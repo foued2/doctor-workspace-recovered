@@ -131,6 +131,7 @@ _PROBLEM_RULES: dict[str, tuple[tuple[str, ...], ...]] = {
     "merge_intervals": (("merge",), ("interval",), ("overlap", "overlapping"), ("start", "end")),
     "product_except_self": (("product", "multiply"), ("except", "self"), ("array", "nums"), ("prefix", "suffix"), ("division",)),
     "longest_common_subsequence": (("string",), ("longest",), ("common",), ("subsequence",), ("length", "character")),
+    "word_search": (("grid", "board", "matrix"), ("word", "string"), ("find", "search", "exist"), ("letter", "character")),
 }
 
 _MANDATORY_ANCHORS: dict[str, tuple[str, ...]] = {
@@ -152,6 +153,22 @@ _REJECT_PATTERNS = {
     "remove_duplicates": (("find", "all", "duplicate"),),
     "longest_substring_without_repeating_characters": (("first", "non", "repeating"),),
     "contains_duplicate": (("find", "all", "duplicate"),),
+}
+
+_REGISTRY_TO_RULES: dict[str, str] = {
+    "lc322": "coin_change",
+    "lc200": "number_of_islands",
+    "lc79": "word_search",
+    "lc121": "best_time_to_buy_sell",
+    "lc300": "longest_increasing_subsequence",
+    "lc128": "longest_consecutive_sequence",
+    "lc135": "candy",
+    "lc312": "burst_balloons",
+    "lc743": "network_delay",
+    "lc560": "subarray_sum_equals_k",
+    "lc198": "house_robber",
+    "lc139": "word_break",
+    "lc118": "pascals_triangle",
 }
 
 
@@ -458,10 +475,12 @@ def match_to_registry(model: Dict[str, Any]) -> Tuple[Optional[str], str, dict]:
     for problem_id, entry in problems.items():
         if problem_id in ("registry_version", "registry_notes"):
             continue
-        rule_score = _rule_score(problem_id, tokens, statement)
+        rule_key = _REGISTRY_TO_RULES.get(problem_id, problem_id)
+        rule_score = _rule_score(rule_key, tokens, statement)
         keyword_score = _keyword_score(text, entry)
         lexical_score = _fallback_score(problem_id, tokens, entry)
-        semantic_score = _semantic_score(problem_id, tokens)
+        semantic_key = _REGISTRY_TO_RULES.get(problem_id, problem_id)
+        semantic_score = _semantic_score(semantic_key, tokens)
         score = max(rule_score, keyword_score, semantic_score, lexical_score * 0.7)
         candidates.append((score, problem_id))
 

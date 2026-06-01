@@ -45,11 +45,11 @@ def infer_spec(
                 if isinstance(node, ast.FunctionDef) and node.args.args:
                     for arg in node.args.args:
                         name = arg.arg
-                        if name in ("nums", "arr", "array", "height", "grid"):
+                        if name in ("nums", "arr", "array", "height", "grid", "board"):
                             input_schema[name] = "list"
                         elif name in ("s", "text", "string"):
                             input_schema[name] = "string"
-                        elif name in ("n", "num", "number"):
+                        elif name in ("n", "num", "number", "amount"):
                             input_schema[name] = "int"
                         elif name in ("target", "k"):
                             input_schema[name] = "int"
@@ -57,8 +57,13 @@ def infer_spec(
                             input_schema[name] = "linked_list"
                         elif name in ("root",):
                             input_schema[name] = "tree"
+                        elif name in ("coins",):
+                            input_schema[name] = "list"
+                        elif name in ("word",):
+                            input_schema[name] = "string"
                         else:
                             input_schema[name] = "any"
+                    break  # only process the first (outermost) function
         except SyntaxError:
             pass
 
@@ -79,6 +84,8 @@ def infer_spec(
             output_shape = "int"
         elif "boolean" in statement_lower or "true or false" in statement_lower:
             output_shape = "bool"
+        elif "character" in statement_lower or "string" in statement_lower:
+            output_shape = "string"
 
     return SpecHypothesis(
         problem_id=statement,
