@@ -6,8 +6,6 @@ import operator
 from dataclasses import dataclass
 from typing import Any, Mapping
 
-from doctor.adversarial.lc42_symbol_registry import LC42_SYMBOL_REGISTRY
-
 
 class RegistryRoutingError(RuntimeError):
     def __init__(self, symbol: str) -> None:
@@ -46,6 +44,36 @@ _BIN_OPS = {
     ast.Mult: operator.mul,
     ast.Div: operator.truediv,
 }
+
+
+# --- registry stub (added to fix self-referential import) ---
+
+
+class _LC42Entry:
+    def __init__(self, name: str, input_signature: tuple[str, ...] = (), compute=None) -> None:
+        self.name = name
+        self.input_signature = input_signature
+        self._compute = compute
+
+    def compute(self, context: dict) -> object:
+        if self._compute is not None:
+            return self._compute(context)
+        return None
+
+
+class _LC42Registry:
+    def __init__(self) -> None:
+        self.entries: tuple[_LC42Entry, ...] = ()
+        self.names: set[str] = set()
+
+    def get(self, name: str) -> _LC42Entry | None:
+        for entry in self.entries:
+            if entry.name == name:
+                return entry
+        return None
+
+
+LC42_SYMBOL_REGISTRY: _LC42Registry = _LC42Registry()
 
 
 class LC42OracleEvaluator:
