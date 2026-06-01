@@ -1,3 +1,6 @@
+# STATUS: IMPORT BLOCKED — missing dependencies not reconstructed
+# Investigation script. Not on paper critical path.
+# See git log for reconstruction history.
 """LC997 oracle evaluator implementing OracleEvaluatorContract."""
 from __future__ import annotations
 

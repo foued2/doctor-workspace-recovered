@@ -1,3 +1,6 @@
+# STATUS: IMPORT BLOCKED — missing dependencies not reconstructed
+# Investigation script. Not on paper critical path.
+# See git log for reconstruction history.
 """LC11 implementation of the Bimaristan Layer 1 synthesizer."""
 from __future__ import annotations
 

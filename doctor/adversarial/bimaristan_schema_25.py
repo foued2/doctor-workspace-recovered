@@ -1,3 +1,6 @@
+# STATUS: IMPORT BLOCKED — missing dependencies not reconstructed
+# Investigation script. Not on paper critical path.
+# See git log for reconstruction history.
 """LC3 Bimaristan manifolds — Longest Substring Without Repeating Characters."""
 from __future__ import annotations
 

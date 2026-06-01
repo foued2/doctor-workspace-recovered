@@ -1,3 +1,6 @@
+# STATUS: IMPORT BLOCKED — missing dependencies not reconstructed
+# Investigation script. Not on paper critical path.
+# See git log for reconstruction history.
 """LC3-native synthesis/evaluation path for Bimaristan candidates."""
 from __future__ import annotations
 

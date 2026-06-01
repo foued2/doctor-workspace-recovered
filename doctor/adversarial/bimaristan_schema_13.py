@@ -1,3 +1,6 @@
+# STATUS: IMPORT BLOCKED — missing dependencies not reconstructed
+# Investigation script. Not on paper critical path.
+# See git log for reconstruction history.
 """Run LC11 Bimaristan synthesis and oracle validation end to end."""
 from __future__ import annotations
 

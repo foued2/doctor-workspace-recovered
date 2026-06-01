@@ -1,3 +1,6 @@
+# STATUS: IMPORT BLOCKED — missing dependencies not reconstructed
+# Investigation script. Not on paper critical path.
+# See git log for reconstruction history.
 """Validation utilities for Bimaristan schemas.
 
 The dataclasses in ``bimaristan_schema`` describe evidence, but they do not by
