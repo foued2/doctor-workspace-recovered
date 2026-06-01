@@ -1,104 +1,110 @@
-#!/usr/bin/env python3
-"""
-Investigation 6: Probe Sensitivity Collapse
+from __future__ import annotations
 
-Check whether probe diversity actually matters for truth assignment.
-"""
+import ast
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
-import sys
-sys.path.insert(0, '.')
 
-from doctor.analysis.spec_inferrer import infer_spec
-from doctor.core.test_executor import TestExecutor
-from doctor.pipeline import _doctor_verdict_from_execution
+@dataclass
+class SpecBundle:
+    problem_id: str
+    spec_type: str
+    confidence: float
+    source: str
+    test_cases: List[Dict[str, Any]] = field(default_factory=list)
+    hypothesis: Optional[str] = None
 
-def run_investigation_6():
-    """Run Probe Sensitivity Collapse detection."""
-    results = []
 
-    # Use a simple test problem: two_sum
-    problem_id = "two_sum"
-    solution_code = """
-def two_sum(nums, target):
-    for i in range(len(nums)):
-        for j in range(i+1, len(nums)):
-            if nums[i] + nums[j] == target:
-                return [i, j]
-    return []
-"""
+@dataclass
+class SpecHypothesis:
+    problem_id: Optional[str] = None
+    spec_type: str = "unknown"
+    confidence: float = 0.0
+    source: str = "unknown"
+    inferred_input_schema: Dict[str, str] = field(default_factory=dict)
+    inferred_output_shape: str = "unknown"
+    completeness_score: float = 0.0
+    canonical_form: Optional[str] = None
 
-    # Get registry test cases
-    from doctor.registry.problem_registry import get_registry
-    registry = get_registry()
-    problem = registry.get_problem(problem_id)
 
-    if not problem:
-        print(f"Problem {problem_id} not found in registry")
-        return []
+def infer_spec(
+    problem_id_or_statement: str,
+    source_code: Optional[str] = None,
+    execution_traces: Optional[List[Dict[str, Any]]] = None,
+) -> Dict[str, Any]:
+    statement = problem_id_or_statement
+    traces = execution_traces or []
 
-    # A) Full schema-driven probes (normal execution)
-    executor = TestExecutor()
-    execution_report = executor.verify(problem_id, solution_code)
-    verdict_a = _doctor_verdict_from_execution(execution_report.verdict)
+    input_schema: Dict[str, str] = {}
+    output_shape = "unknown"
 
-    results.append({
-        "probe_type": "A: full schema-driven",
-        "pass_rate": execution_report.pass_rate,
-        "verdict": execution_report.verdict,
-        "truth": verdict_a.truth,
-        "doctor_verdict": verdict_a.verdict,
-    })
+    if source_code:
+        try:
+            tree = ast.parse(source_code)
+            for node in ast.walk(tree):
+                if isinstance(node, ast.FunctionDef) and node.args.args:
+                    for arg in node.args.args:
+                        name = arg.arg
+                        if name in ("nums", "arr", "array", "height", "grid"):
+                            input_schema[name] = "list"
+                        elif name in ("s", "text", "string"):
+                            input_schema[name] = "string"
+                        elif name in ("n", "num", "number"):
+                            input_schema[name] = "int"
+                        elif name in ("target", "k"):
+                            input_schema[name] = "int"
+                        elif name in ("head",):
+                            input_schema[name] = "linked_list"
+                        elif name in ("root",):
+                            input_schema[name] = "tree"
+                        else:
+                            input_schema[name] = "any"
+        except SyntaxError:
+            pass
 
-    # B) Fallback probes only - need to trace what happens with minimal probes
-    # This requires understanding what fallback probes look like
-    # For now, check if test volume affects verdict
+    statement_lower = (statement or "").lower()
 
-    # C) Check: does low test volume + correct execution = "correct"?
-    # If yes, that's probe insensitivity
-    from doctor.pipeline import derive_verdict
+    if not input_schema:
+        if "array" in statement_lower or "list" in statement_lower or "nums" in statement_lower:
+            input_schema = {"nums": "list"}
+        elif "string" in statement_lower:
+            input_schema = {"s": "string"}
+        elif "integer" in statement_lower or "number" in statement_lower:
+            input_schema = {"n": "int"}
 
-    # Simulate: 1 probe, passes
-    truth_c = "correct"
-    verdict_c = derive_verdict(truth_c, "ok", "matched", "sufficient")
-    results.append({
-        "probe_type": "C: single probe (simulated)",
-        "pass_rate": 1.0,
-        "verdict": "correct",
-        "truth": truth_c,
-        "doctor_verdict": verdict_c,
-        "flag": "probe_insensitivity" if verdict_c == "correct" else None,
-    })
+    if not output_shape and "return" in (statement or "").lower():
+        if "array" in statement_lower or "list" in statement_lower:
+            output_shape = "list"
+        elif "integer" in statement_lower or "number" in statement_lower:
+            output_shape = "int"
+        elif "boolean" in statement_lower or "true or false" in statement_lower:
+            output_shape = "bool"
 
-    # D) Check: does same verdict hold with different probe counts?
-    # If truth="incorrect" from 2/2 failing, would 100/100 failing change anything?
-    truth_d = "incorrect"
-    verdict_d = derive_verdict(truth_d, "ok", "matched", "sufficient")
-    results.append({
-        "probe_type": "D: many probes, all fail (simulated)",
-        "pass_rate": 0.0,
-        "verdict": "incorrect",
-        "truth": truth_d,
-        "doctor_verdict": verdict_d,
-        "flag": None,
-    })
+    return SpecHypothesis(
+        problem_id=statement,
+        spec_type="inferred",
+        confidence=0.5 if input_schema else 0.2,
+        source="inference",
+        inferred_input_schema=input_schema,
+        inferred_output_shape=output_shape,
+        completeness_score=0.5 if input_schema else 0.2,
+        canonical_form=None,
+    )
 
-    return results
 
-if __name__ == "__main__":
-    print("=" * 80)
-    print("INVESTIGATION 6: Probe Sensitivity Collapse")
-    print("=" * 80)
-
-    results = run_investigation_6()
-
-    print(f"\n{'Probe Type':<45} {'Truth':<15} {'Verdict':<15} {'Flag'}")
-    print("-" * 80)
-
-    for r in results:
-        print(f"{r['probe_type']:<45} {r.get('truth', 'N/A'):<15} {r.get('doctor_verdict', 'N/A'):<15} {r.get('flag', 'OK')}")
-
-    # Mechanism check
-    print(f"\nMechanism Analysis:")
-    print(f"  Truth assignment is binary (correct/incorrect), not graduated")
-    print(f"  Probe volume affects evidence_score, but NOT truth/verdict directly")
-    print(f"  Once truth is set, it dominates verdict regardless of probe count")
+def infer_spec_bundle(
+    problem_id: str,
+    test_cases: Optional[List[Dict[str, Any]]] = None,
+) -> List[SpecBundle]:
+    tc = test_cases or []
+    confidence = min(1.0, 0.5 + 0.1 * len(tc)) if tc else 0.0
+    source = "test_cases" if tc else "no_test_cases"
+    return [
+        SpecBundle(
+            problem_id=problem_id,
+            spec_type="test_based" if tc else "unverifiable",
+            confidence=confidence,
+            source=source,
+            test_cases=tc,
+        )
+    ]

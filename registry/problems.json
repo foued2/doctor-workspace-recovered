@@ -1,0 +1,267 @@
+{
+  "two_sum": {
+    "spec": {
+      "problem_id": "two_sum",
+      "display_name": "Two Sum",
+      "difficulty": "easy",
+      "tags": ["array", "hash_table"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [[2, 7, 11, 15], 9], "expected": [0, 1], "label": "basic"},
+        {"input": [[3, 2, 4], 6], "expected": [1, 2], "label": "middle"},
+        {"input": [[3, 3], 6], "expected": [0, 1], "label": "duplicates"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["twoSum", "two_sum", "solution"]
+    }
+  },
+  "lc42": {
+    "spec": {
+      "problem_id": "lc42",
+      "display_name": "Trapping Rain Water",
+      "difficulty": "hard",
+      "tags": ["array", "two_pointers", "stack", "dynamic_programming"],
+      "order_sensitive": true,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [6, [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]], "expected": 6, "label": "classic"},
+        {"input": [4, [4, 2, 0, 3, 2, 5]], "expected": 9, "label": "valley"},
+        {"input": [1, [1]], "expected": 0, "label": "single"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["trap", "solution"]
+    }
+  },
+  "lc312": {
+    "spec": {
+      "problem_id": "lc312",
+      "display_name": "Burst Balloons",
+      "difficulty": "hard",
+      "tags": ["array", "dynamic_programming", "interval"],
+      "order_sensitive": true,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [3, [3, 1, 5, 8]], "expected": 167, "label": "example"},
+        {"input": [1, [1]], "expected": 1, "label": "single"},
+        {"input": [2, [1, 5]], "expected": 10, "label": "pair"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["maxCoins", "max_coins", "solution"]
+    }
+  },
+  "lc743": {
+    "spec": {
+      "problem_id": "lc743",
+      "display_name": "Network Delay Time",
+      "difficulty": "medium",
+      "tags": ["graph", "shortest_path", "dijkstra"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [3, [[2, 1, 1], [2, 3, 1], [3, 4, 1]], 2], "expected": 2, "label": "chain"},
+        {"input": [4, [[2, 1, 1], [2, 3, 1], [3, 4, 1]], 2], "expected": 3, "label": "long_chain"},
+        {"input": [1, [], 1], "expected": 0, "label": "single_node"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["networkDelayTime", "network_delay_time", "solution"]
+    }
+  },
+  "lc406": {
+    "spec": {
+      "problem_id": "lc406",
+      "display_name": "Queue Reconstruction by Height",
+      "difficulty": "medium",
+      "tags": ["greedy", "constructive"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [4, [[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]]],
+         "expected": [[5, 0], [7, 0], [5, 2], [6, 1], [4, 4], [7, 1]], "label": "example"},
+        {"input": [1, [[4, 0]]], "expected": [[4, 0]], "label": "single"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["reconstructQueue", "reconstruct_queue", "solution"]
+    }
+  },
+  "lc494": {
+    "spec": {
+      "problem_id": "lc494",
+      "display_name": "Target Sum",
+      "difficulty": "medium",
+      "tags": ["array", "dynamic_programming", "backtracking"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [5, [1, 1, 1, 1, 1], 3], "expected": 5, "label": "example"},
+        {"input": [1, [1], 1], "expected": 1, "label": "single_match"},
+        {"input": [1, [1], 2], "expected": 0, "label": "impossible"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["findTargetSumWays", "find_target_sum_ways", "solution"]
+    }
+  },
+  "lc875": {
+    "spec": {
+      "problem_id": "lc875",
+      "display_name": "Koko Eating Bananas",
+      "difficulty": "medium",
+      "tags": ["array", "binary_search"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [4, [3, 6, 7, 11], 8], "expected": 4, "label": "example"},
+        {"input": [4, [30, 11, 23, 4, 20], 5], "expected": 30, "label": "large_pile"},
+        {"input": [3, [1, 1, 1], 3], "expected": 1, "label": "trivial"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["minEatingSpeed", "min_eating_speed", "solution"]
+    }
+  },
+  "lc134": {
+    "spec": {
+      "problem_id": "lc134",
+      "display_name": "Gas Station",
+      "difficulty": "medium",
+      "tags": ["array", "greedy"],
+      "order_sensitive": true,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [3, [1, 2, 3, 4, 5], [3, 4, 5, 1, 2]], "expected": 3, "label": "example"},
+        {"input": [2, [2, 3, 4], [3, 4, 3]], "expected": -1, "label": "impossible"},
+        {"input": [1, [5], [4]], "expected": 0, "label": "single_ok"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["canCompleteCircuit", "can_complete_circuit", "solution"]
+    }
+  },
+  "cf607a": {
+    "spec": {
+      "problem_id": "cf607a",
+      "display_name": "Bear and Painting",
+      "difficulty": "medium",
+      "tags": ["greedy", "graph"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [5, [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]], "expected": 2, "label": "chain"},
+        {"input": [1, [[1, 100]]], "expected": 0, "label": "single"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["solve", "solution"]
+    }
+  },
+  "lc1029": {
+    "spec": {
+      "problem_id": "lc1029",
+      "display_name": "Two City Scheduling",
+      "difficulty": "medium",
+      "tags": ["greedy", "sorting"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [2, [[10, 20], [30, 200], [400, 50], [30, 2]]], "expected": 110, "label": "example"},
+        {"input": [1, [[259, 770], [448, 54], [926, 667], [184, 139]]], "expected": 185, "label": "one_each"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["twoCitySchedCost", "two_city_sched_cost", "solution"]
+    }
+  },
+  "lc3": {
+    "spec": {
+      "problem_id": "lc3",
+      "display_name": "Longest Substring Without Repeating Characters",
+      "difficulty": "medium",
+      "tags": ["string", "sliding_window", "hash_table"],
+      "order_sensitive": true,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": ["abcabcbb"], "expected": 3, "label": "abcabcbb"},
+        {"input": ["bbbbb"], "expected": 1, "label": "bbbbb"},
+        {"input": ["pwwkew"], "expected": 3, "label": "pwwkew"},
+        {"input": [""], "expected": 0, "label": "empty"},
+        {"input": [" "], "expected": 1, "label": "space"},
+        {"input": ["dvdf"], "expected": 3, "label": "dvdf"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["lengthOfLongestSubstring", "length_of_longest_substring", "solution"]
+    }
+  },
+  "arrange_numbers_divisible": {
+    "spec": {
+      "problem_id": "arrange_numbers_divisible",
+      "display_name": "Arrange Numbers Divisible",
+      "difficulty": "easy",
+      "tags": ["array"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [[1, 2, 3, 4, 5], 3], "expected": [3], "label": "sample"},
+        {"input": [[1, 2, 3, 4, 5], 2], "expected": [2, 4], "label": "evens"},
+        {"input": [[1, 2, 3], 10], "expected": [], "label": "none"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["arrangeNumbersDivisible", "arrange_numbers_divisible", "solution"]
+    }
+  },
+  "lc322": {
+    "spec": {
+      "problem_id": "lc322",
+      "display_name": "Coin Change",
+      "difficulty": "medium",
+      "tags": ["array", "dynamic_programming", "breadth_first_search"],
+      "order_sensitive": false,
+      "verifiable": true
+    },
+    "execution": {
+      "test_cases": [
+        {"input": [[1, 2, 5], 11], "expected": 3, "label": "example"},
+        {"input": [[2], 3], "expected": -1, "label": "impossible"},
+        {"input": [[1], 0], "expected": 0, "label": "zero_amount"},
+        {"input": [[1], 1], "expected": 1, "label": "single_coin"},
+        {"input": [[1, 2, 5], 100], "expected": 20, "label": "large_amount"},
+        {"input": [[1, 5, 10, 25], 30], "expected": 2, "label": "greedy_trap"},
+        {"input": [[2, 5, 10, 1], 27], "expected": 4, "label": "mixed"}
+      ]
+    },
+    "normalization": {
+      "function_names": ["coinChange", "coin_change", "solution"]
+    }
+  }
+}

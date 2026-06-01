@@ -14,6 +14,7 @@ from doctor.analysis.spec_inferrer import infer_spec
 from doctor.analysis.induction_gate import evaluate_induction_candidate
 from doctor.analysis.agreement import compute_agreement_multi
 from doctor.analysis.promotion_gate import should_promote
+from doctor.core.execution_policy import UnsafeExecutionBlocked, candidate_writes_allowed
 from doctor.oracle_feasibility import (
     assess_oracle_feasibility,
     default_oracle_state,
@@ -261,7 +262,18 @@ def _unrecognized_executable_response(
     }
     if source_code:
         import hashlib
-        spec = infer_spec(statement, source_code, execution_traces or [])
+        try:
+            spec = infer_spec(statement, source_code, execution_traces or [])
+        except UnsafeExecutionBlocked as exc:
+            response["execution_blocked"] = {
+                "reason": str(exc),
+                "policy": "DOCTOR_ALLOW_UNTRUSTED_EXECUTION",
+            }
+            response["induction_result"] = {
+                "eligible": False,
+                "rejection_reason": "unsafe_execution_blocked",
+            }
+            return _with_pipeline_status(response)
         response["spec_hypothesis"] = asdict(spec)
 
         try:
@@ -291,7 +303,11 @@ def _unrecognized_executable_response(
                 else None
             )
 
-            if induction_result.eligible and induction_result.candidate_artifact:
+            if (
+                induction_result.eligible
+                and induction_result.candidate_artifact
+                and candidate_writes_allowed()
+            ):
                 artifact = dict(induction_result.candidate_artifact)
                 artifact["problem_hash"] = problem_hash
                 artifact["candidate_type"] = context["candidate_type"]
@@ -355,13 +371,19 @@ def _expected_entrypoints(problem_name: str) -> list[str]:
 
 
 def _has_resolvable_entrypoint(solution_code: str, problem_name: Optional[str]) -> bool:
+    from doctor.registry.problem_aliases import equivalent_function_name
+
     candidates = _entrypoint_candidates(solution_code)
     if len(candidates) <= 1:
         return bool(candidates)
     if not problem_name:
         return False
-    expected = set(_expected_entrypoints(problem_name))
-    return any(name in expected for name in candidates)
+    expected = _expected_entrypoints(problem_name)
+    return any(
+        equivalent_function_name(name, expected_name)
+        for name in candidates
+        for expected_name in expected
+    )
 
 
 def _has_code_statement_relevance(solution_code: str, statement: str) -> bool:
@@ -522,7 +544,9 @@ def run_pipeline(
     
     if recognition_bypassed:
         # Verify problem_id exists in registry before accepting
+        from doctor.registry.problem_aliases import canonical_problem_id
         from doctor.registry.problem_registry import get_problems
+        problem_id = canonical_problem_id(problem_id)
         if problem_id not in get_problems():
             # Not in registry — fall through to unrecognized path
             recognition_bypassed = False

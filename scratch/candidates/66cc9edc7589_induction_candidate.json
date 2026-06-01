@@ -1,0 +1,15 @@
+{
+  "candidate_type": "induction_candidate",
+  "statement": "",
+  "source_code": "def mystery(x):\n    return x * 2\n",
+  "spec_hypothesis": {
+    "inferred_input_schema": {
+      "x": "unknown"
+    },
+    "inferred_output_shape": "unknown",
+    "confidence": 0.5,
+    "canonical_form": null,
+    "completeness_score": 0.5
+  },
+  "problem_hash": "66cc9edc75895d936e60f1d92af05f167d9144e57bf10968e31f71e14055c7d3"
+}

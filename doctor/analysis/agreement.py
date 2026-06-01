@@ -1,123 +1,201 @@
-#!/usr/bin/env python3
-"""
-Investigation 1: Agreement–Truth Decoupling Sweep
+from __future__ import annotations
 
-Detects cases where agreement signal contradicts execution truth but has no effect.
-"""
+import ast
+from dataclasses import dataclass
+from typing import Any
 
-import sys
-sys.path.insert(0, '.')
-
-from doctor.analysis.agreement import compute_agreement_multi, AgreementResult
+from doctor.analysis.checker_gen import generate_checker
 from doctor.analysis.spec_inferrer import SpecBundle
-from doctor.pipeline import _doctor_verdict_from_execution
+from doctor.core.sandbox_runner import run_solution_in_sandbox
 
-def build_spec_bundle(confidence: float = 1.0, source: str = "test") -> SpecBundle:
-    """Build a minimal SpecBundle for testing."""
-    return SpecBundle(
-        problem_id="test",
-        expected_output_type="integer",
-        expected_values=[],
-        expected_exceptions=[],
-        confidence=confidence,
-        source=source,
+
+@dataclass
+class AgreementResult:
+    verdict: str          # "PASS" | "FAIL" | "INCONCLUSIVE"
+    agreeing_specs: float # confidence-weighted sum of specs that returned PASS
+    total_specs: int      # len(spec_bundles)
+    dominant_source: str  # source field of highest-confidence agreeing spec, or "none"
+
+
+def compute_agreement_multi(
+    spec_bundles: list[SpecBundle],
+    test_results: list[tuple[Any, Any]],
+) -> AgreementResult:
+    """
+    Run agreement check against all test outputs.
+
+    Priority: FAIL > INCONCLUSIVE > PASS.
+    A None solution output is INCONCLUSIVE for that test, not FAIL.
+    """
+    # Probe output variance check — if all outputs identical, zero evidential value
+    non_none_outputs = [o for o, _ in test_results if o is not None]
+    if non_none_outputs and len(set(map(str, non_none_outputs))) == 1:
+        return AgreementResult(
+            verdict="INCONCLUSIVE",
+            agreeing_specs=0.0,
+            total_specs=len(spec_bundles),
+            dominant_source="none",
+        )
+
+    checker_results: list[tuple[SpecBundle, str]] = []
+
+    for solution_output, input_args in test_results:
+        if solution_output is None:
+            for spec in spec_bundles:
+                checker_results.append((spec, "INCONCLUSIVE"))
+            continue
+
+        for spec in spec_bundles:
+            checker_code = generate_checker(spec)
+            if checker_code is None:
+                checker_results.append((spec, "INCONCLUSIVE"))
+                continue
+            checker_results.append((spec, _run_checker(checker_code, solution_output, input_args)))
+
+    agreeing = [(spec, result) for spec, result in checker_results if result == "PASS"]
+    agreeing_specs = sum(spec.confidence for spec, result in agreeing)
+    dominant_source = max(agreeing, key=lambda x: x[0].confidence)[0].source if agreeing else "none"
+
+    fail_count = sum(spec.confidence for spec, r in checker_results if r == "FAIL")
+    pass_count = sum(spec.confidence for spec, r in checker_results if r == "PASS")
+
+    if fail_count > pass_count:
+        verdict = "FAIL"
+    elif pass_count > fail_count:
+        verdict = "PASS"
+    else:
+        verdict = "INCONCLUSIVE"
+
+    return AgreementResult(
+        verdict=verdict,
+        agreeing_specs=agreeing_specs,
+        total_specs=len(spec_bundles),
+        dominant_source=dominant_source,
     )
 
-def run_investigation_1():
-    """Run Agreement-Truth Decoupling Sweep."""
-    results = []
 
-    spec_bundles = [build_spec_bundle(1.0, "registry"), build_spec_bundle(0.8, "inferred")]
 
-    # Case 1: Partial execution (wrong outputs) - should be "incorrect" truth
-    test_results_partial = [
-        (42, {"input": 5}),   # correct
-        (99, {"input": 3}),   # wrong
-        (42, {"input": 7}),   # correct
-        (99, {"input": 2}),   # wrong
-    ]
 
-    agreement = compute_agreement_multi(spec_bundles, test_results_partial)
-    doctor_verdict = _doctor_verdict_from_execution("partial")
 
-    flag = None
-    if agreement.verdict != "PASS" and doctor_verdict.verdict == "incorrect":
-        flag = "no_cross_layer_effect"  # Agreement doesn't affect verdict
+def _run_checker(checker_code: str, solution_output: Any, input_args: Any) -> str:
+    """Run checker in sandbox and return PASS/FAIL/INCONCLUSIVE."""
+    import subprocess
+    import sys
+    import tempfile
+    import os
 
-    results.append({
-        "case": "partial execution (50% pass)",
-        "execution_verdict": "partial",
-        "agreement_verdict": agreement.verdict,
-        "truth": doctor_verdict.truth,
-        "verdict": doctor_verdict.verdict,
-        "flag": flag,
-    })
+    sandbox_code = f"""
+{checker_code}
 
-    # Case 2: Incorrect but consistent outputs (all wrong same value)
-    test_results_constant_wrong = [
-        (99, {"input": 5}),
-        (99, {"input": 3}),
-        (99, {"input": 7}),
-    ]
-
-    agreement = compute_agreement_multi(spec_bundles, test_results_constant_wrong)
-    doctor_verdict = _doctor_verdict_from_execution("incorrect")
-
-    flag = None
-    if agreement.verdict == "INCONCLUSIVE" and doctor_verdict.verdict == "incorrect":
-        flag = "constant_output_INCONCLUSIVE_but_incorrect"
-
-    results.append({
-        "case": "incorrect + constant output",
-        "execution_verdict": "incorrect",
-        "agreement_verdict": agreement.verdict,
-        "truth": doctor_verdict.truth,
-        "verdict": doctor_verdict.verdict,
-        "flag": flag,
-    })
-
-    # Case 3: Correct execution with None outputs (forces INCONCLUSIVE)
-    test_results_with_none = [
-        (None, {"input": 5}),
-        (42, {"input": 3}),
-    ]
-
-    agreement = compute_agreement_multi(spec_bundles, test_results_with_none)
-    doctor_verdict = _doctor_verdict_from_execution("correct")
-
-    flag = None
-    if agreement.verdict == "INCONCLUSIVE" and doctor_verdict.verdict == "correct":
-        flag = "INCONCLUSIVE_agreement_but_correct_verdict"
-
-    results.append({
-        "case": "correct + None outputs (INCONCLUSIVE agreement)",
-        "execution_verdict": "correct",
-        "agreement_verdict": agreement.verdict,
-        "truth": doctor_verdict.truth,
-        "verdict": doctor_verdict.verdict,
-        "flag": flag,
-    })
-
-    return results
-
-if __name__ == "__main__":
-    print("=" * 80)
-    print("INVESTIGATION 1: Agreement–Truth Decoupling Sweep")
-    print("=" * 80)
-
-    results = run_investigation_1()
-
-    print(f"\n{'Case':<45} {'Exec':<12} {'Agreement':<15} {'Truth':<15} {'Verdict':<15} {'Flag'}")
-    print("-" * 110)
-
-    for r in results:
-        print(f"{r['case']:<45} {r['execution_verdict']:<12} {r['agreement_verdict']:<15} {r['truth']:<15} {r['verdict']:<15} {r['flag'] or 'OK'}")
-
-    # Mechanism analysis
-    flags = [r['flag'] for r in results if r['flag']]
-    print(f"\nMechanism Analysis:")
-    if flags:
-        print(f"  Cross-layer isolation confirmed: agreement verdict has NO pathway to truth/verdict")
-        print(f"  Shared mechanism: agreement layer is advisory-only for matched problems")
+try:
+    result = checker_entry({solution_output!r}, {input_args!r})
+    if result is True:
+        print("PASS")
+    elif result is False:
+        print("FAIL")
     else:
-        print(f"  No cross-layer inconsistencies found")
+        print("INCONCLUSIVE")
+except Exception:
+    print("INCONCLUSIVE")
+"""
+
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+        f.write(sandbox_code)
+        temp_file = f.name
+
+    try:
+        result = subprocess.run(
+            [sys.executable, temp_file],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+        output = result.stdout.strip()
+        if output in ("PASS", "FAIL", "INCONCLUSIVE"):
+            return output
+        return "INCONCLUSIVE"
+    except subprocess.TimeoutExpired:
+        return "INCONCLUSIVE"
+    except Exception:
+        return "INCONCLUSIVE"
+    finally:
+        try:
+            os.unlink(temp_file)
+        except:
+            pass
+
+
+def compute_agreement(
+    spec_bundles: list[SpecBundle],
+    solution_output: Any,
+    input_args: Any,
+) -> AgreementResult:
+    """Deprecated wrapper — delegates to compute_agreement_multi with single test."""
+    return compute_agreement_multi(spec_bundles, [(solution_output, input_args)])
+
+
+@dataclass
+class _CheckerTestCase:
+    input: tuple
+    expected: Any
+    label: str = ""
+    validation_type: str | None = None
+
+
+def _sandbox_checker_code(checker_code: str) -> str | None:
+    literals = _checker_literals(checker_code)
+    if literals is None:
+        return None
+    expected, mode = literals
+    return f"""\
+def checker_entry(solution_output, input_args):
+    EXPECTED = {expected!r}
+    MODE = {mode!r}
+    actual = solution_output
+    expected = EXPECTED
+    try:
+        if MODE == "scalar":
+            verdict = "PASS" if actual == expected else "FAIL"
+        elif MODE == "sorted":
+            try:
+                verdict = "PASS" if sorted(actual) == sorted(expected) else "FAIL"
+            except Exception:
+                verdict = "INCONCLUSIVE"
+        elif MODE == "set":
+            try:
+                verdict = "PASS" if set(actual) == set(expected) else "FAIL"
+            except Exception:
+                verdict = "INCONCLUSIVE"
+        else:
+            verdict = "INCONCLUSIVE"
+    except Exception:
+        verdict = "INCONCLUSIVE"
+    if verdict == "PASS":
+        return True
+    if verdict == "FAIL":
+        return False
+    raise RuntimeError("checker inconclusive")
+"""
+
+
+def _checker_literals(checker_code: str) -> tuple[Any, str] | None:
+    try:
+        tree = ast.parse(checker_code)
+    except SyntaxError:
+        return None
+
+    values: dict[str, Any] = {}
+    for node in tree.body:
+        if not isinstance(node, ast.Assign) or len(node.targets) != 1:
+            continue
+        target = node.targets[0]
+        if isinstance(target, ast.Name) and target.id in {"EXPECTED", "MODE"}:
+            try:
+                values[target.id] = ast.literal_eval(node.value)
+            except (ValueError, TypeError):
+                return None
+
+    mode = values.get("MODE")
+    if "EXPECTED" not in values or not isinstance(mode, str):
+        return None
+    return values["EXPECTED"], mode

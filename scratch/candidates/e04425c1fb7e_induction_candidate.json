@@ -1,0 +1,19 @@
+{
+  "candidate_type": "induction_candidate",
+  "statement": "Given an array of integers and a target, return indices of two numbers that add up to target.",
+  "source_code": "def twoSum(nums, target): return [0, 1]",
+  "spec_hypothesis": {
+    "problem_id": "Given an array of integers and a target, return indices of two numbers that add up to target.",
+    "spec_type": "inferred",
+    "confidence": 0.5,
+    "source": "inference",
+    "inferred_input_schema": {
+      "nums": "list",
+      "target": "int"
+    },
+    "inferred_output_shape": "unknown",
+    "completeness_score": 0.5,
+    "canonical_form": null
+  },
+  "problem_hash": "e04425c1fb7e966d5b9f1be2464836178b0f3707f09dc11de9c3bb25d511f6b1"
+}
