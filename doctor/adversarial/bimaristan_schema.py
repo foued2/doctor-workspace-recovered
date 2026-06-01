@@ -7,12 +7,22 @@
 from __future__ import annotations
 
 import pytest
+from dataclasses import dataclass
 
-from doctor.adversarial.bimaristan_schema import RelationConstraint
 from doctor.adversarial.lc322_oracle import LC322OracleEvaluator, OracleCeilingError, evaluation_surface
 from doctor.adversarial.lc322_symbol_registry import LC322_SYMBOL_REGISTRY
 from doctor.adversarial.symbol_registry import SymbolCategory
 from doctor.adversarial.synthesizer_contract import GenerationStrategy, SynthesizedCandidate
+
+
+# --- RelationConstraint stub (added to fix self-referential import on line 5) ---
+
+
+@dataclass(frozen=True)
+class RelationConstraint:
+    left: str
+    operator: str
+    right: str
 
 
 def _candidate(coins: list[int], amount: int, generator_id="test"):
