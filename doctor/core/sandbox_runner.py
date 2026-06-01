@@ -14,8 +14,20 @@ def run_solution_in_sandbox(code: str, input_args: Any = None, timeout: int = 5)
 
 import sys
 args = {input_args!r} if {input_args is not None} else ()
+
+_func = None
+for _name in ["solution", "solve", "twoSum", "maxArea", "trap", "lengthOfLongestSubstring", "isValid", "exist", "coinChange", "arrange_numbers_divisible"]:
+    if _name in dir() and callable(eval(_name)):
+        _func = eval(_name)
+        break
+if _func is None:
+    for _name in dir():
+        if not _name.startswith("_") and callable(eval(_name)):
+            _func = eval(_name)
+            break
+
 try:
-    result = solution(*args) if hasattr(solution, '__call__') else solve(*args)
+    result = _func(*args) if _func else None
     print(repr(result))
 except Exception as e:
     print(f"ERROR:{{e}}", file=sys.stderr)
