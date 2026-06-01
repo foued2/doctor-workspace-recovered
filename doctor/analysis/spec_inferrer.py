@@ -72,7 +72,7 @@ def infer_spec(
         elif "integer" in statement_lower or "number" in statement_lower:
             input_schema = {"n": "int"}
 
-    if not output_shape and "return" in (statement or "").lower():
+    if output_shape == "unknown" and "return" in (statement or "").lower():
         if "array" in statement_lower or "list" in statement_lower:
             output_shape = "list"
         elif "integer" in statement_lower or "number" in statement_lower:

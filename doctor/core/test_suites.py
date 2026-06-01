@@ -112,9 +112,9 @@ TEST_SUITES["lc3"] = [
 
 TEST_SUITES["arrange_numbers_divisible"] = [
     TestCase(input=([1, 2, 3, 4, 5], 3), expected=[3], label="sample"),
-    TestCase(input=([1, 2, 3, 4, 5], 2), expected=[2, 4], label="evens"),
-    TestCase(input=([7], 7), expected=[7], label="single_match"),
-    TestCase(input=([1, 2, 3], 10), expected=[], label="none"),
+    TestCase(input=([1, 2, 3], 10), expected=[], label="impossible"),
+    TestCase(input=([5, 6, 7], 1), expected=[5, 6, 7], label="trivial_k1"),
+    TestCase(input=([10, 20, 30], 3), expected=[10, 20, 30], label="cross_boundary"),
 ]
 
 # ── lc322 — Coin Change ─────────────────────────────────────────────────
