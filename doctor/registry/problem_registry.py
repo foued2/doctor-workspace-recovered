@@ -244,6 +244,54 @@ PROBLEMS: Dict[str, Dict[str, Any]] = {
         "description": "Arrange numbers divisible by k.",
         "spec": {"verifiable": True},
     },
+    "merge_intervals": {
+        "name": "Merge Intervals",
+        "keywords": ["array", "intervals", "merge", "overlap"],
+        "description": "Merge all overlapping intervals.",
+        "spec": {"verifiable": True},
+    },
+    "binary_tree_max_path": {
+        "name": "Binary Tree Maximum Path Sum",
+        "keywords": ["binary tree", "path", "maximum", "sum"],
+        "description": "Find the maximum path sum in a binary tree.",
+        "spec": {"verifiable": True},
+    },
+    "reverse_linked_list": {
+        "name": "Reverse Linked List",
+        "keywords": ["linked list", "reverse", "pointer"],
+        "description": "Reverse a singly linked list.",
+        "spec": {"verifiable": True},
+    },
+    "lru_cache": {
+        "name": "LRU Cache",
+        "keywords": ["cache", "hash", "linked list", "lru"],
+        "description": "Design an LRU cache data structure.",
+        "spec": {"verifiable": True},
+    },
+    "median_finder": {
+        "name": "Find Median from Data Stream",
+        "keywords": ["heap", "median", "stream", "data structure"],
+        "description": "Find median of a data stream.",
+        "spec": {"verifiable": True},
+    },
+    "median_two_sorted": {
+        "name": "Median of Two Sorted Arrays",
+        "keywords": ["array", "binary search", "median", "sorted"],
+        "description": "Find median of two sorted arrays.",
+        "spec": {"verifiable": True},
+    },
+    "edit_distance": {
+        "name": "Edit Distance",
+        "keywords": ["dynamic programming", "string", "edit", "distance", "levenshtein"],
+        "description": "Compute minimum edit distance between two strings.",
+        "spec": {"verifiable": True},
+    },
+    "maximal_square": {
+        "name": "Maximal Square",
+        "keywords": ["dynamic programming", "matrix", "binary", "square"],
+        "description": "Find the largest square containing only 1s in a binary matrix.",
+        "spec": {"verifiable": True},
+    },
 }
 
 
