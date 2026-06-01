@@ -85,6 +85,9 @@ def _init_test_suites():
         TEST_SUITES.update(_TS)
 
 
+_init_test_suites()
+
+
 class TestExecutor:
     def verify(self, problem_id: str, code: str) -> ExecutionReport:
         func = _extract_function(code, problem_id)
