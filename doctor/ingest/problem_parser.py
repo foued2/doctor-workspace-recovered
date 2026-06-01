@@ -24,8 +24,6 @@ _KNOWN_OBJECTIVES = {
     "edit_distance": ["edit distance", "minimum edits", "levenshtein"],
     "maximal_square": ["maximal square", "largest square"],
     "lc416": ["partition equal subset", "equal sum partition"],
-    "lc70": ["climbing stairs", "climb stairs", "ways to climb"],
-    "lc53": ["maximum subarray", "max subarray", "contiguous subarray"],
     "lc45": ["jump game", "minimum jumps", "fewest jumps"],
     "lc312": ["burst balloons", "burst balloon"],
     "lc560": ["subarray sum equals k", "subarray sum"],
@@ -70,6 +68,7 @@ def parse_problem(statement: str) -> Dict[str, Any]:
             "constraints": [],
             "examples": [],
             "raw_statement": statement or "",
+            "source_statement": statement or "",
         }
 
     objective = _extract_objective(statement)
