@@ -6,7 +6,7 @@ from typing import Any, Dict, Optional
 _KNOWN_OBJECTIVES = {
     "two_sum": ["two sum", "sum of two", "add two numbers", "find two numbers", "pair that sums", "indices of two numbers"],
     "max_subarray": ["maximum subarray", "max subarray", "contiguous subarray"],
-    "climbing_stairs": ["climbing stairs", "climb stairs", "ways to climb"],
+    "climbing_stairs": ["climbing stairs", "climb stairs", "ways to climb", "climb to the top", "distinct ways to climb"],
     "lc322": ["coin change", "minimum coins", "fewest coins", "fewest number of coins"],
     "longest_increasing": ["longest increasing", "longest subsequence", "lis "],
     "number_of_islands": ["number of islands", "count islands", "num islands"],
@@ -32,6 +32,7 @@ _KNOWN_OBJECTIVES = {
     "lc997": ["town judge", "find the town judge"],
     "lc875": ["koko eating bananas", "eating bananas"],
     "lc743": ["network delay", "signal propagation"],
+    "lc79": ["word search", "exist in the grid", "board and a word", "word exists"],
 }
 
 
