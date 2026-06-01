@@ -31,7 +31,7 @@ def infer_spec(
     problem_id_or_statement: str,
     source_code: Optional[str] = None,
     execution_traces: Optional[List[Dict[str, Any]]] = None,
-) -> Dict[str, Any]:
+) -> SpecHypothesis:
     statement = problem_id_or_statement
     traces = execution_traces or []
 
