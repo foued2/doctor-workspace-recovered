@@ -1,3 +1,5 @@
+# STATUS: IMPORT BLOCKED — missing dependencies not reconstructed
+# Not on paper critical path. See git log for reconstruction history.
 from __future__ import annotations
 
 import pytest
