@@ -305,3 +305,7 @@ def get_problems() -> Dict[str, Dict[str, Any]]:
 
 def list_problem_ids() -> list:
     return list(PROBLEMS.keys())
+
+
+def get_all_display_names() -> Dict[str, str]:
+    return {entry["name"]: pid for pid, entry in PROBLEMS.items() if "name" in entry}
