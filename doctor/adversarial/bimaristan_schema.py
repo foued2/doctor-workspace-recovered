@@ -1,3 +1,9 @@
+# STATUS: MODULE UNIMPORTABLE — 3 cascade self-import failures
+# (RelationConstraint, LC322OracleEvaluator, SymbolCategory)
+# 34 LC322 oracle tests cannot be collected by pytest.
+# These tests documented a completed negative result (paper closed).
+# Reconstruction deferred — original implementations unrecoverable.
+# See git log for reconstruction history.
 from __future__ import annotations
 
 import pytest
