@@ -56,6 +56,12 @@ THIS sampling protocol. It is not stable under:
   - sampling parameter changes
 The count is degeneracy of the ensemble under the P1 quotient, not a
 feature of LC45.
+
+TEST-LAYER OBSERVATION SUBSTRATE: per-sample classifications in this
+file are also populated as `doctor.core.observation.Observation`
+instances. The Observation is test-layer instrumentation; production
+modules in `doctor/adversarial/` etc. MUST NOT import it. The rationale
+is recorded in `doctor/core/observation.py`.
 """
 import os
 import random

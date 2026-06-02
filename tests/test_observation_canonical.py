@@ -8,6 +8,11 @@ Asserts the three design invariants from `doctor/core/observation.py`:
      different problem_ids are not equivalent just because their
      canonical_form is identical. Downstream code must declare its
      equivalence assumptions.
+
+These tests pin the data model of Observation. They do NOT assert that
+production code uses Observation — only that when Observation IS used,
+the invariants hold. The test-locality of Observation is a separate
+architectural commitment, recorded in `doctor/core/observation.py`.
 """
 from __future__ import annotations
 

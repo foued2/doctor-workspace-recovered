@@ -1,12 +1,34 @@
 """Canonical observation form for cross-problem measurement.
 
-This module defines `Observation`, a hashable record of a single
-projection-classified evaluation. The form is deliberately minimal:
-it captures WHAT was observed (problem, candidate, projection, layer,
-classification), under WHICH sampling conditions (seed, sample size),
-and NOTHING ELSE.
+TEST-LAYER INSTRUMENTATION OBJECT
+=================================
 
-DESIGN INVARIANTS (must hold — verified by tests/test_observation_canonical.py):
+Observation is a test-layer instrumentation object. It exists to make
+evaluation assumptions visible during analysis and CI verification.
+
+Production modules MUST NOT rely on Observation as an evaluation
+primitive. Observation does not establish cross-problem comparability,
+behavioral equivalence, or measurement validity. It records the output
+of a particular evaluation procedure under a particular projection.
+
+RATIONALE FOR TEST-LOCALITY
+===========================
+
+Prior investigation of the blocked schema files (47 files in the
+bimaristan_schema family) surfaced three incompatible notions of
+"valid measurement" coexisting in the latent system (brute-force,
+symbol, schema layers). The findings are recorded in an external
+audit artifact, not in this repository. Observation was introduced to
+expose those assumptions, not to resolve them. If it migrates into
+production code too early, the repository risks reifying one
+particular measurement encoding as if it were the canonical semantic
+object — bypassing the very problem the investigation uncovered.
+
+The burden of proof for promoting Observation out of the test layer is
+on promotion, not on containment. Any future change to this contract
+must be argued explicitly and recorded here.
+
+DESIGN INVARIANTS (what Observation is — verified by tests/test_observation_canonical.py):
 
   A. Layer coverage. All three evaluation layers in the latent system
      (brute-force / symbol / schema) can populate Observation without

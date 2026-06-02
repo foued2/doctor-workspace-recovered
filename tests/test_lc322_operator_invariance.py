@@ -54,6 +54,12 @@ the two measurements are taken under different joint distributions
 The three surviving invariants (monotonicity, SURVIVOR separability,
 finite-sample stability) hold in both; everything else is interpretive
 load.
+
+TEST-LAYER OBSERVATION SUBSTRATE: per-sample classifications in this
+file are also populated as `doctor.core.observation.Observation`
+instances. The Observation is test-layer instrumentation; production
+modules in `doctor/adversarial/` etc. MUST NOT import it. The rationale
+is recorded in `doctor/core/observation.py`.
 """
 from __future__ import annotations
 
