@@ -1,15 +1,35 @@
-# REPRODUCE.md — Midweather-Fingerprint-Gate Clean-Run (LC322)
+# REPRODUCE.md — Midweather-Fingerprint-Gate Clean-Run (LC322 + LC45)
 
 This document is the step-by-step recipe to reproduce the run that produced
-`data/midweather_fingerprint_lc322.json`. Every artifact is SHA-locked in
-`ARTIFACT_MANIFEST.lock`; the protocol freeze is SHA-locked in
-`MIDWEATHER_FINGERPRINT_GATE_FREEZE.json`.
+`data/midweather_fingerprint_lc322.json` (and `data/midweather_fingerprint_lc45.json`
+for the B0-B6-only LC45 port). Every artifact is SHA-locked in
+`ARTIFACT_MANIFEST.lock`; each protocol freeze is SHA-locked in its own
+`MIDWEATHER_FINGERPRINT_GATE_*_FREEZE.json`.
 
 ## Prerequisites
 
 - Python 3.14 (any Python that supports PEP 604 union syntax and the rest of the source works)
 - A working tree at the commit recorded in `ARTIFACT_MANIFEST.lock:_meta.locked_at`
 - No environment variables or secret keys required
+- Optional: `pip install -e .` to expose the `doctor-certify` console script;
+  the steps below work either via the console script or via `python -m doctor.adversarial.cli`
+
+## Using the CLI
+
+The protocol ships as a CLI with four subcommands. After `pip install -e .`,
+invoke as `doctor-certify ...`; before install, invoke as
+`py -m doctor.adversarial.cli ...` (or `python -m` on non-Windows).
+
+| Subcommand | Purpose | Exit codes |
+|---|---|---|
+| `doctor-certify list` | Print the 6 adapter slot fills for each registered problem class | `0` always |
+| `doctor-certify validate-freeze --freeze=PATH` | Run the 7 freeze validators against a freeze file | `0` all pass, `2` any fail, `3` ERROR |
+| `doctor-certify validate-manifest --seval-manifest=PATH --freeze=PATH` | Schema + freeze tie + certification | `0` valid, `2` invalid, `3` ERROR |
+| `doctor-certify run --problem-class=lc322` (or `lc45`) | Execute the protocol; write the result JSON | `0` PASS, `1` FAIL, `2` REFUSED, `3` ERROR |
+
+The exit code policy is stable across all subcommands. See `docs/CLI_SCOPE.md`
+for the full surface declaration and the `REFUSED: <guard>: <reason>` vs
+`ERROR: <exception>: <message>` stderr format.
 
 ## Step 1: Verify the lockfile
 
@@ -24,41 +44,40 @@ print('lockfile', 'OK' if ok else 'BROKEN')"
 
 Expected: `lockfile OK`. If mismatches, the working tree is dirty; do not proceed.
 
-## Step 2: Run the protocol tests (39 tests, all must pass)
+## Step 2: Run the protocol tests (40 tests, all must pass)
 
 ```
 python -m pytest -q tests/test_midweather_fingerprint.py
 ```
 
-Expected: `39 passed in <1s`. The 39 tests are the protocol-level contract
-(see `tests/test_midweather_fingerprint.py:1-50` for the relocation provenance).
+Expected: `40 passed in <1s`. The 40 tests are the protocol-level contract.
 If any test fails, the protocol is broken; do not interpret the result JSON.
 
-## Step 3: Verify the freeze validates
+## Step 3: Verify the freeze validates (via the CLI)
 
 ```
-python -c "
-import json, sys
-from pathlib import Path
-from doctor.adversarial.midweather_fingerprint_features import clean_run_refusal_reasons
-freeze = json.loads(Path('MIDWEATHER_FINGERPRINT_GATE_FREEZE.json').read_text())
-manifest = json.loads(Path('data/midweather_fingerprint_lc322_seval_manifest.json').read_text())
-probe_index = json.loads(Path('data/midweather_fingerprint_lc322_probe_index.json').read_text())
-ds = {'name': 'ACCEPT_REJECT', 'failure_threshold': 0.05, 'minimum_accept_rate': 0.2}
-reasons = clean_run_refusal_reasons(
-    seval_manifest=manifest, freeze=freeze, repo_root=Path('.'),
-    decision_spec=ds, probe_index=probe_index, freeze_id=freeze['freeze_id'])
-print('reasons:', reasons if reasons else '[] -- all 7 freeze validators pass')
-"
+doctor-certify validate-freeze --freeze=MIDWEATHER_FINGERPRINT_GATE_FREEZE.json
 ```
 
-Expected: `reasons: [] -- all 7 freeze validators pass`. Any non-empty list
-is a freeze-validation failure; the runner will refuse to run.
+Expected: `PASS: all freeze validators passed` and exit code `0`. Any non-empty
+`REFUSED: freeze_validation: <reason>` line is a freeze-validation failure; the
+runner would refuse to run.
 
-## Step 4: Run the protocol
+To validate the manifest separately (a CI hook before the expensive run):
 
 ```
-python runners/run_midweather_fingerprint_lc322.py
+doctor-certify validate-manifest \
+  --seval-manifest=data/midweather_fingerprint_lc322_seval_manifest.json \
+  --freeze=MIDWEATHER_FINGERPRINT_GATE_FREEZE.json
+```
+
+Expected: `PASS: manifest is valid (schema + freeze tie + certification)` and
+exit code `0`.
+
+## Step 4: Run the protocol (via the CLI)
+
+```
+doctor-certify run --problem-class=lc322
 ```
 
 Expected output (lines truncated):
@@ -82,6 +101,13 @@ B5_nearest_neighbor_raw_tensor         19.0   19    0     1.000  0.457   all-ACC
 B6_regularized_raw_tensor              19.0   19    0     1.000  0.457   all-ACCEPT
 C_structured_fingerprint                5.0    0    5     0.200  0.593
 ```
+
+Process exit code: `1` (FAIL). The CLI's run subcommand propagates the verdict
+via the exit code; CI can branch on it (`0=PASS, 1=FAIL, 2=REFUSED, 3=ERROR`).
+
+If you have not run `pip install -e .`, the equivalent invocation is
+`py -m doctor.adversarial.cli run --problem-class=lc322` (the CLI adds the
+project root to `sys.path` at startup so the `runners/` package is importable).
 
 Wallclock: <1s on any modern machine.
 
@@ -111,6 +137,68 @@ python C:\Users\pakla\AppData\Local\Temp\opencode\generate_artifact_manifest.py
 
 This regenerates `ARTIFACT_MANIFEST.lock` from the working tree. Expected:
 `manifest solver sha consistency: ok` and 39 artifacts (9 named + 30 solver files).
+
+## LC45 (B0-B6 port)
+
+The LC45 port runs the same generalized kernel against the LC45 freeze, probe
+index, and seval manifest. It uses estimators B0-B6 only (no C); per the
+kernel contract (see `docs/GENERALIZATION_CONTRACT.md:§7 item 6`), the verdict
+degenerates to FAIL when C is absent.
+
+```
+doctor-certify list
+```
+
+lists `lc45` alongside `lc322`, showing the 6 adapter slot fills and that
+LC45 has 7 estimators (B0-B6) vs LC322's 8 (B0-B6 + C_structured_fingerprint).
+
+```
+doctor-certify run --problem-class=lc45
+```
+
+Expected output (lines truncated):
+
+```
+Wrote C:\Users\pakla\PycharmProjects\doctor-workspace-recovered\data\midweather_fingerprint_lc45.json
+
+Decision: FAIL
+Reason:   degenerate: all-reject in B4_raw_full_tensor
+
+Ground truth: 1 good / 9 bad
+
+Per-estimator table:
+estimator                              loss   WA   WR  acc_rate   RMSE   degenerate
+B0_prior                                9.0    9    0     1.000  0.617   all-ACCEPT
+B1_count                                0.0    0    0     0.100  0.477
+B2_calibrated_count                     0.0    0    0     0.100  0.477
+B3_raw_pf_vector                        0.0    0    0     0.100  0.477
+B4_raw_full_tensor                      1.0    0    1     0.000  0.572   all-REJECT
+B5_nearest_neighbor_raw_tensor          9.0    9    0     1.000  0.617   all-ACCEPT
+B6_regularized_raw_tensor               9.0    9    0     1.000  0.617   all-ACCEPT
+```
+
+Process exit code: `1` (FAIL). The 1 good solver is the BFS-survivor
+(`solver_001`); solvers 2-10 fail on various held-out probes (0.2-1.0 fail rate).
+
+The LC45 freeze, probe index, and seval manifest are at:
+- `MIDWEATHER_FINGERPRINT_GATE_LC45_FREEZE.json` (18 frozen files)
+- `data/midweather_fingerprint_lc45_probe_index.json` (30 probes, 5/manifold, 15/15 split)
+- `data/midweather_fingerprint_lc45_seval_manifest.json` (10 LC45 candidates, pack_source=external_baseline)
+
+To validate the LC45 artifacts before running:
+
+```
+doctor-certify validate-freeze --freeze=MIDWEATHER_FINGERPRINT_GATE_LC45_FREEZE.json
+doctor-certify validate-manifest \
+  --seval-manifest=data/midweather_fingerprint_lc45_seval_manifest.json \
+  --freeze=MIDWEATHER_FINGERPRINT_GATE_LC45_FREEZE.json
+```
+
+A consistency check fires if the freeze's `freeze_id` prefix does not match
+`--problem-class` (e.g., `--problem-class=lc45` with the LC322 freeze): the
+CLI exits `3` with `freeze_id_mismatch: freeze declares '<lc322 id>',
+problem_class is 'lc45'`. This catches the "wrong freeze for the wrong
+problem class" bug.
 
 ## What is NOT reproduced by this recipe
 
