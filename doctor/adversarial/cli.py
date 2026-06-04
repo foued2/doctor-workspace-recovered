@@ -154,7 +154,7 @@ def run_command(args: argparse.Namespace) -> int:
 
 
 def validate_freeze_command(args: argparse.Namespace) -> int:
-    from doctor.adversarial.midweather_fingerprint_features import validate_freeze_artifact
+    from doctor.adversarial.midweather_fingerprint_features import clean_run_refusal_reasons
     try:
         freeze = json.loads(args.freeze.read_text(encoding="utf-8"))
     except FileNotFoundError:
@@ -164,12 +164,41 @@ def validate_freeze_command(args: argparse.Namespace) -> int:
         print(f"ERROR: freeze_invalid_json: {e}", file=sys.stderr)
         return EXIT_ERROR
 
-    reasons = validate_freeze_artifact(freeze, PROJECT_ROOT)
+    freeze_id = freeze.get("freeze_id", "")
+    parts = freeze_id.split("_")
+    if len(parts) < 3 or parts[0] != "midweather" or parts[1] != "fingerprint":
+        print(f"ERROR: cannot_extract_problem_class: freeze_id={freeze_id!r}", file=sys.stderr)
+        return EXIT_ERROR
+    problem_class = parts[2]
+
+    from runners.run_midweather_fingerprint_lc322 import _paths_for
+    paths = _paths_for(problem_class)
+    seval_manifest_path = paths["seval_manifest"]
+    probe_index_path = paths["probe_index"]
+
+    try:
+        seval_manifest = json.loads(seval_manifest_path.read_text(encoding="utf-8"))
+        probe_index = json.loads(probe_index_path.read_text(encoding="utf-8"))
+    except FileNotFoundError as e:
+        print(f"ERROR: file_not_found: {e.filename}", file=sys.stderr)
+        return EXIT_ERROR
+    except json.JSONDecodeError as e:
+        print(f"ERROR: invalid_json: {e}", file=sys.stderr)
+        return EXIT_ERROR
+
+    reasons = clean_run_refusal_reasons(
+        seval_manifest=seval_manifest,
+        freeze=freeze,
+        repo_root=PROJECT_ROOT,
+        decision_spec=freeze.get("decision_spec", {}),
+        probe_index=probe_index,
+        freeze_id=freeze_id,
+    )
     if reasons:
         for reason in reasons:
             print(f"REFUSED: freeze_validation: {reason}", file=sys.stderr)
         return EXIT_REFUSED
-    print("PASS: all freeze validators passed")
+    print("PASS: all 7 freeze validators passed")
     return EXIT_PASS
 
 
