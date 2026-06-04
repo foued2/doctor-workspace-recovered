@@ -96,6 +96,11 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         choices=["lc322", "lc45"],
         help="Problem class to evaluate (default: lc322).",
     )
+    parser.add_argument("--freeze", type=Path, help="Override the freeze path.")
+    parser.add_argument("--probe-index", type=Path, help="Override the probe_index path.")
+    parser.add_argument("--seval-manifest", type=Path, help="Override the seval_manifest path.")
+    parser.add_argument("--solvers-dir", type=Path, help="Override the solvers directory.")
+    parser.add_argument("--output", type=Path, help="Override the result output path.")
     return parser.parse_args(argv)
 
 
@@ -224,10 +229,10 @@ def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv)
     problem_class: str = args.problem_class
     paths = _paths_for(problem_class)
-    freeze_path = paths["freeze"]
-    probe_index_path = paths["probe_index"]
-    seval_manifest_path = paths["seval_manifest"]
-    result_path = paths["result"]
+    freeze_path = args.freeze or paths["freeze"]
+    probe_index_path = args.probe_index or paths["probe_index"]
+    seval_manifest_path = args.seval_manifest or paths["seval_manifest"]
+    result_path = args.output or paths["result"]
 
     t0 = time.time()
     try:
