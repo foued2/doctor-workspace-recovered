@@ -48,6 +48,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from doctor.adversarial.midweather_fingerprint_features import (
     ACCEPT_REJECT_SPEC,
+    SevalManifestValidationError,
     assert_valid_seval_manifest,
     clean_run_refusal_reasons,
     decide_accept_reject,
@@ -57,6 +58,12 @@ from doctor.adversarial.problem_class_config import (
     ProblemClassConfig,
     get_problem_class_config,
 )
+
+# Exit codes (match doctor/adversarial/cli.py: 0=PASS, 1=FAIL, 2=REFUSED, 3=ERROR).
+EXIT_PASS = 0
+EXIT_FAIL = 1
+EXIT_REFUSED = 2
+EXIT_ERROR = 3
 
 
 def _paths_for(problem_class: str) -> dict[str, Path]:
@@ -213,7 +220,7 @@ def compute_rmse_secondary(
     return (sq_err / n) ** 0.5 if n else 0.0
 
 
-def main(argv: list[str] | None = None) -> None:
+def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv)
     problem_class: str = args.problem_class
     paths = _paths_for(problem_class)
@@ -223,22 +230,36 @@ def main(argv: list[str] | None = None) -> None:
     result_path = paths["result"]
 
     t0 = time.time()
-    freeze = load_freeze(freeze_path)
-    probe_index = load_probe_index(probe_index_path)
-    seval_manifest = load_seval_manifest(seval_manifest_path)
+    try:
+        freeze = load_freeze(freeze_path)
+        probe_index = load_probe_index(probe_index_path)
+        seval_manifest = load_seval_manifest(seval_manifest_path)
+    except FileNotFoundError as e:
+        print(f"ERROR: file_not_found: {e.filename}", file=sys.stderr)
+        return EXIT_ERROR
+    except json.JSONDecodeError as e:
+        print(f"ERROR: invalid_json: {e}", file=sys.stderr)
+        return EXIT_ERROR
 
     # Slot 5 cross-check: probe_index's axis_set must match the config's declaration
     config = get_problem_class_config(problem_class)
     declared_axes = set(config.fingerprint_axes)
     actual_axes = set(probe_index.get("axis_set", []))
     if actual_axes != declared_axes:
-        raise SystemExit(
-            f"axis_set mismatch: probe_index declares {sorted(actual_axes)}, "
-            f"config ({problem_class}) declares {sorted(declared_axes)}"
+        print(
+            f"ERROR: axis_set_mismatch: probe_index declares {sorted(actual_axes)}, "
+            f"config ({problem_class}) declares {sorted(declared_axes)}",
+            file=sys.stderr,
         )
+        return EXIT_ERROR
 
     # Guard 1: schema + freeze tie
-    assert_valid_seval_manifest(seval_manifest, freeze)
+    try:
+        assert_valid_seval_manifest(seval_manifest, freeze)
+    except SevalManifestValidationError as e:
+        print(f"REFUSED: manifest_certification: {e}", file=sys.stderr)
+        return EXIT_REFUSED
+
     # Guard 2: clean-run refusal reasons
     refusal_reasons = clean_run_refusal_reasons(
         seval_manifest=seval_manifest,
@@ -249,7 +270,9 @@ def main(argv: list[str] | None = None) -> None:
         freeze_id=freeze["freeze_id"],
     )
     if refusal_reasons:
-        raise SystemExit(f"clean-run refused: {refusal_reasons}")
+        for reason in refusal_reasons:
+            print(f"REFUSED: freeze_validation: {reason}", file=sys.stderr)
+        return EXIT_REFUSED
 
     decision_spec = freeze["decision_spec"]
     cost = decision_spec.get("cost_model", {"wrong_accept_cost": 1, "wrong_reject_cost": 1})
@@ -410,6 +433,13 @@ def main(argv: list[str] | None = None) -> None:
             deg = "all-REJECT"
         print(f"{row['estimator']:<36} {row['decision_loss']:>6.1f} {row['wrong_accepts']:>4} {row['wrong_rejects']:>4} {row['accept_rate']:>9.3f} {row['rmse_secondary']:>6.3f} {deg:>12}")
 
+    if decision == "PASS":
+        return EXIT_PASS
+    if decision == "FAIL":
+        return EXIT_FAIL
+    print(f"ERROR: unexpected_decision: {decision!r}", file=sys.stderr)
+    return EXIT_ERROR
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

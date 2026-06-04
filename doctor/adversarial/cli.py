@@ -122,13 +122,6 @@ def _resolve_freeze_path(args: argparse.Namespace) -> Path:
     return _paths_for(args.problem_class)["freeze"]
 
 
-def _resolve_result_path(args: argparse.Namespace) -> Path:
-    if args.output is not None:
-        return args.output
-    from runners.run_midweather_fingerprint_lc322 import _paths_for
-    return _paths_for(args.problem_class)["result"]
-
-
 def _check_freeze_id_match(freeze: dict, problem_class: str) -> str | None:
     expected_prefix = f"midweather_fingerprint_{problem_class}_"
     freeze_id = freeze.get("freeze_id", "")
@@ -157,39 +150,7 @@ def run_command(args: argparse.Namespace) -> int:
         return EXIT_ERROR
 
     from runners import run_midweather_fingerprint_lc322 as runner
-    runner_argv = _build_runner_argv(args)
-    try:
-        runner.main(runner_argv)
-    except SystemExit as e:
-        msg = str(e) if e.code is not None else ""
-        if "clean-run refused" in msg:
-            print(f"REFUSED: freeze_validation: {msg}", file=sys.stderr)
-            return EXIT_REFUSED
-        if e.code is not None and isinstance(e.code, int):
-            return e.code
-        return EXIT_ERROR
-    except Exception as e:
-        print(f"ERROR: {type(e).__name__}: {e}", file=sys.stderr)
-        traceback.print_exc(file=sys.stderr)
-        return EXIT_ERROR
-
-    result_path = _resolve_result_path(args)
-    if not result_path.exists():
-        print(f"ERROR: result_not_written: {result_path}", file=sys.stderr)
-        return EXIT_ERROR
-    try:
-        result = json.loads(result_path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as e:
-        print(f"ERROR: result_invalid_json: {e}", file=sys.stderr)
-        return EXIT_ERROR
-
-    decision = result.get("decision")
-    if decision == "PASS":
-        return EXIT_PASS
-    if decision == "FAIL":
-        return EXIT_FAIL
-    print(f"ERROR: unexpected_decision: {decision!r}", file=sys.stderr)
-    return EXIT_ERROR
+    return runner.main(_build_runner_argv(args))
 
 
 def validate_freeze_command(args: argparse.Namespace) -> int:
