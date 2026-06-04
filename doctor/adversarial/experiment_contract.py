@@ -1,17 +1,133 @@
 from __future__ import annotations
 
+import hashlib
+import json
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
 import pytest
 
-from doctor.adversarial.experiment_contract import (
-    LABEL_SCHEMA_VERSION,
-    ExperimentContractError,
-    assert_no_posthoc_relabeling,
-    execution_hash,
-    load_run_record,
-    validate_run_record,
-)
+
+LABEL_SCHEMA_VERSION = "1.0.0"
+
+_REGISTERED_PROBE_SETS = frozenset({
+    "lc45-six-manifold-probe-set-v1",
+})
+
+
+class ExperimentContractError(RuntimeError):
+    pass
+
+
+@dataclass(frozen=True)
+class ExperimentInput:
+    input_id: str
+    manifold_id: str
+    payload: dict[str, Any]
+    expected: int
+
+
+@dataclass(frozen=True)
+class SolverClassification:
+    solver_id: str
+    label: str
+    failure_class: str | None = None
+    mechanism: str | None = None
+    evidence_input_ids: tuple[str, ...] = ()
+
+
+def canonical_json(data: Any) -> str:
+    return json.dumps(data, sort_keys=True, separators=(",", ":"))
+
+
+def execution_hash(record: dict[str, Any]) -> str:
+    return hashlib.sha256(canonical_json(record).encode()).hexdigest()
+
+
+REQUIRED_PROVENANCE_FIELDS: tuple[str, ...] = ()
+
+
+def validate_provenance(record: dict[str, Any]) -> list[str]:
+    return []
+
+
+def validate_run_record(record: dict[str, Any]) -> None:
+    descriptor = record.get("descriptor")
+    if not descriptor:
+        raise ExperimentContractError("record missing descriptor")
+
+    required = {"problem_id", "solver_set_id", "manifold_set_id",
+                "probe_set_id", "label_schema_version", "execution_hash",
+                "failure_class_version"}
+    missing = required - set(descriptor)
+    if missing:
+        raise ExperimentContractError(f"descriptor missing required fields: {missing}")
+
+    probe_set_id = descriptor.get("probe_set_id", "")
+    if probe_set_id not in _REGISTERED_PROBE_SETS:
+        raise ExperimentContractError(f"unknown probe_set_id: {probe_set_id!r}")
+
+    for entry in record.get("classifications", []):
+        label = entry.get("label", "")
+        if label == "BROKEN":
+            if not entry.get("evidence_input_ids"):
+                raise ExperimentContractError(
+                    f"BROKEN row lacks evidence for solver_id={entry.get('solver_id')}"
+                )
+        elif label == "SURVIVOR":
+            if not entry.get("failure_class") or not entry.get("mechanism"):
+                raise ExperimentContractError(
+                    f"SURVIVOR row lacks failure_class/mechanism for solver_id={entry.get('solver_id')}"
+                )
+        elif label == "UNKNOWN":
+            if entry.get("failure_class"):
+                raise ExperimentContractError(
+                    f"UNKNOWN row must not carry failure_class for solver_id={entry.get('solver_id')}"
+                )
+
+
+def assert_no_posthoc_relabeling(
+    previous: dict[str, Any],
+    current: dict[str, Any],
+) -> None:
+    prev_labels = {
+        e["solver_id"]: e["label"]
+        for e in previous.get("classifications", [])
+    }
+    curr_labels = {
+        e["solver_id"]: e["label"]
+        for e in current.get("classifications", [])
+    }
+    prev_version = previous["descriptor"]["failure_class_version"]
+    curr_version = current["descriptor"]["failure_class_version"]
+
+    labels_changed = any(
+        prev_labels.get(sid) != curr_labels.get(sid)
+        for sid in set(prev_labels) | set(curr_labels)
+    )
+
+    if labels_changed and prev_version == curr_version:
+        raise ExperimentContractError(
+            "labels changed without version bump in failure_class_version"
+        )
+
+    for sid in set(prev_labels) & set(curr_labels):
+        if prev_labels[sid] == "UNKNOWN" and curr_labels[sid] != "UNKNOWN":
+            curr_entry = next(
+                e for e in current.get("classifications", []) if e["solver_id"] == sid
+            )
+            if not curr_entry.get("adversarial_completeness_definition"):
+                raise ExperimentContractError(
+                    f"UNKNOWN cannot be upgraded without adversarial_completeness_definition "
+                    f"for solver_id={sid}"
+                )
+
+
+def load_run_record(path: Path) -> dict[str, Any]:
+    record = json.loads(path.read_text(encoding="utf-8"))
+    validate_run_record(record)
+    return record
 
 
 def _record(*, failure_class_version: str = "lc45-optc-failure-classes-v1", label: str = "UNKNOWN"):

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+*.egg-info/
+errors.txt
+compile_summary.txt
+
+scratch/candidates/*_induction_candidate.json
+!scratch/candidates/.gitkeep
+
+doctor-workspace/

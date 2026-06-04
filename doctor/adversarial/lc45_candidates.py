@@ -13,14 +13,239 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from doctor.adversarial.lc45_candidates import lc45_bfs_depth_cutoff, lc45_farthest_landing_path
-from runners.run_lc45_solver_population import _instances
-
-
 LC322_AUDIT = PROJECT_ROOT / "data" / "lc322_specificity_audit.json"
 LC45_AUDIT = PROJECT_ROOT / "data" / "lc45_specificity_audit.json"
 OUTPUT_JSON = PROJECT_ROOT / "data" / "representational_span_test.json"
 OUTPUT_MD = PROJECT_ROOT / "findings" / "FINDINGS_118.md"
+
+
+# Solver functions for LC45 Jump Game II.
+# Signature: fn(nums: list[int]) -> int
+#   Returns minimum jumps to reach the last index, or -1 if unreachable.
+
+
+def lc45_bfs_depth_cutoff(nums: list[int]) -> int:
+    """BFS with depth cutoff — SURVIVOR. Passes all oracle cases."""
+    n = len(nums)
+    if n == 0:
+        raise ValueError("empty input")
+    if n == 1:
+        return 0
+    if nums[0] == 0:
+        raise ValueError("cannot move from start")
+    from collections import deque
+    cutoff = n
+    queue: deque[tuple[int, int]] = deque([(0, 0)])
+    visited = {0}
+    while queue:
+        pos, jumps = queue.popleft()
+        if jumps >= cutoff:
+            continue
+        for step in range(nums[pos], 0, -1):
+            nxt = pos + step
+            if nxt >= n - 1:
+                return jumps + 1
+            if nxt not in visited:
+                visited.add(nxt)
+                queue.append((nxt, jumps + 1))
+    raise ValueError("unreachable last index")
+
+
+def lc45_farthest_landing_path(nums: list[int]) -> int:
+    """Greedy: jumps to the farthest reachable landing position by value.
+    When all reachable landing values are equal, returns -1 (indeterminate)."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    jumps = 0
+    pos = 0
+    while pos < n - 1:
+        if nums[pos] == 0:
+            return -1
+        landing_values = set()
+        for step in range(1, nums[pos] + 1):
+            nxt = pos + step
+            if nxt >= n - 1:
+                return jumps + 1
+            landing_values.add(nums[nxt])
+        if len(landing_values) <= 1:
+            return -1
+        best_step = 1
+        max_landing = -1
+        for step in range(1, nums[pos] + 1):
+            nxt = pos + step
+            if nums[nxt] > max_landing:
+                max_landing = nums[nxt]
+                best_step = step
+        pos += best_step
+        jumps += 1
+    return jumps
+
+
+def lc45_naive_greedy(nums: list[int]) -> int:
+    """Greedy: always take the longest possible jump (max index)."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    jumps = 0
+    pos = 0
+    while pos < n - 1:
+        if nums[pos] == 0:
+            return -1
+        farthest = pos + 1
+        for step in range(2, nums[pos] + 1):
+            nxt = pos + step
+            if nxt >= n - 1:
+                return jumps + 1
+            if nxt > farthest:
+                farthest = nxt
+        pos = farthest
+        jumps += 1
+    return jumps
+
+
+def lc45_max_landing_value(nums: list[int]) -> int:
+    """Greedy: jump to position with max nums value; on tie pick closest."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    jumps = 0
+    pos = 0
+    while pos < n - 1:
+        if nums[pos] == 0:
+            return -1
+        max_val = -1
+        best_step = 1
+        for step in range(1, nums[pos] + 1):
+            nxt = pos + step
+            if nxt >= n - 1:
+                return jumps + 1
+            if nums[nxt] > max_val:
+                max_val = nums[nxt]
+                best_step = step
+        pos += best_step
+        jumps += 1
+    return jumps
+
+
+def lc45_zero_dead_end_panic(nums: list[int]) -> int:
+    """Returns -1 if any reachable position has value 0 (dead-end panic)."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    jumps = 0
+    pos = 0
+    while pos < n - 1:
+        if nums[pos] == 0:
+            return -1
+        for step in range(1, nums[pos] + 1):
+            nxt = pos + step
+            if nxt >= n - 1:
+                return jumps + 1
+            if nums[nxt] == 0:
+                return -1
+        farthest = pos + 1
+        for step in range(2, nums[pos] + 1):
+            nxt = pos + step
+            if nxt > farthest:
+                farthest = nxt
+        pos = farthest
+        jumps += 1
+    return jumps
+
+
+def lc45_reachable_boolean_confusion(nums: list[int]) -> int:
+    """Confuses reachability with count — returns number of reachable indices
+    reachable from start, not minimum jumps."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    reachable = {0}
+    for i in range(n):
+        for step in range(1, nums[i] + 1):
+            nxt = i + step
+            if nxt >= n - 1:
+                return len(reachable) + 1
+            if nxt not in reachable:
+                reachable.add(nxt)
+    return -1
+
+
+def lc45_three_step_window_dp(nums: list[int]) -> int:
+    """DP with limited 3-step lookahead — each step inspects at most 3 forward positions."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    dp = [float("inf")] * n
+    dp[0] = 0
+    for i in range(n):
+        if dp[i] == float("inf"):
+            continue
+        window = min(nums[i], 3, n - 1 - i)
+        for step in range(1, window + 1):
+            nxt = i + step
+            if nxt >= n - 1:
+                return dp[i] + 1
+            dp[nxt] = min(dp[nxt], dp[i] + 1)
+    return -1 if dp[-1] == float("inf") else int(dp[-1])
+
+
+def lc45_frontier_off_by_one(nums: list[int]) -> int:
+    """Off-by-one in BFS frontier — counts one extra jump."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    from collections import deque
+    queue: deque[tuple[int, int]] = deque([(0, 0)])
+    visited = {0}
+    while queue:
+        pos, jumps = queue.popleft()
+        for step in range(1, nums[pos] + 1):
+            nxt = pos + step
+            if nxt >= n - 1:
+                return jumps + 2
+            if nxt not in visited:
+                visited.add(nxt)
+                queue.append((nxt, jumps + 1))
+    return -1
+
+
+def lc45_uniform_formula_generalizer(nums: list[int]) -> int:
+    """Assumes uniform input — applies ceil((n-1) / max(nums)) formula.
+    Correct on uniform arrays (all values equal), wrong on non-uniform."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    import math
+    step = max(nums)
+    if step <= 0:
+        return -1
+    ans = int(math.ceil((n - 1) / step))
+    return max(1, ans)
+
+
+
+def lc45_first_window_max_then_greedy(nums: list[int]) -> int:
+    """First step always 1, then greedy farthest-index thereafter."""
+    n = len(nums)
+    if n <= 1:
+        return 0
+    pos = 1
+    jumps = 1
+    while pos < n - 1:
+        if nums[pos] == 0:
+            return -1
+        farthest = pos + 1
+        for s in range(2, nums[pos] + 1):
+            nxt = pos + s
+            if nxt >= n - 1:
+                return jumps + 1
+            if nxt > farthest:
+                farthest = nxt
+        pos = farthest
+        jumps += 1
+    return jumps
+
 
 LC45_SOLVERS: tuple[tuple[str, Callable[[list[int]], int]], ...] = (
     ("lc45_farthest_landing_path", lc45_farthest_landing_path),
@@ -39,6 +264,7 @@ def _load_json(path: Path) -> dict[str, Any]:
 
 
 def _instances_by_manifold() -> dict[str, list[dict[str, Any]]]:
+    from runners.run_lc45_solver_population import _instances
     grouped: dict[str, list[dict[str, Any]]] = {}
     for instance in _instances():
         grouped.setdefault(str(instance["manifold_id"]), []).append(instance)

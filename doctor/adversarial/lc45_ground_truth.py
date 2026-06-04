@@ -25,7 +25,7 @@ def lc45_brute_force(nums: list[int]) -> int:
         pos, jumps = queue.popleft()
         for step in range(1, nums[pos] + 1):
             nxt = pos + step
-            if nxt >= len(nums):
+            if nxt >= len(nums) - 1:
                 return jumps + 1
             if nxt not in visited:
                 visited.add(nxt)

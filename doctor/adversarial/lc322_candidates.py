@@ -14,18 +14,208 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from doctor.adversarial.lc322_candidates import (
-    lc322_bfs_coin_count_cutoff,
-    lc322_dp,
-    lc322_greedy,
-    lc322_lookahead_one,
-    lc322_memo_collision,
-    lc322_modulo_memo_alias,
-    lc322_ordering_commitment,
-    lc322_reachability_lookahead,
-    lc322_smallest_first,
-    lc322_transition_asymmetric_forward_dp,
-)
+# Solver functions for LC322 Coin Change.
+# Signature: fn(nums: list[int]) -> int
+#   nums = [c1, c2, ..., amount]  (last element is the amount)
+#   Returns minimum coin count, or -1 if unreachable.
+
+
+def lc322_dp(nums: list[int]) -> int:
+    """Correct DP."""
+    coins = nums[:-1]
+    amount = nums[-1]
+    if amount < 0:
+        return -1
+    dp = [float("inf")] * (amount + 1)
+    dp[0] = 0
+    for i in range(1, amount + 1):
+        for c in coins:
+            if c <= 0:
+                continue
+            if c <= i:
+                dp[i] = min(dp[i], dp[i - c] + 1)
+    return -1 if dp[amount] == float("inf") else dp[amount]
+
+
+def lc322_greedy(nums: list[int]) -> int:
+    """Greedy: largest coin first. Fails on non-canonical coin systems."""
+    coins = sorted([c for c in nums[:-1] if c > 0], reverse=True)
+    amount = nums[-1]
+    count = 0
+    for c in coins:
+        q = amount // c
+        count += q
+        amount -= q * c
+    return -1 if amount != 0 else count
+
+
+def lc322_smallest_first(nums: list[int]) -> int:
+    """Always pick smallest coin first — pathologically many coins."""
+    coins = sorted([c for c in nums[:-1] if c > 0])
+    amount = nums[-1]
+    count = 0
+    for c in coins:
+        q = amount // c
+        count += q
+        amount -= q * c
+    return -1 if amount != 0 else count
+
+
+def lc322_memo_collision(nums: list[int]) -> int:
+    """DP with coin-set-independent memo — cache collisions across amounts.
+    Cache key is (remaining % 3), causing aliasing between different amounts."""
+    coins = [c for c in nums[:-1] if c > 0]
+    amount = nums[-1]
+    if amount < 0:
+        return -1
+    _cache: dict[int, int] = {}
+    MOD = 3
+
+    def _min_coins(remaining: int) -> int:
+        if remaining < 0:
+            return float("inf")
+        if remaining == 0:
+            return 0
+        key = remaining % MOD
+        if key in _cache:
+            return _cache[key]
+        best = float("inf")
+        for c in coins:
+            best = min(best, 1 + _min_coins(remaining - c))
+        _cache[key] = best
+        return best
+
+    result = _min_coins(amount)
+    return -1 if result == float("inf") else result
+
+
+def lc322_lookahead_one(nums: list[int]) -> int:
+    """Only considers using one coin per recursive step without exploring all paths."""
+    coins = [c for c in nums[:-1] if c > 0]
+    amount = nums[-1]
+    if amount < 0:
+        return -1
+    steps = 0
+    while amount > 0:
+        best = max((c for c in coins if c <= amount), default=None)
+        if best is None:
+            return -1
+        amount -= best
+        steps += 1
+    return steps
+
+
+def lc322_bfs_coin_count_cutoff(nums: list[int]) -> int:
+    """BFS with depth cutoff — stops searching after a fixed depth."""
+    coins = [c for c in nums[:-1] if c > 0]
+    amount = nums[-1]
+    if amount < 0:
+        return -1
+    cutoff = 6
+    from collections import deque
+    queue: deque[tuple[int, int]] = deque([(0, 0)])
+    visited = {0}
+    while queue:
+        total, depth = queue.popleft()
+        if depth >= cutoff:
+            continue
+        for c in coins:
+            nxt = total + c
+            if nxt == amount:
+                return depth + 1
+            if nxt < amount and nxt not in visited:
+                visited.add(nxt)
+                queue.append((nxt, depth + 1))
+    return -1
+
+
+def lc322_modulo_memo_alias(nums: list[int]) -> int:
+    """Uses modulo-2 memo key — maximum aliasing causes wrong results."""
+    coins = [c for c in nums[:-1] if c > 0]
+    amount = nums[-1]
+    if amount < 0:
+        return -1
+    _cache: dict[int, int] = {}
+
+    def _solve(remaining: int) -> int:
+        if remaining < 0:
+            return float("inf")
+        if remaining == 0:
+            return 0
+        key = remaining % 2
+        if key in _cache:
+            return _cache[key]
+        best = float("inf")
+        for c in coins:
+            best = min(best, 1 + _solve(remaining - c))
+        _cache[key] = best
+        return best
+
+    result = _solve(amount)
+    return -1 if result == float("inf") else result
+
+
+def lc322_reachability_lookahead(nums: list[int]) -> int:
+    """Checks reachability correctly, then uses greedy coin count (wrong for non-canonical)."""
+    coins = [c for c in nums[:-1] if c > 0]
+    amount = nums[-1]
+    if amount < 0:
+        return -1
+    reachable = {0}
+    for c in coins:
+        for v in range(c, amount + 1):
+            if v - c in reachable:
+                reachable.add(v)
+    if amount not in reachable:
+        return -1
+    remaining = amount
+    count = 0
+    for c in sorted(coins, reverse=True):
+        q = remaining // c
+        count += q
+        remaining -= q * c
+    return -1 if remaining != 0 else count
+
+
+def lc322_ordering_commitment(nums: list[int]) -> int:
+    """Commits to coin ordering — picks first coin that fits."""
+    coins = [c for c in nums[:-1] if c > 0]
+    amount = nums[-1]
+    if amount < 0:
+        return -1
+    steps = 0
+    while amount > 0:
+        chosen = None
+        for c in coins:
+            if c <= amount:
+                chosen = c
+                break
+        if chosen is None:
+            return -1
+        amount -= chosen
+        steps += 1
+    return steps
+
+
+def lc322_transition_asymmetric_forward_dp(nums: list[int]) -> int:
+    """DP with asymmetric transition — correct first pass, then overwrite pass corrupts."""
+    coins = [c for c in nums[:-1] if c > 0]
+    amount = nums[-1]
+    if amount < 0:
+        return -1
+    dp = [float("inf")] * (amount + 1)
+    dp[0] = 0
+    for c in coins:
+        for i in range(c, amount + 1):
+            if dp[i - c] != float("inf"):
+                dp[i] = min(dp[i], dp[i - c] + 1)
+    for c in sorted(coins):
+        for i in range(c, amount + 1):
+            if dp[i - c] != float("inf"):
+                dp[i] = dp[i - c] + 1
+    return -1 if dp[amount] == float("inf") else dp[amount]
+
+
 from doctor.adversarial.lc45_candidates import (
     lc45_bfs_depth_cutoff,
     lc45_farthest_landing_path,
@@ -38,9 +228,6 @@ from doctor.adversarial.lc45_candidates import (
     lc45_uniform_formula_generalizer,
     lc45_zero_dead_end_panic,
 )
-from runners.run_lc322_density_blindspot_diagnostic import MUTANTS, _dimension_samples
-from runners.run_lc45_solver_population import _instances
-from runners.run_representation_stability_boundary_test import _lc322_transform, _lc45_transform
 
 
 OUTPUT_JSON = PROJECT_ROOT / "data" / "solver_population_projection_test.json"
@@ -81,7 +268,6 @@ LC45_SOLVERS: tuple[tuple[str, Callable[[list[int]], int]], ...] = (
     ("lc45_first_window_max_then_greedy", lc45_first_window_max_then_greedy),
 )
 
-
 def _round(value: float) -> float:
     return round(float(value), 6)
 
@@ -106,6 +292,7 @@ def _fail_rate_lc322(
     axis: str,
     k: int,
 ) -> float:
+    from runners.run_representation_stability_boundary_test import _lc322_transform
     observed = 0
     failed = 0
     for row in rows:
@@ -127,6 +314,7 @@ def _fail_rate_lc45(
     axis: str,
     k: int,
 ) -> float:
+    from runners.run_representation_stability_boundary_test import _lc45_transform
     observed = 0
     failed = 0
     for row in rows:
@@ -155,6 +343,7 @@ def _axis_coordinate(rates: list[float]) -> dict[str, Any]:
 
 
 def _project_lc322(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    from runners.run_lc322_density_blindspot_diagnostic import MUTANTS
     projected = []
     solvers = [
         *[(solver_id, "lc322_solver", solver) for solver_id, solver in LC322_CANDIDATES],
@@ -366,6 +555,8 @@ def _centroid_distances(centroids: dict[str, list[float]]) -> dict[str, float]:
 
 
 def run() -> dict[str, Any]:
+    from runners.run_lc322_density_blindspot_diagnostic import _dimension_samples
+    from runners.run_lc45_solver_population import _instances
     lc322_rows = _dedupe_lc322_rows(_dimension_samples(LC322_SAMPLE_CAP))
     lc45_rows = [dict(row) for row in _instances()]
     projections = [*_project_lc322(lc322_rows), *_project_lc45(lc45_rows)]

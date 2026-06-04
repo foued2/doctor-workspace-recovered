@@ -3,13 +3,16 @@
   "statement": "",
   "source_code": "def mystery(x):\n    return x\n",
   "spec_hypothesis": {
+    "problem_id": "",
+    "spec_type": "inferred",
+    "confidence": 0.5,
+    "source": "inference",
     "inferred_input_schema": {
-      "x": "unknown"
+      "x": "any"
     },
     "inferred_output_shape": "unknown",
-    "confidence": 0.5,
-    "canonical_form": null,
-    "completeness_score": 0.5
+    "completeness_score": 0.5,
+    "canonical_form": null
   },
   "problem_hash": "1e2c546f2d0ed7dcfc704463fe01db36ca5ac073813ecc0c777f400339c38e9a"
 }

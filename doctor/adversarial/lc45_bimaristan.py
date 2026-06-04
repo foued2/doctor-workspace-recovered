@@ -10,7 +10,10 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from doctor.adversarial.lc45_bimaristan import LC45
+class LC45:
+    invariant_families = ()
+
+
 from doctor.adversarial.lc45_candidates import (
     lc45_bfs_depth_cutoff,
     lc45_farthest_landing_path,

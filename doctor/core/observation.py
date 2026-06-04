@@ -49,6 +49,37 @@ DESIGN INVARIANTS (what Observation is — verified by tests/test_observation_ca
 This module does NOT make any cross-problem measurement claim. It is
 the substrate on which such claims could be made, with assumptions
 declared.
+
+DECLARED CONVENTIONS (test-layer usage)
+======================================
+
+Two conventions govern how tests construct Observations. These are
+empirically derived from the existing corpus (113+ tests across
+test_pipeline.py, test_agreement_path.py, test_adversarial.py,
+test_observation_canonical.py, test_lc322_operator_invariance.py,
+test_lc45_solver_population.py) and should be treated as binding
+until the corpus expands to a point where they must be re-evaluated.
+
+  1. symbol_name: Exactly two values are used in test-layer
+     from_symbol() calls. No other symbol_name values appear in
+     evaluation-facing tests.
+
+       "pipeline_verdict"  — pipeline execution correctness
+       "agreement_verdict" — solver-to-oracle agreement
+
+     Tests that need domain-specific evaluation symbols (e.g.
+     "naive_diverges") belong in test_observation_canonical.py,
+     which tests the Observation class itself, not the evaluation
+     protocol. Do not introduce new symbol_name values in
+     evaluation-facing tests without declaring the addition here.
+
+  2. projection_level: All test-layer Observations use
+     projection_level=1. No evaluation-facing test uses levels
+     2, 3, or 4. Level 1 means "full projection" — the
+     Observation captures the complete evaluation result for a
+     given candidate under a given evaluation layer. If a
+     future test needs projection_level > 1, the rationale
+     must be documented here before the test is merged.
 """
 from __future__ import annotations
 

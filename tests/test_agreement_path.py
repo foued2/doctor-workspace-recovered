@@ -13,6 +13,7 @@ import unittest
 os.environ["DOCTOR_ALLOW_UNTRUSTED_EXECUTION"] = "1"
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+from doctor.core.observation import from_symbol
 from doctor.analysis.checker_gen import generate_checker
 from doctor.analysis.spec_inferrer import SpecBundle, infer_spec_bundle
 from doctor.analysis.agreement import (
@@ -124,6 +125,14 @@ class TestRunCheckerSandbox(unittest.TestCase):
 class TestAgreementMulti(unittest.TestCase):
     """Step 3: verify compute_agreement_multi returns correct verdict."""
 
+    def _obs(self, result, candidate_id, expected_verdict):
+        return from_symbol(
+            problem_id="two_sum", candidate_id=candidate_id,
+            projection_level=1, symbol_name="agreement_verdict",
+            symbol_value=result.verdict,
+            passed=result.verdict == expected_verdict, seed=1, sample_size=1,
+        )
+
     def test_all_correct_gives_pass(self):
         spec = SpecBundle(
             problem_id="two_sum", spec_type="test_based",
@@ -135,7 +144,8 @@ class TestAgreementMulti(unittest.TestCase):
             ([1, 0], ([2, 3, 4], 5)),
         ]
         result = compute_agreement_multi([spec], test_results)
-        self.assertEqual(result.verdict, "PASS")
+        obs = self._obs(result, "all_correct", "PASS")
+        self.assertEqual(obs.canonical_form, ("agreement_verdict", "'PASS'", "PASS"))
         self.assertGreater(result.agreeing_specs, 0)
 
     def test_all_wrong_gives_inconclusive(self):
@@ -150,7 +160,8 @@ class TestAgreementMulti(unittest.TestCase):
             ([99, 99], ([2, 3, 4], 5)),
         ]
         result = compute_agreement_multi([spec], test_results)
-        self.assertEqual(result.verdict, "INCONCLUSIVE")
+        obs = self._obs(result, "all_wrong", "INCONCLUSIVE")
+        self.assertEqual(obs.canonical_form, ("agreement_verdict", "'INCONCLUSIVE'", "PASS"))
 
     def test_different_wrong_outputs_gives_fail(self):
         """Different wrong outputs produce FAIL (not constant, so checkers run)."""
@@ -164,7 +175,8 @@ class TestAgreementMulti(unittest.TestCase):
             ([42, 42], ([2, 3, 4], 5)),
         ]
         result = compute_agreement_multi([spec], test_results)
-        self.assertEqual(result.verdict, "FAIL")
+        obs = self._obs(result, "different_wrong", "FAIL")
+        self.assertEqual(obs.canonical_form, ("agreement_verdict", "'FAIL'", "PASS"))
 
     def test_mixed_gives_pass_or_inconclusive(self):
         spec = SpecBundle(
@@ -177,7 +189,9 @@ class TestAgreementMulti(unittest.TestCase):
             ([99, 99], ([2, 3, 4], 5)),
         ]
         result = compute_agreement_multi([spec], test_results)
-        self.assertIn(result.verdict, ("PASS", "FAIL", "INCONCLUSIVE"))
+        obs = self._obs(result, "mixed", None)
+        self.assertIn(obs.canonical_form[1],
+                      ("'PASS'", "'FAIL'", "'INCONCLUSIVE'"))
 
     def test_all_none_gives_inconclusive(self):
         spec = SpecBundle(
@@ -187,7 +201,8 @@ class TestAgreementMulti(unittest.TestCase):
         )
         test_results = [(None, ([1, 2, 3], 3))]
         result = compute_agreement_multi([spec], test_results)
-        self.assertEqual(result.verdict, "INCONCLUSIVE")
+        obs = self._obs(result, "all_none", "INCONCLUSIVE")
+        self.assertEqual(obs.canonical_form, ("agreement_verdict", "'INCONCLUSIVE'", "PASS"))
 
     def test_constant_output_inconclusive(self):
         spec = SpecBundle(
@@ -201,11 +216,20 @@ class TestAgreementMulti(unittest.TestCase):
             ([5], ([3],)),
         ]
         result = compute_agreement_multi([spec], test_results)
-        self.assertEqual(result.verdict, "INCONCLUSIVE")
+        obs = self._obs(result, "constant_output", "INCONCLUSIVE")
+        self.assertEqual(obs.canonical_form, ("agreement_verdict", "'INCONCLUSIVE'", "PASS"))
 
 
 class TestPipelineAgreementPath(unittest.TestCase):
     """Step 4: verify agreement result feeds into pipeline verdict."""
+
+    def _obs(self, report, candidate_id, expected_verdict):
+        return from_symbol(
+            problem_id="two_sum", candidate_id=candidate_id,
+            projection_level=1, symbol_name="pipeline_verdict",
+            symbol_value=report["verdict"],
+            passed=report["verdict"] == expected_verdict, seed=1, sample_size=1,
+        )
 
     def test_two_sum_correct_reaches_agreement(self):
         r = run_pipeline(
@@ -220,7 +244,8 @@ class TestPipelineAgreementPath(unittest.TestCase):
                 "    return []"
             ),
         )
-        self.assertEqual(r["verdict"], "correct")
+        obs = self._obs(r, "correct_two_sum", "correct")
+        self.assertEqual(obs.canonical_form, ("pipeline_verdict", "'correct'", "PASS"))
         self.assertEqual(r["matched"], "two_sum")
         stages = r.get("pipeline", {})
         self.assertIn("executor", stages)
@@ -234,8 +259,9 @@ class TestPipelineAgreementPath(unittest.TestCase):
                 "    return [0, 1]"
             ),
         )
+        obs = self._obs(r, "incorrect_two_sum", None)
         self.assertEqual(r["matched"], "two_sum")
-        self.assertIn(r["verdict"], ("incorrect", "partial"))
+        self.assertIn(obs.canonical_form[1], ("'incorrect'", "'partial'"))
 
     def test_spec_inferrer_gets_test_cases(self):
         r = run_pipeline(

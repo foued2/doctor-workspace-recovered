@@ -7,6 +7,7 @@ import unittest
 os.environ["DOCTOR_ALLOW_UNTRUSTED_EXECUTION"] = "1"
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+from doctor.core.observation import from_symbol
 from doctor.core.test_executor import TestExecutor, _results_equal
 from doctor.pipeline import run_pipeline
 
@@ -50,12 +51,21 @@ class TestExecutorHonestResult(unittest.TestCase):
 
 
 class TestPipelineVerdicts(unittest.TestCase):
+    def _obs(self, report, candidate_id, expected_verdict):
+        return from_symbol(
+            problem_id="pipeline", candidate_id=candidate_id,
+            projection_level=1, symbol_name="pipeline_verdict",
+            symbol_value=report["verdict"],
+            passed=report["verdict"] == expected_verdict, seed=1, sample_size=1,
+        )
+
     def test_syntax_error_returns_invalid_input(self):
         report = run_pipeline(
             "given an array and target, return the indices that add to the target",
             "def broken(:\n    pass\n",
         )
-        self.assertEqual(report["verdict"], "InvalidInput")
+        obs = self._obs(report, "syntax_error", "InvalidInput")
+        self.assertEqual(obs.canonical_form, ("pipeline_verdict", "'InvalidInput'", "PASS"))
         self.assertEqual(report["reason"], "syntax_error")
 
     def test_syntax_error_pipeline_status(self):
@@ -71,24 +81,30 @@ class TestPipelineVerdicts(unittest.TestCase):
             "",
             "def first(x):\n    return x\n\ndef second(x):\n    return x\n",
         )
-        self.assertEqual(report["verdict"], "unrecognized_but_executable")
+        obs = self._obs(report, "multiple_unresolvable", "unrecognized_but_executable")
+        self.assertEqual(obs.canonical_form,
+                         ("pipeline_verdict", "'unrecognized_but_executable'", "PASS"))
         self.assertIn(report["reason"], ["entrypoint_unresolvable", "insufficient structural signal"])
 
     def test_unverifiable_statement(self):
         report = run_pipeline("hello")
-        self.assertEqual(report["verdict"], "InvalidInput")
+        obs = self._obs(report, "unverifiable", "InvalidInput")
+        self.assertEqual(obs.canonical_form, ("pipeline_verdict", "'InvalidInput'", "PASS"))
         self.assertEqual(report["reason"], "unverifiable_statement")
 
     def test_code_only_single_executable(self):
         report = run_pipeline("", "def mystery(x):\n    return x\n")
-        self.assertEqual(report["verdict"], "unrecognized_but_executable")
+        obs = self._obs(report, "code_only_exec", "unrecognized_but_executable")
+        self.assertEqual(obs.canonical_form,
+                         ("pipeline_verdict", "'unrecognized_but_executable'", "PASS"))
         self.assertEqual(report["risk"], "MEDIUM")
 
     def test_statement_only_no_code(self):
         report = run_pipeline(
             "given an array of integers and a target, return indices of two numbers that add up to target"
         )
-        self.assertEqual(report["verdict"], "InvalidInput")
+        obs = self._obs(report, "statement_no_code", "InvalidInput")
+        self.assertEqual(obs.canonical_form, ("pipeline_verdict", "'InvalidInput'", "PASS"))
         self.assertEqual(report["reason"], "pipeline_incomplete")
         self.assertEqual(report["pipeline_status"]["input_validity"], "valid")
         self.assertEqual(report["pipeline_status"]["pipeline_completeness"], "incomplete")
@@ -98,12 +114,21 @@ class TestPipelineVerdicts(unittest.TestCase):
             "given an array of integers and a target, return indices of two numbers that add up to target",
             "def twoSum(nums, target):\n    return [0, 1]\n",
         )
-        self.assertEqual(report["verdict"], "incorrect")
+        obs = self._obs(report, "partial_incorrect", "incorrect")
+        self.assertEqual(obs.canonical_form, ("pipeline_verdict", "'incorrect'", "PASS"))
         self.assertEqual(report["doctor_verdict"]["truth"], "incorrect")
         self.assertEqual(report["pipeline_status"]["verification_state"], "unverified")
 
 
 class TestSpecHypothesis(unittest.TestCase):
+    def _obs(self, report, candidate_id, expected_verdict):
+        return from_symbol(
+            problem_id="pipeline", candidate_id=candidate_id,
+            projection_level=1, symbol_name="pipeline_verdict",
+            symbol_value=report["verdict"],
+            passed=report["verdict"] == expected_verdict, seed=1, sample_size=1,
+        )
+
     def test_spec_hypothesis_appears_on_unrecognized(self):
         report = run_pipeline(
             (
@@ -123,7 +148,9 @@ class TestSpecHypothesis(unittest.TestCase):
                 "    return result\n"
             ),
         )
-        self.assertEqual(report["verdict"], "unrecognized_but_executable")
+        obs = self._obs(report, "spec_hypothesis_present", "unrecognized_but_executable")
+        self.assertEqual(obs.canonical_form,
+                         ("pipeline_verdict", "'unrecognized_but_executable'", "PASS"))
         self.assertIn("spec_hypothesis", report)
         self.assertEqual(report["spec_hypothesis"]["inferred_input_schema"], {"nums": "list"})
         self.assertEqual(report["spec_hypothesis"]["inferred_output_shape"], "list")
@@ -141,7 +168,8 @@ class TestSpecHypothesis(unittest.TestCase):
                 "    return []\n"
             ),
         )
-        self.assertEqual(report["verdict"], "correct")
+        obs = self._obs(report, "correct_two_sum", "correct")
+        self.assertEqual(obs.canonical_form, ("pipeline_verdict", "'correct'", "PASS"))
         self.assertNotIn("spec_hypothesis", report)
 
 

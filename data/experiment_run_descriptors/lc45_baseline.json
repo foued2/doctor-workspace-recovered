@@ -1,0 +1,47 @@
+{
+  "classifications": [
+    {
+      "adversarial_completeness_definition": null,
+      "evidence_input_ids": [],
+      "failure_class": null,
+      "label": "UNKNOWN",
+      "mechanism": null,
+      "solver_id": "s1"
+    }
+  ],
+  "descriptor": {
+    "execution_hash": "1cbe9774cb41a14730c81a74e0f90502e8197e51a09804db83ecd1454aca057d",
+    "failure_class_version": "lc45-optc-failure-classes-v1",
+    "label_schema_version": "1.0.0",
+    "manifold_set_id": "lc45-six-manifold-probe-set-v1",
+    "probe_set_id": "lc45-six-manifold-probe-set-v1",
+    "problem_id": "lc45",
+    "solver_set_id": "lc45-llm-population-v1"
+  },
+  "executions": [
+    {
+      "expected": 2,
+      "failure_record": null,
+      "input_id": "i1",
+      "observed": 2,
+      "passed": true,
+      "solver_id": "s1"
+    }
+  ],
+  "inputs": [
+    {
+      "expected": 2,
+      "input_id": "i1",
+      "manifold_id": "m1",
+      "payload": {
+        "nums": [
+          2,
+          3,
+          1,
+          1,
+          4
+        ]
+      }
+    }
+  ]
+}

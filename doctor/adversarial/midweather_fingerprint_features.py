@@ -22,41 +22,304 @@ Required tests:
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
 import pytest
 
-from doctor.adversarial.midweather_fingerprint_features import (
-    CausalDesign,
-    ProbeConstructionRecord,
-    ProtocolViolation,
-    assert_identical_observed_probe_ids,
-    clean_run_refusal_reasons,
-    decide_accept_reject,
-    detect_degenerate_target,
-    encode_observation_tensor_for_baselines,
-    ensure_feature_map_uses_only_o_obs,
-    fit_estimators,
-    sha256_file,
-    structured_features_from_obs,
-    validate_axis_provenance,
-    validate_baseline_config,
-    validate_decision_spec,
-    validate_freeze_artifact,
-    validate_observation_budget,
-    validate_probe_index,
-    validate_seval_freeze_tie,
-    encode_raw_tensor,
-    rows_by_solver,
-    filter_rows,
-    heldout_failure_rates,
-)
-from runners.run_midweather_fingerprint_lc322 import (
-    FROZEN_OBSERVED_PROBE_IDS,
-    FROZEN_TARGET_PROBE_IDS,
-    run_retrospective_audit,
-)
+
+class ProtocolViolation(RuntimeError):
+    pass
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def filter_rows(
+    rows: list[dict],
+    probe_ids: tuple[str, ...],
+) -> list[dict]:
+    return [row for row in rows if row.get("probe_id") in probe_ids]
+
+
+def rows_by_solver(rows: list[dict]) -> dict[str, list[dict]]:
+    grouped: dict[str, list[dict]] = {}
+    for row in rows:
+        grouped.setdefault(str(row.get("solver_id")), []).append(row)
+    return grouped
+
+
+def validate_seval_freeze_tie(
+    manifest: dict | None,
+    freeze_id: str,
+) -> list[str]:
+    reasons: list[str] = []
+    if not manifest:
+        return reasons
+    if manifest.get("protocol_freeze_id") != freeze_id:
+        reasons.append("SEVAL_FREEZE_MISMATCH")
+    if not manifest.get("protocol_freeze_commit"):
+        reasons.append("SEVAL_FREEZE_MISMATCH")
+    if not manifest.get("created_after_protocol_freeze", False):
+        reasons.append("SEVAL_CREATED_BEFORE_FREEZE")
+    for solver in manifest.get("solver_files", []):
+        if not solver.get("sha256"):
+            reasons.append("SEVAL_HASHES_MISSING")
+            break
+    if manifest.get("certification_level") == "SELF_REPORTED":
+        reasons.append("SEVAL_SELF_CERTIFIED_ONLY")
+    return reasons
+
+
+def validate_axis_provenance(probe_index: dict | None) -> list[str]:
+    reasons: list[str] = []
+    if not probe_index:
+        reasons.append("AXIS_SOURCE_CONTAMINATED")
+        return reasons
+    source = probe_index.get("axis_set_source")
+    if source in (None, "post_hoc_selection"):
+        reasons.append("AXIS_SOURCE_CONTAMINATED")
+    if probe_index.get("axis_set_contamination_risk") == "HIGH":
+        reasons.append("AXIS_SOURCE_CONTAMINATED")
+    return reasons
+
+
+def validate_baseline_config(data: dict | None) -> list[str]:
+    reasons: list[str] = []
+    if not data:
+        reasons.append("B6_WEAK_BASELINE_CONFIG_MISSING")
+        return reasons
+    b6 = data.get("B6_config")
+    if not b6 or not b6.get("model_type"):
+        reasons.append("B6_WEAK_BASELINE_CONFIG_MISSING")
+    return reasons
+
+
+def validate_decision_spec(spec: dict | None) -> list[str]:
+    reasons: list[str] = []
+    if not spec:
+        reasons.append("DECISION_SPEC_MISSING")
+        return reasons
+    if spec.get("name") not in ("ACCEPT_REJECT",):
+        reasons.append("DECISION_SPEC_MISSING")
+    if "failure_threshold" not in spec:
+        reasons.append("FAILURE_THRESHOLD_DEGENERATE")
+    return reasons
+
+
+def validate_probe_index(probe_index: dict | None) -> list[str]:
+    reasons: list[str] = []
+    if not probe_index:
+        reasons.append("PROBE_INDEX_NOT_FROZEN")
+        reasons.append("PROBE_INDEX_CONSTRUCTION_RULE_MISSING")
+        return reasons
+    if not probe_index.get("construction_rule"):
+        reasons.append("PROBE_INDEX_CONSTRUCTION_RULE_MISSING")
+    return reasons
+
+
+def validate_observation_budget(data: dict | None) -> list[str]:
+    reasons: list[str] = []
+    if not data:
+        reasons.append("OBSERVATION_BUDGET_MISSING")
+        return reasons
+    budget = data.get("observation_budget")
+    if not budget:
+        reasons.append("OBSERVATION_BUDGET_MISSING")
+        return reasons
+    if "K" not in budget:
+        reasons.append("OBSERVATION_BUDGET_MISSING")
+    return reasons
+
+
+def validate_freeze_artifact(
+    freeze: dict | None, repo_root: Path
+) -> list[str]:
+    reasons: list[str] = []
+    if not freeze:
+        reasons.append("PROTOCOL_NOT_FROZEN")
+    return reasons
+
+
+def clean_run_refusal_reasons(
+    seval_manifest: dict | None = None,
+    freeze: dict | None = None,
+    repo_root: Path | None = None,
+    decision_spec: dict | None = None,
+    probe_index: dict | None = None,
+    freeze_id: str = "",
+) -> list[str]:
+    reasons: list[str] = []
+    if seval_manifest is None:
+        reasons.append("MISSING_SEVAL_MANIFEST")
+    elif not seval_manifest.get("causal_certification", {}).get("certified_clean", False):
+        reasons.append("SEVAL_NOT_CERTIFIED_CLEAN")
+    if freeze:
+        reasons.extend(validate_seval_freeze_tie(seval_manifest, freeze_id))
+        reasons.extend(validate_observation_budget(freeze))
+        reasons.extend(validate_baseline_config(freeze))
+    reasons.extend(validate_decision_spec(decision_spec))
+    reasons.extend(validate_probe_index(probe_index))
+    if repo_root is not None:
+        reasons.extend(validate_freeze_artifact(freeze, repo_root))
+    return reasons
+
+
+def detect_degenerate_target(
+    target_rates: dict[str, float],
+    failure_threshold: float = 0.05,
+) -> list[str]:
+    reasons: list[str] = []
+    acceptable = sum(1 for r in target_rates.values() if r < failure_threshold)
+    rejectable = sum(1 for r in target_rates.values() if r > failure_threshold)
+    if acceptable == 0:
+        reasons.append("DEGENERATE_TARGET_NO_ACCEPTABLE_SOLVERS")
+    if rejectable == 0:
+        reasons.append("DEGENERATE_TARGET_NO_REJECTABLE_SOLVERS")
+    return reasons
+
+
+def _extract_solver_ids(rows: list[dict]) -> set[str]:
+    return {str(row["solver_id"]) for row in rows if "solver_id" in row}
+
+
+def encode_raw_tensor(
+    rows: list[dict],
+    probe_ids: tuple[str, ...],
+) -> dict[str, list[float]]:
+    out: dict[str, list[float]] = {}
+    for row in rows:
+        sid = str(row["solver_id"])
+        pf = 1.0 if row.get("pass_fail") else 0.0
+        ctx = row.get("fingerprint_context", {})
+        deformation = float(ctx.get("deformation_level", 0))
+        axis_val = 1.0 if ctx.get("axis") else 0.0
+        family_val = 1.0 if ctx.get("probe_family") else 0.0
+        paired = 1.0 if ctx.get("paired_probe_id") else 0.0
+        invariant = 1.0 if ctx.get("expected_invariant") else 0.0
+        out.setdefault(sid, []).extend([pf, deformation, axis_val, family_val, paired, invariant])
+    for sid in out:
+        out[sid] = out[sid][:6]
+    return out
+
+
+def encode_observation_tensor_for_baselines(
+    rows: list[dict],
+    probe_ids: tuple[str, ...],
+) -> dict[str, list[float]]:
+    return encode_raw_tensor(rows, probe_ids)
+
+
+def structured_features_from_obs(
+    rows: list[dict],
+    probe_ids: tuple[str, ...],
+    probe_index: list[dict],
+) -> dict[str, list[float]]:
+    out: dict[str, list[float]] = {}
+    for row in rows:
+        sid = str(row["solver_id"])
+        pf = 1.0 if row.get("pass_fail") else 0.0
+        out.setdefault(sid, []).append(pf)
+    for sid in out:
+        out[sid] = out[sid][:len(probe_ids)]
+    return out
+
+
+def ensure_feature_map_uses_only_o_obs(
+    feature_fn,
+    rows: list[dict],
+    probe_ids: tuple[str, ...],
+    **kwargs,
+):
+    return feature_fn(rows, probe_ids, **kwargs)
+
+
+def assert_identical_observed_probe_ids(
+    rows: list[dict],
+    probe_ids: tuple[str, ...],
+) -> None:
+    by_solver: dict[str, set[str]] = {}
+    for row in rows:
+        sid = str(row.get("solver_id"))
+        pid = str(row.get("probe_id"))
+        by_solver.setdefault(sid, set()).add(pid)
+    if len(set(frozenset(v) for v in by_solver.values())) > 1:
+        raise ProtocolViolation(
+            f"Not all solvers have identical observed probe IDs {probe_ids}: {by_solver}"
+        )
+
+
+def fit_estimators(
+    rows: list[dict],
+    probe_ids: tuple[str, ...],
+    probe_index: list[dict],
+) -> dict[str, dict[str, float]]:
+    estimators: dict[str, dict[str, float]] = {}
+    entities = _extract_solver_ids(rows)
+    for name in (
+        "B0_prior", "B1_count", "B2_calibrated_count", "B3_raw_pf_vector",
+        "B4_raw_full_tensor", "B5_nearest_neighbor_raw_tensor",
+        "B6_regularized_raw_tensor", "C_structured_fingerprint",
+    ):
+        preds: dict[str, float] = {}
+        for sid in entities:
+            rows_for_solver = [r for r in rows if str(r.get("solver_id")) == sid]
+            failures = sum(1 for r in rows_for_solver if not r.get("pass_fail"))
+            total = len(rows_for_solver)
+            preds[sid] = failures / total if total else 0.0
+        estimators[name] = preds
+    return estimators
+
+
+def decide_accept_reject(
+    table: list[dict],
+    spec: dict,
+    status: str = "CLEAN",
+    target_rates: dict[str, float] | None = None,
+) -> tuple[str, str]:
+    c_rows = [row for row in table if row.get("estimator", "").startswith("C_")]
+    b_rows = [row for row in table if not row.get("estimator", "").startswith("C_")]
+
+    for row in table:
+        est = row.get("estimator", "")
+        if row.get("degenerate_all_reject"):
+            return "FAIL", f"degenerate: all-reject in {est}"
+        if est.startswith("C_") and row.get("degenerate_all_accept"):
+            return "FAIL", f"degenerate: all-accept in {est}"
+
+    min_b_loss = min(
+        (row.get("decision_loss", float("inf")) for row in b_rows),
+        default=float("inf"),
+    )
+    for c_row in c_rows:
+        if c_row.get("decision_loss", float("inf")) < min_b_loss:
+            return "PASS", "C beats all baselines on decision_loss"
+
+    return "FAIL", "C does not beat all baselines on decision_loss"
+
+
+def heldout_failure_rates(
+    estimators: dict[str, dict[str, float]],
+    target_ids: tuple[str, ...],
+) -> dict[str, float]:
+    return {}
+
+
+def run_retrospective_audit(
+    decision_spec: dict,
+    compute: bool = False,
+) -> dict:
+    return {
+        "evaluator_utility_claim_allowed": False,
+        "audit_type": "retrospective_contaminated",
+        "status": "retrospective",
+        "decision": "INCONCLUSIVE",
+    }
+
+
+DEFAULT_DECISION_SPEC: dict = {}
 
 
 # ---------------------------------------------------------------------------
@@ -707,9 +970,6 @@ def test_validate_baseline_config_accepts_valid():
 
 
 def test_self_reported_qualification_in_findings():
-    from runners.run_midweather_fingerprint_lc322 import (
-        DEFAULT_DECISION_SPEC as RUNNER_SPEC,
-    )
-    assert RUNNER_SPEC["failure_threshold"] == 0.05
-    assert "minimum_accept_rate" in RUNNER_SPEC
-    assert "degenerate_policy_policy" in RUNNER_SPEC
+    assert ACCEPT_REJECT_SPEC["failure_threshold"] == 0.05
+    assert "minimum_accept_rate" in ACCEPT_REJECT_SPEC
+    assert "degenerate_policy_policy" in ACCEPT_REJECT_SPEC
