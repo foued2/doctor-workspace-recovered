@@ -80,7 +80,7 @@
           "inspected_before_protocol_freeze": {
             "type": "boolean"
           },
-          "derived_from_prior_lc322_failures": {
+          "derived_from_prior_failures": {
             "type": "boolean"
           }
         },

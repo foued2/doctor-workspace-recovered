@@ -8,22 +8,22 @@
     "locked_at": "2026-06-04T15:30:11.378325+00:00",
     "protocol_freeze_id": "midweather_fingerprint_lc322_clean_001",
     "protocol_freeze_commit": "6ca6c28",
-    "result_json_sha256": "1400828193bbd51795d3ad454d5b1ec32991a8505b2ae94bf91323ef783c1f2d",
+    "result_json_sha256": "a58bf6d8effe1042dd103fe22dc2b07ce3e9c76e7d6a11287a545159fa533ca9",
     "manifest_solver_sha_consistency": "ok",
     "manifest_solver_sha_mismatches": []
   },
   "artifacts": [
     {
       "path": "MIDWEATHER_FINGERPRINT_GATE_FREEZE.json",
-      "sha256": "dcc8f3022c9be83e0ecda69baa9c28d5bc80acd9c8a899d9fa4ec2b2ff0a255d",
-      "size_bytes": 8815,
+      "sha256": "c64803f34cc5dd96ca39fc5e60f2adddd48516b96fcee741f80d3ec9586adc58",
+      "size_bytes": 8913,
       "role": "protocol_freeze",
       "notes": "All 7 freeze validators pass. Self-SHA is PENDING_SELF_REFERENCE_AT_FREEZE_TIME per convention."
     },
     {
       "path": "MIDWEATHER_FINGERPRINT_SEVAL_MANIFEST.schema.json",
-      "sha256": "5e16abe9e33e089ada19fa01cafc04a70438f487bb4727f217cb9822dd9d70ec",
-      "size_bytes": 5368,
+      "sha256": "8dce4eee6007a19882a2e4fc2924f8f3ae658fe73f934937b4d68d2260a62e8d",
+      "size_bytes": 5362,
       "role": "seval_manifest_schema",
       "notes": "JSON Schema draft-2020-12. Narrow structural validation. additionalProperties=true to allow recovered original pack."
     },
@@ -36,36 +36,36 @@
     },
     {
       "path": "data/midweather_fingerprint_lc322_seval_manifest.json",
-      "sha256": "8e86990fb582bc817d9a992eca0e6acc921a26eea2e20d4e36eec5dd23f1342b",
-      "size_bytes": 14383,
+      "sha256": "ae4389c4c0c8b1242763742719a0e6273561fcec4c74580b525d115174a214e3",
+      "size_bytes": 14203,
       "role": "seval_manifest",
       "notes": "30 stub solver files. pack_source=reconstructed_stub. certified_clean=true."
     },
     {
       "path": "data/midweather_fingerprint_lc322.json",
-      "sha256": "1400828193bbd51795d3ad454d5b1ec32991a8505b2ae94bf91323ef783c1f2d",
-      "size_bytes": 8435,
+      "sha256": "a58bf6d8effe1042dd103fe22dc2b07ce3e9c76e7d6a11287a545159fa533ca9",
+      "size_bytes": 8449,
       "role": "result",
       "notes": "Verdict FAIL, reason 'degenerate: all-reject in B4_raw_full_tensor'. reconstruction_disclosure block present."
     },
     {
       "path": "runners/run_midweather_fingerprint_lc322.py",
-      "sha256": "b06d0bc424f76293c855ad5e53178c85052993cbb355d03c6f988ccdbb352048",
-      "size_bytes": 16026,
+      "sha256": "4346cb9694658cecc465eedfb9fdcd1214cf28010587d7759e16d50506f330bb",
+      "size_bytes": 16068,
       "role": "runner",
       "notes": "Execute-and-write-result runner. No decision logic of its own; delegates to decide_accept_reject in features.py."
     },
     {
       "path": "tests/test_midweather_fingerprint.py",
-      "sha256": "e612009bc830c86148eac1674b7e7a6fdffd58c69ce2dd7d4d724ae28e0de130",
-      "size_bytes": 20012,
+      "sha256": "f56e1d7bd32c04553e195c8280b72fe52532e10fd682633b9c6c059bfa71dcb3",
+      "size_bytes": 20229,
       "role": "test_suite",
-      "notes": "39 protocol tests, all pass under pytest. Relocated from in-module defs in features.py."
+      "notes": "40 protocol tests, all pass under pytest. Relocated from in-module defs in features.py."
     },
     {
       "path": "doctor/adversarial/midweather_fingerprint_features.py",
-      "sha256": "87cc7bb18527a34d27e8fc2da65812cd045e1416484af55ea34517f67690e2a0",
-      "size_bytes": 20455,
+      "sha256": "53d275e2c135ffdf6d04f24eedd193cbb86c5fcd8f78d54bd05a02f89613c869",
+      "size_bytes": 20673,
       "role": "features_and_validators",
       "notes": "7 freeze validators, ACCEPT_REJECT_SPEC, decide_accept_reject, helpers. NOTE: 39 in-module test_* defs removed; relocated to tests/test_midweather_fingerprint.py."
     },

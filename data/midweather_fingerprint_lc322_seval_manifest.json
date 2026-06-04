@@ -92,7 +92,7 @@
       "sha256": "bf01f653513b45a111626e69eaa16640677322f06155c8f5f091cf8cc3c8ddd9",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_002",
@@ -100,7 +100,7 @@
       "sha256": "abc86f0046401874fdb5c2cbcef5440c9e26d117c53f073ebc520f496cfb1036",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_003",
@@ -108,7 +108,7 @@
       "sha256": "b59820c5674059d73aa4489e1674b37ca52691902f8328332494659bd1958487",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_004",
@@ -116,7 +116,7 @@
       "sha256": "7998363f09407ac87cb649e10759f92c8a3bc7dfaeb990f79e6108584ef048ee",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_005",
@@ -124,7 +124,7 @@
       "sha256": "cb4337807919fc77e05342c6c6b3b1465300bf1b0c041ab922ecc80f5e8936f0",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_006",
@@ -132,7 +132,7 @@
       "sha256": "f41d85c47040c4446709832dc558e0f6c8a83d51c6c5e85cdda56d3774a498c7",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_007",
@@ -140,7 +140,7 @@
       "sha256": "e782a04565de66337d3c6d92860680d5f60a039feea56f5f2d6aa48bde14bd39",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_008",
@@ -148,7 +148,7 @@
       "sha256": "a26bf39703674c517e2f8091e35d190473bc745f437e7e742483902cd7a7357e",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_009",
@@ -156,7 +156,7 @@
       "sha256": "671d74561abd71887a0262f83d9cc4ac960b915c2d6949288969673149db8fca",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_010",
@@ -164,7 +164,7 @@
       "sha256": "1d6f5dfb2225d52346233e419a78883e9be5fe31bff47d4f95433b29638fb691",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_011",
@@ -172,7 +172,7 @@
       "sha256": "a5f9fa851f5129d24ae1ae4b35218255f2e7073439a78d7449f46ee9a4bb9f42",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_012",
@@ -180,7 +180,7 @@
       "sha256": "c38e5097c9bf139a5273fc21a94c62daf9a33ad046fca0c4bf38031463faff0b",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_013",
@@ -188,7 +188,7 @@
       "sha256": "d64e4c6c159472f4696c589105a8bf621a761c83be631fff284dc225c69af446",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_014",
@@ -196,7 +196,7 @@
       "sha256": "61387ad20112326464a91eb88e4c44ec4c84b4a55e3fe2f6db068cb6b1708ca8",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_015",
@@ -204,7 +204,7 @@
       "sha256": "277b32a551f0dbae4707844578084cb12f00b124ad79b0337259a5f4fe7171b0",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_016",
@@ -212,7 +212,7 @@
       "sha256": "46c4f3a6b8bb094337d0841ec83b483ec74975e868f3e003a4a7e47ce0f33595",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_017",
@@ -220,7 +220,7 @@
       "sha256": "b53fe01c9811270eae848fa0d3fe8d0839e81a8bb050eb57b5fca30f4017bbfd",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_018",
@@ -228,7 +228,7 @@
       "sha256": "9faffff79152e75c0903c3fc164875fd4c4ff0cc671ee5a92713d7220dc34e6b",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_019",
@@ -236,7 +236,7 @@
       "sha256": "93d15956ea65a9ee87cdc20f0d71bce26a6ce3db1f665597b41654d8fcb3e287",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_020",
@@ -244,7 +244,7 @@
       "sha256": "66384990b6528d88c9b8019ca2a8b8b361d6dfa32eccfcf8763a62a40b8babea",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_021",
@@ -252,7 +252,7 @@
       "sha256": "ab254e8be4b820819fc32718d783f2f777f06151893bdcf2ba5558c43b95ce7b",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_022",
@@ -260,7 +260,7 @@
       "sha256": "107d5ec12d24102b2962e34d2b63a9d669ba4d7ff0008e5b86ad41c6f5122ca9",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_023",
@@ -268,7 +268,7 @@
       "sha256": "df97340e693f23cdd302bc2e5ef3d5d77b8dafe719f985e502035e86f2b84340",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_024",
@@ -276,7 +276,7 @@
       "sha256": "a311e2e135297d3698009a1f69aa359a7b70256628eea103634703012a703f91",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_025",
@@ -284,7 +284,7 @@
       "sha256": "fdaaa6bbf24f4aa1df80c5a58441a31d3855ab258f677e4681def945bd4ba127",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_026",
@@ -292,7 +292,7 @@
       "sha256": "4a80128c866f6ab37c690aac66730b0911ffd4124bec4f0eda2090b604fe47e1",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_027",
@@ -300,7 +300,7 @@
       "sha256": "b2524ebc726897e73ea09d3f6d87a5ad4fe2d690454e06b70fee323a18754724",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_028",
@@ -308,7 +308,7 @@
       "sha256": "b9e757102919ae4d980f20ccbd555b0189b89aefd1baaf88b9b97a96c71f08df",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_029",
@@ -316,7 +316,7 @@
       "sha256": "77d387af9d8175a802d72da9f361ba0ed2c629cf07e7ae22759901bd530561d5",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     },
     {
       "solver_id": "solver_030",
@@ -324,7 +324,7 @@
       "sha256": "83171d8248a7d900ae0618cb304fa2b6163e181b0938d46af8e272d9e74688c2",
       "created_at": "2026-05-22T00:00:00Z",
       "inspected_before_protocol_freeze": false,
-      "derived_from_prior_lc322_failures": false
+      "derived_from_prior_failures": false
     }
   ],
   "causal_certification": {

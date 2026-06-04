@@ -91,8 +91,8 @@ def validate_baseline_config(data: dict | None) -> list[str]:
     if not data:
         reasons.append("B6_WEAK_BASELINE_CONFIG_MISSING")
         return reasons
-    b6 = data.get("B6_config")
-    if not b6 or not b6.get("model_type"):
+    weakest = data.get("weakest_baseline_config")
+    if not weakest or not weakest.get("model_type"):
         reasons.append("B6_WEAK_BASELINE_CONFIG_MISSING")
     return reasons
 
@@ -102,7 +102,8 @@ def validate_decision_spec(spec: dict | None) -> list[str]:
     if not spec:
         reasons.append("DECISION_SPEC_MISSING")
         return reasons
-    if spec.get("name") not in ("ACCEPT_REJECT",):
+    name = spec.get("name")
+    if not isinstance(name, str) or not name:
         reasons.append("DECISION_SPEC_MISSING")
     if "failure_threshold" not in spec:
         reasons.append("FAILURE_THRESHOLD_DEGENERATE")
@@ -337,15 +338,19 @@ def decide_accept_reject(
     spec: dict,
     status: str = "CLEAN",
     target_rates: dict[str, float] | None = None,
+    candidate_prefixes: tuple[str, ...] = ("C_",),
 ) -> tuple[str, str]:
-    c_rows = [row for row in table if row.get("estimator", "").startswith("C_")]
-    b_rows = [row for row in table if not row.get("estimator", "").startswith("C_")]
+    def _is_candidate(est: str) -> bool:
+        return any(est.startswith(p) for p in candidate_prefixes)
+
+    c_rows = [row for row in table if _is_candidate(row.get("estimator", ""))]
+    b_rows = [row for row in table if not _is_candidate(row.get("estimator", ""))]
 
     for row in table:
         est = row.get("estimator", "")
         if row.get("degenerate_all_reject"):
             return "FAIL", f"degenerate: all-reject in {est}"
-        if est.startswith("C_") and row.get("degenerate_all_accept"):
+        if _is_candidate(est) and row.get("degenerate_all_accept"):
             return "FAIL", f"degenerate: all-accept in {est}"
 
     min_b_loss = min(
@@ -483,7 +488,7 @@ def certified_manifest(clean: bool = True) -> dict:
                 "sha256": "0" * 64,
                 "created_at": "2026-05-22T00:00:00Z",
                 "inspected_before_protocol_freeze": False,
-                "derived_from_prior_lc322_failures": False,
+                "derived_from_prior_failures": False,
             }
         ],
         "causal_certification": {
@@ -533,7 +538,7 @@ def minimal_repo_with_freeze(tmp_path: Path) -> tuple[Path, dict]:
             "observed_probe_ids": ["p_fp_0001"],
             "target_probe_ids": ["p_fp_0002"],
         },
-        "B6_config": {
+        "weakest_baseline_config": {
             "model_type": "leave-one-out ridge regression",
             "regularization": "L2 (alpha=1.0, fixed)",
             "hyperparameter_selection": "fixed",

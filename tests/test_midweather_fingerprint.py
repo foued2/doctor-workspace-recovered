@@ -219,7 +219,7 @@ def test_missing_b6_config_refuses():
 def test_b6_config_missing_model_type_refuses():
     reasons = validate_baseline_config({
         "primary_utility": "x",
-        "B6_config": {"regularization": "L2"},
+        "weakest_baseline_config": {"regularization": "L2"},
     })
     assert "B6_WEAK_BASELINE_CONFIG_MISSING" in reasons
 
@@ -404,9 +404,16 @@ def test_validate_decision_spec_refuses_missing_failure_threshold():
     assert "FAILURE_THRESHOLD_DEGENERATE" in reasons
 
 
-def test_validate_decision_spec_refuses_unsupported_type():
+def test_validate_decision_spec_accepts_arbitrary_nonempty_name():
     spec = dict(ACCEPT_REJECT_SPEC)
     spec["name"] = "RANK_SELECT_TOP_K"
+    reasons = validate_decision_spec(spec)
+    assert reasons == []
+
+
+def test_validate_decision_spec_refuses_empty_name():
+    spec = dict(ACCEPT_REJECT_SPEC)
+    spec["name"] = ""
     reasons = validate_decision_spec(spec)
     assert "DECISION_SPEC_MISSING" in reasons
 
@@ -492,7 +499,7 @@ def test_validate_axis_provenance_high_risk():
 
 def test_validate_baseline_config_accepts_valid():
     reasons = validate_baseline_config({
-        "B6_config": {
+        "weakest_baseline_config": {
             "model_type": "ridge",
             "regularization": "L2",
             "hyperparameter_selection": "fixed",

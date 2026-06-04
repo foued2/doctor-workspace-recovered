@@ -149,7 +149,7 @@
       "evidence": "failure_threshold=0.05, minimum_accept_rate=0.2"
     },
     {
-      "guard": "B6 config frozen (leave-one-out ridge, alpha=1.0)",
+      "guard": "weakest baseline config frozen (leave-one-out ridge, alpha=1.0)",
       "status": "passed",
       "evidence": "model_type=leave-one-out ridge regression, regularization=L2 (alpha=1.0, fixed)"
     },
@@ -287,5 +287,5 @@
     "paper_claim": "27 good / 3 bad solvers; C decision_loss=1.0, RMSE=0.024; B0/B4/B5/B6 degenerate; C ties B1/B2/B3 on decision_loss -> FAIL",
     "actual_summary": "11 good / 19 bad solvers (stub pack); decision=FAIL, reason=degenerate: all-reject in B4_raw_full_tensor"
   },
-  "wallclock_seconds": 0.368
+  "wallclock_seconds": 1.524
 }
