@@ -84,6 +84,12 @@ LC322_ESTIMATOR_NAMES: list[str] = [
     "B6_regularized_raw_tensor", "C_structured_fingerprint",
 ]
 
+LC45_ESTIMATOR_NAMES: list[str] = [
+    "B0_prior", "B1_count", "B2_calibrated_count", "B3_raw_pf_vector",
+    "B4_raw_full_tensor", "B5_nearest_neighbor_raw_tensor",
+    "B6_regularized_raw_tensor",
+]
+
 
 def _b0_prior_policy(obs_fails: int, n_obs: int) -> str:
     return "ACCEPT"  # all-ACCEPT degenerate
@@ -114,6 +120,16 @@ LC322_ESTIMATOR_POLICIES: dict[str, Callable[[int, int], str]] = {
     "B5_nearest_neighbor_raw_tensor": _b5_nn_policy,
     "B6_regularized_raw_tensor": _b6_reg_policy,
     "C_structured_fingerprint": _fail_count_policy,
+}
+
+LC45_ESTIMATOR_POLICIES: dict[str, Callable[[int, int], str]] = {
+    "B0_prior": _b0_prior_policy,
+    "B1_count": _fail_count_policy,
+    "B2_calibrated_count": _fail_count_policy,
+    "B3_raw_pf_vector": _fail_count_policy,
+    "B4_raw_full_tensor": _b4_raw_full_tensor_policy,
+    "B5_nearest_neighbor_raw_tensor": _b5_nn_policy,
+    "B6_regularized_raw_tensor": _b6_reg_policy,
 }
 
 
@@ -215,8 +231,8 @@ def get_problem_class_config(problem_id: str) -> ProblemClassConfig:
             oracle=_lc45_oracle_factory(),
             probe_to_solver_input=lc45_probe_to_solver_input,
             solver_entry_point=LC45_SOLVER_ENTRY_POINT,
-            estimator_names=list(LC322_ESTIMATOR_NAMES),  # same labels; LC45-specific policies deferred
-            estimator_policies=dict(LC322_ESTIMATOR_POLICIES),  # LC45 policies deferred
+            estimator_names=list(LC45_ESTIMATOR_NAMES),
+            estimator_policies=dict(LC45_ESTIMATOR_POLICIES),
             fingerprint_axes=list(LC45_FINGERPRINT_AXES),
             raw_tensor_encoder=lc45_raw_tensor_encoder,
         )

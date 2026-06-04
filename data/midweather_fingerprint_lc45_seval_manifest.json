@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.0.0",
+  "s_eval_id": "fingerprint_lc45_external_baseline_001",
+  "problem_id": "LC45",
+  "created_after_protocol_freeze": true,
+  "protocol_freeze_id": "midweather_fingerprint_lc45_clean_001",
+  "protocol_freeze_commit": "6ca6c28",
+  "protocol_freeze_sha256": "PENDING_SELF_REFERENCE_AT_FREEZE_TIME",
+  "certification_level": "EXTERNAL_BLIND_PACK",
+  "solver_source": "external_baseline",
+  "pack_source": "external_baseline",
+  "reconstruction_note": "LC45 candidate corpus of 10 solvers recovered from the LC45 candidates module (doctor/adversarial/lc45_candidates.py). These are 10 distinct LLM-generated / hand-written LC45 Jump Game II solvers, each with a known algorithmic strategy. The 10 wrappers (experiments/frozen_taxonomy_lc45/solvers/solver_001.py..solver_010.py) are thin `solve(nums) -> int` adapters that import the corresponding lc45_* function. These solvers pre-existed the protocol freeze and are not derived from the 30 frozen probes or the 6 LC45 manifolds. The pack_source=external_baseline field documents the provenance. This is the Week 2 LC45 port: 10 solvers (vs 30 for LC322) because the LC45 candidate corpus has 10 distinct strategies; the smaller pack size is honest, not adjusted.",
+  "n_solvers": 10,
+  "strategy_families": [
+    {
+      "family": "BFS-survivor",
+      "solver_ids": [
+        "solver_001"
+      ],
+      "expected_pass_rate": "high",
+      "n_solvers": 1
+    },
+    {
+      "family": "Greedy-family",
+      "solver_ids": [
+        "solver_002",
+        "solver_003",
+        "solver_004",
+        "solver_010"
+      ],
+      "expected_fail_axis": "various (greedy misselection)",
+      "n_solvers": 4
+    },
+    {
+      "family": "Heuristic-avoidance",
+      "solver_ids": [
+        "solver_005",
+        "solver_008"
+      ],
+      "expected_fail_axis": "boundary/horizon",
+      "n_solvers": 2
+    },
+    {
+      "family": "Type-confusion",
+      "solver_ids": [
+        "solver_006"
+      ],
+      "expected_fail_axis": "type-shape mismatch",
+      "n_solvers": 1
+    },
+    {
+      "family": "Approximate-DP",
+      "solver_ids": [
+        "solver_007",
+        "solver_009"
+      ],
+      "expected_fail_axis": "approximation gap",
+      "n_solvers": 2
+    }
+  ],
+  "solver_files": [
+    {
+      "solver_id": "solver_001",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_001.py",
+      "sha256": "43f4266b2fba75f4b5266b9e96e1c48d71be36f2d059c85c2ea0b7f271df771c",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "BFS with depth cutoff (SURVIVOR)"
+    },
+    {
+      "solver_id": "solver_002",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_002.py",
+      "sha256": "fb8d5db0852a6c423875fe59cb7c0c494a6fe51a76360c473657ef6f398a0a3c",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "Greedy farthest landing path"
+    },
+    {
+      "solver_id": "solver_003",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_003.py",
+      "sha256": "37ef059dec940910dca173d5ebb6966ed4e89c2fd94aee0e83b498ede2ca791b",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "Naive greedy max-jump"
+    },
+    {
+      "solver_id": "solver_004",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_004.py",
+      "sha256": "2c1651a8625b564f8488bb0a2bed522b2522b14d0db991f53262608f14c85980",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "Max landing value greedy"
+    },
+    {
+      "solver_id": "solver_005",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_005.py",
+      "sha256": "d372f376e4174bdc8ed8ad250df7bda7b451734ae7d1d8c8448f48171416e8c3",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "Zero dead-end panic heuristic"
+    },
+    {
+      "solver_id": "solver_006",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_006.py",
+      "sha256": "b1f33a909732a0f984bb3b71a4199d7bd2001f44e12b026b999c3603842cb5e2",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "Reachable boolean confusion (returns truthiness)"
+    },
+    {
+      "solver_id": "solver_007",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_007.py",
+      "sha256": "c86ebcee5c5ad60eedc69ae97b1d6465749872ea3bf036d29d86f5da5624f156",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "Three-step window DP (local horizon)"
+    },
+    {
+      "solver_id": "solver_008",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_008.py",
+      "sha256": "8dc34c1c37987f2d140722e429189d129cc146896fdc46761516f3f2289cbfa4",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "Frontier counting (off-by-one boundary bug)"
+    },
+    {
+      "solver_id": "solver_009",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_009.py",
+      "sha256": "4ea19cdbde478aecb56bac024f7813b741ea707f69cf0714ec69a8a7457f6d19",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "Uniform formula generalizer (assumes all values equal)"
+    },
+    {
+      "solver_id": "solver_010",
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_010.py",
+      "sha256": "1963c983fcc3e82621083f39f1625026757c3d98d66abdbd9665d7b4932a78f5",
+      "created_at": "2026-06-04T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false,
+      "description": "First window max then greedy (two-phase)"
+    }
+  ],
+  "causal_certification": {
+    "s_eval_existed_before_protocol": true,
+    "s_eval_used_to_design_probes": false,
+    "s_eval_used_to_design_features": false,
+    "s_eval_outputs_seen_before_freeze": false,
+    "failure_labels_seen_before_freeze": false,
+    "certified_clean": true,
+    "clean_rationale": "Certified clean because: (a) the 10 solver algorithms are pre-existing LC45 candidates recovered from doctor/adversarial/lc45_candidates.py (not designed in response to this protocol); (b) the wrappers are thin solve(nums) -> int adapters that import the candidates, not re-implementations that could leak probe knowledge; (c) the 30 frozen probes and the 6 LC45 manifolds were designed independently of the candidate corpus; (d) the candidate algorithms (BFS, naive greedy, heuristic, window-DP, formula-based) are well-known textbook implementations; (e) the protocol freeze is 6ca6c28 (paper-cited) and the candidate corpus pre-dates that anchor."
+  }
+}

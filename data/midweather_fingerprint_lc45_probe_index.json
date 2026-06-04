@@ -1,0 +1,548 @@
+{
+  "probe_index_set_id": "midweather_fingerprint_lc45_30probes",
+  "construction_rule": "30 probes for LC45 Jump Game II, 5 per manifold, 6 manifolds (naive_max_jump_suboptimal, single_large_jump_decoy, greedy_horizon_collapse, naive_max_jump_dead_landing, uniform_jump_array, greedy_frontier_valid_no_false_pressure). Probes are deterministic reachable `nums` lists (per the LC45 manifold descriptors) where the BFS oracle (lc45_brute_force) returns a finite jump count. Probe IDs p_lc45_0001..p_lc45_0030 assigned axis-by-axis in axis-declaration order. Split: O_obs = 15 probes at odd within-axis positions (1,3,5,...,29), D_target = 15 probes at even within-axis positions (2,4,6,...,30). This gives a 3+2+3+2+3+2 observed+held-out split per manifold (3,2,3,2,3,2 across the 6 manifolds in declaration order) for a balanced 15/15 total. All 30 probes empirically verified reachable (BFS raises on unreachable; no unreachable probes here). Truth values are computed by lc45_brute_force (LC45 ground truth) at freeze time. This is the Week 2 LC45 port of the protocol; the manifold descriptors are taken from the 6-manifold probe set for LC45 declared in the lc45 candidate corpus; specific probe values are reconstructed stubs chosen for reachability and manifold coverage, NOT derived from the protocol or any prior solver's outputs.",
+  "axis_set": [
+    "naive_max_jump_suboptimal",
+    "single_large_jump_decoy",
+    "greedy_horizon_collapse",
+    "naive_max_jump_dead_landing",
+    "uniform_jump_array",
+    "greedy_frontier_valid_no_false_pressure"
+  ],
+  "axis_set_source": "problem_specification_only",
+  "axis_set_contamination_risk": "LOW",
+  "observed_probe_ids": [
+    "p_lc45_0001",
+    "p_lc45_0003",
+    "p_lc45_0005",
+    "p_lc45_0007",
+    "p_lc45_0009",
+    "p_lc45_0011",
+    "p_lc45_0013",
+    "p_lc45_0015",
+    "p_lc45_0017",
+    "p_lc45_0019",
+    "p_lc45_0021",
+    "p_lc45_0023",
+    "p_lc45_0025",
+    "p_lc45_0027",
+    "p_lc45_0029"
+  ],
+  "target_probe_ids": [
+    "p_lc45_0002",
+    "p_lc45_0004",
+    "p_lc45_0006",
+    "p_lc45_0008",
+    "p_lc45_0010",
+    "p_lc45_0012",
+    "p_lc45_0014",
+    "p_lc45_0016",
+    "p_lc45_0018",
+    "p_lc45_0020",
+    "p_lc45_0022",
+    "p_lc45_0024",
+    "p_lc45_0026",
+    "p_lc45_0028",
+    "p_lc45_0030"
+  ],
+  "probes": [
+    {
+      "probe_id": "p_lc45_0001",
+      "family": "non_monotonic_max_jump",
+      "axis": "naive_max_jump_suboptimal",
+      "nums": [
+        2,
+        3,
+        1,
+        1,
+        4
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0002",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0002",
+      "family": "non_monotonic_max_jump",
+      "axis": "naive_max_jump_suboptimal",
+      "nums": [
+        1,
+        4,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0001",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0003",
+      "family": "non_monotonic_max_jump",
+      "axis": "naive_max_jump_suboptimal",
+      "nums": [
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0004",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0004",
+      "family": "non_monotonic_max_jump",
+      "axis": "naive_max_jump_suboptimal",
+      "nums": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0003",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0005",
+      "family": "non_monotonic_max_jump",
+      "axis": "naive_max_jump_suboptimal",
+      "nums": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 4,
+      "paired_probe_id": "p_lc45_0005",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_4_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0006",
+      "family": "single_large_decoy",
+      "axis": "single_large_jump_decoy",
+      "nums": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 1,
+      "paired_probe_id": "p_lc45_0007",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_1_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0007",
+      "family": "single_large_decoy",
+      "axis": "single_large_jump_decoy",
+      "nums": [
+        10,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 1,
+      "paired_probe_id": "p_lc45_0006",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_1_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0008",
+      "family": "single_large_decoy",
+      "axis": "single_large_jump_decoy",
+      "nums": [
+        4,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0008",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0009",
+      "family": "single_large_decoy",
+      "axis": "single_large_jump_decoy",
+      "nums": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 1,
+      "paired_probe_id": "p_lc45_0009",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_1_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0010",
+      "family": "single_large_decoy",
+      "axis": "single_large_jump_decoy",
+      "nums": [
+        6,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0010",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0011",
+      "family": "horizon_collapse",
+      "axis": "greedy_horizon_collapse",
+      "nums": [
+        2,
+        0,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0012",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0012",
+      "family": "horizon_collapse",
+      "axis": "greedy_horizon_collapse",
+      "nums": [
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0011",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0013",
+      "family": "horizon_collapse",
+      "axis": "greedy_horizon_collapse",
+      "nums": [
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0013",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0014",
+      "family": "horizon_collapse",
+      "axis": "greedy_horizon_collapse",
+      "nums": [
+        2,
+        2,
+        0,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0014",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0015",
+      "family": "horizon_collapse",
+      "axis": "greedy_horizon_collapse",
+      "nums": [
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "expected_jumps": 4,
+      "paired_probe_id": "p_lc45_0015",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_4_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0016",
+      "family": "dead_landing",
+      "axis": "naive_max_jump_dead_landing",
+      "nums": [
+        2,
+        3,
+        0,
+        1,
+        4
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0017",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0017",
+      "family": "dead_landing",
+      "axis": "naive_max_jump_dead_landing",
+      "nums": [
+        1,
+        3,
+        1,
+        0,
+        1
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0016",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0018",
+      "family": "dead_landing",
+      "axis": "naive_max_jump_dead_landing",
+      "nums": [
+        1,
+        3,
+        0,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0018",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0019",
+      "family": "dead_landing",
+      "axis": "naive_max_jump_dead_landing",
+      "nums": [
+        1,
+        2,
+        0,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0019",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0020",
+      "family": "dead_landing",
+      "axis": "naive_max_jump_dead_landing",
+      "nums": [
+        3,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0020",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0021",
+      "family": "uniform_array",
+      "axis": "uniform_jump_array",
+      "nums": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0022",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0022",
+      "family": "uniform_array",
+      "axis": "uniform_jump_array",
+      "nums": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0021",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0023",
+      "family": "uniform_array",
+      "axis": "uniform_jump_array",
+      "nums": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 6,
+      "paired_probe_id": "p_lc45_0023",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_6_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0024",
+      "family": "uniform_array",
+      "axis": "uniform_jump_array",
+      "nums": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0024",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0025",
+      "family": "uniform_array",
+      "axis": "uniform_jump_array",
+      "nums": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "expected_jumps": 1,
+      "paired_probe_id": "p_lc45_0025",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_1_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0026",
+      "family": "frontier_greedy_valid",
+      "axis": "greedy_frontier_valid_no_false_pressure",
+      "nums": [
+        2,
+        3,
+        1,
+        1,
+        4
+      ],
+      "expected_jumps": 2,
+      "paired_probe_id": "p_lc45_0027",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_2_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0027",
+      "family": "frontier_greedy_valid",
+      "axis": "greedy_frontier_valid_no_false_pressure",
+      "nums": [
+        1,
+        1,
+        3,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0026",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0028",
+      "family": "frontier_greedy_valid",
+      "axis": "greedy_frontier_valid_no_false_pressure",
+      "nums": [
+        2,
+        1,
+        1,
+        1,
+        4
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0028",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0029",
+      "family": "frontier_greedy_valid",
+      "axis": "greedy_frontier_valid_no_false_pressure",
+      "nums": [
+        1,
+        2,
+        3,
+        1,
+        1
+      ],
+      "expected_jumps": 3,
+      "paired_probe_id": "p_lc45_0029",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_3_jumps"
+    },
+    {
+      "probe_id": "p_lc45_0030",
+      "family": "frontier_greedy_valid",
+      "axis": "greedy_frontier_valid_no_false_pressure",
+      "nums": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "expected_jumps": 4,
+      "paired_probe_id": "p_lc45_0030",
+      "deformation_level": 0,
+      "expected_invariant": "reachable_in_4_jumps"
+    }
+  ]
+}

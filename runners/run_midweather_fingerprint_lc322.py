@@ -4,9 +4,9 @@ The runner's job is to execute the protocol and write the result JSON. It
 does NOT make the decision (that comes from decide_accept_reject in
 midweather_fingerprint_features.py). It also does NOT enforce guard
 statuses (those come from clean_run_refusal_reasons). The runner just
-loads the freeze + probe_index + seval_manifest, runs the 30 external
-solvers on the 30 probes, fits the 8 estimators (B0-B6, C), computes
-the per-estimator metrics, builds the table, calls
+loads the freeze + probe_index + seval_manifest, runs the external
+solvers on the probes, fits the estimators (B0-B6, optional C),
+computes the per-estimator metrics, builds the table, calls
 decide_accept_reject, and writes the result.
 
 Per-problem-class configuration comes from
@@ -28,9 +28,15 @@ The LC322 estimator policies (reproduced by the default config) are:
                                 context but with the same primary
                                 threshold as B1; honest implementation
                                 of the policy described in the paper)
+
+Usage:
+    python runners/run_midweather_fingerprint_lc322.py
+    python runners/run_midweather_fingerprint_lc322.py --problem-class=lc322
+    python runners/run_midweather_fingerprint_lc322.py --problem-class=lc45
 """
 from __future__ import annotations
 
+import argparse
 import importlib.util
 import json
 import sys
@@ -53,25 +59,49 @@ from doctor.adversarial.problem_class_config import (
 )
 
 
-PROBLEM_CLASS: str = "lc322"  # default; LC45 port sets this to "lc45"
+def _paths_for(problem_class: str) -> dict[str, Path]:
+    """Return the {freeze, probe_index, seval_manifest, solvers_dir, result} paths.
 
-FREEZE_PATH = REPO_ROOT / "MIDWEATHER_FINGERPRINT_GATE_FREEZE.json"
-PROBE_INDEX_PATH = REPO_ROOT / "data" / "midweather_fingerprint_lc322_probe_index.json"
-SEVAL_MANIFEST_PATH = REPO_ROOT / "data" / "midweather_fingerprint_lc322_seval_manifest.json"
-SOLVERS_DIR = REPO_ROOT / "experiments" / "frozen_taxonomy_lc322" / "solvers"
-RESULT_PATH = REPO_ROOT / "data" / "midweather_fingerprint_lc322.json"
+    The LC322 freeze file is the legacy name ``MIDWEATHER_FINGERPRINT_GATE_FREEZE.json``
+    (no problem_class suffix). All other problem classes use the suffix convention
+    ``MIDWEATHER_FINGERPRINT_GATE_{CLASS_UPPER}_FREEZE.json``.
+    """
+    if problem_class == "lc322":
+        freeze = REPO_ROOT / "MIDWEATHER_FINGERPRINT_GATE_FREEZE.json"
+    else:
+        freeze = REPO_ROOT / f"MIDWEATHER_FINGERPRINT_GATE_{problem_class.upper()}_FREEZE.json"
+    return {
+        "freeze": freeze,
+        "probe_index": REPO_ROOT / "data" / f"midweather_fingerprint_{problem_class}_probe_index.json",
+        "seval_manifest": REPO_ROOT / "data" / f"midweather_fingerprint_{problem_class}_seval_manifest.json",
+        "solvers_dir": REPO_ROOT / "experiments" / f"frozen_taxonomy_{problem_class}" / "solvers",
+        "result": REPO_ROOT / "data" / f"midweather_fingerprint_{problem_class}.json",
+    }
 
 
-def load_freeze() -> dict:
-    return json.loads(FREEZE_PATH.read_text(encoding="utf-8"))
+def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Run the Midweather-Fingerprint clean-gate protocol for a problem class."
+    )
+    parser.add_argument(
+        "--problem-class",
+        default="lc322",
+        choices=["lc322", "lc45"],
+        help="Problem class to evaluate (default: lc322).",
+    )
+    return parser.parse_args(argv)
 
 
-def load_probe_index() -> dict:
-    return json.loads(PROBE_INDEX_PATH.read_text(encoding="utf-8"))
+def load_freeze(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_seval_manifest() -> dict:
-    return json.loads(SEVAL_MANIFEST_PATH.read_text(encoding="utf-8"))
+def load_probe_index(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_seval_manifest(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def load_solver(solver_path: Path, entry_point: str) -> callable:
@@ -183,20 +213,28 @@ def compute_rmse_secondary(
     return (sq_err / n) ** 0.5 if n else 0.0
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    args = _parse_args(argv)
+    problem_class: str = args.problem_class
+    paths = _paths_for(problem_class)
+    freeze_path = paths["freeze"]
+    probe_index_path = paths["probe_index"]
+    seval_manifest_path = paths["seval_manifest"]
+    result_path = paths["result"]
+
     t0 = time.time()
-    freeze = load_freeze()
-    probe_index = load_probe_index()
-    seval_manifest = load_seval_manifest()
+    freeze = load_freeze(freeze_path)
+    probe_index = load_probe_index(probe_index_path)
+    seval_manifest = load_seval_manifest(seval_manifest_path)
 
     # Slot 5 cross-check: probe_index's axis_set must match the config's declaration
-    config = get_problem_class_config(PROBLEM_CLASS)
+    config = get_problem_class_config(problem_class)
     declared_axes = set(config.fingerprint_axes)
     actual_axes = set(probe_index.get("axis_set", []))
     if actual_axes != declared_axes:
         raise SystemExit(
             f"axis_set mismatch: probe_index declares {sorted(actual_axes)}, "
-            f"config ({PROBLEM_CLASS}) declares {sorted(declared_axes)}"
+            f"config ({problem_class}) declares {sorted(declared_axes)}"
         )
 
     # Guard 1: schema + freeze tie
@@ -221,7 +259,7 @@ def main() -> None:
     observed_ids = freeze["observation_budget"]["observed_probe_ids"]
     target_ids = freeze["observation_budget"]["target_probe_ids"]
 
-    # Run all 30 solvers on all 30 probes
+    # Run all solvers on all probes
     pass_results = execute_solvers(seval_manifest, probe_index, config)
 
     # Ground truth: held-out fail rate
@@ -271,6 +309,17 @@ def main() -> None:
     )
 
     # Compute guard statuses (all 10 from the paper)
+    n_estimators = len(config.estimator_names)
+    c_rows_for_guard = [r for r in table if r["estimator"].startswith("C_")]
+    if c_rows_for_guard:
+        c_guard_status = "passed"
+        c_guard_evidence = f"C predictions: {c_rows_for_guard[0]['accept_rate']} accept rate"
+    else:
+        c_guard_status = "n/a"
+        c_guard_evidence = (
+            f"C estimator not present in this run ({problem_class} port: "
+            f"B0-B6 only, no C); verdict degenerates to FAIL per kernel contract"
+        )
     guard_statuses = [
         {"guard": "K=15 frozen (observed probes = 15, budget unit = one solver execution)",
          "status": "passed",
@@ -297,16 +346,17 @@ def main() -> None:
          "status": "passed" if not degenerate_target_reasons else "failed",
          "evidence": f"good={n_good}, bad={n_bad}; degenerate_target_reasons={degenerate_target_reasons}"},
         {"guard": "No degenerate C policy (not all-ACCEPT, not all-REJECT)",
-         "status": "passed",
-         "evidence": f"C predictions: {[r for r in table if r['estimator'].startswith('C_')][0]['accept_rate']} accept rate"},
+         "status": c_guard_status,
+         "evidence": c_guard_evidence},
         {"guard": "All estimators receive identical O_obs",
          "status": "passed",
-         "evidence": "all 8 estimators consume the same K=15 observed_probe_ids"},
+         "evidence": f"all {n_estimators} estimators consume the same K={len(observed_ids)} observed_probe_ids"},
     ]
 
     # Build result JSON
     result = {
-        "result_id": "midweather_fingerprint_lc322_clean_001",
+        "result_id": f"midweather_fingerprint_{problem_class}_clean_001",
+        "problem_class": problem_class,
         "experiment": "Midweather-Fingerprint-Gate",
         "protocol_freeze_id": freeze["freeze_id"],
         "protocol_freeze_commit": freeze["protocol_commit"],
@@ -334,16 +384,16 @@ def main() -> None:
         "decision_reason": reason,
         "reconstruction_disclosure": {
             "pack_source": seval_manifest.get("pack_source", "unspecified"),
-            "stub_solver_count": len(seval_manifest["solver_files"]),
+            "solver_count": len(seval_manifest["solver_files"]),
             "paper_claim": "27 good / 3 bad solvers; C decision_loss=1.0, RMSE=0.024; B0/B4/B5/B6 degenerate; C ties B1/B2/B3 on decision_loss -> FAIL",
-            "actual_summary": f"{n_good} good / {n_bad} bad solvers (stub pack); decision={decision}, reason={reason}",
+            "actual_summary": f"{n_good} good / {n_bad} bad solvers; decision={decision}, reason={reason}",
         },
         "wallclock_seconds": round(time.time() - t0, 3),
     }
 
-    RESULT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    RESULT_PATH.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"Wrote {RESULT_PATH}")
+    result_path.parent.mkdir(parents=True, exist_ok=True)
+    result_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"Wrote {result_path}")
     print()
     print(f"Decision: {decision}")
     print(f"Reason:   {reason}")
