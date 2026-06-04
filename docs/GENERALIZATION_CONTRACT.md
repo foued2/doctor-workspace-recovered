@@ -401,6 +401,10 @@ questions that the Week 2 implementation must answer:
 4. **CLI surface:** should the runner be a single CLI that takes `--problem-class` and `--freeze-path` etc., or one CLI per problem class? Recommend single CLI with problem-class as a flag; mirrors the bimaristan experiment_runner abstraction.
 5. **Pack source for LC45:** LC45 already has real LLM-generated candidates in `lc45_candidates.py`. The manifest `pack_source` for LC45 would be `"external_baseline"` or `"llm_population_v1"`, not `"reconstructed_stub"`. The disclosure text would change accordingly.
 
+**Resolved at end of Week 1 (carried into Week 2):**
+
+6. **C is optional at the kernel level.** B0-B6 produce a valid FAIL verdict without C. PASS requires C to beat all baselines on decision_loss. The port of any new problem can proceed without a C implementation; C is a Week 3+ deliverable per problem. Reading `decide_accept_reject`: `c_rows` is filtered by prefix; with zero matches the pass-condition for-loop runs zero times and the function falls through to `return "FAIL", "C does not beat all baselines on decision_loss"`. So the kernel runs end-to-end with B0-B6 alone; PASS is conditional on C.
+
 ---
 
 ## 8. Week 1 deliverable status
