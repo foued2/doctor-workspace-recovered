@@ -34,15 +34,31 @@ for the full surface declaration and the `REFUSED: <guard>: <reason>` vs
 ## Step 1: Verify the lockfile
 
 ```
-python -c "import json, hashlib; m = json.load(open('ARTIFACT_MANIFEST.lock')); ok = True
+python -c "import json, hashlib
+m = json.load(open('ARTIFACT_MANIFEST.lock'))
+ok = True
 for a in m['artifacts']:
     p = open(a['path'], 'rb').read()
-    if hashlib.sha256(p).hexdigest() != a['sha256']:
+    if a.get('exclude_fields'):
+        d = json.loads(p)
+        for f in a['exclude_fields']:
+            d.pop(f, None)
+        content = json.dumps(d, indent=2, ensure_ascii=False).encode('utf-8')
+    else:
+        content = p
+    if hashlib.sha256(content).hexdigest() != a['sha256']:
         print('MISMATCH', a['path']); ok = False
 print('lockfile', 'OK' if ok else 'BROKEN')"
 ```
 
 Expected: `lockfile OK`. If mismatches, the working tree is dirty; do not proceed.
+
+Note: result JSON entries (`data/midweather_fingerprint_*.json`) carry an
+`exclude_fields: ["wallclock_seconds"]` directive. The verifier strips that
+field before SHA computation, so the lockfile SHA is stable across runs even
+though `wallclock_seconds` itself is timing-dependent. The lockfile holds
+56 entries (was 40 before the LC45 port; see `_meta.manifest_solver_sha_consistency`
+for the cross-check against the LC322 seval_manifest).
 
 ## Step 2: Run the protocol tests (40 tests, all must pass)
 

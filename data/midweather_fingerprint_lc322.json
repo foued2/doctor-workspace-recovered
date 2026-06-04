@@ -1,5 +1,6 @@
 {
   "result_id": "midweather_fingerprint_lc322_clean_001",
+  "problem_class": "lc322",
   "experiment": "Midweather-Fingerprint-Gate",
   "protocol_freeze_id": "midweather_fingerprint_lc322_clean_001",
   "protocol_freeze_commit": "6ca6c28",
@@ -283,9 +284,9 @@
   "decision_reason": "degenerate: all-reject in B4_raw_full_tensor",
   "reconstruction_disclosure": {
     "pack_source": "reconstructed_stub",
-    "stub_solver_count": 30,
+    "solver_count": 30,
     "paper_claim": "27 good / 3 bad solvers; C decision_loss=1.0, RMSE=0.024; B0/B4/B5/B6 degenerate; C ties B1/B2/B3 on decision_loss -> FAIL",
-    "actual_summary": "11 good / 19 bad solvers (stub pack); decision=FAIL, reason=degenerate: all-reject in B4_raw_full_tensor"
+    "actual_summary": "11 good / 19 bad solvers; decision=FAIL, reason=degenerate: all-reject in B4_raw_full_tensor"
   },
-  "wallclock_seconds": 0.38
+  "wallclock_seconds": 0.351
 }

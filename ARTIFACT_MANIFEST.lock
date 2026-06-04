@@ -5,10 +5,13 @@
     "experiment": "Midweather-Fingerprint-Gate",
     "decision": "FAIL",
     "decision_reason_code": "degenerate_all_reject_in_B4_raw_full_tensor",
-    "locked_at": "2026-06-04T15:30:11.378325+00:00",
+    "locked_at": "2026-06-04T20:42:53.174808+00:00",
     "protocol_freeze_id": "midweather_fingerprint_lc322_clean_001",
     "protocol_freeze_commit": "6ca6c28",
-    "result_json_sha256": "fc3154ba371aa21c44d3d91e56176aa565554c809952aa7675023248f91e124b",
+    "result_json_sha256": "75ab1d32c89f35eadc19e09f8881191644b632b691b12ba2faf0ccc77ceeb4b1",
+    "result_json_exclude_fields": [
+      "wallclock_seconds"
+    ],
     "manifest_solver_sha_consistency": "ok",
     "manifest_solver_sha_mismatches": []
   },
@@ -18,70 +21,118 @@
       "sha256": "0eb9b548fa053d408dc5b1c9f08b91eb97c14daba4e6536440c61fe0ca13d737",
       "size_bytes": 9073,
       "role": "protocol_freeze",
-      "notes": "All 7 freeze validators pass. Self-SHA is PENDING_SELF_REFERENCE_AT_FREEZE_TIME per convention. frozen_files includes 9 files (was 8; added problem_class_config.py)."
+      "notes": "LC322 freeze. All 7 freeze validators pass."
+    },
+    {
+      "path": "MIDWEATHER_FINGERPRINT_GATE_LC45_FREEZE.json",
+      "sha256": "4247b3b5642a3851977295a72f6b03e5ee53915c9d1f5e0a26c351aec5ce2e09",
+      "size_bytes": 8925,
+      "role": "protocol_freeze",
+      "notes": "LC45 freeze. 18 frozen files. K=15+15. 7 estimators (B0-B6, no C)."
     },
     {
       "path": "MIDWEATHER_FINGERPRINT_SEVAL_MANIFEST.schema.json",
       "sha256": "8dce4eee6007a19882a2e4fc2924f8f3ae658fe73f934937b4d68d2260a62e8d",
       "size_bytes": 5362,
       "role": "seval_manifest_schema",
-      "notes": "JSON Schema draft-2020-12. Narrow structural validation. additionalProperties=true to allow recovered original pack."
+      "notes": "JSON Schema draft-2020-12. Narrow structural validation. additionalProperties=true."
     },
     {
       "path": "data/midweather_fingerprint_lc322_probe_index.json",
       "sha256": "fc4065bee0f48a9f8b8133423f3f96e597ac79baaac20de0d5cbe06f8f221785",
       "size_bytes": 10824,
       "role": "probe_index",
-      "notes": "30 probes / 6 axes. validate_axis_provenance + validate_probe_index pass."
+      "notes": "30 probes / 6 axes, K=15+15 round-robin split."
+    },
+    {
+      "path": "data/midweather_fingerprint_lc45_probe_index.json",
+      "sha256": "f330e85551ff1d321a4a02adeca53c0e7728b8aeb7d2c6f7bf8b188d0d0a4635",
+      "size_bytes": 13662,
+      "role": "probe_index",
+      "notes": "30 probes / 6 LC45 manifolds, K=15+15 round-robin split."
     },
     {
       "path": "data/midweather_fingerprint_lc322_seval_manifest.json",
       "sha256": "ae4389c4c0c8b1242763742719a0e6273561fcec4c74580b525d115174a214e3",
       "size_bytes": 14203,
       "role": "seval_manifest",
-      "notes": "30 stub solver files. pack_source=reconstructed_stub. certified_clean=true."
+      "notes": "30 stub solvers, pack_source=reconstructed_stub."
+    },
+    {
+      "path": "data/midweather_fingerprint_lc45_seval_manifest.json",
+      "sha256": "529f73ff9e262b392f69b0bca670bccf31e39689550e809f92ebe8df1b8c08ba",
+      "size_bytes": 7382,
+      "role": "seval_manifest",
+      "notes": "10 LC45 candidates, pack_source=external_baseline, certified_clean=true."
     },
     {
       "path": "data/midweather_fingerprint_lc322.json",
-      "sha256": "fc3154ba371aa21c44d3d91e56176aa565554c809952aa7675023248f91e124b",
-      "size_bytes": 8448,
-      "role": "result",
-      "notes": "Verdict FAIL, reason 'degenerate: all-reject in B4_raw_full_tensor'. reconstruction_disclosure block present."
+      "sha256": "75ab1d32c89f35eadc19e09f8881191644b632b691b12ba2faf0ccc77ceeb4b1",
+      "size_bytes": 8460,
+      "role": "result_json",
+      "notes": "Verdict FAIL, 11/19 split. Wallclock excluded (non-deterministic).",
+      "exclude_fields": [
+        "wallclock_seconds"
+      ]
+    },
+    {
+      "path": "data/midweather_fingerprint_lc45.json",
+      "sha256": "16dddeb9367d8fbce610ee7942c1584dc21fc34d9c54415b14bc6844a3c39ac3",
+      "size_bytes": 6314,
+      "role": "result_json",
+      "notes": "Verdict FAIL, 1/9 split, B4 all-REJECT. Wallclock excluded.",
+      "exclude_fields": [
+        "wallclock_seconds"
+      ]
     },
     {
       "path": "runners/run_midweather_fingerprint_lc322.py",
-      "sha256": "52e021087b50140fb67ba67b5262d2e8fcb099a7dd798bc969a4a97a76d5ded1",
-      "size_bytes": 15619,
+      "sha256": "84c5946088039dde07e08f69ceadb8496fde72c8da9c167b5e6140f83543e775",
+      "size_bytes": 19154,
       "role": "runner",
-      "notes": "Execute-and-write-result runner. Uses problem_class_config for the 6 adapter slots. No decision logic of its own; delegates to decide_accept_reject in features.py."
-    },
-    {
-      "path": "doctor/adversarial/problem_class_config.py",
-      "sha256": "1e870ad90786bd6e07945585bb08ad94511a8128c5de81a6a43ca5e4aa4607e4",
-      "size_bytes": 8909,
-      "role": "problem_class_config",
-      "notes": "6 adapter slots: oracle, probe_to_solver_input, solver_entry_point, estimator_names+estimator_policies, fingerprint_axes, raw_tensor_encoder. LC322 default + LC45 stub."
-    },
-    {
-      "path": "tests/test_midweather_fingerprint.py",
-      "sha256": "f56e1d7bd32c04553e195c8280b72fe52532e10fd682633b9c6c059bfa71dcb3",
-      "size_bytes": 20229,
-      "role": "test_suite",
-      "notes": "40 protocol tests, all pass under pytest. Relocated from in-module defs in features.py."
+      "notes": "Config-driven runner. main() returns int (0/1/2/3). --problem-class flag."
     },
     {
       "path": "doctor/adversarial/midweather_fingerprint_features.py",
       "sha256": "53d275e2c135ffdf6d04f24eedd193cbb86c5fcd8f78d54bd05a02f89613c869",
       "size_bytes": 20673,
-      "role": "features_and_validators",
-      "notes": "7 freeze validators, ACCEPT_REJECT_SPEC, decide_accept_reject, helpers. NOTE: 39 in-module test_* defs removed; relocated to tests/test_midweather_fingerprint.py."
+      "role": "kernel_features",
+      "notes": "7 freeze validators, ACCEPT_REJECT_SPEC, decide_accept_reject, helpers."
+    },
+    {
+      "path": "doctor/adversarial/problem_class_config.py",
+      "sha256": "3ce8fd6f569c41bf0c4220102d8844d1d33e893ee27dfeacaed1c439b6dbf657",
+      "size_bytes": 9422,
+      "role": "problem_class_config",
+      "notes": "6 adapter slots. LC322 default + LC45 port."
+    },
+    {
+      "path": "doctor/adversarial/cli.py",
+      "sha256": "4ec3ecae73926180dedd2fdbef8466379f346fce11b60784cc667bd27aa2371a",
+      "size_bytes": 10266,
+      "role": "cli",
+      "notes": "doctor-certify CLI: 4 subcommands, exit code policy, freeze_id check."
+    },
+    {
+      "path": "tests/test_midweather_fingerprint.py",
+      "sha256": "f56e1d7bd32c04553e195c8280b72fe52532e10fd682633b9c6c059bfa71dcb3",
+      "size_bytes": 20229,
+      "role": "protocol_tests",
+      "notes": "40 protocol tests, all pass."
+    },
+    {
+      "path": "tests/test_cli.py",
+      "sha256": "363d19d19423445a7407007c50552ea25e23977549ef80742451c34092ecb7aa",
+      "size_bytes": 5286,
+      "role": "cli_tests",
+      "notes": "11 CLI tests covering all 4 subcommands + edge cases."
     },
     {
       "path": "findings/FINDINGS_MIDWEATHER_FINGERPRINT_LC322.md",
       "sha256": "0420250b5e2baba7e814d1d8ce2f95e3b9727cf7371c01cf3833f67bdc4eaefd",
       "size_bytes": 14574,
       "role": "findings",
-      "notes": "First-class finding: code/paper mismatch on degenerate-baseline policy. Code is authoritative; paper prose at :605 misstates the policy."
+      "notes": "Verdict FAIL + kernel-authoritative interpretation of paper :605."
     },
     {
       "path": "experiments/frozen_taxonomy_lc322/solvers/solver_001.py",
@@ -292,6 +343,76 @@
       "size_bytes": 1349,
       "role": "stub_solver",
       "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_001.py",
+      "sha256": "43f4266b2fba75f4b5266b9e96e1c48d71be36f2d059c85c2ea0b7f271df771c",
+      "size_bytes": 430,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_002.py",
+      "sha256": "fb8d5db0852a6c423875fe59cb7c0c494a6fe51a76360c473657ef6f398a0a3c",
+      "size_bytes": 386,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_003.py",
+      "sha256": "37ef059dec940910dca173d5ebb6966ed4e89c2fd94aee0e83b498ede2ca791b",
+      "size_bytes": 395,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_004.py",
+      "sha256": "2c1651a8625b564f8488bb0a2bed522b2522b14d0db991f53262608f14c85980",
+      "size_bytes": 378,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_005.py",
+      "sha256": "d372f376e4174bdc8ed8ad250df7bda7b451734ae7d1d8c8448f48171416e8c3",
+      "size_bytes": 391,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_006.py",
+      "sha256": "b1f33a909732a0f984bb3b71a4199d7bd2001f44e12b026b999c3603842cb5e2",
+      "size_bytes": 450,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_007.py",
+      "sha256": "c86ebcee5c5ad60eedc69ae97b1d6465749872ea3bf036d29d86f5da5624f156",
+      "size_bytes": 408,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_008.py",
+      "sha256": "8dc34c1c37987f2d140722e429189d129cc146896fdc46761516f3f2289cbfa4",
+      "size_bytes": 406,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_009.py",
+      "sha256": "4ea19cdbde478aecb56bac024f7813b741ea707f69cf0714ec69a8a7457f6d19",
+      "size_bytes": 441,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc45/solvers/solver_010.py",
+      "sha256": "1963c983fcc3e82621083f39f1625026757c3d98d66abdbd9665d7b4932a78f5",
+      "size_bytes": 432,
+      "role": "lc45_candidate_solver",
+      "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
     }
   ]
 }
