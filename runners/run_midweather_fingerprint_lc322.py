@@ -9,7 +9,13 @@ solvers on the 30 probes, fits the 8 estimators (B0-B6, C), computes
 the per-estimator metrics, builds the table, calls
 decide_accept_reject, and writes the result.
 
-The estimator policies are:
+Per-problem-class configuration comes from
+``doctor.adversarial.problem_class_config.get_problem_class_config``
+(6 adapter slots: oracle, probe-to-solver-input, solver entry-point,
+estimator names+policies, fingerprint axes, raw tensor encoder). The
+LC322 default reproduces the original behavior exactly.
+
+The LC322 estimator policies (reproduced by the default config) are:
   B0_prior:                     all-ACCEPT (population prior, degenerate)
   B1_count:                     ACCEPT iff observed_failures == 0
   B2_calibrated_count:          same as B1 (no calibration set in this run)
@@ -22,13 +28,6 @@ The estimator policies are:
                                 context but with the same primary
                                 threshold as B1; honest implementation
                                 of the policy described in the paper)
-
-C and B1 use the same primary rule because the paper's C is described
-as "deterministic features (pair flips, invariants, sensitivity) from
-O_obs" with the same failure_threshold=0.05 boundary. The structured
-features (pair flips, axis metadata) can refine the decision but in
-this run they do not change the ACCEPT/REJECT boundary for any solver
-(documented in the result JSON's per-solver details).
 """
 from __future__ import annotations
 
@@ -41,7 +40,6 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from doctor.adversarial.lc322_ground_truth import lc322_brute_force
 from doctor.adversarial.midweather_fingerprint_features import (
     ACCEPT_REJECT_SPEC,
     assert_valid_seval_manifest,
@@ -49,7 +47,13 @@ from doctor.adversarial.midweather_fingerprint_features import (
     decide_accept_reject,
     detect_degenerate_target,
 )
+from doctor.adversarial.problem_class_config import (
+    ProblemClassConfig,
+    get_problem_class_config,
+)
 
+
+PROBLEM_CLASS: str = "lc322"  # default; LC45 port sets this to "lc45"
 
 FREEZE_PATH = REPO_ROOT / "MIDWEATHER_FINGERPRINT_GATE_FREEZE.json"
 PROBE_INDEX_PATH = REPO_ROOT / "data" / "midweather_fingerprint_lc322_probe_index.json"
@@ -70,34 +74,32 @@ def load_seval_manifest() -> dict:
     return json.loads(SEVAL_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
-def load_solver(solver_path: Path) -> callable:
+def load_solver(solver_path: Path, entry_point: str) -> callable:
     spec = importlib.util.spec_from_file_location(f"runner_{solver_path.stem}", solver_path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot import {solver_path}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    if not hasattr(module, "solve"):
-        raise RuntimeError(f"{solver_path} has no `solve` function")
-    return module.solve
+    if not hasattr(module, entry_point):
+        raise RuntimeError(f"{solver_path} has no `{entry_point}` function")
+    return getattr(module, entry_point)
 
 
 def execute_solvers(
-    manifest: dict, probe_index: dict
+    manifest: dict, probe_index: dict, config: ProblemClassConfig,
 ) -> dict[str, dict[str, bool]]:
     """Run each solver on each probe; return {solver_id: {probe_id: pass_bool}}."""
-    probe_by_id = {p["probe_id"]: p for p in probe_index["probes"]}
     results: dict[str, dict[str, bool]] = {}
     for entry in manifest["solver_files"]:
         sid = entry["solver_id"]
         path = REPO_ROOT / entry["path"]
-        solver = load_solver(path)
+        solver = load_solver(path, config.solver_entry_point)
         results[sid] = {}
         for probe in probe_index["probes"]:
-            coins = probe["coins"]
-            amount = probe["amount"]
-            truth = lc322_brute_force(list(coins), amount)
+            solver_input = config.probe_to_solver_input(probe)
+            truth = config.oracle(solver_input)
             try:
-                observed = solver([*list(coins), amount])
+                observed = solver(solver_input)
             except Exception:
                 observed = "EXC"
             results[sid][probe["probe_id"]] = (observed == truth)
@@ -125,38 +127,22 @@ def compute_ground_truth(
 
 
 def apply_estimator(
-    estimator_name: str,
+    policy,
     pass_results: dict[str, dict[str, bool]],
     observed_ids: list[str],
 ) -> dict[str, str]:
-    """Return {solver_id: "ACCEPT"|"REJECT"} for one estimator.
+    """Return {solver_id: "ACCEPT"|"REJECT"} for one estimator policy.
 
     The estimator only sees the K=15 observed probe results, never the
-    held-out ground truth.
+    held-out ground truth. The policy is a callable
+    ``(obs_fails: int, n_obs: int) -> "ACCEPT"|"REJECT"`` from
+    ``config.estimator_policies[name]``.
     """
     preds: dict[str, str] = {}
     n_obs = len(observed_ids)
     for sid, probe_results in pass_results.items():
         obs_fails = sum(1 for pid in observed_ids if not probe_results[pid])
-        if estimator_name == "B0_prior":
-            preds[sid] = "ACCEPT"
-        elif estimator_name == "B1_count":
-            preds[sid] = "ACCEPT" if obs_fails == 0 else "REJECT"
-        elif estimator_name == "B2_calibrated_count":
-            preds[sid] = "ACCEPT" if obs_fails == 0 else "REJECT"
-        elif estimator_name == "B3_raw_pf_vector":
-            preds[sid] = "ACCEPT" if obs_fails == 0 else "REJECT"
-        elif estimator_name == "B4_raw_full_tensor":
-            preds[sid] = "REJECT"
-        elif estimator_name in ("B5_nearest_neighbor_raw_tensor",
-                                 "B6_regularized_raw_tensor"):
-            preds[sid] = "ACCEPT"
-        elif estimator_name == "C_structured_fingerprint":
-            # structured features can refine, but in this run the
-            # primary rule (obs_fails == 0) is the binding decision
-            preds[sid] = "ACCEPT" if obs_fails == 0 else "REJECT"
-        else:
-            raise ValueError(f"unknown estimator: {estimator_name}")
+        preds[sid] = policy(obs_fails, n_obs)
     return preds
 
 
@@ -203,6 +189,16 @@ def main() -> None:
     probe_index = load_probe_index()
     seval_manifest = load_seval_manifest()
 
+    # Slot 5 cross-check: probe_index's axis_set must match the config's declaration
+    config = get_problem_class_config(PROBLEM_CLASS)
+    declared_axes = set(config.fingerprint_axes)
+    actual_axes = set(probe_index.get("axis_set", []))
+    if actual_axes != declared_axes:
+        raise SystemExit(
+            f"axis_set mismatch: probe_index declares {sorted(actual_axes)}, "
+            f"config ({PROBLEM_CLASS}) declares {sorted(declared_axes)}"
+        )
+
     # Guard 1: schema + freeze tie
     assert_valid_seval_manifest(seval_manifest, freeze)
     # Guard 2: clean-run refusal reasons
@@ -226,7 +222,7 @@ def main() -> None:
     target_ids = freeze["observation_budget"]["target_probe_ids"]
 
     # Run all 30 solvers on all 30 probes
-    pass_results = execute_solvers(seval_manifest, probe_index)
+    pass_results = execute_solvers(seval_manifest, probe_index, config)
 
     # Ground truth: held-out fail rate
     ground = compute_ground_truth(pass_results, target_ids, failure_threshold)
@@ -239,15 +235,11 @@ def main() -> None:
         failure_threshold=failure_threshold,
     )
 
-    # Fit each estimator and compute decision metrics
-    estimator_names = [
-        "B0_prior", "B1_count", "B2_calibrated_count", "B3_raw_pf_vector",
-        "B4_raw_full_tensor", "B5_nearest_neighbor_raw_tensor",
-        "B6_regularized_raw_tensor", "C_structured_fingerprint",
-    ]
+    # Fit each estimator (using config.estimator_names) and compute decision metrics
     table: list[dict] = []
-    for est in estimator_names:
-        preds = apply_estimator(est, pass_results, observed_ids)
+    for est in config.estimator_names:
+        policy = config.estimator_policies[est]
+        preds = apply_estimator(policy, pass_results, observed_ids)
         loss = compute_decision_loss(preds, ground, cost)
         n_accepted = sum(1 for p in preds.values() if p == "ACCEPT")
         accept_rate = n_accepted / len(preds) if preds else 0.0

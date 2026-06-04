@@ -50,7 +50,7 @@
     },
     {
       "path": "data/midweather_fingerprint_lc322.json",
-      "sha256": "a58bf6d8effe1042dd103fe22dc2b07ce3e9c76e7d6a11287a545159fa533ca9"
+      "sha256": "fc3154ba371aa21c44d3d91e56176aa565554c809952aa7675023248f91e124b"
     },
     {
       "path": "data/midweather_fingerprint_lc322_probe_index.json",
@@ -62,11 +62,15 @@
     },
     {
       "path": "runners/run_midweather_fingerprint_lc322.py",
-      "sha256": "4346cb9694658cecc465eedfb9fdcd1214cf28010587d7759e16d50506f330bb"
+      "sha256": "52e021087b50140fb67ba67b5262d2e8fcb099a7dd798bc969a4a97a76d5ded1"
     },
     {
       "path": "doctor/adversarial/midweather_fingerprint_features.py",
       "sha256": "53d275e2c135ffdf6d04f24eedd193cbb86c5fcd8f78d54bd05a02f89613c869"
+    },
+    {
+      "path": "doctor/adversarial/problem_class_config.py",
+      "sha256": "1e870ad90786bd6e07945585bb08ad94511a8128c5de81a6a43ca5e4aa4607e4"
     }
   ],
   "primary_target": "heldout_failure_rate",

@@ -8,17 +8,17 @@
     "locked_at": "2026-06-04T15:30:11.378325+00:00",
     "protocol_freeze_id": "midweather_fingerprint_lc322_clean_001",
     "protocol_freeze_commit": "6ca6c28",
-    "result_json_sha256": "a58bf6d8effe1042dd103fe22dc2b07ce3e9c76e7d6a11287a545159fa533ca9",
+    "result_json_sha256": "fc3154ba371aa21c44d3d91e56176aa565554c809952aa7675023248f91e124b",
     "manifest_solver_sha_consistency": "ok",
     "manifest_solver_sha_mismatches": []
   },
   "artifacts": [
     {
       "path": "MIDWEATHER_FINGERPRINT_GATE_FREEZE.json",
-      "sha256": "c64803f34cc5dd96ca39fc5e60f2adddd48516b96fcee741f80d3ec9586adc58",
-      "size_bytes": 8913,
+      "sha256": "0eb9b548fa053d408dc5b1c9f08b91eb97c14daba4e6536440c61fe0ca13d737",
+      "size_bytes": 9073,
       "role": "protocol_freeze",
-      "notes": "All 7 freeze validators pass. Self-SHA is PENDING_SELF_REFERENCE_AT_FREEZE_TIME per convention."
+      "notes": "All 7 freeze validators pass. Self-SHA is PENDING_SELF_REFERENCE_AT_FREEZE_TIME per convention. frozen_files includes 9 files (was 8; added problem_class_config.py)."
     },
     {
       "path": "MIDWEATHER_FINGERPRINT_SEVAL_MANIFEST.schema.json",
@@ -43,17 +43,24 @@
     },
     {
       "path": "data/midweather_fingerprint_lc322.json",
-      "sha256": "a58bf6d8effe1042dd103fe22dc2b07ce3e9c76e7d6a11287a545159fa533ca9",
-      "size_bytes": 8449,
+      "sha256": "fc3154ba371aa21c44d3d91e56176aa565554c809952aa7675023248f91e124b",
+      "size_bytes": 8448,
       "role": "result",
       "notes": "Verdict FAIL, reason 'degenerate: all-reject in B4_raw_full_tensor'. reconstruction_disclosure block present."
     },
     {
       "path": "runners/run_midweather_fingerprint_lc322.py",
-      "sha256": "4346cb9694658cecc465eedfb9fdcd1214cf28010587d7759e16d50506f330bb",
-      "size_bytes": 16068,
+      "sha256": "52e021087b50140fb67ba67b5262d2e8fcb099a7dd798bc969a4a97a76d5ded1",
+      "size_bytes": 15619,
       "role": "runner",
-      "notes": "Execute-and-write-result runner. No decision logic of its own; delegates to decide_accept_reject in features.py."
+      "notes": "Execute-and-write-result runner. Uses problem_class_config for the 6 adapter slots. No decision logic of its own; delegates to decide_accept_reject in features.py."
+    },
+    {
+      "path": "doctor/adversarial/problem_class_config.py",
+      "sha256": "1e870ad90786bd6e07945585bb08ad94511a8128c5de81a6a43ca5e4aa4607e4",
+      "size_bytes": 8909,
+      "role": "problem_class_config",
+      "notes": "6 adapter slots: oracle, probe_to_solver_input, solver_entry_point, estimator_names+estimator_policies, fingerprint_axes, raw_tensor_encoder. LC322 default + LC45 stub."
     },
     {
       "path": "tests/test_midweather_fingerprint.py",
