@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://doctor-workspace-recovered/MIDWEATHER_FINGERPRINT_SEVAL_MANIFEST.schema.json",
+  "title": "Midweather Fingerprint LC322 S_eval Manifest Schema",
+  "description": "Schema for the S_eval manifest of the Midweather-Fingerprint-Gate experiment. The schema validates the manifest's structural shape only; the freeze-tie check (protocol_freeze_id matches the protocol freeze's freeze_id, protocol_freeze_commit matches the protocol freeze's protocol_commit) is enforced at runtime by assert_valid_seval_manifest in doctor/adversarial/midweather_fingerprint_features.py. The schema intentionally does NOT enumerate stub-specific fields (pack_source, strategy_families, n_solvers, reconstruction_note) so that a recovered original external blind pack can use the same schema without modification.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "s_eval_id",
+    "problem_id",
+    "protocol_freeze_id",
+    "protocol_freeze_commit",
+    "certification_level",
+    "solver_source",
+    "solver_files",
+    "causal_certification"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version this manifest conforms to.",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "s_eval_id": {
+      "type": "string",
+      "description": "Stable identifier for the S_eval pack.",
+      "minLength": 1
+    },
+    "problem_id": {
+      "type": "string",
+      "description": "The problem identifier this S_eval targets.",
+      "minLength": 1
+    },
+    "protocol_freeze_id": {
+      "type": "string",
+      "description": "Must equal the protocol freeze's freeze_id at runtime. The schema only checks it is a non-empty string; the actual tie is enforced by assert_valid_seval_manifest.",
+      "minLength": 1
+    },
+    "protocol_freeze_commit": {
+      "type": "string",
+      "description": "Must equal the protocol freeze's protocol_commit at runtime. The schema only checks it is a non-empty string; the actual tie is enforced by assert_valid_seval_manifest.",
+      "minLength": 1
+    },
+    "protocol_freeze_sha256": {
+      "type": "string",
+      "description": "Optional SHA256 of the protocol freeze file. The schema does not enforce a hex pattern because the manifest can legitimately inherit a placeholder string (e.g. PENDING_SELF_REFERENCE_AT_FREEZE_TIME) from the freeze's frozen_files entry. If present and the freeze's own SHA is computable, assert_valid_seval_manifest verifies the values match."
+    },
+    "certification_level": {
+      "type": "string",
+      "description": "One of EXTERNAL_BLIND_PACK or other certified-clean level. SELF_REPORTED is rejected at runtime by validate_seval_freeze_tie.",
+      "enum": ["EXTERNAL_BLIND_PACK", "INDEPENDENT_REPLICATION", "BLIND_REPRODUCTION"]
+    },
+    "solver_source": {
+      "type": "string",
+      "description": "Free-text source identifier. The schema only requires it is a non-empty string.",
+      "minLength": 1
+    },
+    "solver_files": {
+      "type": "array",
+      "description": "List of solver file entries. Must be non-empty. Each entry has a stable solver_id and a 64-char hex SHA256 of the solver's source. The schema does NOT enforce how many entries there are, what the solver_ids look like, or what other fields each entry may carry, so the schema is compatible with both reconstructed stub packs and any recovered original pack.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["solver_id", "sha256"],
+        "properties": {
+          "solver_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "path": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "inspected_before_protocol_freeze": {
+            "type": "boolean"
+          },
+          "derived_from_prior_lc322_failures": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "causal_certification": {
+      "type": "object",
+      "description": "Causal certification block. certified_clean is required and must be a boolean; the other fields are optional to keep the schema forward-compatible.",
+      "required": ["certified_clean"],
+      "properties": {
+        "certified_clean": {
+          "type": "boolean",
+          "description": "Whether the S_eval pack is certified clean of contamination with the protocol design. Validated at runtime by clean_run_refusal_reasons."
+        },
+        "s_eval_existed_before_protocol": {
+          "type": "boolean"
+        },
+        "s_eval_used_to_design_probes": {
+          "type": "boolean"
+        },
+        "s_eval_used_to_design_features": {
+          "type": "boolean"
+        },
+        "s_eval_outputs_seen_before_freeze": {
+          "type": "boolean"
+        },
+        "failure_labels_seen_before_freeze": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "created_after_protocol_freeze": {
+      "type": "boolean",
+      "description": "Optional flag. If present must be boolean. The runtime tie check enforces the value."
+    }
+  },
+  "additionalProperties": true
+}

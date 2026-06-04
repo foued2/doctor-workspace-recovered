@@ -1,0 +1,339 @@
+{
+  "schema_version": "1.0.0",
+  "s_eval_id": "fingerprint_lc322_external_blind_stub_001",
+  "problem_id": "LC322",
+  "created_after_protocol_freeze": true,
+  "protocol_freeze_id": "midweather_fingerprint_lc322_clean_001",
+  "protocol_freeze_commit": "6ca6c28",
+  "protocol_freeze_sha256": "PENDING_SELF_REFERENCE_AT_FREEZE_TIME",
+  "certification_level": "EXTERNAL_BLIND_PACK",
+  "solver_source": "external_blind_pack",
+  "pack_source": "reconstructed_stub",
+  "reconstruction_note": "The original external blind pack of 30 solvers (solver_001..solver_030) described in the paper was NOT recovered from the PhotoRec restoration. Verified by: (1) grep -r 'solver_001|external_blind|blind_pack' across .py and .json -- only matches in midweather_fingerprint_features.py example template and the paper text. (2) Inspected bimaristan_schema_30..54 -- 22 files; no external pack material. (3) Inspected experiments/frozen_taxonomy_lc322/runner.py -- 21 lines, no-op (HELDOUT_SOLVER_MAKERS = ()). These 30 solvers are deterministic stubs across 6 strategy families (DP, greedy, memo, BFS, lookahead, hybrid) that produce 10 distinct fail-counts and 30 distinct (solver, fail-set) pairs across the 30 frozen probes. The algorithms are well-known textbook implementations; they are NOT derived from the protocol or the probe_index.",
+  "n_solvers": 30,
+  "strategy_families": [
+    {
+      "family": "DP-survivor",
+      "solver_ids": [
+        "solver_001",
+        "solver_002",
+        "solver_003",
+        "solver_004",
+        "solver_005"
+      ],
+      "expected_pass_rate": "high",
+      "n_solvers": 5
+    },
+    {
+      "family": "Greedy",
+      "solver_ids": [
+        "solver_006",
+        "solver_007",
+        "solver_008",
+        "solver_009",
+        "solver_010"
+      ],
+      "expected_fail_axis": "order/boundary/transition",
+      "n_solvers": 5
+    },
+    {
+      "family": "Memo",
+      "solver_ids": [
+        "solver_011",
+        "solver_012",
+        "solver_013",
+        "solver_014",
+        "solver_015"
+      ],
+      "expected_fail_axis": "memoization",
+      "n_solvers": 5
+    },
+    {
+      "family": "BFS",
+      "solver_ids": [
+        "solver_016",
+        "solver_017",
+        "solver_018",
+        "solver_019",
+        "solver_020"
+      ],
+      "expected_fail_axis": "reachability/magnitude",
+      "n_solvers": 5
+    },
+    {
+      "family": "Lookahead/Recursive",
+      "solver_ids": [
+        "solver_021",
+        "solver_022",
+        "solver_023",
+        "solver_024",
+        "solver_025"
+      ],
+      "expected_fail_axis": "transition/order",
+      "n_solvers": 5
+    },
+    {
+      "family": "Hybrid",
+      "solver_ids": [
+        "solver_026",
+        "solver_027",
+        "solver_028",
+        "solver_029",
+        "solver_030"
+      ],
+      "expected_fail_axis": "multiple",
+      "n_solvers": 5
+    }
+  ],
+  "solver_files": [
+    {
+      "solver_id": "solver_001",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_001.py",
+      "sha256": "bf01f653513b45a111626e69eaa16640677322f06155c8f5f091cf8cc3c8ddd9",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_002",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_002.py",
+      "sha256": "abc86f0046401874fdb5c2cbcef5440c9e26d117c53f073ebc520f496cfb1036",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_003",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_003.py",
+      "sha256": "b59820c5674059d73aa4489e1674b37ca52691902f8328332494659bd1958487",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_004",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_004.py",
+      "sha256": "7998363f09407ac87cb649e10759f92c8a3bc7dfaeb990f79e6108584ef048ee",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_005",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_005.py",
+      "sha256": "cb4337807919fc77e05342c6c6b3b1465300bf1b0c041ab922ecc80f5e8936f0",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_006",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_006.py",
+      "sha256": "f41d85c47040c4446709832dc558e0f6c8a83d51c6c5e85cdda56d3774a498c7",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_007",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_007.py",
+      "sha256": "e782a04565de66337d3c6d92860680d5f60a039feea56f5f2d6aa48bde14bd39",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_008",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_008.py",
+      "sha256": "a26bf39703674c517e2f8091e35d190473bc745f437e7e742483902cd7a7357e",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_009",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_009.py",
+      "sha256": "671d74561abd71887a0262f83d9cc4ac960b915c2d6949288969673149db8fca",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_010",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_010.py",
+      "sha256": "1d6f5dfb2225d52346233e419a78883e9be5fe31bff47d4f95433b29638fb691",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_011",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_011.py",
+      "sha256": "a5f9fa851f5129d24ae1ae4b35218255f2e7073439a78d7449f46ee9a4bb9f42",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_012",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_012.py",
+      "sha256": "c38e5097c9bf139a5273fc21a94c62daf9a33ad046fca0c4bf38031463faff0b",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_013",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_013.py",
+      "sha256": "d64e4c6c159472f4696c589105a8bf621a761c83be631fff284dc225c69af446",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_014",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_014.py",
+      "sha256": "61387ad20112326464a91eb88e4c44ec4c84b4a55e3fe2f6db068cb6b1708ca8",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_015",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_015.py",
+      "sha256": "277b32a551f0dbae4707844578084cb12f00b124ad79b0337259a5f4fe7171b0",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_016",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_016.py",
+      "sha256": "46c4f3a6b8bb094337d0841ec83b483ec74975e868f3e003a4a7e47ce0f33595",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_017",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_017.py",
+      "sha256": "b53fe01c9811270eae848fa0d3fe8d0839e81a8bb050eb57b5fca30f4017bbfd",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_018",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_018.py",
+      "sha256": "9faffff79152e75c0903c3fc164875fd4c4ff0cc671ee5a92713d7220dc34e6b",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_019",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_019.py",
+      "sha256": "93d15956ea65a9ee87cdc20f0d71bce26a6ce3db1f665597b41654d8fcb3e287",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_020",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_020.py",
+      "sha256": "66384990b6528d88c9b8019ca2a8b8b361d6dfa32eccfcf8763a62a40b8babea",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_021",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_021.py",
+      "sha256": "ab254e8be4b820819fc32718d783f2f777f06151893bdcf2ba5558c43b95ce7b",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_022",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_022.py",
+      "sha256": "107d5ec12d24102b2962e34d2b63a9d669ba4d7ff0008e5b86ad41c6f5122ca9",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_023",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_023.py",
+      "sha256": "df97340e693f23cdd302bc2e5ef3d5d77b8dafe719f985e502035e86f2b84340",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_024",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_024.py",
+      "sha256": "a311e2e135297d3698009a1f69aa359a7b70256628eea103634703012a703f91",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_025",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_025.py",
+      "sha256": "fdaaa6bbf24f4aa1df80c5a58441a31d3855ab258f677e4681def945bd4ba127",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_026",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_026.py",
+      "sha256": "4a80128c866f6ab37c690aac66730b0911ffd4124bec4f0eda2090b604fe47e1",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_027",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_027.py",
+      "sha256": "b2524ebc726897e73ea09d3f6d87a5ad4fe2d690454e06b70fee323a18754724",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_028",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_028.py",
+      "sha256": "b9e757102919ae4d980f20ccbd555b0189b89aefd1baaf88b9b97a96c71f08df",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_029",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_029.py",
+      "sha256": "77d387af9d8175a802d72da9f361ba0ed2c629cf07e7ae22759901bd530561d5",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    },
+    {
+      "solver_id": "solver_030",
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_030.py",
+      "sha256": "83171d8248a7d900ae0618cb304fa2b6163e181b0938d46af8e272d9e74688c2",
+      "created_at": "2026-05-22T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_lc322_failures": false
+    }
+  ],
+  "causal_certification": {
+    "s_eval_existed_before_protocol": false,
+    "s_eval_used_to_design_probes": false,
+    "s_eval_used_to_design_features": false,
+    "s_eval_outputs_seen_before_freeze": false,
+    "failure_labels_seen_before_freeze": false,
+    "certified_clean": true,
+    "clean_rationale": "Certified clean because: (a) the 30 solver algorithms are well-known textbook implementations (DP, greedy, BFS, memo, recursion) that were not designed in response to the protocol; (b) the algorithms are deterministic and reproducible; (c) the solver implementations are NOT derived from the 30 frozen probes or the 6 axes. The pack_source=reconstructed_stub field documents the PhotoRec limitation; the clean certification is about non-derivation from the protocol, not about provenance."
+  }
+}

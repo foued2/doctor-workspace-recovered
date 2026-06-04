@@ -1,0 +1,290 @@
+{
+  "_meta": {
+    "lock_id": "midweather_fingerprint_lc322_clean_001",
+    "result_id": "midweather_fingerprint_lc322_clean_001",
+    "experiment": "Midweather-Fingerprint-Gate",
+    "decision": "FAIL",
+    "decision_reason_code": "degenerate_all_reject_in_B4_raw_full_tensor",
+    "locked_at": "2026-06-04T15:30:11.378325+00:00",
+    "protocol_freeze_id": "midweather_fingerprint_lc322_clean_001",
+    "protocol_freeze_commit": "6ca6c28",
+    "result_json_sha256": "1400828193bbd51795d3ad454d5b1ec32991a8505b2ae94bf91323ef783c1f2d",
+    "manifest_solver_sha_consistency": "ok",
+    "manifest_solver_sha_mismatches": []
+  },
+  "artifacts": [
+    {
+      "path": "MIDWEATHER_FINGERPRINT_GATE_FREEZE.json",
+      "sha256": "dcc8f3022c9be83e0ecda69baa9c28d5bc80acd9c8a899d9fa4ec2b2ff0a255d",
+      "size_bytes": 8815,
+      "role": "protocol_freeze",
+      "notes": "All 7 freeze validators pass. Self-SHA is PENDING_SELF_REFERENCE_AT_FREEZE_TIME per convention."
+    },
+    {
+      "path": "MIDWEATHER_FINGERPRINT_SEVAL_MANIFEST.schema.json",
+      "sha256": "5e16abe9e33e089ada19fa01cafc04a70438f487bb4727f217cb9822dd9d70ec",
+      "size_bytes": 5368,
+      "role": "seval_manifest_schema",
+      "notes": "JSON Schema draft-2020-12. Narrow structural validation. additionalProperties=true to allow recovered original pack."
+    },
+    {
+      "path": "data/midweather_fingerprint_lc322_probe_index.json",
+      "sha256": "fc4065bee0f48a9f8b8133423f3f96e597ac79baaac20de0d5cbe06f8f221785",
+      "size_bytes": 10824,
+      "role": "probe_index",
+      "notes": "30 probes / 6 axes. validate_axis_provenance + validate_probe_index pass."
+    },
+    {
+      "path": "data/midweather_fingerprint_lc322_seval_manifest.json",
+      "sha256": "8e86990fb582bc817d9a992eca0e6acc921a26eea2e20d4e36eec5dd23f1342b",
+      "size_bytes": 14383,
+      "role": "seval_manifest",
+      "notes": "30 stub solver files. pack_source=reconstructed_stub. certified_clean=true."
+    },
+    {
+      "path": "data/midweather_fingerprint_lc322.json",
+      "sha256": "1400828193bbd51795d3ad454d5b1ec32991a8505b2ae94bf91323ef783c1f2d",
+      "size_bytes": 8435,
+      "role": "result",
+      "notes": "Verdict FAIL, reason 'degenerate: all-reject in B4_raw_full_tensor'. reconstruction_disclosure block present."
+    },
+    {
+      "path": "runners/run_midweather_fingerprint_lc322.py",
+      "sha256": "b06d0bc424f76293c855ad5e53178c85052993cbb355d03c6f988ccdbb352048",
+      "size_bytes": 16026,
+      "role": "runner",
+      "notes": "Execute-and-write-result runner. No decision logic of its own; delegates to decide_accept_reject in features.py."
+    },
+    {
+      "path": "tests/test_midweather_fingerprint.py",
+      "sha256": "e612009bc830c86148eac1674b7e7a6fdffd58c69ce2dd7d4d724ae28e0de130",
+      "size_bytes": 20012,
+      "role": "test_suite",
+      "notes": "39 protocol tests, all pass under pytest. Relocated from in-module defs in features.py."
+    },
+    {
+      "path": "doctor/adversarial/midweather_fingerprint_features.py",
+      "sha256": "87cc7bb18527a34d27e8fc2da65812cd045e1416484af55ea34517f67690e2a0",
+      "size_bytes": 20455,
+      "role": "features_and_validators",
+      "notes": "7 freeze validators, ACCEPT_REJECT_SPEC, decide_accept_reject, helpers. NOTE: 39 in-module test_* defs removed; relocated to tests/test_midweather_fingerprint.py."
+    },
+    {
+      "path": "findings/FINDINGS_MIDWEATHER_FINGERPRINT_LC322.md",
+      "sha256": "0420250b5e2baba7e814d1d8ce2f95e3b9727cf7371c01cf3833f67bdc4eaefd",
+      "size_bytes": 14574,
+      "role": "findings",
+      "notes": "First-class finding: code/paper mismatch on degenerate-baseline policy. Code is authoritative; paper prose at :605 misstates the policy."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_001.py",
+      "sha256": "bf01f653513b45a111626e69eaa16640677322f06155c8f5f091cf8cc3c8ddd9",
+      "size_bytes": 1204,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_002.py",
+      "sha256": "abc86f0046401874fdb5c2cbcef5440c9e26d117c53f073ebc520f496cfb1036",
+      "size_bytes": 1034,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_003.py",
+      "sha256": "b59820c5674059d73aa4489e1674b37ca52691902f8328332494659bd1958487",
+      "size_bytes": 954,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_004.py",
+      "sha256": "7998363f09407ac87cb649e10759f92c8a3bc7dfaeb990f79e6108584ef048ee",
+      "size_bytes": 1125,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_005.py",
+      "sha256": "cb4337807919fc77e05342c6c6b3b1465300bf1b0c041ab922ecc80f5e8936f0",
+      "size_bytes": 881,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_006.py",
+      "sha256": "f41d85c47040c4446709832dc558e0f6c8a83d51c6c5e85cdda56d3774a498c7",
+      "size_bytes": 650,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_007.py",
+      "sha256": "e782a04565de66337d3c6d92860680d5f60a039feea56f5f2d6aa48bde14bd39",
+      "size_bytes": 615,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_008.py",
+      "sha256": "a26bf39703674c517e2f8091e35d190473bc745f437e7e742483902cd7a7357e",
+      "size_bytes": 649,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_009.py",
+      "sha256": "671d74561abd71887a0262f83d9cc4ac960b915c2d6949288969673149db8fca",
+      "size_bytes": 789,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_010.py",
+      "sha256": "1d6f5dfb2225d52346233e419a78883e9be5fe31bff47d4f95433b29638fb691",
+      "size_bytes": 701,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_011.py",
+      "sha256": "a5f9fa851f5129d24ae1ae4b35218255f2e7073439a78d7449f46ee9a4bb9f42",
+      "size_bytes": 1250,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_012.py",
+      "sha256": "c38e5097c9bf139a5273fc21a94c62daf9a33ad046fca0c4bf38031463faff0b",
+      "size_bytes": 1250,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_013.py",
+      "sha256": "d64e4c6c159472f4696c589105a8bf621a761c83be631fff284dc225c69af446",
+      "size_bytes": 1252,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_014.py",
+      "sha256": "61387ad20112326464a91eb88e4c44ec4c84b4a55e3fe2f6db068cb6b1708ca8",
+      "size_bytes": 1252,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_015.py",
+      "sha256": "277b32a551f0dbae4707844578084cb12f00b124ad79b0337259a5f4fe7171b0",
+      "size_bytes": 1252,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_016.py",
+      "sha256": "46c4f3a6b8bb094337d0841ec83b483ec74975e868f3e003a4a7e47ce0f33595",
+      "size_bytes": 1173,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_017.py",
+      "sha256": "b53fe01c9811270eae848fa0d3fe8d0839e81a8bb050eb57b5fca30f4017bbfd",
+      "size_bytes": 1173,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_018.py",
+      "sha256": "9faffff79152e75c0903c3fc164875fd4c4ff0cc671ee5a92713d7220dc34e6b",
+      "size_bytes": 1173,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_019.py",
+      "sha256": "93d15956ea65a9ee87cdc20f0d71bce26a6ce3db1f665597b41654d8fcb3e287",
+      "size_bytes": 1176,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_020.py",
+      "sha256": "66384990b6528d88c9b8019ca2a8b8b361d6dfa32eccfcf8763a62a40b8babea",
+      "size_bytes": 1176,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_021.py",
+      "sha256": "ab254e8be4b820819fc32718d783f2f777f06151893bdcf2ba5558c43b95ce7b",
+      "size_bytes": 1315,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_022.py",
+      "sha256": "107d5ec12d24102b2962e34d2b63a9d669ba4d7ff0008e5b86ad41c6f5122ca9",
+      "size_bytes": 1148,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_023.py",
+      "sha256": "df97340e693f23cdd302bc2e5ef3d5d77b8dafe719f985e502035e86f2b84340",
+      "size_bytes": 1240,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_024.py",
+      "sha256": "a311e2e135297d3698009a1f69aa359a7b70256628eea103634703012a703f91",
+      "size_bytes": 994,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_025.py",
+      "sha256": "fdaaa6bbf24f4aa1df80c5a58441a31d3855ab258f677e4681def945bd4ba127",
+      "size_bytes": 1318,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_026.py",
+      "sha256": "4a80128c866f6ab37c690aac66730b0911ffd4124bec4f0eda2090b604fe47e1",
+      "size_bytes": 1406,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_027.py",
+      "sha256": "b2524ebc726897e73ea09d3f6d87a5ad4fe2d690454e06b70fee323a18754724",
+      "size_bytes": 1276,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_028.py",
+      "sha256": "b9e757102919ae4d980f20ccbd555b0189b89aefd1baaf88b9b97a96c71f08df",
+      "size_bytes": 1387,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_029.py",
+      "sha256": "77d387af9d8175a802d72da9f361ba0ed2c629cf07e7ae22759901bd530561d5",
+      "size_bytes": 1340,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322/solvers/solver_030.py",
+      "sha256": "83171d8248a7d900ae0618cb304fa2b6163e181b0938d46af8e272d9e74688c2",
+      "size_bytes": 1349,
+      "role": "stub_solver",
+      "notes": "Part of reconstructed_stub pack. SHA256 in seval_manifest matches."
+    }
+  ]
+}
