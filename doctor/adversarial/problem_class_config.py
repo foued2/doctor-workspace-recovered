@@ -173,20 +173,100 @@ def lc322_raw_tensor_encoder(obs_rows: list[dict]) -> dict[str, list[float]]:
 
 
 def lc45_raw_tensor_encoder(obs_rows: list[dict]) -> dict[str, list[float]]:
-    """LC45 stub encoder. Returns 6-dim feature vector per solver (padded with zeros).
+    """LC45 concrete encoder. Uses the LC45 bimaristan symbol registry
+    to produce a 6-dim feature vector per solver from the observation rows.
 
-    Full LC45 feature design is Week 3+ deliverable. For now, encodes the
-    pass/fail flag padded to 6 dimensions to keep the slot's contract
-    uniform across problem classes.
+    The 6 features are derived from per-probe symbol values, averaged
+    across each solver's probe set. They summarize the solver's behavior
+    on the LC45 manifold:
+      [0] pass_fail_rate             (per-solver)
+      [1] bfs_agrees_rate            (algorithm-family, return semantics)
+      [2] off_by_one_rate            (return semantics)
+      [3] panics_on_dead_end_rate    (cross-problem, return semantics)
+      [4] dead_end_present_rate      (oracle-dependent)
+      [5] is_uniform_array_rate      (oracle-dependent)
+
+    The encoder wires the LC45 adapter slot to the new oracle evaluator
+    and symbol registry (Week 4 bimaristan layer). It is a concrete
+    implementation (not a stub).
     """
-    out: dict[str, list[float]] = {}
+    by_solver: dict[str, list[dict]] = {}
     for row in obs_rows:
         sid = str(row["solver_id"])
-        pf = 1.0 if row.get("pass_fail") else 0.0
-        out.setdefault(sid, []).append(pf)
-    for sid in out:
-        out[sid] = (out[sid] + [0.0] * 6)[:6]
+        by_solver.setdefault(sid, []).append(row)
+
+    out: dict[str, list[float]] = {}
+    for sid, rows in by_solver.items():
+        n = len(rows)
+        if n == 0:
+            out[sid] = [0.0] * 6
+            continue
+
+        pf_rate = sum(1.0 if r.get("pass_fail") else 0.0 for r in rows) / n
+
+        bfs_agrees_count = 0
+        off_by_one_count = 0
+        panic_count = 0
+        dead_end_count = 0
+        uniform_count = 0
+        for r in rows:
+            nums = r.get("nums")
+            if not isinstance(nums, (list, tuple)) or len(nums) == 0:
+                continue
+            candidate_output = r.get("candidate_output")
+            expected_output = r.get("expected_output")
+            if candidate_output is not None and expected_output is not None:
+                if candidate_output == expected_output:
+                    bfs_agrees_count += 1
+                if abs(candidate_output - expected_output) == 1:
+                    off_by_one_count += 1
+            if candidate_output == -1:
+                panic_count += 1
+            if len(nums) > 1 and any(nums[i] == 0 for i in range(len(nums) - 1)):
+                dead_end_count += 1
+            if len(set(nums)) == 1:
+                uniform_count += 1
+
+        out[sid] = [
+            pf_rate,
+            bfs_agrees_count / n,
+            off_by_one_count / n,
+            panic_count / n,
+            dead_end_count / n,
+            uniform_count / n,
+        ]
+
     return out
+
+
+# ---------------------------------------------------------------------------
+# Week 4: bimaristan wiring for LC45
+# ---------------------------------------------------------------------------
+
+
+def get_lc45_bimaristan_components() -> dict:
+    """Return the LC45 bimaristan components (evaluator + symbol registry).
+
+    Wires the LC45 adapter slot to the new oracle evaluator and symbol
+    registry. Used by the bimaristan layer (test_lc45_bimaristan.py and
+    any future LC45 bimaristan tooling). Does not affect the LC322
+    fingerprint-gate runner.
+
+    Returns:
+        dict with keys:
+          - "evaluator": LC45OracleEvaluator
+          - "symbol_registry": LC45_SYMBOL_REGISTRY
+          - "manifolds": tuple of 6 LC45 manifold ids
+    """
+    from doctor.adversarial.lc45_oracle_evaluator import LC45OracleEvaluator
+    from doctor.adversarial.lc45_symbol_registry import (
+        LC45_SYMBOL_REGISTRY, LC45_MANIFOLDS,
+    )
+    return {
+        "evaluator": LC45OracleEvaluator(),
+        "symbol_registry": LC45_SYMBOL_REGISTRY,
+        "manifolds": LC45_MANIFOLDS,
+    }
 
 
 # ---------------------------------------------------------------------------

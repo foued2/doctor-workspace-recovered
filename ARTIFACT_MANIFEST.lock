@@ -5,7 +5,7 @@
     "experiment": "Midweather-Fingerprint-Gate",
     "decision": "FAIL",
     "decision_reason_code": "degenerate_all_reject_in_B4_raw_full_tensor",
-    "locked_at": "2026-06-04T20:42:53.174808+00:00",
+    "locked_at": "2026-06-05T06:07:40.528695+00:00",
     "protocol_freeze_id": "midweather_fingerprint_lc322_clean_001",
     "protocol_freeze_commit": "6ca6c28",
     "result_json_sha256": "75ab1d32c89f35eadc19e09f8881191644b632b691b12ba2faf0ccc77ceeb4b1",
@@ -68,7 +68,7 @@
     {
       "path": "data/midweather_fingerprint_lc322.json",
       "sha256": "75ab1d32c89f35eadc19e09f8881191644b632b691b12ba2faf0ccc77ceeb4b1",
-      "size_bytes": 8460,
+      "size_bytes": 8461,
       "role": "result_json",
       "notes": "Verdict FAIL, 11/19 split. Wallclock excluded (non-deterministic).",
       "exclude_fields": [
@@ -101,8 +101,8 @@
     },
     {
       "path": "doctor/adversarial/problem_class_config.py",
-      "sha256": "3ce8fd6f569c41bf0c4220102d8844d1d33e893ee27dfeacaed1c439b6dbf657",
-      "size_bytes": 9422,
+      "sha256": "6b2ef598bf27f692840ab01aa85d5ce950f5ce37dc09db158a24c34fb35c463a",
+      "size_bytes": 12402,
       "role": "problem_class_config",
       "notes": "6 adapter slots. LC322 default + LC45 port."
     },
@@ -126,6 +126,27 @@
       "size_bytes": 5286,
       "role": "cli_tests",
       "notes": "11 CLI tests covering all 4 subcommands + edge cases."
+    },
+    {
+      "path": "tests/test_lc45_bimaristan.py",
+      "sha256": "b3b4c18619fc245785b89177c09faba122882ce2a4bfb9e8425ce44e91d2e0d1",
+      "size_bytes": 18206,
+      "role": "lc45_bimaristan_tests",
+      "notes": "36 tests: registry structure, oracle evaluator, 9 buggy solvers >= 2 symbols, BFS survivor = 0 false positives, cross-problem vocabulary."
+    },
+    {
+      "path": "doctor/adversarial/lc45_oracle_evaluator.py",
+      "sha256": "212426371801166a85d49e57aed353336aa41bf658609cfd6913c8a3efa945aa",
+      "size_bytes": 10627,
+      "role": "lc45_oracle_evaluator",
+      "notes": "LC45OracleEvaluator: runs candidate on probe set, returns structured {output, correct, exception, trace_features} + aggregated summary. Self-contained BFS trace."
+    },
+    {
+      "path": "doctor/adversarial/lc45_symbol_registry.py",
+      "sha256": "2171e85555afcc4ef32276c7e14ece1334362fd47593700ff6587853445e14b1",
+      "size_bytes": 28494,
+      "role": "lc45_symbol_registry",
+      "notes": "LC45_SYMBOL_REGISTRY: 38 entries (5 ALGORITHM_FAMILY + 3 TIE_BREAKER + 3 RETURN_SEMANTICS + 22 ORACLE_DEPENDENT + 5 CROSS_PROBLEM). Cross-problem transfer decisions documented in module docstring."
     },
     {
       "path": "findings/FINDINGS_MIDWEATHER_FINGERPRINT_LC322.md",
