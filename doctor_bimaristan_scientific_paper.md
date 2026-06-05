@@ -263,7 +263,7 @@ extracts from O_obs:
 | B1_count                       | pass_fail from O_obs                                                    |      no       |       no        |       no       |     fixed     |
 | B2_calibrated_count            | pass_fail from O_obs                                                    |      no       |       no        |       no       |    LOO CV     |
 | B3_raw_pf_vector               | pass_fail vector (15 probes)                                            |      no       |       no        |       no       |     fixed     |
-| B4_raw_full_tensor             | pass_fail + axis + deformation for all 15 probes                        |      yes      |       no        |       no       |     fixed     |
+| B4_raw_full_tensor             | pf, deformation, axis, family, paired, invariant                        |      yes      |       no        |       no       |     fixed     |
 | B5_nearest_neighbor_raw_tensor | raw tensor (as B4)                                                      |      yes      |       no        |       no       |     fixed     |
 | B6_regularized_raw_tensor      | raw tensor (as B4)                                                      |      yes      |       no        |       no       |    LOO CV     |
 | C_structured_fingerprint       | deterministic features (pair flips, invariants, sensitivity) from O_obs |      yes      |       no        |       no       |     fixed     |
