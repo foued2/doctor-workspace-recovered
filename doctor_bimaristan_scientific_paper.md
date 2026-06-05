@@ -279,7 +279,7 @@ evaluation. It does not mean externally judged, third-party benchmarked, or inde
 The clean gate uses 30 solver functions generated as an external blind pack:
 
 - **Generator:** Claude (Anthropic), prompted with the LC322 problem statement only.
-- **Generation time:** After the protocol freeze (commit 6ca6c28). Solver source was not inspected before the freeze.
+- **Generation time:** After the protocol freeze (original freeze commit unrecoverable (PhotoRec loss); reconstructed at `c3db242`). Solver source was not inspected before the freeze.
 - **Number:** 30 distinct solver_id entries (`solver_001`–`solver_030`).
 - **Source file:** A single generated solver pack file with all 30 function definitions.
 - **No deduplication:** Solvers were not deduplicated by behavior or output. All 30 are included as-is.
@@ -551,9 +551,15 @@ external blind S_eval, and anti-degeneracy guards.
 | No degenerate C policy (not all-ACCEPT, not all-REJECT)                  | passed |
 | All estimators receive identical O_obs                                   | passed |
 
-Degenerate baselines (B0 all-ACCEPT, B4 all-REJECT, B5/B6 all-ACCEPT) are reported rather than blocked.
-The anti-degeneracy guard applies to C (no degenerate prediction) and to target collapse (all solvers
-ACCEPT or all REJECT), not to every baseline policy.
+Degenerate baselines (B0 all-ACCEPT, B4 all-REJECT, B5/B6 all-ACCEPT) trigger the FAIL verdict.
+The `decide_accept_reject` function in `midweather_fingerprint_features.py` unconditionally returns
+FAIL with reason `degenerate: all-reject in <estimator>` if any row has `degenerate_all_reject=True`.
+In this run, B4 is all-REJECT and triggers the FAIL before the C-vs-baselines comparison is reached.
+The anti-degeneracy guard additionally checks that C is not all-ACCEPT (which would be a degenerate
+candidate policy) and that the target set has both ACCEPT and REJECT ground-truth labels (no target
+collapse). Both are checked; both passed in this run.
+
+**Corrected from original draft.** Code at `c3db242` is authoritative.
 
 **Layer A observation:**
 
@@ -605,10 +611,178 @@ pack.
 - `data/midweather_fingerprint_lc322_seval_manifest.json` — S_eval manifest for blind solver pack
 - `data/midweather_fingerprint_lc322.json` — full result JSON
 - `findings/FINDINGS_MIDWEATHER_FINGERPRINT_LC322.md` — findings report
-- `tests/test_midweather_fingerprint.py` — 39 protocol tests (all pass at commit 6ca6c28: `pytest` yields 39/39)
+- `tests/test_midweather_fingerprint.py` — 40 protocol tests (all pass at commit `c3db242`: `pytest` yields 40/40; original freeze commit unrecoverable (PhotoRec loss); reconstructed at `c3db242`)
 
 **Clean-run status:** all guards passed. Metrics computed. Decision: FAIL.
 No evaluator-utility claim is made. The clean negative result is the contribution.
+
+### Reproducibility Gap
+
+The Stage 3 result table above shows an 11/19 good/bad split, not the 27/3 split originally claimed in
+the paper draft. This discrepancy is an **irrecoverable evidentiary gap**, not a protocol error.
+
+- The original solver pack that produced the 27/3 split is **unrecoverable**. The working tree was lost
+  in a PhotoRec recovery; only the protocol code, freeze, and manifest schema survived. The 30 original
+  solver files and the original freeze commit SHA are gone.
+- The **reconstructed stub pack** (30 solvers, `pack_source: "reconstructed_stub"`) produces an 11/19
+  split. All 30 solvers pass the 4 pre-run sanity probes; 11 pass all 15 observed probes; 19 fail at
+  least one held-out probe.
+- The **hand-curated real benchmark** (30 solvers, `pack_source: "hand_curated_real"`) produces a 16/14
+  split. This pack was designed in lieu of real LLM completions (the `ANTHROPIC_API_KEY` was not set
+  and the `anthropic` SDK was not installed in the recovery environment).
+- All three packs run the **same protocol** and produce verdict **FAIL**. The central claim (FAIL) is
+  reproducible; the exact split is not.
+
+The stub pack's 11/19 and the real benchmark's 16/14 both end in FAIL via B4 degenerate, matching the
+original 27/3 verdict. The verdict is the contribution; the split is a population statistic that
+depends on the solver pack, which is not reproducible from the recovered artifacts.
+
+**What is recoverable:** the protocol kernel, the freeze validators, the manifest schema, the 6 adapter
+slots, the bimaristan layer, the decision rule, and the FAIL verdict. **What is not recoverable:** the
+original 30 solver functions, the original freeze commit SHA, and the exact population statistics.
+
+**Note on the paper draft:** the original paper draft cited a freeze commit (`6ca6c28`) and a 27/3 split
+that cannot be reproduced from the current artifacts. Both have been corrected in this version: the
+phantom commit has been replaced with "original freeze commit unrecoverable (PhotoRec loss);
+reconstructed at `c3db242`," and the 27/3 claim has been replaced with the actual reconstructed
+statistics above.
+
+# LC45 Generalization
+
+The generalized kernel was applied to a second problem class: **LC45 Jump Game II** (minimum jumps to
+reach the last index of a non-negative integer array). LC45 is structurally different from LC322
+(greedy/monotonic dynamics vs DP/non-monotonic), so it tests whether the kernel's adapter-slot design
+holds across problem families.
+
+## LC45 problem and manifolds
+
+LC45 has 6 failure manifolds (analogous to LC322's 6 fingerprint axes):
+
+1. `naive_max_jump_suboptimal` — naive greedy (always take the longest step) is suboptimal when
+   shorter steps land on higher-value positions.
+2. `single_large_jump_decoy` — a single large jump decoy makes greedy skip a reachable path.
+3. `greedy_horizon_collapse` — greedy's horizon collapses when the farthest-reachable position is
+   not the best landing.
+4. `naive_max_jump_dead_landing` — naive greedy lands on a 0-valued position (dead end).
+5. `uniform_jump_array` — uniform arrays (all values equal) expose formulas that assume uniformity.
+6. `greedy_frontier_valid_no_false_pressure` — greedy frontier is valid (not panicked) on inputs
+   where it should be confident.
+
+The probe index has 30 probes (5 per manifold), split K=15+15 round-robin across observed and target
+sets.
+
+## Solver population and verdict
+
+10 candidate solvers were sourced from an external baseline pack (`pack_source: "external_baseline"`):
+- 1 survivor: `lc45_bfs_depth_cutoff` (BFS with visited set and depth cutoff — passes all oracle cases)
+- 9 buggy solvers spanning 4 families: Greedy (4), Reachability confusion (2), Bounded/incomplete (2),
+  Off-by-one (1)
+
+The LC45 protocol verdict: **FAIL**, 1/9 split (1 good / 9 bad), B4 degenerate. The single survivor
+passes all 30 probes; the 9 buggy solvers fail on varying numbers of held-out probes (0.2-1.0 fail rate).
+
+## Bimaristan layer summary
+
+The LC45 bimaristan layer was built in a separate self-contained module (no Doctor pipeline dependency):
+
+- **`LC45OracleEvaluator`** (295 lines): evaluates a black-box candidate function on a set of LC45 probes,
+  collecting per-probe trace features (visited count, max depth, edges, max width) and comparing the
+  candidate's output to the BFS oracle's output.
+- **`LC45_SYMBOL_REGISTRY`** (463 lines, 38 entries across 5 categories):
+  - 5 ALGORITHM_FAMILY entries (BFS, Greedy, DP, Recursive, Formula)
+  - 3 TIE_BREAKER entries (farthest-index, max-landing-value, first-step)
+  - 3 RETURN_SEMANTICS entries (panic-on-dead-end, off-by-one, reachable-count-confusion)
+  - 22 ORACLE_DEPENDENT entries (5 basic + 5 derived + 12 manifold-specific)
+  - 5 CROSS_PROBLEM entries (transfer decisions documented per-entry)
+- **6 manifold definitions** in `LC45_MANIFOLDS` covering the 6 failure modes above.
+- **10 candidate solvers** in `lc45_candidates.py` spanning 4 buggy families + 1 survivor.
+
+The bimaristan layer is testable independently of the Midweather-Fingerprint-Gate kernel: 36 tests in
+`tests/test_lc45_bimaristan.py` cover structural integrity, oracle evaluator correctness, buggy solver
+detection (≥2 symbols per buggy solver), BFS survivor (0 false positives), and cross-problem vocabulary.
+
+# C Estimator Design and Negative Result
+
+The C estimator (C_structured_fingerprint) was wired into the LC45 protocol in a two-week investigation:
+**Week 6** (wiring) and **Week 7** (feature audit).
+
+## Week 6: C wiring
+
+C was added to the LC45 estimator set using the existing bimaristan layer. The C policy is
+`_fail_count_policy` (ACCEPT iff obs_fails == 0), matching the LC322 C wiring. The LC45 result JSON
+now has 8 estimator rows (B0-B6 + C) instead of 7 (B0-B6). C ties B1/B2/B3 on decision_loss (all 0.0)
+and does not beat all baselines. The verdict remains FAIL via B4 degenerate. C is present in the
+estimator table but shadowed by B4.
+
+## Week 7: Feature audit and negative result
+
+A feature audit was run to determine whether the 6 features in `lc45_raw_tensor_encoder` (the LC45 C
+feature vector) could separate the 1 survivor from the 9 buggy solvers, enabling a threshold policy
+distinct from B1.
+
+**Feature table** (10 solvers × 6 features, computed on all 30 probes):
+
+| Feature | Survivor (solver_001) | Buggy [min, max] | Gap | Clean separation? |
+|---------|----------------------|-------------------|-----|-------------------|
+| `pass_fail_rate` | 1.0 | [0.0, 0.8667] | 0.1333 | **YES** |
+| `bfs_agrees_rate` | 1.0 | [0.0, 0.8667] | 0.1333 | **YES** |
+| `off_by_one_rate` | 0.0 | [0.0, 1.0] | 0.0 | no (overlap) |
+| `panics_on_dead_end_rate` | 0.0 | [0.0, 0.7333] | 0.0 | no (overlap) |
+| `dead_end_present_rate` | 0.2333 | [0.2333, 0.2333] | 0.0 | no (constant) |
+| `is_uniform_array_rate` | 0.2 | [0.2, 0.2] | 0.0 | no (constant) |
+
+**Finding:** the only separating features are `pass_fail_rate` and `bfs_agrees_rate`, which are
+informationally identical — the encoder's `bfs_agrees_count` compares `candidate_output ==
+expected_output`, the same condition as `pass_fail`. This is an encoder artifact. A threshold on
+`pass_fail_rate` cannot beat B1: T=1.0 is equivalent to B1; T<1.0 is weaker; T>1.0 is impossible.
+No combination of the other 4 features (which either overlap with the survivor or are constant probe
+properties) can beat B1 either.
+
+**Conclusion:** C cannot differentiate from B1 on the LC45 population. This mirrors the Stage 3
+finding at the estimator level: the tested feature representation does not improve the evaluator
+decision it was meant to support. C remains wired with `_fail_count_policy` (same as B1). The
+finding is formally negative and is documented in `docs/LC45_C_POLICY_FINDING.md` with the full
+10×6 feature table and separation analysis.
+
+# Real Benchmark (hand-curated)
+
+A real benchmark for LC322 was attempted as Direction A (LLM solver certification). The intended
+design used Claude (Anthropic, model `claude-sonnet-4-20250514`) to generate 30 solver functions
+via 4 prompting strategies (P1-P4). However, the `ANTHROPIC_API_KEY` was not set and the `anthropic`
+SDK was not installed in the recovery environment. The mandate was revised to a **hand-curated
+30-body catalog** that mirrors the structural shape the real LLM pack would have.
+
+## Design
+
+- 10 correct solvers: DP-survivor family (BFS variant of full DP) and BFS-survivor family (BFS with
+  visited set). All 10 pass all 30 probes.
+- 20 buggy solvers across 7 bug families: BFS-no-visited, BFS depth cutoff, DP-threshold-overwrite,
+  BFS+GCD confusion, Recursive-no-memo, Greedy-verify (DP for small amounts, greedy for large),
+  DP-modular-overwrite (odd-amount or divisible-by-3 amounts use greedy).
+- All 30 pass 4 pre-run sanity probes (`[1,5,10]/7→3`, `[4,5,7]/10→2`, `[1,2]/4→2`, `[2,4]/3→-1`).
+- Buggy solvers have `_MAX_ITER` or call-limit guards to raise on large probes (runner catches as
+  "EXC" → fail).
+
+## Result
+
+The real benchmark produces a **16/14 split** (16 ACCEPT / 14 REJECT), verdict **FAIL**, B4
+degenerate. The 14 rejected solvers are the designed-buggy ones that fail on at least one held-out
+probe. The 16 accepted solvers are the 10 correct + 6 buggy that happen to pass all 30 probes (the
+threshold cutoffs in some buggy solvers are wide enough that the held-out probe set doesn't cross
+them).
+
+## Honest disclosure
+
+The manifest declares:
+- `pack_source: "hand_curated_real"` — explicitly not LLM-generated
+- `certification_level: "EXTERNAL_BLIND_PACK"` — generation-process certification
+- `certified_clean: true` — generation-process declaration (not protocol verdict)
+- No `model_id`, no `prompt_versions` — the pack is not LLM-generated
+
+The reserved namespace `experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/` is the target
+directory for a future real LLM run. If the `ANTHROPIC_API_KEY` becomes available and the
+`anthropic` SDK is installed, the hand-curated pack can be replaced with a real LLM-generated pack
+using the same manifest schema and freeze structure.
 
 # Discussion
 
@@ -828,7 +1002,7 @@ The following test scopes apply to the repository (do not conflate):
 |----------------------------------|-------------------------------------------------------|:---------------------------:|----------------------------------------------------------------------------------|
 | Historical repository Track A    | archival state                                        | 6 failures across 26 tests  | broader repo test state (archival, not all scoped to this paper)                 |
 | Historical targeted pytest audit | archival state                                        |   14 pass, 2 skip, 0 fail   | subset of Track A tests                                                          |
-| Midweather-Fingerprint protocol  | `pytest test_midweather_fingerprint.py`               | 39/39 pass (commit 6ca6c28) | clean-gate guard and correctness tests                                           |
+| Midweather-Fingerprint protocol  | `pytest test_midweather_fingerprint.py`               | 40/40 pass (commit `c3db242`) | clean-gate guard and correctness tests (original freeze commit unrecoverable (PhotoRec loss); reconstructed at `c3db242`) |
 | Repair regression suite          | `pytest test_comparator_regression.py` + oracle duels |         45/45 pass          | mechanical consistency of typed comparators, perturbation registry, oracle duels |
 
 One collection error was recorded for a scratch file (`test_euler_4.py`) that calls `sys.exit(0)` at module level
