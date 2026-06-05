@@ -91,27 +91,27 @@ LC45_ESTIMATOR_NAMES: list[str] = [
 ]
 
 
-def _b0_prior_policy(obs_fails: int, n_obs: int) -> str:
+def _b0_prior_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = None) -> str:
     return "ACCEPT"  # all-ACCEPT degenerate
 
 
-def _fail_count_policy(obs_fails: int, n_obs: int) -> str:
+def _fail_count_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = None) -> str:
     return "ACCEPT" if obs_fails == 0 else "REJECT"
 
 
-def _b4_raw_full_tensor_policy(obs_fails: int, n_obs: int) -> str:
+def _b4_raw_full_tensor_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = None) -> str:
     return "REJECT"  # all-REJECT degenerate
 
 
-def _b5_nn_policy(obs_fails: int, n_obs: int) -> str:
+def _b5_nn_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = None) -> str:
     return "ACCEPT"  # all-ACCEPT degenerate
 
 
-def _b6_reg_policy(obs_fails: int, n_obs: int) -> str:
+def _b6_reg_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = None) -> str:
     return "ACCEPT"  # all-ACCEPT degenerate
 
 
-LC322_ESTIMATOR_POLICIES: dict[str, Callable[[int, int], str]] = {
+LC322_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]] = {
     "B0_prior": _b0_prior_policy,
     "B1_count": _fail_count_policy,
     "B2_calibrated_count": _fail_count_policy,
@@ -122,7 +122,7 @@ LC322_ESTIMATOR_POLICIES: dict[str, Callable[[int, int], str]] = {
     "C_structured_fingerprint": _fail_count_policy,
 }
 
-LC45_ESTIMATOR_POLICIES: dict[str, Callable[[int, int], str]] = {
+LC45_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]] = {
     "B0_prior": _b0_prior_policy,
     "B1_count": _fail_count_policy,
     "B2_calibrated_count": _fail_count_policy,

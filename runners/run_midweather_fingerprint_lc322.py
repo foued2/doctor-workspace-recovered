@@ -168,23 +168,60 @@ def compute_ground_truth(
     return ground
 
 
+def _probe_to_fingerprint_context(probe: dict) -> dict:
+    """Translate a raw ``probe_index`` entry to ``fingerprint_context`` schema.
+
+    The only key rename is ``family`` -> ``probe_family``; the other four
+    fingerprint dimensions pass through unchanged. Matches the keys read
+    by ``midweather_fingerprint_features.encode_raw_tensor``.
+    """
+    return {
+        "axis": probe.get("axis"),
+        "probe_family": probe.get("family"),
+        "deformation_level": probe.get("deformation_level"),
+        "paired_probe_id": probe.get("paired_probe_id"),
+        "expected_invariant": probe.get("expected_invariant"),
+    }
+
+
 def apply_estimator(
     policy,
     pass_results: dict[str, dict[str, bool]],
     observed_ids: list[str],
+    probe_index: dict | None = None,
 ) -> dict[str, str]:
     """Return {solver_id: "ACCEPT"|"REJECT"} for one estimator policy.
 
     The estimator only sees the K=15 observed probe results, never the
     held-out ground truth. The policy is a callable
-    ``(obs_fails: int, n_obs: int) -> "ACCEPT"|"REJECT"`` from
-    ``config.estimator_policies[name]``.
+    ``(obs_fails: int, n_obs: int, obs_records: list[dict] | None) -> "ACCEPT"|"REJECT"``
+    from ``config.estimator_policies[name]``.
+
+    When ``probe_index`` is supplied, ``obs_records`` is built as a list of
+    per-probe dicts in ``fingerprint_context`` schema (matching
+    ``encode_raw_tensor``'s contract). When omitted, ``obs_records`` is
+    ``None`` and policies that only need ``obs_fails`` / ``n_obs`` behave
+    as before.
     """
     preds: dict[str, str] = {}
     n_obs = len(observed_ids)
+    probe_by_id: dict[str, dict] = (
+        {p["probe_id"]: p for p in probe_index.get("probes", [])}
+        if probe_index else {}
+    )
     for sid, probe_results in pass_results.items():
         obs_fails = sum(1 for pid in observed_ids if not probe_results[pid])
-        preds[sid] = policy(obs_fails, n_obs)
+        obs_records: list[dict] | None = None
+        if probe_by_id:
+            obs_records = [
+                {
+                    "probe_id": pid,
+                    "pass_fail": probe_results[pid],
+                    "fingerprint_context": _probe_to_fingerprint_context(probe_by_id[pid]),
+                }
+                for pid in observed_ids
+            ]
+        preds[sid] = policy(obs_fails, n_obs, obs_records)
     return preds
 
 
@@ -305,7 +342,7 @@ def main(argv: list[str] | None = None) -> int:
     table: list[dict] = []
     for est in config.estimator_names:
         policy = config.estimator_policies[est]
-        preds = apply_estimator(policy, pass_results, observed_ids)
+        preds = apply_estimator(policy, pass_results, observed_ids, probe_index)
         loss = compute_decision_loss(preds, ground, cost)
         n_accepted = sum(1 for p in preds.values() if p == "ACCEPT")
         accept_rate = n_accepted / len(preds) if preds else 0.0
