@@ -87,13 +87,30 @@ def test_audit_clean_separation_count_matches_analysis():
     assert a["clean_separation_count"] == actual_clean
 
 
-def test_audit_pass_fail_and_bfs_agrees_are_identical():
-    """Document the encoder artifact: bfs_agrees_rate == pass_fail_rate for all solvers."""
+def test_audit_bfs_agrees_is_zero_for_all_solvers():
+    """After Week 8 encoder fix: bfs_agrees_rate compares against BFS reachable_count,
+    which is a different quantity from min-jump count. No solver outputs the reachable
+    count, so bfs_agrees_rate is 0.0 for all solvers. This is informationally distinct
+    from pass_fail_rate (which varies across solvers)."""
     a = _load_audit()
     for row in a["feature_table"]:
-        assert row["features"]["pass_fail_rate"] == row["features"]["bfs_agrees_rate"], (
-            f"bfs_agrees_rate diverged from pass_fail_rate for {row['solver_id']}"
+        assert row["features"]["bfs_agrees_rate"] == 0.0, (
+            f"bfs_agrees_rate should be 0.0 for all solvers after encoder fix, "
+            f"got {row['features']['bfs_agrees_rate']} for {row['solver_id']}"
         )
+
+
+def test_audit_bfs_agrees_distinct_from_pass_fail():
+    """After Week 8 fix: bfs_agrees_rate is informationally distinct from pass_fail_rate.
+    For the survivor, pass_fail_rate=1.0 but bfs_agrees_rate=0.0. For at least one
+    solver, the two values must differ. Catches the encoder artifact regressing
+    (bfs_agrees should NOT equal pass_fail for the survivor)."""
+    a = _load_audit()
+    survivor = next(r for r in a["feature_table"] if r["solver_id"] == "solver_001")
+    assert survivor["features"]["bfs_agrees_rate"] != survivor["features"]["pass_fail_rate"], (
+        f"bfs_agrees_rate regressed to pass_fail_rate for survivor: "
+        f"both = {survivor['features']['pass_fail_rate']}"
+    )
 
 
 def test_audit_constant_probe_features():
@@ -121,3 +138,15 @@ def test_finding_document_contains_key_findings():
     assert "bfs_agrees_rate" in text
     assert "negative result" in text.lower() or "no separation" in text.lower()
     assert "B1" in text
+
+
+def test_paper_has_reproducibility_gap_section():
+    """Simple file-presence + string check on the paper's Reproducibility Gap section.
+    Not content validation — guards against the section being accidentally deleted."""
+    paper = REPO_ROOT / "doctor_bimaristan_scientific_paper.md"
+    assert paper.exists(), f"Missing {paper}"
+    text = paper.read_text(encoding="utf-8")
+    assert "Reproducibility Gap" in text
+    assert "27/3" in text
+    assert "PhotoRec" in text
+    assert "c3db242" in text

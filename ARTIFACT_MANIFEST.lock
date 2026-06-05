@@ -5,7 +5,7 @@
     "experiment": "Midweather-Fingerprint-Gate",
     "decision": "FAIL",
     "decision_reason_code": "degenerate_all_reject_in_B4_raw_full_tensor",
-    "locked_at": "2026-06-05T08:18:52.723675+00:00",
+    "locked_at": "2026-06-05T09:38:36.073876+00:00",
     "protocol_freeze_id": "midweather_fingerprint_lc322_real_clean_001",
     "protocol_freeze_commit": "f6682a9308f469fc287d4e30996d02a419cbbdc5",
     "stub_freeze_id": "midweather_fingerprint_lc322_clean_001",
@@ -134,8 +134,8 @@
     },
     {
       "path": "doctor/adversarial/problem_class_config.py",
-      "sha256": "0dcb3a9c01aacfa6e9f2674504f1e04a2417375ffb0a8a97f08bab1a0be25513",
-      "size_bytes": 12482,
+      "sha256": "c8f8ce55ed73f7f0f0d6b50d6a82431fed8ebcc5d837d70263f29d303a7f8930",
+      "size_bytes": 13852,
       "role": "problem_class_config",
       "notes": "6 adapter slots. LC322 default + LC45 port."
     },
@@ -155,8 +155,8 @@
     },
     {
       "path": "tests/test_cli.py",
-      "sha256": "363d19d19423445a7407007c50552ea25e23977549ef80742451c34092ecb7aa",
-      "size_bytes": 5286,
+      "sha256": "f3e4446b732a60095966f2259bc195542b6a939dc1eae6212e823623b0c712a7",
+      "size_bytes": 5282,
       "role": "cli_tests",
       "notes": "11 CLI tests covering all 4 subcommands + edge cases."
     },

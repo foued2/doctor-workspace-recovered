@@ -173,6 +173,35 @@ def lc322_raw_tensor_encoder(obs_rows: list[dict]) -> dict[str, list[float]]:
     return out
 
 
+def _bfs_reachable_count(nums: list[int]) -> int:
+    """Count positions reachable from start via BFS. Returns the total
+    number of positions BFS can reach (including the target if reached).
+
+    This is the BFS oracle's `reachable_count` — a different quantity from
+    the BFS oracle's min-jump output. Used by `bfs_agrees_rate` to
+    compare the candidate's output against an independent BFS-derived
+    quantity, not against the expected_output label.
+    """
+    from collections import deque
+    n = len(nums)
+    if n == 0:
+        return 0
+    if nums[0] == 0:
+        return 1
+    visited: set[int] = {0}
+    queue: deque[int] = deque([0])
+    while queue:
+        pos = queue.popleft()
+        for step in range(1, nums[pos] + 1):
+            nxt = pos + step
+            if nxt >= n - 1:
+                return len(visited) + 1
+            if nxt not in visited:
+                visited.add(nxt)
+                queue.append(nxt)
+    return len(visited)
+
+
 def lc45_raw_tensor_encoder(obs_rows: list[dict]) -> dict[str, list[float]]:
     """LC45 concrete encoder. Uses the LC45 bimaristan symbol registry
     to produce a 6-dim feature vector per solver from the observation rows.
@@ -217,8 +246,6 @@ def lc45_raw_tensor_encoder(obs_rows: list[dict]) -> dict[str, list[float]]:
             candidate_output = r.get("candidate_output")
             expected_output = r.get("expected_output")
             if candidate_output is not None and expected_output is not None:
-                if candidate_output == expected_output:
-                    bfs_agrees_count += 1
                 if abs(candidate_output - expected_output) == 1:
                     off_by_one_count += 1
             if candidate_output == -1:
@@ -227,6 +254,14 @@ def lc45_raw_tensor_encoder(obs_rows: list[dict]) -> dict[str, list[float]]:
                 dead_end_count += 1
             if len(set(nums)) == 1:
                 uniform_count += 1
+            # bfs_agrees_rate: compare candidate output against the BFS oracle's
+            # reachable_count (number of positions BFS can reach from start),
+            # NOT against expected_output. This makes it informationally distinct
+            # from pass_fail_rate.
+            if candidate_output is not None and nums is not None:
+                reachable = _bfs_reachable_count(list(nums))
+                if candidate_output == reachable:
+                    bfs_agrees_count += 1
 
         out[sid] = [
             pf_rate,

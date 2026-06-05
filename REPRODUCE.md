@@ -216,6 +216,62 @@ CLI exits `3` with `freeze_id_mismatch: freeze declares '<lc322 id>',
 problem_class is 'lc45'`. This catches the "wrong freeze for the wrong
 problem class" bug.
 
+## LC322 Real Benchmark (hand-curated)
+
+The real benchmark runs the same protocol against a 30-solver hand-curated pack
+(10 correct + 20 buggy, spanning 7 bug families). This pack is used in lieu of
+real LLM completions (the `ANTHROPIC_API_KEY` was not set in the recovery
+environment). See `docs/LC45_C_POLICY_FINDING.md` and the paper's "Real
+Benchmark" section for the full design rationale.
+
+The real benchmark uses a separate freeze and manifest:
+
+```
+doctor-certify validate-freeze --freeze=MIDWEATHER_FINGERPRINT_GATE_LC322_REAL_FREEZE.json
+doctor-certify validate-manifest \
+  --seval-manifest=data/midweather_fingerprint_lc322_real_claude_sonnet_4_seval_manifest.json \
+  --freeze=MIDWEATHER_FINGERPRINT_GATE_LC322_REAL_FREEZE.json
+```
+
+To run the real benchmark (this invokes the same kernel with a different
+freeze/manifest pair; the runner picks paths from the freeze's freeze_id
+prefix or from explicit `--freeze` / `--seval-manifest` flags):
+
+```
+py -m doctor.adversarial.cli run \
+  --freeze=MIDWEATHER_FINGERPRINT_GATE_LC322_REAL_FREEZE.json \
+  --seval-manifest=data/midweather_fingerprint_lc322_real_claude_sonnet_4_seval_manifest.json \
+  --output=data/midweather_fingerprint_lc322_real_claude_sonnet_4.json
+```
+
+Expected output (lines truncated):
+
+```
+Wrote data/midweather_fingerprint_lc322_real_claude_sonnet_4.json
+
+Decision: FAIL
+Reason:   degenerate: all-reject in B4_raw_full_tensor
+
+Ground truth: 16 good / 14 bad
+```
+
+Process exit code: `1` (FAIL). The 30 solvers, manifest, and result JSON are
+all in the repo and SHA-locked.
+
+## LC45 C Feature Audit (research artifact)
+
+The LC45 C feature audit runs all 10 LC45 solvers on all 30 probes and
+computes the 6 features from `lc45_raw_tensor_encoder` for each solver. The
+result is a 10x6 feature table written to `data/lc45_c_feature_audit.json`.
+This is a research artifact, not a protocol artifact — it does not go in the
+freeze.
+
+The audit is run by a temp script (`C:\Users\pakla\AppData\Local\Temp\opencode\lc45_feature_audit.py`).
+It produces the feature table + separation analysis. The finding (C cannot
+differentiate from B1 on the LC45 population) is documented in
+`docs/LC45_C_POLICY_FINDING.md` with the full 10x6 table and per-feature gap
+analysis.
+
 ## What is NOT reproduced by this recipe
 
 - The stub pack generation script (`generate_stub_solvers.py` in temp dir) is not in the repo; it is a one-shot script. The 30 solver files at `experiments/frozen_taxonomy_lc322/solvers/` ARE in the repo, and their SHAs are pinned in both the manifest and the lockfile.

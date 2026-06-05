@@ -18,7 +18,7 @@
       "total_probes": 30,
       "features": {
         "pass_fail_rate": 1.0,
-        "bfs_agrees_rate": 1.0,
+        "bfs_agrees_rate": 0.0,
         "off_by_one_rate": 0.0,
         "panics_on_dead_end_rate": 0.0,
         "dead_end_present_rate": 0.2333,
@@ -31,7 +31,7 @@
       "total_probes": 30,
       "features": {
         "pass_fail_rate": 0.2667,
-        "bfs_agrees_rate": 0.2667,
+        "bfs_agrees_rate": 0.0,
         "off_by_one_rate": 0.0,
         "panics_on_dead_end_rate": 0.7333,
         "dead_end_present_rate": 0.2333,
@@ -44,7 +44,7 @@
       "total_probes": 30,
       "features": {
         "pass_fail_rate": 0.8667,
-        "bfs_agrees_rate": 0.8667,
+        "bfs_agrees_rate": 0.0,
         "off_by_one_rate": 0.0667,
         "panics_on_dead_end_rate": 0.0667,
         "dead_end_present_rate": 0.2333,
@@ -57,7 +57,7 @@
       "total_probes": 30,
       "features": {
         "pass_fail_rate": 0.6,
-        "bfs_agrees_rate": 0.6,
+        "bfs_agrees_rate": 0.0,
         "off_by_one_rate": 0.2333,
         "panics_on_dead_end_rate": 0.0333,
         "dead_end_present_rate": 0.2333,
@@ -70,7 +70,7 @@
       "total_probes": 30,
       "features": {
         "pass_fail_rate": 0.7,
-        "bfs_agrees_rate": 0.7,
+        "bfs_agrees_rate": 0.0,
         "off_by_one_rate": 0.0667,
         "panics_on_dead_end_rate": 0.2333,
         "dead_end_present_rate": 0.2333,
@@ -96,7 +96,7 @@
       "total_probes": 30,
       "features": {
         "pass_fail_rate": 0.8,
-        "bfs_agrees_rate": 0.8,
+        "bfs_agrees_rate": 0.0,
         "off_by_one_rate": 0.1,
         "panics_on_dead_end_rate": 0.0,
         "dead_end_present_rate": 0.2333,
@@ -122,7 +122,7 @@
       "total_probes": 30,
       "features": {
         "pass_fail_rate": 0.4333,
-        "bfs_agrees_rate": 0.4333,
+        "bfs_agrees_rate": 0.0,
         "off_by_one_rate": 0.5,
         "panics_on_dead_end_rate": 0.0,
         "dead_end_present_rate": 0.2333,
@@ -135,7 +135,7 @@
       "total_probes": 30,
       "features": {
         "pass_fail_rate": 0.6,
-        "bfs_agrees_rate": 0.6,
+        "bfs_agrees_rate": 0.0,
         "off_by_one_rate": 0.1333,
         "panics_on_dead_end_rate": 0.0667,
         "dead_end_present_rate": 0.2333,
@@ -156,13 +156,13 @@
     },
     {
       "feature": "bfs_agrees_rate",
-      "survivor_value": 1.0,
+      "survivor_value": 0.0,
       "buggy_min": 0.0,
-      "buggy_max": 0.8667,
-      "buggy_mean": 0.4741,
+      "buggy_max": 0.0,
+      "buggy_mean": 0.0,
       "direction": "survivor_above",
-      "gap": 0.1333,
-      "clean_separation": true
+      "gap": 0.0,
+      "clean_separation": false
     },
     {
       "feature": "off_by_one_rate",
@@ -205,10 +205,9 @@
       "clean_separation": false
     }
   ],
-  "clean_separation_count": 2,
+  "clean_separation_count": 1,
   "clean_separation_features": [
-    "pass_fail_rate",
-    "bfs_agrees_rate"
+    "pass_fail_rate"
   ],
   "conclusion": "C can differentiate from B1 on this population"
 }
