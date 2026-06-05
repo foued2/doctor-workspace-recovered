@@ -1,0 +1,383 @@
+{
+  "schema_version": "1.0.0",
+  "s_eval_id": "fingerprint_lc322_real_hand_curated_001",
+  "problem_id": "LC322",
+  "created_after_protocol_freeze": true,
+  "protocol_freeze_id": "midweather_fingerprint_lc322_real_clean_001",
+  "protocol_freeze_commit": "f6682a9308f469fc287d4e30996d02a419cbbdc5",
+  "protocol_freeze_sha256": "TBD_AT_FREEZE_TIME",
+  "certification_level": "EXTERNAL_BLIND_PACK",
+  "solver_source": "hand_curated_real",
+  "pack_source": "hand_curated_real",
+  "real_pack_note": "30 hand-curated solver bodies written without LLM assistance (ANTHROPIC_API_KEY not set at freeze time). 10 correct (DP/BFS-survivor families) + 20 buggy (BFS-bug, DP-overwrite, Recursive-bug, Greedy-verify, DP-modular-overwrite families). All 30 pass 4 pre-run sanity probes ([1,5,10]/7->3, [4,5,7]/10->2, [1,2]/4->2, [2,4]/3->-1). The 20 buggy solvers carry deliberate, categorized bugs targeting the 6 fingerprint axes (reachability, order, magnitude, boundary, transition, memoization). certified_clean is a generation-process declaration, not a protocol verdict.",
+  "pre_run_probes": [
+    {
+      "coins": [
+        1,
+        5,
+        10
+      ],
+      "amount": 7,
+      "expected": 3
+    },
+    {
+      "coins": [
+        4,
+        5,
+        7
+      ],
+      "amount": 10,
+      "expected": 2
+    },
+    {
+      "coins": [
+        1,
+        2
+      ],
+      "amount": 4,
+      "expected": 2
+    },
+    {
+      "coins": [
+        2,
+        4
+      ],
+      "amount": 3,
+      "expected": -1
+    }
+  ],
+  "pre_run_check_log": "data/lc322_real_pre_run_check.json",
+  "n_solvers": 30,
+  "strategy_families": [
+    {
+      "family": "DP-survivor",
+      "solver_ids": [
+        "solver_001",
+        "solver_002",
+        "solver_003",
+        "solver_004",
+        "solver_005"
+      ],
+      "expected_pass_rate": "high",
+      "n_solvers": 5
+    },
+    {
+      "family": "BFS-survivor",
+      "solver_ids": [
+        "solver_006",
+        "solver_007",
+        "solver_008",
+        "solver_009",
+        "solver_010"
+      ],
+      "expected_pass_rate": "high",
+      "n_solvers": 5
+    },
+    {
+      "family": "BFS-bug",
+      "solver_ids": [
+        "solver_011",
+        "solver_012",
+        "solver_013"
+      ],
+      "expected_fail_axis": "magnitude/reachability",
+      "n_solvers": 3
+    },
+    {
+      "family": "DP-overwrite",
+      "solver_ids": [
+        "solver_014",
+        "solver_015",
+        "solver_016",
+        "solver_017",
+        "solver_018",
+        "solver_019"
+      ],
+      "expected_fail_axis": "transition",
+      "n_solvers": 6
+    },
+    {
+      "family": "Recursive-bug",
+      "solver_ids": [
+        "solver_020",
+        "solver_021",
+        "solver_022",
+        "solver_023"
+      ],
+      "expected_fail_axis": "magnitude",
+      "n_solvers": 4
+    },
+    {
+      "family": "Greedy-verify",
+      "solver_ids": [
+        "solver_024",
+        "solver_025",
+        "solver_026",
+        "solver_027",
+        "solver_028"
+      ],
+      "expected_fail_axis": "order/boundary",
+      "n_solvers": 5
+    },
+    {
+      "family": "DP-modular-overwrite",
+      "solver_ids": [
+        "solver_029",
+        "solver_030"
+      ],
+      "expected_fail_axis": "transition",
+      "n_solvers": 2
+    }
+  ],
+  "solver_files": [
+    {
+      "solver_id": "solver_001",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_001.py",
+      "sha256": "98d78e7c3e01292bf0986b624214205ef6cf5c9ad50432ad56c0d923c7e3db44",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_002",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_002.py",
+      "sha256": "f50bc477fd9345799a35cd0d99ef95e87eb54fe527d6f6f90c93dbd8daed259a",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_003",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_003.py",
+      "sha256": "4c6e4a8f40629b1bfc54fbe3b92141f8aaf041003f30cf23ec71c0249041155a",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_004",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_004.py",
+      "sha256": "cb50a01a6f6443803b85198481f0dbdac12be2593b245571fbb2ae29894c8b49",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_005",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_005.py",
+      "sha256": "44170c5a43fd146a68db2c3d536b3d71a28ec96910ceff0455c2fe71e869c83f",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_006",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_006.py",
+      "sha256": "2e8cafa26369caa8eb19a4e34f7293adbab29484410a53f7365b9c4b199c6440",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_007",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_007.py",
+      "sha256": "23bc1745883086cf2fc451ed46970f611747569a88cbb7be03abd2123fc4676b",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_008",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_008.py",
+      "sha256": "68dbdf7d94b58dfc63c7ba89cebfc389e9361f72f5c0ae0ed270c85d1b57062b",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_009",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_009.py",
+      "sha256": "ae4b5f6b5b7499563f922a7791404d4e85f70257be8ac8c7955b72ed3eedd705",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_010",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_010.py",
+      "sha256": "2f19593ffbdad881e1a3ddbfa3609448ef4f8f96866abe06359aa4bff9a266c0",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_011",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_011.py",
+      "sha256": "6608c4d7cfcedc791ecd897e1f732ca4aeb4c3c45697f1d1f4ea3e30b8094e52",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_012",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_012.py",
+      "sha256": "19eb7d5769e691e9b9b1353b5e5c8fd9e18425df15226d29bcbb48305c7fb705",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_013",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_013.py",
+      "sha256": "be6e7c1ed189fc6226d83b03490e6fa2a141b3c845c5bb148ea30e556f00c585",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_014",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_014.py",
+      "sha256": "65d417b0833ccbc30b1d2d42c7016c853d2797678d623a73e287b2d18f775602",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_015",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_015.py",
+      "sha256": "ea037488b5c856995276f5658e918f1f536775f7ed0c73310018e7d8c7528f21",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_016",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_016.py",
+      "sha256": "bada43d255117ce8a79c08cf4b8366084474672444d1735f43525ceafee7d5d9",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_017",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_017.py",
+      "sha256": "6fa6c16d8958687db39601c0a4deda6ef9d4223e846ceb36dea7deb1fab61315",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_018",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_018.py",
+      "sha256": "aed1d6730e92fce8198beb08f38edcdef9a943df7a3f13364383eb538c65d4e5",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_019",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_019.py",
+      "sha256": "2ae67c220f4e22fbce82cc4f252010b2050b49e3fc12c32df83d8c84e64e262d",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_020",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_020.py",
+      "sha256": "a4effd227d6cc848d09095338fcc84cfa488cd6950a1a701973647086e9ee8cb",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_021",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_021.py",
+      "sha256": "3c1d180d36fb9601118c659084cbe0336d36cb34644e8d559453209d032290f9",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_022",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_022.py",
+      "sha256": "d8c14a3dfe1fca21a37190ed98ee144b4d665bc4affa7cfbfe627e42727c8d66",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_023",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_023.py",
+      "sha256": "7539a8abf9eb47e25aba76513d7f0ba51ff6157aae00968f45992659a4408e80",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_024",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_024.py",
+      "sha256": "8a3242dedcc0ed6682fbb334b175f77894408e02654be0cc6636177e949aaf21",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_025",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_025.py",
+      "sha256": "c14999757353193cc053ac051f3d72a8fe1c2c6d1e2bb3752b3de7bc1cc30bfc",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_026",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_026.py",
+      "sha256": "bd4bac641ff760467da813f9d5bb5759c7bf3725c6a97e97c7c6836e0db1713a",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_027",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_027.py",
+      "sha256": "3822f41377f09c9309be61e3f321d8cedd886e76ef3e195fbd508d06b5c7c98f",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_028",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_028.py",
+      "sha256": "aa8bdd4b3003d8930d4950b09c7f6cca847224f6b7f752003d542894588b8529",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_029",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_029.py",
+      "sha256": "f0e081841184f974ff60ed511a638bc0e9a7c5565795dc231a479816c6987e59",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_030",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_030.py",
+      "sha256": "1334f25eb8736fb46efc53bc103b97289409257a0c23611ab8f7ffc1631f9db7",
+      "created_at": "2026-06-05T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    }
+  ],
+  "causal_certification": {
+    "s_eval_existed_before_protocol": false,
+    "s_eval_used_to_design_probes": false,
+    "s_eval_used_to_design_features": false,
+    "s_eval_outputs_seen_before_freeze": false,
+    "failure_labels_seen_before_freeze": false,
+    "certified_clean": true,
+    "clean_rationale": "Certified clean because: (a) solver bodies were hand-written without LLM assistance and without access to probe_index, feature definitions, or protocol internals beyond the public surface; (b) the 4 pre-run probes were chosen to catch happy-path-only bugs and are independent of the 30 frozen probes; (c) the 20 buggy solvers are categorized by deliberate bug pattern (BFS cutoff, DP overwrite, recursive no-memo, greedy+verify) targeting the 6 declared fingerprint axes, not by inspection of the protocol. The pack_source=hand_curated_real field documents the non-LLM origin; the clean certification is about non-derivation from the protocol, not about provenance."
+  }
+}

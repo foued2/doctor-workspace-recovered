@@ -1,0 +1,298 @@
+{
+  "_provenance": {
+    "sources": {
+      "MIDWEATHER_FINGERPRINT_GATE_FREEZE.json": "Stub freeze for LC322 (Week 3). Kernel module SHAs and probe_index SHA are re-used unchanged. This real freeze adds the real_seval_manifest, pre_run_check_log, and 30 hand-curated solver files.",
+      "data/midweather_fingerprint_lc322_probe_index.json": "Same 30 probes as stub freeze (p_fp_0001..p_fp_0030). Probe index SHA is identical.",
+      "doctor/adversarial/midweather_fingerprint_features.py": "Kernel module. SHA unchanged from stub freeze.",
+      "doctor/adversarial/problem_class_config.py": "Kernel module. SHA unchanged from stub freeze.",
+      "runners/run_midweather_fingerprint_lc322.py": "Runner. SHA unchanged from stub freeze.",
+      "tests/test_midweather_fingerprint.py": "Protocol tests. SHA unchanged from stub freeze.",
+      "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/": "30 hand-curated solver bodies (solver_001..solver_030) written without LLM assistance. ANTHROPIC_API_KEY not set at freeze time; anthropic SDK not installed. pack_source=hand_curated_real. All 30 pass 4 pre-run sanity probes."
+    },
+    "field_provenance": {
+      "freeze_id": "inferred from convention (midweather_fingerprint_lc322_real_clean_001) -- sibling of stub freeze (midweather_fingerprint_lc322_clean_001)",
+      "experiment": "source-code: minimal_repo_with_freeze -- paper-confirmed (Evidence Stage 3 = Midweather-Fingerprint-Gate)",
+      "created_at": "2026-06-05 (Week 5, real benchmark)",
+      "protocol_commit": "git HEAD at freeze time: f6682a93 (full SHA in freeze.evidence)",
+      "frozen_files": "ALL SHA256s computed at freeze time. probe_index SHA is identical to stub freeze. Kernel module SHAs are identical to stub freeze (frozen at c3db242/dd59ec2). New: real_seval_manifest, pre_run_check_log, 30 solver files.",
+      "primary_target": "inferred from stub freeze convention",
+      "primary_utility": "inferred from stub freeze convention",
+      "observation_budget": "Same 15/15 split as stub freeze (same probe_index)",
+      "weakest_baseline_config": "Same as stub freeze",
+      "decision_spec": "Same as stub freeze (ACCEPT_REJECT_SPEC constant unchanged)",
+      "success_rule": "Same as stub freeze",
+      "split_configuration": "Same 15/15 split as stub freeze",
+      "status": "FROZEN",
+      "real_pack_note": "This freeze is the Week 5 real benchmark. The 30 solvers are hand-curated (not LLM-generated) due to API unavailability. 10 correct + 20 buggy, all passing pre-run probes. The kernel (features, runner, problem_class_config) is unchanged from stub freeze."
+    }
+  },
+  "freeze_id": "midweather_fingerprint_lc322_real_clean_001",
+  "experiment": "Midweather-Fingerprint-Gate",
+  "created_at": "2026-06-05T00:00:00Z",
+  "protocol_commit": "f6682a9308f469fc287d4e30996d02a419cbbdc5",
+  "frozen_files": [
+    {
+      "path": "MIDWEATHER_FINGERPRINT_GATE_LC322_REAL_FREEZE.json",
+      "sha256": "PENDING_SELF_REFERENCE_AT_FREEZE_TIME"
+    },
+    {
+      "path": "MIDWEATHER_FINGERPRINT_SEVAL_MANIFEST.schema.json",
+      "sha256": "8dce4eee6007a19882a2e4fc2924f8f3ae658fe73f934937b4d68d2260a62e8d"
+    },
+    {
+      "path": "data/midweather_fingerprint_lc322_probe_index.json",
+      "sha256": "fc4065bee0f48a9f8b8133423f3f96e597ac79baaac20de0d5cbe06f8f221785"
+    },
+    {
+      "path": "tests/test_midweather_fingerprint.py",
+      "sha256": "f56e1d7bd32c04553e195c8280b72fe52532e10fd682633b9c6c059bfa71dcb3"
+    },
+    {
+      "path": "runners/run_midweather_fingerprint_lc322.py",
+      "sha256": "84c5946088039dde07e08f69ceadb8496fde72c8da9c167b5e6140f83543e775"
+    },
+    {
+      "path": "doctor/adversarial/midweather_fingerprint_features.py",
+      "sha256": "53d275e2c135ffdf6d04f24eedd193cbb86c5fcd8f78d54bd05a02f89613c869"
+    },
+    {
+      "path": "doctor/adversarial/problem_class_config.py",
+      "sha256": "6b2ef598bf27f692840ab01aa85d5ce950f5ce37dc09db158a24c34fb35c463a"
+    },
+    {
+      "path": "data/midweather_fingerprint_lc322_real_claude_sonnet_4_seval_manifest.json",
+      "sha256": "62544396704b677939a2e78c1351828a5f6f27c71cd1efd7f404fd077b3a7e2f"
+    },
+    {
+      "path": "data/lc322_real_pre_run_check.json",
+      "sha256": "a5a3f3881eb4688bc4111cc9ba9b88d1e0832bc975d22a47576149da7c0d53f4"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_001.py",
+      "sha256": "98d78e7c3e01292bf0986b624214205ef6cf5c9ad50432ad56c0d923c7e3db44"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_002.py",
+      "sha256": "f50bc477fd9345799a35cd0d99ef95e87eb54fe527d6f6f90c93dbd8daed259a"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_003.py",
+      "sha256": "4c6e4a8f40629b1bfc54fbe3b92141f8aaf041003f30cf23ec71c0249041155a"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_004.py",
+      "sha256": "cb50a01a6f6443803b85198481f0dbdac12be2593b245571fbb2ae29894c8b49"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_005.py",
+      "sha256": "44170c5a43fd146a68db2c3d536b3d71a28ec96910ceff0455c2fe71e869c83f"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_006.py",
+      "sha256": "2e8cafa26369caa8eb19a4e34f7293adbab29484410a53f7365b9c4b199c6440"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_007.py",
+      "sha256": "23bc1745883086cf2fc451ed46970f611747569a88cbb7be03abd2123fc4676b"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_008.py",
+      "sha256": "68dbdf7d94b58dfc63c7ba89cebfc389e9361f72f5c0ae0ed270c85d1b57062b"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_009.py",
+      "sha256": "ae4b5f6b5b7499563f922a7791404d4e85f70257be8ac8c7955b72ed3eedd705"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_010.py",
+      "sha256": "2f19593ffbdad881e1a3ddbfa3609448ef4f8f96866abe06359aa4bff9a266c0"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_011.py",
+      "sha256": "6608c4d7cfcedc791ecd897e1f732ca4aeb4c3c45697f1d1f4ea3e30b8094e52"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_012.py",
+      "sha256": "19eb7d5769e691e9b9b1353b5e5c8fd9e18425df15226d29bcbb48305c7fb705"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_013.py",
+      "sha256": "be6e7c1ed189fc6226d83b03490e6fa2a141b3c845c5bb148ea30e556f00c585"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_014.py",
+      "sha256": "65d417b0833ccbc30b1d2d42c7016c853d2797678d623a73e287b2d18f775602"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_015.py",
+      "sha256": "ea037488b5c856995276f5658e918f1f536775f7ed0c73310018e7d8c7528f21"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_016.py",
+      "sha256": "bada43d255117ce8a79c08cf4b8366084474672444d1735f43525ceafee7d5d9"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_017.py",
+      "sha256": "6fa6c16d8958687db39601c0a4deda6ef9d4223e846ceb36dea7deb1fab61315"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_018.py",
+      "sha256": "aed1d6730e92fce8198beb08f38edcdef9a943df7a3f13364383eb538c65d4e5"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_019.py",
+      "sha256": "2ae67c220f4e22fbce82cc4f252010b2050b49e3fc12c32df83d8c84e64e262d"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_020.py",
+      "sha256": "a4effd227d6cc848d09095338fcc84cfa488cd6950a1a701973647086e9ee8cb"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_021.py",
+      "sha256": "3c1d180d36fb9601118c659084cbe0336d36cb34644e8d559453209d032290f9"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_022.py",
+      "sha256": "d8c14a3dfe1fca21a37190ed98ee144b4d665bc4affa7cfbfe627e42727c8d66"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_023.py",
+      "sha256": "7539a8abf9eb47e25aba76513d7f0ba51ff6157aae00968f45992659a4408e80"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_024.py",
+      "sha256": "8a3242dedcc0ed6682fbb334b175f77894408e02654be0cc6636177e949aaf21"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_025.py",
+      "sha256": "c14999757353193cc053ac051f3d72a8fe1c2c6d1e2bb3752b3de7bc1cc30bfc"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_026.py",
+      "sha256": "bd4bac641ff760467da813f9d5bb5759c7bf3725c6a97e97c7c6836e0db1713a"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_027.py",
+      "sha256": "3822f41377f09c9309be61e3f321d8cedd886e76ef3e195fbd508d06b5c7c98f"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_028.py",
+      "sha256": "aa8bdd4b3003d8930d4950b09c7f6cca847224f6b7f752003d542894588b8529"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_029.py",
+      "sha256": "f0e081841184f974ff60ed511a638bc0e9a7c5565795dc231a479816c6987e59"
+    },
+    {
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_030.py",
+      "sha256": "1334f25eb8736fb46efc53bc103b97289409257a0c23611ab8f7ffc1631f9db7"
+    }
+  ],
+  "primary_target": "heldout_failure_rate",
+  "primary_utility": "decision_loss",
+  "observation_budget": {
+    "K": 15,
+    "unit": "one solver execution on one probe_id",
+    "observed_probe_ids": [
+      "p_fp_0001",
+      "p_fp_0003",
+      "p_fp_0005",
+      "p_fp_0007",
+      "p_fp_0009",
+      "p_fp_0011",
+      "p_fp_0013",
+      "p_fp_0015",
+      "p_fp_0017",
+      "p_fp_0019",
+      "p_fp_0021",
+      "p_fp_0023",
+      "p_fp_0025",
+      "p_fp_0027",
+      "p_fp_0029"
+    ],
+    "target_probe_ids": [
+      "p_fp_0002",
+      "p_fp_0004",
+      "p_fp_0006",
+      "p_fp_0008",
+      "p_fp_0010",
+      "p_fp_0012",
+      "p_fp_0014",
+      "p_fp_0016",
+      "p_fp_0018",
+      "p_fp_0020",
+      "p_fp_0022",
+      "p_fp_0024",
+      "p_fp_0026",
+      "p_fp_0028",
+      "p_fp_0030"
+    ]
+  },
+  "weakest_baseline_config": {
+    "model_type": "leave-one-out ridge regression",
+    "regularization": "L2 (alpha=1.0, fixed)",
+    "hyperparameter_selection": "fixed",
+    "cv_strategy": "leave_one_out_cv",
+    "random_seed": 322001,
+    "predeclared": true
+  },
+  "decision_spec": {
+    "name": "ACCEPT_REJECT",
+    "action_space": [
+      "ACCEPT",
+      "REJECT"
+    ],
+    "policy_input": "K observations from O_obs including fingerprint_context",
+    "policy_output": "one action from action_space per solver",
+    "failure_threshold": 0.05,
+    "minimum_accept_rate": 0.2,
+    "degenerate_policy_policy": "REFUSE_OR_MARK_INCONCLUSIVE",
+    "wrong_accept_cost": 1,
+    "wrong_reject_cost": 1,
+    "utility_function": "Minimize cost-weighted decision_loss = wrong_accept_cost * wrong_accepts + wrong_reject_cost * wrong_rejects.",
+    "cost_model": {
+      "wrong_accept_cost": 1,
+      "wrong_reject_cost": 1
+    },
+    "primary_utility_metric": "decision_loss",
+    "success_rule": "C must have strictly lower decision_loss than every same-information baseline (B0-B6), satisfy minimum_accept_rate, and not be degenerate."
+  },
+  "success_rule": "C must strictly beat every same-observation baseline (B0-B6) on decision_loss. Ties are FAIL.",
+  "split_configuration": {
+    "O_obs": [
+      "p_fp_0001",
+      "p_fp_0003",
+      "p_fp_0005",
+      "p_fp_0007",
+      "p_fp_0009",
+      "p_fp_0011",
+      "p_fp_0013",
+      "p_fp_0015",
+      "p_fp_0017",
+      "p_fp_0019",
+      "p_fp_0021",
+      "p_fp_0023",
+      "p_fp_0025",
+      "p_fp_0027",
+      "p_fp_0029"
+    ],
+    "D_target": [
+      "p_fp_0002",
+      "p_fp_0004",
+      "p_fp_0006",
+      "p_fp_0008",
+      "p_fp_0010",
+      "p_fp_0012",
+      "p_fp_0014",
+      "p_fp_0016",
+      "p_fp_0018",
+      "p_fp_0020",
+      "p_fp_0022",
+      "p_fp_0024",
+      "p_fp_0026",
+      "p_fp_0028",
+      "p_fp_0030"
+    ]
+  },
+  "status": "FROZEN"
+}

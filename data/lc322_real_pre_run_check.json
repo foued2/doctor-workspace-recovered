@@ -1,0 +1,1515 @@
+{
+  "checked_at": "2026-06-05T07:43:49.739782+00:00",
+  "solvers_dir": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers",
+  "n_solvers": 30,
+  "n_pass": 30,
+  "n_fail": 0,
+  "pre_run_probes": [
+    {
+      "coins": [
+        1,
+        5,
+        10
+      ],
+      "amount": 7,
+      "expected": 3
+    },
+    {
+      "coins": [
+        4,
+        5,
+        7
+      ],
+      "amount": 10,
+      "expected": 2
+    },
+    {
+      "coins": [
+        1,
+        2
+      ],
+      "amount": 4,
+      "expected": 2
+    },
+    {
+      "coins": [
+        2,
+        4
+      ],
+      "amount": 3,
+      "expected": -1
+    }
+  ],
+  "results": [
+    {
+      "solver_id": "solver_001",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_001.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_002",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_002.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_003",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_003.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_004",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_004.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_005",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_005.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_006",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_006.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_007",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_007.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_008",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_008.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_009",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_009.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_010",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_010.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_011",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_011.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_012",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_012.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_013",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_013.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_014",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_014.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_015",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_015.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_016",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_016.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_017",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_017.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_018",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_018.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_019",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_019.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_020",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_020.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_021",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_021.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_022",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_022.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_023",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_023.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_024",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_024.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_025",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_025.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_026",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_026.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_027",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_027.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_028",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_028.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_029",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_029.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    {
+      "solver_id": "solver_030",
+      "path": "experiments\\frozen_taxonomy_lc322_real_claude_sonnet_4\\solvers\\solver_030.py",
+      "probes": [
+        {
+          "coins": [
+            1,
+            5,
+            10
+          ],
+          "amount": 7,
+          "expected": 3,
+          "got": 3,
+          "pass": true
+        },
+        {
+          "coins": [
+            4,
+            5,
+            7
+          ],
+          "amount": 10,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            1,
+            2
+          ],
+          "amount": 4,
+          "expected": 2,
+          "got": 2,
+          "pass": true
+        },
+        {
+          "coins": [
+            2,
+            4
+          ],
+          "amount": 3,
+          "expected": -1,
+          "got": -1,
+          "pass": true
+        }
+      ],
+      "all_pass": true
+    }
+  ]
+}

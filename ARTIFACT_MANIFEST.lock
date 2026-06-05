@@ -1,13 +1,15 @@
 {
   "_meta": {
-    "lock_id": "midweather_fingerprint_lc322_clean_001",
-    "result_id": "midweather_fingerprint_lc322_clean_001",
+    "lock_id": "midweather_fingerprint_lc322_real_clean_001",
+    "result_id": "midweather_fingerprint_lc322_real_clean_001",
     "experiment": "Midweather-Fingerprint-Gate",
     "decision": "FAIL",
     "decision_reason_code": "degenerate_all_reject_in_B4_raw_full_tensor",
-    "locked_at": "2026-06-05T06:07:40.528695+00:00",
-    "protocol_freeze_id": "midweather_fingerprint_lc322_clean_001",
-    "protocol_freeze_commit": "6ca6c28",
+    "locked_at": "2026-06-05T07:52:29.993191+00:00",
+    "protocol_freeze_id": "midweather_fingerprint_lc322_real_clean_001",
+    "protocol_freeze_commit": "f6682a9308f469fc287d4e30996d02a419cbbdc5",
+    "stub_freeze_id": "midweather_fingerprint_lc322_clean_001",
+    "stub_freeze_commit": "6ca6c28",
     "result_json_sha256": "75ab1d32c89f35eadc19e09f8881191644b632b691b12ba2faf0ccc77ceeb4b1",
     "result_json_exclude_fields": [
       "wallclock_seconds"
@@ -21,7 +23,7 @@
       "sha256": "0eb9b548fa053d408dc5b1c9f08b91eb97c14daba4e6536440c61fe0ca13d737",
       "size_bytes": 9073,
       "role": "protocol_freeze",
-      "notes": "LC322 freeze. All 7 freeze validators pass."
+      "notes": "LC322 stub freeze. All 7 freeze validators pass."
     },
     {
       "path": "MIDWEATHER_FINGERPRINT_GATE_LC45_FREEZE.json",
@@ -29,6 +31,13 @@
       "size_bytes": 8925,
       "role": "protocol_freeze",
       "notes": "LC45 freeze. 18 frozen files. K=15+15. 7 estimators (B0-B6, no C)."
+    },
+    {
+      "path": "MIDWEATHER_FINGERPRINT_GATE_LC322_REAL_FREEZE.json",
+      "sha256": "fa05b3ca62aee44f3e60378d0e6403d7d67d30a830336f38d603df1c25203947",
+      "size_bytes": 13129,
+      "role": "protocol_freeze",
+      "notes": "LC322 real benchmark freeze (Week 5). 39 frozen files. Kernel module SHAs re-used from stub freeze. New: real_seval_manifest, pre_run_check_log, 30 hand-curated solver files."
     },
     {
       "path": "MIDWEATHER_FINGERPRINT_SEVAL_MANIFEST.schema.json",
@@ -66,11 +75,18 @@
       "notes": "10 LC45 candidates, pack_source=external_baseline, certified_clean=true."
     },
     {
+      "path": "data/midweather_fingerprint_lc322_real_claude_sonnet_4_seval_manifest.json",
+      "sha256": "62544396704b677939a2e78c1351828a5f6f27c71cd1efd7f404fd077b3a7e2f",
+      "size_bytes": 15534,
+      "role": "seval_manifest",
+      "notes": "30 hand-curated LC322 solvers, pack_source=hand_curated_real. certified_clean=true (generation-process declaration)."
+    },
+    {
       "path": "data/midweather_fingerprint_lc322.json",
       "sha256": "75ab1d32c89f35eadc19e09f8881191644b632b691b12ba2faf0ccc77ceeb4b1",
       "size_bytes": 8461,
       "role": "result_json",
-      "notes": "Verdict FAIL, 11/19 split. Wallclock excluded (non-deterministic).",
+      "notes": "Stub pack verdict FAIL, 11/19 split. Wallclock excluded.",
       "exclude_fields": [
         "wallclock_seconds"
       ]
@@ -80,10 +96,27 @@
       "sha256": "16dddeb9367d8fbce610ee7942c1584dc21fc34d9c54415b14bc6844a3c39ac3",
       "size_bytes": 6314,
       "role": "result_json",
-      "notes": "Verdict FAIL, 1/9 split, B4 all-REJECT. Wallclock excluded.",
+      "notes": "LC45 verdict FAIL, 1/9 split, B4 all-REJECT. Wallclock excluded.",
       "exclude_fields": [
         "wallclock_seconds"
       ]
+    },
+    {
+      "path": "data/midweather_fingerprint_lc322_real_claude_sonnet_4.json",
+      "sha256": "1ef4b372f26682e20aa80a6b2c8bbaabdd5e16d2316d2538c3c1bffbdd704b0a",
+      "size_bytes": 8519,
+      "role": "result_json",
+      "notes": "Real benchmark verdict FAIL, 16/14 split, B4 all-REJECT. Wallclock excluded.",
+      "exclude_fields": [
+        "wallclock_seconds"
+      ]
+    },
+    {
+      "path": "data/lc322_real_pre_run_check.json",
+      "sha256": "a5a3f3881eb4688bc4111cc9ba9b88d1e0832bc975d22a47576149da7c0d53f4",
+      "size_bytes": 29951,
+      "role": "pre_run_check_log",
+      "notes": "30/30 hand-curated solvers pass 4 pre-run sanity probes."
     },
     {
       "path": "runners/run_midweather_fingerprint_lc322.py",
@@ -135,18 +168,25 @@
       "notes": "36 tests: registry structure, oracle evaluator, 9 buggy solvers >= 2 symbols, BFS survivor = 0 false positives, cross-problem vocabulary."
     },
     {
+      "path": "tests/test_lc322_real_benchmark.py",
+      "sha256": "86943db3a76c3ed26260f44d6dfaa5805a260e9af38657a295229377b5b75f09",
+      "size_bytes": 5936,
+      "role": "real_benchmark_tests",
+      "notes": "Week 5 real benchmark tests: manifest schema valid, 30 solver files present and SHA-match, pre-run check log present, freeze correct, result JSON has verdict, 7 estimator rows, 30 solver files, no partial: true."
+    },
+    {
       "path": "doctor/adversarial/lc45_oracle_evaluator.py",
       "sha256": "212426371801166a85d49e57aed353336aa41bf658609cfd6913c8a3efa945aa",
       "size_bytes": 10627,
       "role": "lc45_oracle_evaluator",
-      "notes": "LC45OracleEvaluator: runs candidate on probe set, returns structured {output, correct, exception, trace_features} + aggregated summary. Self-contained BFS trace."
+      "notes": "LC45OracleEvaluator: runs candidate on probe set, returns structured {output, correct, exception, trace_features} + aggregated summary."
     },
     {
       "path": "doctor/adversarial/lc45_symbol_registry.py",
       "sha256": "2171e85555afcc4ef32276c7e14ece1334362fd47593700ff6587853445e14b1",
       "size_bytes": 28494,
       "role": "lc45_symbol_registry",
-      "notes": "LC45_SYMBOL_REGISTRY: 38 entries (5 ALGORITHM_FAMILY + 3 TIE_BREAKER + 3 RETURN_SEMANTICS + 22 ORACLE_DEPENDENT + 5 CROSS_PROBLEM). Cross-problem transfer decisions documented in module docstring."
+      "notes": "LC45_SYMBOL_REGISTRY: 38 entries. Cross-problem transfer decisions documented in module docstring."
     },
     {
       "path": "findings/FINDINGS_MIDWEATHER_FINGERPRINT_LC322.md",
@@ -434,6 +474,216 @@
       "size_bytes": 432,
       "role": "lc45_candidate_solver",
       "notes": "Thin solve(nums) -> int adapter importing from lc45_candidates.py."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_001.py",
+      "sha256": "98d78e7c3e01292bf0986b624214205ef6cf5c9ad50432ad56c0d923c7e3db44",
+      "size_bytes": 662,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_002.py",
+      "sha256": "f50bc477fd9345799a35cd0d99ef95e87eb54fe527d6f6f90c93dbd8daed259a",
+      "size_bytes": 919,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_003.py",
+      "sha256": "4c6e4a8f40629b1bfc54fbe3b92141f8aaf041003f30cf23ec71c0249041155a",
+      "size_bytes": 846,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_004.py",
+      "sha256": "cb50a01a6f6443803b85198481f0dbdac12be2593b245571fbb2ae29894c8b49",
+      "size_bytes": 800,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_005.py",
+      "sha256": "44170c5a43fd146a68db2c3d536b3d71a28ec96910ceff0455c2fe71e869c83f",
+      "size_bytes": 678,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_006.py",
+      "sha256": "2e8cafa26369caa8eb19a4e34f7293adbab29484410a53f7365b9c4b199c6440",
+      "size_bytes": 866,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_007.py",
+      "sha256": "23bc1745883086cf2fc451ed46970f611747569a88cbb7be03abd2123fc4676b",
+      "size_bytes": 663,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_008.py",
+      "sha256": "68dbdf7d94b58dfc63c7ba89cebfc389e9361f72f5c0ae0ed270c85d1b57062b",
+      "size_bytes": 899,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_009.py",
+      "sha256": "ae4b5f6b5b7499563f922a7791404d4e85f70257be8ac8c7955b72ed3eedd705",
+      "size_bytes": 792,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_010.py",
+      "sha256": "2f19593ffbdad881e1a3ddbfa3609448ef4f8f96866abe06359aa4bff9a266c0",
+      "size_bytes": 859,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_011.py",
+      "sha256": "6608c4d7cfcedc791ecd897e1f732ca4aeb4c3c45697f1d1f4ea3e30b8094e52",
+      "size_bytes": 1040,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_012.py",
+      "sha256": "19eb7d5769e691e9b9b1353b5e5c8fd9e18425df15226d29bcbb48305c7fb705",
+      "size_bytes": 926,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_013.py",
+      "sha256": "be6e7c1ed189fc6226d83b03490e6fa2a141b3c845c5bb148ea30e556f00c585",
+      "size_bytes": 964,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_014.py",
+      "sha256": "65d417b0833ccbc30b1d2d42c7016c853d2797678d623a73e287b2d18f775602",
+      "size_bytes": 1015,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_015.py",
+      "sha256": "ea037488b5c856995276f5658e918f1f536775f7ed0c73310018e7d8c7528f21",
+      "size_bytes": 1021,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_016.py",
+      "sha256": "bada43d255117ce8a79c08cf4b8366084474672444d1735f43525ceafee7d5d9",
+      "size_bytes": 894,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_017.py",
+      "sha256": "6fa6c16d8958687db39601c0a4deda6ef9d4223e846ceb36dea7deb1fab61315",
+      "size_bytes": 876,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_018.py",
+      "sha256": "aed1d6730e92fce8198beb08f38edcdef9a943df7a3f13364383eb538c65d4e5",
+      "size_bytes": 876,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_019.py",
+      "sha256": "2ae67c220f4e22fbce82cc4f252010b2050b49e3fc12c32df83d8c84e64e262d",
+      "size_bytes": 859,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_020.py",
+      "sha256": "a4effd227d6cc848d09095338fcc84cfa488cd6950a1a701973647086e9ee8cb",
+      "size_bytes": 1107,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_021.py",
+      "sha256": "3c1d180d36fb9601118c659084cbe0336d36cb34644e8d559453209d032290f9",
+      "size_bytes": 966,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_022.py",
+      "sha256": "d8c14a3dfe1fca21a37190ed98ee144b4d665bc4affa7cfbfe627e42727c8d66",
+      "size_bytes": 1186,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_023.py",
+      "sha256": "7539a8abf9eb47e25aba76513d7f0ba51ff6157aae00968f45992659a4408e80",
+      "size_bytes": 1543,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_024.py",
+      "sha256": "8a3242dedcc0ed6682fbb334b175f77894408e02654be0cc6636177e949aaf21",
+      "size_bytes": 1289,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_025.py",
+      "sha256": "c14999757353193cc053ac051f3d72a8fe1c2c6d1e2bb3752b3de7bc1cc30bfc",
+      "size_bytes": 1122,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_026.py",
+      "sha256": "bd4bac641ff760467da813f9d5bb5759c7bf3725c6a97e97c7c6836e0db1713a",
+      "size_bytes": 1122,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_027.py",
+      "sha256": "3822f41377f09c9309be61e3f321d8cedd886e76ef3e195fbd508d06b5c7c98f",
+      "size_bytes": 1122,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_028.py",
+      "sha256": "aa8bdd4b3003d8930d4950b09c7f6cca847224f6b7f752003d542894588b8529",
+      "size_bytes": 1122,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_029.py",
+      "sha256": "f0e081841184f974ff60ed511a638bc0e9a7c5565795dc231a479816c6987e59",
+      "size_bytes": 857,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
+    },
+    {
+      "path": "experiments/frozen_taxonomy_lc322_real_claude_sonnet_4/solvers/solver_030.py",
+      "sha256": "1334f25eb8736fb46efc53bc103b97289409257a0c23611ab8f7ffc1631f9db7",
+      "size_bytes": 1201,
+      "role": "real_solver",
+      "notes": "Part of hand_curated_real pack (Week 5). SHA256 in real_seval_manifest matches."
     }
   ]
 }
