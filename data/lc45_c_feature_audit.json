@@ -1,0 +1,214 @@
+{
+  "audit_id": "lc45_c_feature_audit_001",
+  "n_solvers": 10,
+  "n_probes": 30,
+  "survivor_id": "solver_001",
+  "feature_names": [
+    "pass_fail_rate",
+    "bfs_agrees_rate",
+    "off_by_one_rate",
+    "panics_on_dead_end_rate",
+    "dead_end_present_rate",
+    "is_uniform_array_rate"
+  ],
+  "feature_table": [
+    {
+      "solver_id": "solver_001",
+      "pass_count": 30,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 1.0,
+        "bfs_agrees_rate": 1.0,
+        "off_by_one_rate": 0.0,
+        "panics_on_dead_end_rate": 0.0,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_002",
+      "pass_count": 8,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.2667,
+        "bfs_agrees_rate": 0.2667,
+        "off_by_one_rate": 0.0,
+        "panics_on_dead_end_rate": 0.7333,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_003",
+      "pass_count": 26,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.8667,
+        "bfs_agrees_rate": 0.8667,
+        "off_by_one_rate": 0.0667,
+        "panics_on_dead_end_rate": 0.0667,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_004",
+      "pass_count": 18,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.6,
+        "bfs_agrees_rate": 0.6,
+        "off_by_one_rate": 0.2333,
+        "panics_on_dead_end_rate": 0.0333,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_005",
+      "pass_count": 21,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.7,
+        "bfs_agrees_rate": 0.7,
+        "off_by_one_rate": 0.0667,
+        "panics_on_dead_end_rate": 0.2333,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_006",
+      "pass_count": 0,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.0,
+        "bfs_agrees_rate": 0.0,
+        "off_by_one_rate": 0.1,
+        "panics_on_dead_end_rate": 0.0,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_007",
+      "pass_count": 24,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.8,
+        "bfs_agrees_rate": 0.8,
+        "off_by_one_rate": 0.1,
+        "panics_on_dead_end_rate": 0.0,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_008",
+      "pass_count": 0,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.0,
+        "bfs_agrees_rate": 0.0,
+        "off_by_one_rate": 1.0,
+        "panics_on_dead_end_rate": 0.0,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_009",
+      "pass_count": 13,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.4333,
+        "bfs_agrees_rate": 0.4333,
+        "off_by_one_rate": 0.5,
+        "panics_on_dead_end_rate": 0.0,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    },
+    {
+      "solver_id": "solver_010",
+      "pass_count": 18,
+      "total_probes": 30,
+      "features": {
+        "pass_fail_rate": 0.6,
+        "bfs_agrees_rate": 0.6,
+        "off_by_one_rate": 0.1333,
+        "panics_on_dead_end_rate": 0.0667,
+        "dead_end_present_rate": 0.2333,
+        "is_uniform_array_rate": 0.2
+      }
+    }
+  ],
+  "separation_analysis": [
+    {
+      "feature": "pass_fail_rate",
+      "survivor_value": 1.0,
+      "buggy_min": 0.0,
+      "buggy_max": 0.8667,
+      "buggy_mean": 0.4741,
+      "direction": "survivor_above",
+      "gap": 0.1333,
+      "clean_separation": true
+    },
+    {
+      "feature": "bfs_agrees_rate",
+      "survivor_value": 1.0,
+      "buggy_min": 0.0,
+      "buggy_max": 0.8667,
+      "buggy_mean": 0.4741,
+      "direction": "survivor_above",
+      "gap": 0.1333,
+      "clean_separation": true
+    },
+    {
+      "feature": "off_by_one_rate",
+      "survivor_value": 0.0,
+      "buggy_min": 0.0,
+      "buggy_max": 1.0,
+      "buggy_mean": 0.2444,
+      "direction": "survivor_below",
+      "gap": 0.0,
+      "clean_separation": false
+    },
+    {
+      "feature": "panics_on_dead_end_rate",
+      "survivor_value": 0.0,
+      "buggy_min": 0.0,
+      "buggy_max": 0.7333,
+      "buggy_mean": 0.1259,
+      "direction": "survivor_below",
+      "gap": 0.0,
+      "clean_separation": false
+    },
+    {
+      "feature": "dead_end_present_rate",
+      "survivor_value": 0.2333,
+      "buggy_min": 0.2333,
+      "buggy_max": 0.2333,
+      "buggy_mean": 0.2333,
+      "direction": "survivor_above",
+      "gap": 0.0,
+      "clean_separation": false
+    },
+    {
+      "feature": "is_uniform_array_rate",
+      "survivor_value": 0.2,
+      "buggy_min": 0.2,
+      "buggy_max": 0.2,
+      "buggy_mean": 0.2,
+      "direction": "survivor_above",
+      "gap": 0.0,
+      "clean_separation": false
+    }
+  ],
+  "clean_separation_count": 2,
+  "clean_separation_features": [
+    "pass_fail_rate",
+    "bfs_agrees_rate"
+  ],
+  "conclusion": "C can differentiate from B1 on this population"
+}
