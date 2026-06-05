@@ -9,7 +9,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterator
 
-from doctor.adversarial.observer.extractor_common import ARTIFACT_ROOT
+
+ROOT = Path(__file__).resolve().parents[3]
+ARTIFACT_ROOT = ROOT / "doctor" / "adversarial" / "observer" / "artifacts"
 
 
 @dataclass(frozen=True)

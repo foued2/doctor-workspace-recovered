@@ -11,18 +11,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from doctor.adversarial.observer.artifact_schema import (
-    DependencyDepth,
-    DivergenceKAxis,
-    DivergenceProfile,
-    DivergenceSignAxis,
-    LocalityClass,
-    ManifoldArtifact,
-    PerturbationEvent,
-    PerturbationStability,
-    RejectionTopology,
-)
-
 
 ROOT = Path(__file__).resolve().parents[3]
 ARTIFACT_ROOT = ROOT / "doctor" / "adversarial" / "observer" / "artifacts"

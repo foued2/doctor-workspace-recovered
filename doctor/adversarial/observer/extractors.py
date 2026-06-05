@@ -10,19 +10,6 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from collections import Counter
 
-from doctor.adversarial.observer.extractors import (
-    lc11_extractor,
-    lc42_extractor,
-    lc135_extractor,
-    lc322_extractor,
-    lc45_extractor,
-    lc560_extractor,
-    lc997_extractor,
-    lc3_extractor,
-    lc20_extractor,
-    lc79_extractor,
-    lc33_extractor,
-)
 from doctor.adversarial.observer.relation_detector import detect_candidate_anomalies, load_artifacts, weakest_signal
 
 

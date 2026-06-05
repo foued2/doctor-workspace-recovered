@@ -14,8 +14,6 @@ import random
 from collections.abc import Callable
 from typing import Any
 
-from doctor.adversarial.observer.relation_detector import load_artifacts, score_pair_trajectory
-
 
 THRESHOLD = 3.5
 SEED = 20260508
