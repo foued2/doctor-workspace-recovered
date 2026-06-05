@@ -114,8 +114,8 @@ def test_cli_run_lc45_exits_one(
     assert result["decision"] == "FAIL"
     assert result["problem_class"] == "lc45"
     estimator_names = [row["estimator"] for row in result["estimator_table"]]
-    assert "C_structured_fingerprint" not in estimator_names
-    assert len(estimator_names) == 7
+    assert "C_structured_fingerprint" in estimator_names
+    assert len(estimator_names) == 8
 
 
 def test_cli_freeze_id_mismatch_exits_three(

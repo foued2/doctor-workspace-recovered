@@ -101,13 +101,13 @@
     },
     {
       "guard": "No degenerate C policy (not all-ACCEPT, not all-REJECT)",
-      "status": "n/a",
-      "evidence": "C estimator not present in this run (lc45 port: B0-B6 only, no C); verdict degenerates to FAIL per kernel contract"
+      "status": "passed",
+      "evidence": "C predictions: 0.1 accept rate"
     },
     {
       "guard": "All estimators receive identical O_obs",
       "status": "passed",
-      "evidence": "all 7 estimators consume the same K=15 observed_probe_ids"
+      "evidence": "all 8 estimators consume the same K=15 observed_probe_ids"
     }
   ],
   "estimator_table": [
@@ -187,6 +187,17 @@
       "degenerate_all_accept": true,
       "degenerate_all_reject": false,
       "rmse_secondary": 0.6172
+    },
+    {
+      "estimator": "C_structured_fingerprint",
+      "wrong_accepts": 0,
+      "wrong_rejects": 0,
+      "decision_loss": 0,
+      "accept_rate": 0.1,
+      "satisfies_minimum_accept_rate": false,
+      "degenerate_all_accept": false,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.477
     }
   ],
   "decision": "FAIL",
@@ -197,5 +208,5 @@
     "paper_claim": "27 good / 3 bad solvers; C decision_loss=1.0, RMSE=0.024; B0/B4/B5/B6 degenerate; C ties B1/B2/B3 on decision_loss -> FAIL",
     "actual_summary": "1 good / 9 bad solvers; decision=FAIL, reason=degenerate: all-reject in B4_raw_full_tensor"
   },
-  "wallclock_seconds": 0.088
+  "wallclock_seconds": 0.095
 }

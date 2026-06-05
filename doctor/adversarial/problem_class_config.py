@@ -87,7 +87,7 @@ LC322_ESTIMATOR_NAMES: list[str] = [
 LC45_ESTIMATOR_NAMES: list[str] = [
     "B0_prior", "B1_count", "B2_calibrated_count", "B3_raw_pf_vector",
     "B4_raw_full_tensor", "B5_nearest_neighbor_raw_tensor",
-    "B6_regularized_raw_tensor",
+    "B6_regularized_raw_tensor", "C_structured_fingerprint",
 ]
 
 
@@ -130,6 +130,7 @@ LC45_ESTIMATOR_POLICIES: dict[str, Callable[[int, int], str]] = {
     "B4_raw_full_tensor": _b4_raw_full_tensor_policy,
     "B5_nearest_neighbor_raw_tensor": _b5_nn_policy,
     "B6_regularized_raw_tensor": _b6_reg_policy,
+    "C_structured_fingerprint": _fail_count_policy,
 }
 
 

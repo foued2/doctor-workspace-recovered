@@ -5,7 +5,7 @@
     "experiment": "Midweather-Fingerprint-Gate",
     "decision": "FAIL",
     "decision_reason_code": "degenerate_all_reject_in_B4_raw_full_tensor",
-    "locked_at": "2026-06-05T07:52:29.993191+00:00",
+    "locked_at": "2026-06-05T08:18:52.723675+00:00",
     "protocol_freeze_id": "midweather_fingerprint_lc322_real_clean_001",
     "protocol_freeze_commit": "f6682a9308f469fc287d4e30996d02a419cbbdc5",
     "stub_freeze_id": "midweather_fingerprint_lc322_clean_001",
@@ -27,7 +27,7 @@
     },
     {
       "path": "MIDWEATHER_FINGERPRINT_GATE_LC45_FREEZE.json",
-      "sha256": "4247b3b5642a3851977295a72f6b03e5ee53915c9d1f5e0a26c351aec5ce2e09",
+      "sha256": "fc77525ebf720a6bf6eac761596c1708b5c8923cbea2d91350c7aced40ee5bdb",
       "size_bytes": 8925,
       "role": "protocol_freeze",
       "notes": "LC45 freeze. 18 frozen files. K=15+15. 7 estimators (B0-B6, no C)."
@@ -93,8 +93,8 @@
     },
     {
       "path": "data/midweather_fingerprint_lc45.json",
-      "sha256": "16dddeb9367d8fbce610ee7942c1584dc21fc34d9c54415b14bc6844a3c39ac3",
-      "size_bytes": 6314,
+      "sha256": "99189a82acdf2be4ac154deae71fcc8e501af2f691d3f94b2909418bf1e4ce35",
+      "size_bytes": 6560,
       "role": "result_json",
       "notes": "LC45 verdict FAIL, 1/9 split, B4 all-REJECT. Wallclock excluded.",
       "exclude_fields": [
@@ -134,8 +134,8 @@
     },
     {
       "path": "doctor/adversarial/problem_class_config.py",
-      "sha256": "6b2ef598bf27f692840ab01aa85d5ce950f5ce37dc09db158a24c34fb35c463a",
-      "size_bytes": 12402,
+      "sha256": "0dcb3a9c01aacfa6e9f2674504f1e04a2417375ffb0a8a97f08bab1a0be25513",
+      "size_bytes": 12482,
       "role": "problem_class_config",
       "notes": "6 adapter slots. LC322 default + LC45 port."
     },
@@ -169,8 +169,8 @@
     },
     {
       "path": "tests/test_lc322_real_benchmark.py",
-      "sha256": "86943db3a76c3ed26260f44d6dfaa5805a260e9af38657a295229377b5b75f09",
-      "size_bytes": 5936,
+      "sha256": "a1465f879e433ecd5f626178fe777be05f4174e7625075dac044349095be771c",
+      "size_bytes": 5963,
       "role": "real_benchmark_tests",
       "notes": "Week 5 real benchmark tests: manifest schema valid, 30 solver files present and SHA-match, pre-run check log present, freeze correct, result JSON has verdict, 7 estimator rows, 30 solver files, no partial: true."
     },
