@@ -1,0 +1,112 @@
+{
+  "phase": "C3a",
+  "purpose": "Per-Solver Identity Resolution",
+  "status": "APPROVED",
+  "authorization": "Foued override",
+  "violates_c1_constraint": "runners_load_existing_decisions_only",
+  "violation_acknowledged": true,
+  "spec_commit": "e3c50d9",
+
+  "thresholds": {
+    "D": {
+      "value": 0,
+      "type": "integer",
+      "meaning": "Jaccard distance on misclassified solver sets; zero means identical sets",
+      "decision_outcome_if_zero": "FULL_EQUIVALENCE"
+    },
+    "A": {
+      "value": 0,
+      "type": "integer",
+      "meaning": "max over lambda and i of |cost_C(i,lambda) - cost_B1(i,lambda)|; zero means identical per-solver costs at every lambda",
+      "decision_outcome_if_zero_in_conjunction_with_D_positive": "MASKED_DIVERGENCE",
+      "decision_outcome_if_positive_in_conjunction_with_D_positive": "DIRECTIONAL_SUPERIORITY"
+    }
+  },
+
+  "estimators": [
+    "B0_prior",
+    "B1_count",
+    "B2_calibrated_count",
+    "B3_raw_pf_vector",
+    "B4_raw_full_tensor",
+    "B5_nearest_neighbor_raw_tensor",
+    "B6_regularized_raw_tensor",
+    "C_structured_fingerprint"
+  ],
+
+  "populations": [
+    {
+      "id": "LC322",
+      "role": "primary",
+      "n_solvers": 30,
+      "accept": 11,
+      "reject": 19,
+      "data_source": "data/midweather_fingerprint_lc322.json",
+      "solver_pack": "experiments/frozen_taxonomy_lc322/",
+      "probe_index": "data/midweather_fingerprint_lc322_probe_index.json"
+    },
+    {
+      "id": "LC45",
+      "role": "stress_test",
+      "n_solvers": 10,
+      "accept": 1,
+      "reject": 9,
+      "data_source": "data/midweather_fingerprint_lc45.json",
+      "solver_pack": "experiments/frozen_taxonomy_lc45/",
+      "probe_index": "data/midweather_fingerprint_lc45_probe_index.json"
+    }
+  ],
+
+  "cost_function_inherited_from_c1": {
+    "lambda_sweep": [1, 2, 5, 7, 10, 15, 20, 30, 50],
+    "lambda_A_fixed": 1,
+    "formula": "cost(decision, ground_truth, lambda_R, lambda_A) = lambda_A if false_accept, lambda_R if false_reject, 0 if correct",
+    "c1_freeze_commit": "3bd286d"
+  },
+
+  "aggregate_consistency_check": {
+    "required": true,
+    "applies_to": ["estimator", "population"],
+    "check": "For each (estimator, population), recomputed (WA, WR) from per-solver decisions must equal saved (WA, WR) in data/midweather_fingerprint_lc{322,45}.json",
+    "on_failure": "STOP IMMEDIATELY. Do not record any result. Surface discrepancy to Foued. C-3a is not authorized to resolve silently.",
+    "rationale": "The aggregate is the only prior measurement. Inconsistency means the re-run protocol is wrong OR the aggregate was not produced by this solver pack. Both require Foued call."
+  },
+
+  "three_case_decision_rule": [
+    {
+      "case": "FULL_EQUIVALENCE",
+      "condition": "D == 0",
+      "interpretation": "M_C == M_B1. C and B1 misclassify the same solvers. The aggregate tie is real, not a cancellation artifact."
+    },
+    {
+      "case": "MASKED_DIVERGENCE",
+      "condition": "D > 0 AND A == 0",
+      "interpretation": "M_C != M_B1, but per-solver costs are uniformly equal. Structural difference does not produce cost difference under the freeze's symmetric-within-type metric."
+    },
+    {
+      "case": "DIRECTIONAL_SUPERIORITY",
+      "condition": "D > 0 AND A > 0",
+      "interpretation": "M_C != M_B1 AND per-solver costs differ. The only case where a per-solver-weighted cost functional (C-2 territory) could in principle exploit the difference. C-3a reports it; it does not run C-2."
+    }
+  ],
+
+  "protocol_constraints": {
+    "no_new_estimators": true,
+    "no_new_probes": true,
+    "no_new_solver_packs": true,
+    "no_modification_of_c1_freeze_parameters": true,
+    "no_per_solver_weighted_cost_functional": true,
+    "no_post_hoc_adjustment_of_D_or_A_thresholds": true,
+    "no_silent_resolution_of_aggregate_inconsistency": true,
+    "c1_closure_not_reopened": true
+  },
+
+  "lineage": {
+    "c1_spec_commit": "3f1a647",
+    "c1_freeze_commit": "3bd286d",
+    "c1_closure_commit": "77ae794",
+    "c1_tag": "phase-c1-results",
+    "c3a_spec_commit": "e3c50d9",
+    "c3a_freeze_commit": "PENDING"
+  }
+}
