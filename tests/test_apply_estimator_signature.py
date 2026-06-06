@@ -64,8 +64,15 @@ def test_probe_to_fingerprint_context_renames_family_to_probe_family():
 
 
 def test_apply_estimator_backward_compat_lc322_policies():
-    """All 8 LC322 policies produce identical preds with or without obs_records."""
-    for est, policy in LC322_ESTIMATOR_POLICIES.items():
+    """The 8 C-1 LC322 policies produce identical preds with or without obs_records.
+
+    C_genuine is excluded: it intentionally uses obs_records (Phase C-4).
+    See test_c_genuine_intentionally_breaks_backward_compat below.
+    """
+    c1_estimators = [e for e in LC322_ESTIMATOR_POLICIES if e != "C_genuine"]
+    assert len(c1_estimators) == 8
+    for est in c1_estimators:
+        policy = LC322_ESTIMATOR_POLICIES[est]
         preds_without = apply_estimator(policy, PASS_RESULTS, OBSERVED_IDS)
         preds_with = apply_estimator(policy, PASS_RESULTS, OBSERVED_IDS, SAMPLE_PROBE_INDEX)
         assert preds_without == preds_with, (
@@ -74,13 +81,35 @@ def test_apply_estimator_backward_compat_lc322_policies():
 
 
 def test_apply_estimator_backward_compat_lc45_policies():
-    """All 8 LC45 policies produce identical preds with or without obs_records."""
-    for est, policy in LC45_ESTIMATOR_POLICIES.items():
+    """The 8 C-1 LC45 policies produce identical preds with or without obs_records.
+
+    C_genuine is excluded: it intentionally uses obs_records (Phase C-4).
+    See test_c_genuine_intentionally_breaks_backward_compat below.
+    """
+    c1_estimators = [e for e in LC45_ESTIMATOR_POLICIES if e != "C_genuine"]
+    assert len(c1_estimators) == 8
+    for est in c1_estimators:
+        policy = LC45_ESTIMATOR_POLICIES[est]
         preds_without = apply_estimator(policy, PASS_RESULTS, OBSERVED_IDS)
         preds_with = apply_estimator(policy, PASS_RESULTS, OBSERVED_IDS, SAMPLE_PROBE_INDEX)
         assert preds_without == preds_with, (
             f"LC45.{est}: backward-compat broke: {preds_without!r} != {preds_with!r}"
         )
+
+
+def test_c_genuine_intentionally_breaks_backward_compat():
+    """C_genuine must produce different preds with obs_records than without.
+
+    This is the defining property of a genuine structured policy (Phase C-4).
+    If C_genuine produces identical preds with and without obs_records, it
+    has collapsed to B1 behavior and the C-4 experiment cannot produce D > 0.
+    """
+    c_genuine = LC322_ESTIMATOR_POLICIES["C_genuine"]
+    preds_without = apply_estimator(c_genuine, PASS_RESULTS, OBSERVED_IDS)
+    preds_with = apply_estimator(c_genuine, PASS_RESULTS, OBSERVED_IDS, SAMPLE_PROBE_INDEX)
+    assert preds_without != preds_with, (
+        f"C_genuine must differ with vs. without obs_records; got identical: {preds_without!r}"
+    )
 
 
 def test_apply_estimator_obs_records_schema():

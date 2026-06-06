@@ -111,6 +111,38 @@ def _b6_reg_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = 
     return "ACCEPT"  # all-ACCEPT degenerate
 
 
+def _c_genuine_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = None) -> str:
+    """Genuine structured policy for Phase C-4.
+
+    Decision rule (declared in PHASE_C4_SPEC.md before implementation):
+        ACCEPT if obs_fails == 0
+        ACCEPT if obs_fails > 0 AND all failures share one probe_family
+        REJECT otherwise
+
+    Falls back to B1 behavior (ACCEPT iff 0 failures) if obs_records is None.
+
+    Feature used: probe_family (from obs_records[i].fingerprint_context.probe_family).
+    Differs from _fail_count_policy: adds the 'all failures in one probe_family' ACCEPT branch.
+    """
+    if obs_records is None:
+        return "ACCEPT" if obs_fails == 0 else "REJECT"
+
+    failures = [r for r in obs_records if not r.get("pass_fail", False)]
+    if len(failures) == 0:
+        return "ACCEPT"
+
+    families: set = set()
+    for r in failures:
+        ctx = r.get("fingerprint_context", {}) or {}
+        family = ctx.get("probe_family")
+        if family is not None:
+            families.add(family)
+
+    if len(families) == 1:
+        return "ACCEPT"
+    return "REJECT"
+
+
 LC322_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]] = {
     "B0_prior": _b0_prior_policy,
     "B1_count": _fail_count_policy,
@@ -120,6 +152,7 @@ LC322_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]
     "B5_nearest_neighbor_raw_tensor": _b5_nn_policy,
     "B6_regularized_raw_tensor": _b6_reg_policy,
     "C_structured_fingerprint": _fail_count_policy,
+    "C_genuine": _c_genuine_policy,
 }
 
 LC45_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]] = {
@@ -131,6 +164,7 @@ LC45_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]]
     "B5_nearest_neighbor_raw_tensor": _b5_nn_policy,
     "B6_regularized_raw_tensor": _b6_reg_policy,
     "C_structured_fingerprint": _fail_count_policy,
+    "C_genuine": _c_genuine_policy,
 }
 
 
