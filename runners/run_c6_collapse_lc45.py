@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT))
 from doctor.adversarial.problem_class_config import get_problem_class_config
 from doctor.asymmetric_cost import run_sweep_aggregate
 from doctor.identity_resolution import check_aggregate_consistency
-from runners.run_midweather_fingerprint_lc45 import (
+from runners.run_midweather_fingerprint_lc322 import (
     apply_estimator,
     compute_ground_truth,
     execute_solvers,

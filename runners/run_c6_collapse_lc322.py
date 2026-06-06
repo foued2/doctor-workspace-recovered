@@ -246,12 +246,8 @@ def main() -> None:
         perturbations.append(pert)
         print(f"  {pid} done")
 
-    families = c6_freeze["perturbations"]["battery"][4:10]
-    family_names = json.loads(C6_FREEZE_PATH.read_text(encoding="utf-8"))["perturbations"]
-    rotation_order = []
-    for i in range(6):
-        key = f"P3{chr(ord('a') + i)}_probe_family_knockout"
-        rotation_order.append(family_names[key]["family_knocked_out"])
+    families = c5_freeze = json.loads((ROOT / "PHASE_C5_FREEZE.json").read_text(encoding="utf-8"))
+    rotation_order = c5_freeze["perturbations"]["P3_rotation_order"]
     for i, fam in enumerate(rotation_order):
         pid = f"P3{chr(ord('a') + i)}"
         print(f"[phase-c6] {pid}: knockout family '{fam}'")
