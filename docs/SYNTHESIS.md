@@ -93,6 +93,16 @@ It is not answerable by iterating on the current populations or cost model.
 It requires either a theoretical argument about the representation class
 or empirical testing across a substantially wider distribution family.
 
+A theoretical characterization of the open question: a population would need
+to contain solvers whose failure patterns are structured in a way that
+correlates with correctness, not solely with probe family membership.
+The LC322 probe geometry clusters failures by family, and that clustering
+is observable in the probe design rather than in the solvers' algorithmic
+behavior. A population where structural failure patterns reflect genuine
+algorithmic differences would be a different kind of test. This is a
+property the population would need to have, not a property of any
+candidate rule.
+
 ---
 
 ## 7. What the project record supports
@@ -152,3 +162,54 @@ Substantive closure: project-closure-004 (`ccbf927`).
 Transfer hypothesis as operationalized: not supported.
 No future formulation claimed to be ruled out.
 This document does not reopen that closure.
+
+---
+
+## 11. Five lessons from the closed phase record
+
+The phase record can be restated as a diagnostic map with three coordinates:
+
+- Where separation can appear: structured clustering that is observable
+  in the probe geometry (probe_family coherence on LC322).
+- Where it disappears: under distribution shift (label inversion,
+  solver subsampling, probe family knockout, cross-population to LC45).
+- What kinds of gains are not durable: gains that depend on dataset
+  geometry rather than on properties of the estimator itself.
+
+Five observations follow from this diagnostic map.
+
+1. A gap of zero between two estimators on a frozen protocol (C-1)
+   is informative. It distinguishes estimators that are operationally
+   the same on the tested populations and cost model from estimators
+   that could differ. The observation is stronger than "we did not
+   find a better model." It is a property of the two estimators on
+   the tested scope.
+
+2. Per-solver identity resolution (C-3a) precedes per-aggregate
+   comparison. Aggregation can mask structural differences or
+   simulate differences that are not present at the per-solver
+   level. Confirming per-solver equivalence or per-solver difference
+   is a prerequisite for interpreting aggregate utility gaps.
+
+3. A structured-feature estimator is operationally distinct from
+   a feature-blind estimator only when the structured feature is
+   actually consulted (C-4). The C-3a finding that C_structured_
+   fingerprint and B1_count were bound to the same function was
+   the trigger for re-implementing C to consult the structured
+   feature. The re-implementation (C_genuine) produced different
+   per-solver decisions on LC322.
+
+4. Distribution-shift perturbations (C-5) separate estimator-
+   level gains from dataset-geometry interactions. The C-4 gain
+   on unperturbed LC322 is one observation. The C-5 battery of
+   11 perturbations showed the gain survives 6 of 11 and collapses
+   on 5. The collapse pattern is consistent with the gain being
+   an interaction between the decision rule and the specific
+   probe geometry of the unperturbed LC322.
+
+5. The right unit of falsification for a representation class
+   is the class, not the individual rule (C-6). Four pre-declared
+   candidate rules were tested against the C-5 battery on LC322.
+   None survives all 11 perturbations. The class-level verdict
+   is a structured negative result, not a claim that no estimator
+   on the class can work in any context.
