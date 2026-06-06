@@ -1,0 +1,109 @@
+{
+  "phase": "C4",
+  "title": "Genuine Structured Policy",
+  "purpose": "Test whether a C estimator that actively uses structured features (probe_family) improves decision utility over B1 on frozen populations under the C-1 asymmetric-cost protocol.",
+  "status": "APPROVED",
+  "authorization": "Foued override",
+  "violates_c1_constraint": "no_new_estimators",
+  "violation_acknowledged": true,
+  "date": "2026-06-06",
+  "spec_commit": "cab8af3",
+
+  "decision_rule": {
+    "estimator": "C_genuine",
+    "feature_used": "probe_family",
+    "feature_source": "obs_records[i].fingerprint_context.probe_family",
+    "rule_verbatim": "C_genuine(obs_fails, n_obs, obs_records) = ACCEPT if obs_fails == 0; ACCEPT if obs_fails > 0 AND all failures share one probe_family; REJECT otherwise.",
+    "rule_pseudocode": "if obs_records is None: return 'ACCEPT' if obs_fails == 0 else 'REJECT'; failures = [r for r in obs_records if not r['pass_fail']]; if len(failures) == 0: return 'ACCEPT'; families = {r['fingerprint_context']['probe_family'] for r in failures}; if len(families) == 1: return 'ACCEPT'; return 'REJECT'",
+    "fallback_when_obs_records_none": "ACCEPT if obs_fails == 0, REJECT otherwise (B1 behavior)",
+    "differs_from_fail_count_policy": "Adds the 'all failures in one probe_family' ACCEPT branch. When obs_records is provided and obs_fails > 0, C_genuine can differ from B1."
+  },
+
+  "estimators_under_comparison": ["C_genuine", "B1_count"],
+
+  "c1_estimators_preserved": [
+    "B0_prior", "B1_count", "B2_calibrated_count", "B3_raw_pf_vector",
+    "B4_raw_full_tensor", "B5_nearest_neighbor_raw_tensor",
+    "B6_regularized_raw_tensor", "C_structured_fingerprint"
+  ],
+
+  "populations": [
+    {
+      "id": "LC322",
+      "role": "primary",
+      "n_solvers": 30,
+      "accept": 11,
+      "reject": 19,
+      "data_source": "data/midweather_fingerprint_lc322.json",
+      "probe_index": "data/midweather_fingerprint_lc322_probe_index.json"
+    },
+    {
+      "id": "LC45",
+      "role": "stress_test",
+      "n_solvers": 10,
+      "accept": 1,
+      "reject": 9,
+      "data_source": "data/midweather_fingerprint_lc45.json",
+      "probe_index": "data/midweather_fingerprint_lc45_probe_index.json"
+    }
+  ],
+
+  "delta": {
+    "value": 0.10,
+    "unit": "normalized_utility_gap",
+    "source": "PHASE_C1_FREEZE.json (commit 3bd286d)"
+  },
+
+  "lambda_sweep": {
+    "values": [1, 2, 5, 7, 10, 15, 20, 30, 50],
+    "lambda_A_fixed": 1,
+    "source": "PHASE_C1_FREEZE.json (commit 3bd286d)"
+  },
+
+  "falsification_criterion": {
+    "PASS": "exists lambda in sweep such that utility(C_genuine) - utility(B1) > delta on LC322 (primary), AND C_genuine produces different per-solver decisions than B1 on at least one solver on LC322 (D > 0)",
+    "FAIL": "no such lambda found, OR D = 0 (C_genuine collapses to B1 behavior despite the genuine policy)",
+    "DEGENERATE": "C_genuine or B1 collapses to all-ACCEPT or all-REJECT at a given lambda; record and exclude at that lambda",
+    "D_greater_than_zero_required": true,
+    "LC45_role": "stress_test only; LC45 result reported separately; does not override LC322 verdict"
+  },
+
+  "three_case_report": {
+    "FULL_EQUIVALENCE": "D = 0; C_genuine is operationally B1; FAIL",
+    "MASKED_DIVERGENCE": "D > 0, A = 0; structural difference does not produce cost difference; FAIL (utility gap is 0)",
+    "DIRECTIONAL_SUPERIORITY": "D > 0, A > 0; structural difference produces cost difference; PASS or FAIL based on utility gap criterion"
+  },
+
+  "aggregate_consistency_check": {
+    "required": true,
+    "applies_to": ["B1_count"],
+    "check": "Re-run B1 on each population; recomputed (WA, WR) must equal stored (WA, WR) in data/midweather_fingerprint_lc{322,45}.json",
+    "on_failure": "STOP IMMEDIATELY. Do not record any result. Surface discrepancy to Foued."
+  },
+
+  "protocol_constraints": {
+    "no_new_probes": true,
+    "no_new_solver_packs": true,
+    "no_modification_of_c1_freeze_parameters": true,
+    "no_per_solver_weighted_cost_functional": true,
+    "no_post_hoc_adjustment_of_decision_rule": true,
+    "no_post_hoc_adjustment_of_D_or_A_thresholds": true,
+    "no_silent_resolution_of_aggregate_inconsistency": true,
+    "c1_closure_not_reopened": true,
+    "c3a_closure_not_reopened": true,
+    "project_closure_004_not_reopened": true
+  },
+
+  "lineage": {
+    "c1_spec_commit": "3f1a647",
+    "c1_freeze_commit": "3bd286d",
+    "c1_closure_commit": "77ae794",
+    "c1_tag": "phase-c1-results",
+    "c3a_spec_commit": "e3c50d9",
+    "c3a_freeze_commit": "a6c97bc",
+    "c3a_closure_commit": "1ad4777",
+    "c3a_tag": "phase-c3a-results",
+    "c4_spec_commit": "cab8af3",
+    "c4_freeze_commit": "PENDING"
+  }
+}
