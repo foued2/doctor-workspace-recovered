@@ -1,0 +1,565 @@
+{
+  "phase": "C1",
+  "population": "LC322",
+  "freeze_commit": "3bd286d",
+  "n_solvers": 30,
+  "accept_count": 11,
+  "reject_count": 19,
+  "lambda_sweep": [
+    1,
+    2,
+    5,
+    7,
+    10,
+    15,
+    20,
+    30,
+    50
+  ],
+  "lambda_A": 1,
+  "delta": 0.1,
+  "estimator_sweeps": {
+    "B0_prior": [
+      {
+        "lambda_R": 1,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 2,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 5,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 7,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 10,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 15,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 20,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 30,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 50,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      }
+    ],
+    "B1_count": [
+      {
+        "lambda_R": 1,
+        "raw_cost": 0.16666666666666666,
+        "normalized_utility": 0.8333333333333334,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 2,
+        "raw_cost": 0.3333333333333333,
+        "normalized_utility": 0.6666666666666667,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 5,
+        "raw_cost": 0.8333333333333334,
+        "normalized_utility": 0.16666666666666663,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 7,
+        "raw_cost": 1.1666666666666667,
+        "normalized_utility": -0.16666666666666674,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 10,
+        "raw_cost": 1.6666666666666667,
+        "normalized_utility": -0.6666666666666667,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 15,
+        "raw_cost": 2.5,
+        "normalized_utility": -1.5,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 20,
+        "raw_cost": 3.3333333333333335,
+        "normalized_utility": -2.3333333333333335,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 30,
+        "raw_cost": 5.0,
+        "normalized_utility": -4.0,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 50,
+        "raw_cost": 8.333333333333334,
+        "normalized_utility": -7.333333333333334,
+        "degenerate": false
+      }
+    ],
+    "B2_calibrated_count": [
+      {
+        "lambda_R": 1,
+        "raw_cost": 0.16666666666666666,
+        "normalized_utility": 0.8333333333333334,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 2,
+        "raw_cost": 0.3333333333333333,
+        "normalized_utility": 0.6666666666666667,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 5,
+        "raw_cost": 0.8333333333333334,
+        "normalized_utility": 0.16666666666666663,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 7,
+        "raw_cost": 1.1666666666666667,
+        "normalized_utility": -0.16666666666666674,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 10,
+        "raw_cost": 1.6666666666666667,
+        "normalized_utility": -0.6666666666666667,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 15,
+        "raw_cost": 2.5,
+        "normalized_utility": -1.5,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 20,
+        "raw_cost": 3.3333333333333335,
+        "normalized_utility": -2.3333333333333335,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 30,
+        "raw_cost": 5.0,
+        "normalized_utility": -4.0,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 50,
+        "raw_cost": 8.333333333333334,
+        "normalized_utility": -7.333333333333334,
+        "degenerate": false
+      }
+    ],
+    "B3_raw_pf_vector": [
+      {
+        "lambda_R": 1,
+        "raw_cost": 0.16666666666666666,
+        "normalized_utility": 0.8333333333333334,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 2,
+        "raw_cost": 0.3333333333333333,
+        "normalized_utility": 0.6666666666666667,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 5,
+        "raw_cost": 0.8333333333333334,
+        "normalized_utility": 0.16666666666666663,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 7,
+        "raw_cost": 1.1666666666666667,
+        "normalized_utility": -0.16666666666666674,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 10,
+        "raw_cost": 1.6666666666666667,
+        "normalized_utility": -0.6666666666666667,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 15,
+        "raw_cost": 2.5,
+        "normalized_utility": -1.5,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 20,
+        "raw_cost": 3.3333333333333335,
+        "normalized_utility": -2.3333333333333335,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 30,
+        "raw_cost": 5.0,
+        "normalized_utility": -4.0,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 50,
+        "raw_cost": 8.333333333333334,
+        "normalized_utility": -7.333333333333334,
+        "degenerate": false
+      }
+    ],
+    "B4_raw_full_tensor": [
+      {
+        "lambda_R": 1,
+        "raw_cost": 0.36666666666666664,
+        "normalized_utility": 0.6333333333333333,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 2,
+        "raw_cost": 0.7333333333333333,
+        "normalized_utility": 0.2666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 5,
+        "raw_cost": 1.8333333333333333,
+        "normalized_utility": -0.8333333333333333,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 7,
+        "raw_cost": 2.566666666666667,
+        "normalized_utility": -1.5666666666666669,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 10,
+        "raw_cost": 3.6666666666666665,
+        "normalized_utility": -2.6666666666666665,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 15,
+        "raw_cost": 5.5,
+        "normalized_utility": -4.5,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 20,
+        "raw_cost": 7.333333333333333,
+        "normalized_utility": -6.333333333333333,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 30,
+        "raw_cost": 11.0,
+        "normalized_utility": -10.0,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 50,
+        "raw_cost": 18.333333333333332,
+        "normalized_utility": -17.333333333333332,
+        "degenerate": true
+      }
+    ],
+    "B5_nearest_neighbor_raw_tensor": [
+      {
+        "lambda_R": 1,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 2,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 5,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 7,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 10,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 15,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 20,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 30,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 50,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      }
+    ],
+    "B6_regularized_raw_tensor": [
+      {
+        "lambda_R": 1,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 2,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 5,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 7,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 10,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 15,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 20,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 30,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      },
+      {
+        "lambda_R": 50,
+        "raw_cost": 0.6333333333333333,
+        "normalized_utility": 0.3666666666666667,
+        "degenerate": true
+      }
+    ],
+    "C_structured_fingerprint": [
+      {
+        "lambda_R": 1,
+        "raw_cost": 0.16666666666666666,
+        "normalized_utility": 0.8333333333333334,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 2,
+        "raw_cost": 0.3333333333333333,
+        "normalized_utility": 0.6666666666666667,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 5,
+        "raw_cost": 0.8333333333333334,
+        "normalized_utility": 0.16666666666666663,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 7,
+        "raw_cost": 1.1666666666666667,
+        "normalized_utility": -0.16666666666666674,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 10,
+        "raw_cost": 1.6666666666666667,
+        "normalized_utility": -0.6666666666666667,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 15,
+        "raw_cost": 2.5,
+        "normalized_utility": -1.5,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 20,
+        "raw_cost": 3.3333333333333335,
+        "normalized_utility": -2.3333333333333335,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 30,
+        "raw_cost": 5.0,
+        "normalized_utility": -4.0,
+        "degenerate": false
+      },
+      {
+        "lambda_R": 50,
+        "raw_cost": 8.333333333333334,
+        "normalized_utility": -7.333333333333334,
+        "degenerate": false
+      }
+    ]
+  },
+  "falsification": {
+    "verdict": "FAIL",
+    "best_gap": null,
+    "best_lambda": null,
+    "delta": 0.1,
+    "gap_table": [
+      {
+        "lambda_R": 1,
+        "c_utility": 0.8333333333333334,
+        "b1_utility": 0.8333333333333334,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      },
+      {
+        "lambda_R": 2,
+        "c_utility": 0.6666666666666667,
+        "b1_utility": 0.6666666666666667,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      },
+      {
+        "lambda_R": 5,
+        "c_utility": 0.16666666666666663,
+        "b1_utility": 0.16666666666666663,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      },
+      {
+        "lambda_R": 7,
+        "c_utility": -0.16666666666666674,
+        "b1_utility": -0.16666666666666674,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      },
+      {
+        "lambda_R": 10,
+        "c_utility": -0.6666666666666667,
+        "b1_utility": -0.6666666666666667,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      },
+      {
+        "lambda_R": 15,
+        "c_utility": -1.5,
+        "b1_utility": -1.5,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      },
+      {
+        "lambda_R": 20,
+        "c_utility": -2.3333333333333335,
+        "b1_utility": -2.3333333333333335,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      },
+      {
+        "lambda_R": 30,
+        "c_utility": -4.0,
+        "b1_utility": -4.0,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      },
+      {
+        "lambda_R": 50,
+        "c_utility": -7.333333333333334,
+        "b1_utility": -7.333333333333334,
+        "gap": 0.0,
+        "c_degenerate": false,
+        "b1_degenerate": false,
+        "eligible": false
+      }
+    ]
+  },
+  "epistemological_constraints": [
+    "no compression drift",
+    "no negative result inflation beyond tested lambda range and populations",
+    "no causal language"
+  ]
+}

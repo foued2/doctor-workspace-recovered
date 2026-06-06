@@ -258,7 +258,7 @@ def main() -> None:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_PATH.open("w", encoding="utf-8") as f:
         json.dump(output, f, indent=2)
-    print(f"[phase-c1] written → {OUTPUT_PATH}")
+    print(f"[phase-c1] written -> {OUTPUT_PATH}")
 
 
 if __name__ == "__main__":
