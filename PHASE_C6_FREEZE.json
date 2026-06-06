@@ -1,0 +1,171 @@
+{
+  "phase": "C6",
+  "title": "Representation Class Falsification",
+  "purpose": "Test whether any estimator built on the structured fingerprint representation class produces separation from B1 that is invariant under the C-5 perturbation battery. Test 4 pre-declared candidate decision rules and combine per-rule verdicts into a class-level answer to RQ-C6.",
+  "status": "APPROVED",
+  "authorization": "Foued override",
+  "violates_c1_constraint": "no_new_estimators",
+  "violation_acknowledged": true,
+  "date": "2026-06-06",
+  "spec_commit": "54e2839",
+
+  "research_question": "RQ-C6: Can any estimator built on the structured fingerprint representation class produce separation from B1 that is invariant under the distribution transformations tested in C-5?",
+
+  "candidate_rules": {
+    "R1_C_genuine": {
+      "status": "existing",
+      "source": "PHASE_C4_FREEZE.json (commit 88d0243)",
+      "feature_used": "probe_family",
+      "feature_source": "obs_records[i].fingerprint_context.probe_family",
+      "rule_verbatim": "ACCEPT if obs_fails == 0; ACCEPT if obs_fails > 0 AND all failures share one probe_family; REJECT otherwise.",
+      "rule_pseudocode": "if obs_records is None: return 'ACCEPT' if obs_fails == 0 else 'REJECT'; failures = [r for r in obs_records if not r['pass_fail']]; if len(failures) == 0: return 'ACCEPT'; families = {r['fingerprint_context']['probe_family'] for r in failures}; if len(families) == 1: return 'ACCEPT'; return 'REJECT'",
+      "fallback_when_obs_records_none": "ACCEPT if obs_fails == 0, REJECT otherwise (B1 behavior)"
+    },
+    "R2_C_feature_threshold": {
+      "status": "new",
+      "feature_used": "deformation_level",
+      "feature_source": "obs_records[i].fingerprint_context.deformation_level",
+      "feature_dim_in_tensor": 1,
+      "rule_verbatim": "ACCEPT if obs_fails == 0; ACCEPT if failure_rate_on_deformed_probes < 0.5; REJECT otherwise. A 'deformed' probe has deformation_level > 0. If no deformed probes, fall back to B1 behavior.",
+      "rule_pseudocode": "if obs_records is None: return 'ACCEPT' if obs_fails == 0 else 'REJECT'; deformed = [r for r in obs_records if r['fingerprint_context'].get('deformation_level', 0) > 0]; if len(deformed) == 0: return 'ACCEPT' if obs_fails == 0 else 'REJECT'; failures_deformed = [r for r in deformed if not r['pass_fail']]; rate = len(failures_deformed) / len(deformed); if obs_fails == 0: return 'ACCEPT'; if rate < 0.5: return 'ACCEPT'; return 'REJECT'",
+      "threshold": 0.5,
+      "threshold_basis": "natural majority threshold (50%)",
+      "fallback_when_no_deformed_probes": "B1 behavior (ACCEPT if obs_fails == 0, REJECT otherwise)",
+      "fallback_when_obs_records_none": "B1 behavior"
+    },
+    "R3_C_majority": {
+      "status": "new",
+      "feature_used": "probe_family",
+      "feature_source": "obs_records[i].fingerprint_context.probe_family",
+      "rule_verbatim": "ACCEPT if obs_fails == 0; ACCEPT if there is a unique mode in the failure-family distribution (one family has more failures than any other single family); REJECT otherwise. Ties yield REJECT.",
+      "rule_pseudocode": "if obs_records is None: return 'ACCEPT' if obs_fails == 0 else 'REJECT'; failures = [r for r in obs_records if not r['pass_fail']]; if len(failures) == 0: return 'ACCEPT'; counts = {}; for r in failures: f = r['fingerprint_context']['probe_family']; counts[f] = counts.get(f, 0) + 1; max_count = max(counts.values()); n_with_max = sum(1 for c in counts.values() if c == max_count); if n_with_max == 1: return 'ACCEPT'; return 'REJECT'",
+      "fallback_when_obs_records_none": "B1 behavior"
+    },
+    "R4_C_zero_only": {
+      "status": "new",
+      "feature_used": "none",
+      "rule_verbatim": "ACCEPT if obs_fails == 0; REJECT otherwise.",
+      "rule_pseudocode": "return 'ACCEPT' if obs_fails == 0 else 'REJECT'",
+      "operationally_identical_to": "B1_count (_fail_count_policy)",
+      "role": "negative control: shows whether C-4 gain is associated with coherence condition (R1) or with being more permissive than B1",
+      "expected_verdict": "DOES_NOT_SURVIVE a priori (gap = 0 on every perturbation)"
+    }
+  },
+
+  "estimators_under_comparison": ["C_genuine", "C_feature_threshold", "C_majority", "C_zero_only", "B1_count"],
+
+  "c1_estimators_preserved": [
+    "B0_prior", "B1_count", "B2_calibrated_count", "B3_raw_pf_vector",
+    "B4_raw_full_tensor", "B5_nearest_neighbor_raw_tensor",
+    "B6_regularized_raw_tensor", "C_structured_fingerprint"
+  ],
+
+  "populations": [
+    {
+      "id": "LC322",
+      "role": "primary",
+      "n_solvers": 30,
+      "accept": 11,
+      "reject": 19,
+      "data_source": "data/midweather_fingerprint_lc322.json",
+      "probe_index": "data/midweather_fingerprint_lc322_probe_index.json"
+    },
+    {
+      "id": "LC45",
+      "role": "stress_test",
+      "n_solvers": 10,
+      "accept": 1,
+      "reject": 9,
+      "data_source": "data/midweather_fingerprint_lc45.json",
+      "probe_index": "data/midweather_fingerprint_lc45_probe_index.json"
+    }
+  ],
+
+  "delta": {
+    "value": 0.10,
+    "unit": "normalized_utility_gap",
+    "source": "PHASE_C1_FREEZE.json (commit 3bd286d)"
+  },
+
+  "lambda_sweep": {
+    "values": [1, 2, 5, 7, 10, 15, 20, 30, 50],
+    "lambda_A_fixed": 1,
+    "source": "PHASE_C1_FREEZE.json (commit 3bd286d)"
+  },
+
+  "perturbations": {
+    "source": "PHASE_C5_FREEZE.json (commit 98cc8e4)",
+    "inherited": true,
+    "battery": [
+      "P1_accept_reject_ratio_shift",
+      "P2a_solver_subsample_first_20",
+      "P2b_solver_subsample_last_20",
+      "P2c_solver_subsample_first10_last10",
+      "P3a_probe_family_knockout_reachability",
+      "P3b_probe_family_knockout_coin_order",
+      "P3c_probe_family_knockout_large_amount",
+      "P3d_probe_family_knockout_greedy_dp",
+      "P3e_probe_family_knockout_forward_dp",
+      "P3f_probe_family_knockout_memo_cache",
+      "P4_lc45_cross_population"
+    ],
+    "no_new_perturbations": true,
+    "no_modification_of_c5_perturbations": true
+  },
+
+  "falsification_criterion": {
+    "per_rule": {
+      "SURVIVES": "gap > 0.10 on all 11 perturbations at all 9 lambda values, on LC322, with aggregate-consistency check passing",
+      "DOES_NOT_SURVIVE": "any perturbation has gap <= 0.10 or gap < 0 at any lambda value",
+      "DEGENERATE": "rule or B1 collapses to all-ACCEPT or all-REJECT at a given lambda; record and exclude at that lambda; degenerate on all lambdas -> DOES_NOT_SURVIVE"
+    },
+    "rq_c6_class_level": {
+      "YES": "at least one of R1, R2, R3 SURVIVES the C-5 battery on LC322. The class can produce invariant separation.",
+      "NO": "none of R1, R2, R3 SURVIVES. The class does not produce invariant separation under the tested perturbations.",
+      "MIXED": "some rules survive and some do not, no rule is a refinement of another. Per-rule status reported; class contains both surviving and non-surviving rules."
+    },
+    "lc45_role": "stress_test only; LC45 result reported per rule separately; does not override LC322 verdict on RQ-C6",
+    "per_rule_reporting": true,
+    "per_perturbation_reporting": true,
+    "no_aggregation_across_rules_except_class_verdict": true,
+    "no_aggregation_across_perturbations": true
+  },
+
+  "aggregate_consistency_check": {
+    "required": true,
+    "applies_to": ["B1_count"],
+    "check": "Re-run B1 on unperturbed LC322 (and LC45); recomputed (WA, WR) must equal stored (WA, WR) in data/midweather_fingerprint_lc{322,45}.json",
+    "on_failure": "STOP IMMEDIATELY. Do not record any result. Surface discrepancy to Foued."
+  },
+
+  "protocol_constraints": {
+    "no_new_probes": true,
+    "no_new_solver_packs": true,
+    "no_modification_of_c1_freeze_parameters": true,
+    "no_modification_of_c4_decision_rule": true,
+    "no_modification_of_c5_perturbation_battery": true,
+    "no_post_hoc_adjustment_of_candidate_rules": true,
+    "no_post_hoc_selection_of_favorable_perturbations": true,
+    "no_silent_resolution_of_aggregate_inconsistency": true,
+    "no_aggregation_across_perturbations": true,
+    "no_aggregation_across_rules_except_class_verdict": true,
+    "per_perturbation_reporting_only": true,
+    "c1_closure_not_reopened": true,
+    "c3a_closure_not_reopened": true,
+    "c4_closure_not_reopened": true,
+    "c5_closure_not_reopened": true,
+    "project_closure_004_not_reopened": true
+  },
+
+  "lineage": {
+    "c1_freeze_commit": "3bd286d",
+    "c3a_freeze_commit": "a6c97bc",
+    "c4_freeze_commit": "88d0243",
+    "c4_closure_commit": "50d33e5",
+    "c4_tag": "phase-c4-results",
+    "c5_freeze_commit": "98cc8e4",
+    "c5_closure_commit": "d1435a3",
+    "c5_tag": "phase-c5-results",
+    "c6_spec_commit": "54e2839"
+  }
+}
