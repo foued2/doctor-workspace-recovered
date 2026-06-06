@@ -1,0 +1,324 @@
+{
+  "population": "LC45",
+  "spec_commit": "54e2839",
+  "freeze_commit": "6766f4c",
+  "c4_freeze_commit": "88d0243",
+  "c4_closure_commit": "50d33e5",
+  "delta": 0.1,
+  "lambda_sweep": [
+    1,
+    2,
+    5,
+    7,
+    10,
+    15,
+    20,
+    30,
+    50
+  ],
+  "n_solvers": 10,
+  "unperturbed_b1_aggregate": {
+    "wrong_accepts": 0,
+    "wrong_rejects": 0
+  },
+  "per_rule": {
+    "R1_C_genuine": {
+      "rule_aggregate": {
+        "wrong_accepts": 1,
+        "wrong_rejects": 0
+      },
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0
+      },
+      "gaps": [
+        {
+          "lambda_R": 1,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        },
+        {
+          "lambda_R": 2,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        },
+        {
+          "lambda_R": 5,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        },
+        {
+          "lambda_R": 7,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        },
+        {
+          "lambda_R": 10,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        },
+        {
+          "lambda_R": 15,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        },
+        {
+          "lambda_R": 20,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        },
+        {
+          "lambda_R": 30,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        },
+        {
+          "lambda_R": 50,
+          "gap": -0.09999999999999998,
+          "b1_utility": 1.0,
+          "rule_utility": 0.9
+        }
+      ]
+    },
+    "R2_C_feature_threshold": {
+      "rule_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0
+      },
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0
+      },
+      "gaps": [
+        {
+          "lambda_R": 1,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 2,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 5,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 7,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 10,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 15,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 20,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 30,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 50,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        }
+      ]
+    },
+    "R3_C_majority": {
+      "rule_aggregate": {
+        "wrong_accepts": 4,
+        "wrong_rejects": 0
+      },
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0
+      },
+      "gaps": [
+        {
+          "lambda_R": 1,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        },
+        {
+          "lambda_R": 2,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        },
+        {
+          "lambda_R": 5,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        },
+        {
+          "lambda_R": 7,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        },
+        {
+          "lambda_R": 10,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        },
+        {
+          "lambda_R": 15,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        },
+        {
+          "lambda_R": 20,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        },
+        {
+          "lambda_R": 30,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        },
+        {
+          "lambda_R": 50,
+          "gap": -0.4,
+          "b1_utility": 1.0,
+          "rule_utility": 0.6
+        }
+      ]
+    },
+    "R4_C_zero_only": {
+      "rule_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0
+      },
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0
+      },
+      "gaps": [
+        {
+          "lambda_R": 1,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 2,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 5,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 7,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 10,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 15,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 20,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 30,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        },
+        {
+          "lambda_R": 50,
+          "gap": 0.0,
+          "b1_utility": 1.0,
+          "rule_utility": 1.0
+        }
+      ]
+    }
+  },
+  "per_rule_falsification": {
+    "R1_C_genuine": {
+      "verdict": "DOES_NOT_SURVIVE",
+      "min_gap": -0.09999999999999998,
+      "max_gap": -0.09999999999999998
+    },
+    "R2_C_feature_threshold": {
+      "verdict": "DOES_NOT_SURVIVE",
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    "R3_C_majority": {
+      "verdict": "DOES_NOT_SURVIVE",
+      "min_gap": -0.4,
+      "max_gap": -0.4
+    },
+    "R4_C_zero_only": {
+      "verdict": "DOES_NOT_SURVIVE",
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    }
+  },
+  "c4_cross_check": {
+    "r1_c_genuine_aggregate_here": {
+      "wrong_accepts": 1,
+      "wrong_rejects": 0
+    },
+    "c4_c_genuine_aggregate": {
+      "wrong_accepts": 1,
+      "wrong_rejects": 0
+    },
+    "aggregate_matches": true,
+    "c4_verdict": "FAIL"
+  }
+}
