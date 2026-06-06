@@ -1,0 +1,274 @@
+{
+  "population": "LC322",
+  "n_solvers": 30,
+  "spec_commit": "cab8af3",
+  "freeze_commit": "88d0243",
+  "c1_freeze_commit": "3bd286d",
+  "per_solver": [
+    {
+      "solver_id": "solver_001",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_002",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_003",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_004",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_005",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_006",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_007",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_008",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_009",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_010",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_011",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_012",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_013",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_014",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_015",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_016",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_017",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_018",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_019",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_020",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_021",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_022",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_023",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_024",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_025",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_026",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_027",
+      "ground_truth": "ACCEPT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    {
+      "solver_id": "solver_028",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_029",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    {
+      "solver_id": "solver_030",
+      "ground_truth": "REJECT",
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    }
+  ],
+  "b1_aggregate": {
+    "wrong_accepts": 0,
+    "wrong_rejects": 5
+  },
+  "c_genuine_aggregate": {
+    "wrong_accepts": 1,
+    "wrong_rejects": 0
+  },
+  "identity": {
+    "D": 6,
+    "A": 50,
+    "three_case_outcome": "DIRECTIONAL_SUPERIORITY"
+  },
+  "utility_gap_table": [
+    {
+      "lambda_R": 1,
+      "b1_utility": 0.8333333333333334,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 0.1333333333333333,
+      "eligible": true
+    },
+    {
+      "lambda_R": 2,
+      "b1_utility": 0.6666666666666667,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 0.29999999999999993,
+      "eligible": true
+    },
+    {
+      "lambda_R": 5,
+      "b1_utility": 0.16666666666666663,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 0.8,
+      "eligible": true
+    },
+    {
+      "lambda_R": 7,
+      "b1_utility": -0.16666666666666674,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 1.1333333333333333,
+      "eligible": true
+    },
+    {
+      "lambda_R": 10,
+      "b1_utility": -0.6666666666666667,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 1.6333333333333333,
+      "eligible": true
+    },
+    {
+      "lambda_R": 15,
+      "b1_utility": -1.5,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 2.466666666666667,
+      "eligible": true
+    },
+    {
+      "lambda_R": 20,
+      "b1_utility": -2.3333333333333335,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 3.3000000000000003,
+      "eligible": true
+    },
+    {
+      "lambda_R": 30,
+      "b1_utility": -4.0,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 4.966666666666667,
+      "eligible": true
+    },
+    {
+      "lambda_R": 50,
+      "b1_utility": -7.333333333333334,
+      "c_genuine_utility": 0.9666666666666667,
+      "gap": 8.3,
+      "eligible": true
+    }
+  ],
+  "falsification": {
+    "verdict": "PASS",
+    "best_gap": 8.3,
+    "best_lambda": 50,
+    "delta": 0.1,
+    "reason": "PASS: utility gap > 0.1 at lambda=50, D=6 > 0"
+  }
+}
