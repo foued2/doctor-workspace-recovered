@@ -1,0 +1,103 @@
+{
+  "phase": "C1",
+  "title": "Asymmetric-Cost Decision Utility",
+  "frozen_before_sweep": true,
+  "date": "2026-06-06",
+  "commit_spec": "3f1a647",
+
+  "delta": {
+    "value": 0.10,
+    "unit": "normalized_utility_gap",
+    "rationale": "LC45: 10 solvers, 0.10 = 1 wrong decision, minimum resolvable granularity. LC322: conservative but consistent. Not adjusted after results are seen."
+  },
+
+  "lambda_sweep": {
+    "values": [1, 2, 5, 7, 10, 15, 20, 30, 50],
+    "count": 9,
+    "lambda_R_over_lambda_A": true,
+    "lambda_A_fixed": 1,
+    "note": "λ_R varies. λ_A = 1 throughout. Ratio = λ_R."
+  },
+
+  "populations": [
+    {
+      "id": "LC322",
+      "source": "data/midweather_fingerprint_lc322.json",
+      "solvers": 30,
+      "accept_count": 11,
+      "reject_count": 19,
+      "role": "primary"
+    },
+    {
+      "id": "LC45",
+      "source": "data/midweather_fingerprint_lc45.json",
+      "solvers": 10,
+      "accept_count": 1,
+      "reject_count": 9,
+      "role": "stress_test",
+      "note": "Single-survivor skew. Results reported but not used as primary evidence. Findings on LC45 alone do not determine verdict."
+    }
+  ],
+
+  "estimators": [
+    "B0_prior",
+    "B1_count",
+    "B2_calibrated_count",
+    "B3_raw_pf_vector",
+    "B4_raw_full_tensor",
+    "B5_nearest_neighbor_raw_tensor",
+    "B6_regularized_raw_tensor",
+    "C_structured_fingerprint"
+  ],
+
+  "primary_comparison": {
+    "estimator_A": "C_structured_fingerprint",
+    "estimator_B": "B1_count",
+    "direction": "utility(C) - utility(B1) > delta"
+  },
+
+  "objective_function": {
+    "cost_false_reject": "lambda_R",
+    "cost_false_accept": "lambda_A",
+    "cost_correct": 0,
+    "raw_cost": "mean(cost over population)",
+    "normalized_utility": "1 - raw_cost / lambda_A",
+    "normalization": "per_population",
+    "both_metrics_required": true
+  },
+
+  "falsification_criterion": {
+    "PASS": "exists lambda in sweep such that utility(C) - utility(B1) > delta on LC322 (primary population)",
+    "FAIL": "no such lambda found on LC322 across full tested range",
+    "DEGENERATE": "estimator collapses to all-ACCEPT or all-REJECT at given lambda; excluded from comparison at that lambda; not a verdict on RQ",
+    "LC45_role": "stress_test only; LC45 result reported separately; does not override LC322 verdict"
+  },
+
+  "anti_degeneracy_rule": {
+    "all_accept_threshold": "all solvers receive ACCEPT verdict",
+    "all_reject_threshold": "all solvers receive REJECT verdict",
+    "action": "record as DEGENERATE at that lambda; exclude from primary comparison; report in results"
+  },
+
+  "protocol_constraints": {
+    "delta_fixed": true,
+    "lambda_sweep_fixed": true,
+    "normalization_rule_fixed": true,
+    "no_post_hoc_adjustment": true,
+    "no_new_estimators": true,
+    "no_new_probes": true,
+    "runners_load_existing_decisions_only": true
+  },
+
+  "epistemological_constraints": [
+    "no compression drift",
+    "no negative result inflation beyond tested lambda range and tested populations",
+    "no causal language: no because, therefore, explains, caused by, due to"
+  ],
+
+  "closure_reference": {
+    "tag": "project-closure-004",
+    "commit": "ccbf927",
+    "relationship": "none; this phase tests a different objective function class on the same frozen populations"
+  }
+}
