@@ -1,0 +1,429 @@
+{
+  "population": "LC322",
+  "n_solvers": 30,
+  "spec_commit": "e3c50d9",
+  "freeze_commit": "a6c97bc",
+  "c1_freeze_commit": "3bd286d",
+  "per_solver": [
+    {
+      "solver_id": "solver_001",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "ACCEPT",
+        "B2_calibrated_count": "ACCEPT",
+        "B3_raw_pf_vector": "ACCEPT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "ACCEPT"
+      }
+    },
+    {
+      "solver_id": "solver_002",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "ACCEPT",
+        "B2_calibrated_count": "ACCEPT",
+        "B3_raw_pf_vector": "ACCEPT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "ACCEPT"
+      }
+    },
+    {
+      "solver_id": "solver_003",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "ACCEPT",
+        "B2_calibrated_count": "ACCEPT",
+        "B3_raw_pf_vector": "ACCEPT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "ACCEPT"
+      }
+    },
+    {
+      "solver_id": "solver_004",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "ACCEPT",
+        "B2_calibrated_count": "ACCEPT",
+        "B3_raw_pf_vector": "ACCEPT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "ACCEPT"
+      }
+    },
+    {
+      "solver_id": "solver_005",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "ACCEPT",
+        "B2_calibrated_count": "ACCEPT",
+        "B3_raw_pf_vector": "ACCEPT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "ACCEPT"
+      }
+    },
+    {
+      "solver_id": "solver_006",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_007",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_008",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_009",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_010",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_011",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_012",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_013",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_014",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_015",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_016",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_017",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_018",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_019",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_020",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_021",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_022",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_023",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_024",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_025",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_026",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "ACCEPT",
+        "B2_calibrated_count": "ACCEPT",
+        "B3_raw_pf_vector": "ACCEPT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "ACCEPT"
+      }
+    },
+    {
+      "solver_id": "solver_027",
+      "ground_truth": "ACCEPT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_028",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_029",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    },
+    {
+      "solver_id": "solver_030",
+      "ground_truth": "REJECT",
+      "decisions": {
+        "B0_prior": "ACCEPT",
+        "B1_count": "REJECT",
+        "B2_calibrated_count": "REJECT",
+        "B3_raw_pf_vector": "REJECT",
+        "B4_raw_full_tensor": "REJECT",
+        "B5_nearest_neighbor_raw_tensor": "ACCEPT",
+        "B6_regularized_raw_tensor": "ACCEPT",
+        "C_structured_fingerprint": "REJECT"
+      }
+    }
+  ]
+}
