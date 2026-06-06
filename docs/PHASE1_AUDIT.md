@@ -3,7 +3,7 @@
 **Date:** June 2026
 **Trigger document:** `docs/TRANSFER_HYPOTHESIS.md` (revised at commit `7c692e2`)
 **Audit kind:** Option B — frozen mapping, calibration gate disabled
-**Status:** Phase 1 audit complete; decision pending user review
+**Status:** Closed at `project-closure-004`. Path A chosen: stop. Full closure record: `docs/PROJECT_CLOSURE.md` addendum.
 
 ---
 
@@ -156,20 +156,31 @@ In this audit, the calibration gate is **disabled** and replaced with the audita
 
 ## Next steps (require user direction)
 
-Three paths are available; this audit does not choose between them.
+Three paths were available; the user-approved stop decision (path A) is recorded below in the Disposition section.
 
-**(A) Stop the program.** The 1-of-3 degenerate (scale) result is a structural negative. Transfer as a cross-problem phenomenon is not testable in the current corpus without expanding either the stress-class taxonomy or the problem class set. The framework's structural-property claims remain K-local to each problem, consistent with the closure of `project-closure-003`.
+---
 
-**(B) Run the rank test on the 2 auditable classes (boundary, monotonicity) using the existing LC322 and LC45 probe sets and solver packs.** This is a partial transfer test: 2 problems × 2 stress classes. The rank test would compute `Δ(P, d)` for each problem × stress class combination and check sign consistency. This is a restricted version of the spec's transfer test. The user must decide whether 2 problems is enough for a sign-consistency check (the spec was written for 3 problems; 2 problems gives a single Δ sign comparison, which is not a statistical sign-consistency test but a single observation).
+## Disposition (recorded at `project-closure-004`)
 
-**(C) Expand the probe set.** Add scale probes to LC45 (e.g., `nums` lists with progressively larger jump ranges) to make all 3 stress classes auditable. This requires re-doing the LC45 probe construction, which is out of Phase 1 scope per the spec. It would also require re-freezing the LC45 probe index and re-running the gate.
+The user-approved stop decision (path A) is recorded here. The cross-problem transfer hypothesis is **not supported** in the current 2-problem corpus.
+
+- `boundary` and `monotonicity`: auditable. Recorded as such.
+- `scale`: structurally unsupported in the current corpus (no LC45 probes).
+- The original 3-class transfer claim is not supported.
+- The calibration gate was disabled (LC45 n=1 ACCEPT makes distribution comparison undefined).
+- The original decision rule as committed was not actually satisfied in the form it was written.
+- This is not called Phase 2-ready.
+
+The rank test on the 2 auditable classes is a different question (a 2-class exploratory study), not a continuation of the committed 3-class hypothesis. It is recorded as available but not pursued.
+
+The full closure record is in `docs/PROJECT_CLOSURE.md` addendum at `project-closure-004`.
 
 ---
 
 ## Audit artifacts
 
-- Audit script: `phase1_audit.py` (reproducibility — applies frozen mapping, computes coverage, identifiability, measurability)
-- Summary JSON: `phase1_audit_summary.json` (machine-readable output of the audit)
+- Audit script: `phase1_audit.py` (reproducibility — applies frozen mapping, computes coverage, identifiability, measurability). Located in `C:\Users\pakla\AppData\Local\Temp\opencode\` (temp directory; not committed to repo per stop decision).
+- Summary JSON: `phase1_audit_summary.json` (machine-readable output of the audit). Same location.
 - Source data: `data/midweather_fingerprint_lc322_probe_index.json`, `data/midweather_fingerprint_lc45_probe_index.json`, `data/midweather_fingerprint_lc322.json`, `data/midweather_fingerprint_lc45.json`
 
 ---
@@ -180,4 +191,6 @@ Per `docs/TRANSFER_HYPOTHESIS.md` line 6:
 
 > **Trigger for proceeding past Phase 1:** Phase 1 audit shows candidate stress classes auditable in current corpus under the strict definition, OR a clear plan for adding them is committed.
 
-This audit shows **2 of 3 candidate stress classes auditable** under the option B definition (which is a relaxed version of the spec's strict definition, with the calibration gate replaced by an auditable predicate). The strict definition (with calibration gate) is not applicable because LC45 n=1 ACCEPT makes the gate undefined. The trigger is **partially met** — auditable in current corpus, but not under strict definition.
+This audit shows **2 of 3 candidate stress classes auditable** under the option B definition (a relaxed version of the spec's strict definition, with the calibration gate replaced by an auditable predicate). The strict definition (with calibration gate) is not applicable because LC45 n=1 ACCEPT makes the gate undefined. The trigger is **not met** under the strict definition, and the option B substitution is not equivalent to the committed gate.
+
+Per the user-approved stop decision (Finding 3 of the `project-closure-004` addendum), this is recorded as the honest endpoint, not as Phase 2-ready.

@@ -179,3 +179,87 @@ The four options raised in the meta-analysis remain open. The project does not c
 - Does not commit to reopening. The trigger conditions are stated but not activated.
 - Does not modify the paper text. The paper is sealed as the final artifact of `project-closure-001` and `project-closure-002`.
 - Does not modify any test, freeze, or code artifact. The empirical state of the repo is unchanged.
+
+---
+
+# Project Closure Addendum — Transfer-Hypothesis Audit at `project-closure-004`
+
+**Addendum date:** June 2026
+**Re-tag point:** commit adding this addendum
+**Status:** project remains closed; addendum records the transfer-hypothesis Phase 1 audit result and the stop decision
+
+---
+
+## Context
+
+After `project-closure-001` (`707121b`), `project-closure-002` (`c4b6fa9`), and `project-closure-003` (meta-analysis addendum at lines 103-181 above), a Phase 1 audit was run against the transfer-hypothesis design committed at `docs/TRANSFER_HYPOTHESIS.md` (commits `6c5ab18`, `ff1ec77`, `7c692e2`). The audit was the next concrete step called for by the Phase 0 spec, executed under the user-approved option B interpretation (frozen mapping, calibration gate disabled).
+
+This addendum does not reopen the project. It records what the audit found, states the stop decision, and explains why the alternative path (running the rank test on the 2 auditable classes) is not a continuation of the current hypothesis.
+
+---
+
+## Finding 1: The Phase 1 audit returned 2 of 3 auditable; 1 class is structurally degenerate
+
+The audit (`docs/PHASE1_AUDIT.md` at commit `de12b3e`) shows:
+
+- **`boundary`** (LC322=5, LC45=10; extremum_type union cardinality 3): cross-problem exists, identifiability feasible, LC45 measurable → auditable
+- **`scale`** (LC322=5, LC45=0; extremum_type union cardinality 1): no LC45 probes, identifiability infeasible → not auditable
+- **`monotonicity`** (LC322=5, LC45=5; extremum_type union cardinality 2): cross-problem exists, identifiability feasible, LC45 measurable → auditable
+
+2 of 3 stress classes are auditable. 1 of 3 (`scale`) is structurally degenerate in the current corpus.
+
+The spec's decision rule (`docs/TRANSFER_HYPOTHESIS.md` lines 199-201) is gated on the calibration gate, which requires comparing ACCEPT-class pass rate distributions across problems. In the current corpus, LC45 has only 1 ACCEPT-class solver (`solver_001`), making the distribution comparison undefined. The calibration gate had to be disabled. The audit used a weaker feasibility check (LC45 measurability predicate) in place of the gate under the user-approved option B interpretation.
+
+**The original decision rule as committed was not actually satisfied in the form it was written.** A 2-of-3 result under a substituted predicate is not a 2-of-3 result under the committed gate.
+
+## Finding 2: The 1-of-3 degenerate class (scale) is a structural fact, not a defect
+
+LC45 has 0 scale probes. The 6 LC45 manifolds are solver-bug patterns (greedy horizons, uniform arrays, frontier pressure) designed around LC45's internal structure, not around input-magnitude regimes. The 5 LC322 scale probes (extremum_type `large_amount_stress`) have no LC45 counterpart. Adding scale probes to LC45 would require re-doing the LC45 probe construction (out of Phase 1 scope per the spec), re-freezing the LC45 probe index, and re-running the gate.
+
+Half of the existing probe set in each problem (15/30 LC322, 15/30 LC45) does not map to the 3 committed stress classes. This is a structural mismatch between the existing probe design (problem-internal, solver-bug-focused) and the spec's stress-class taxonomy (problem-independent, computational-stressor-focused). No probe was reclassified; sparsity was not repaired.
+
+## Finding 3: The honest endpoint is the stop decision (path A)
+
+The user-approved stop decision is recorded here:
+
+- **Stop here.** Record `boundary` and `monotonicity` as auditable. Record `scale` as unsupported. Do not call this Phase 2-ready.
+- The original 3-class transfer claim is **not supported** in the current corpus.
+- The framework's structural-property claims remain K-local to each problem, consistent with the closure of `project-closure-003`.
+
+The cross-problem transfer hypothesis is closed.
+
+## Finding 4: The rank test on the 2 auditable classes is a different question, not a continuation
+
+Running the rank test on `boundary` and `monotonicity` with the existing 2-problem corpus would be a legitimate empirical study, but it would be a **2-class exploratory study** with a different hypothesis from the one committed. Specifically:
+
+- The committed hypothesis is a 3-class cross-problem transfer claim with a calibration gate.
+- The 2-class rank test would be a partial test: 2 problems × 2 stress classes, with the spec's distribution-based calibration gate replaced by a structural-auditability check.
+- The 2-class test would not test the committed 3-class hypothesis. It would test a new, weaker hypothesis.
+- Running it under the current Phase 0 label would conflate the two. This is a hypothesis downgrade, not a continuation.
+
+Path B (run the 2-class rank test) is recorded as **available** but not **pursed** in the current closed state. Pursuing it would require explicitly re-committing the hypothesis as a 2-class study, which is a different starting point from where the current work stopped.
+
+---
+
+## Updated deferred-list entries
+
+The deferred list at lines 65-71 of this document is updated by reference. The relevant entry is:
+
+- **ComparabilityContext (cross-problem comparison layer)** — previously "Deferred indefinitely — no cross-problem patterns found in the 6-feature vector; a full ComparabilityContext would require problem pairs with shared structure — none were identified." Updated status: **closed-not-deferred**. The Phase 1 audit returned 2-of-3 auditable with the spec's strict proceed-to-Phase-2 trigger unmet. The transfer-hypothesis work is closed at `project-closure-004`. The closure is recorded here, not in the original deferred-list lines (which are sealed at `project-closure-001`).
+
+---
+
+## What this addendum does
+
+- Records the Phase 1 audit result (2 of 3 auditable, 1 degenerate, calibration gate disabled).
+- States the stop decision (path A) as the honest endpoint.
+- Explains why the 2-class rank test is a different question, not a continuation.
+- Updates the deferred-list entry for the cross-problem transfer work from "deferred" to "closed-not-deferred".
+
+## What this addendum does not do
+
+- Does not claim cross-problem transfer. The audit did not produce evidence for or against the original 3-class hypothesis; it produced evidence that the hypothesis as committed is not testable in the current 2-problem corpus.
+- Does not commit to reopening. The transfer-hypothesis work is closed.
+- Does not modify any test, freeze, or code artifact. The empirical state of the repo is unchanged.
+- Does not modify the paper. The paper is sealed as the final artifact of `project-closure-001` and `project-closure-002`.
+- Does not modify the original closure lines (1-101) or the `project-closure-003` addendum (lines 103-181) of this document.

@@ -224,3 +224,15 @@ Phase 1 does exactly three things. No additional analysis is performed in Phase 
 - That the transfer test will be run. That decision is made after Phase 1.
 - That any specific third problem class will be built. Phase 2 is selection; Phase 3 is build.
 - Any change to the existing paper, code, freezes, or tests. Phase 0 is documentation only.
+
+---
+
+## Disposition (recorded at `project-closure-004`)
+
+The Phase 1 audit (`docs/PHASE1_AUDIT.md`) was run under option B (frozen mapping, calibration gate disabled). Result: 2 of 3 stress classes auditable (`boundary`, `monotonicity`); 1 structurally degenerate (`scale` — no LC45 probes).
+
+The original 3-class transfer claim is **not supported** in the current 2-problem corpus. The framework's structural-property claims remain K-local to each problem. The honest endpoint is the stop decision recorded at `project-closure-004`. The cross-problem transfer hypothesis is closed.
+
+The rank test on the 2 auditable classes is a different question, not a continuation of this hypothesis. It is not pursued under the current label. Pursuing it would require explicitly re-committing as a 2-class exploratory study.
+
+Full closure record: `docs/PROJECT_CLOSURE.md` addendum at `project-closure-004`.
