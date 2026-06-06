@@ -1,0 +1,132 @@
+{
+  "phase": "C5",
+  "title": "Collapse Analysis (Distribution Shift)",
+  "purpose": "Test whether the C-4 utility gain on LC322 survives distribution shift via four pre-declared population perturbations.",
+  "status": "APPROVED",
+  "authorization": "Foued override",
+  "violates_c1_constraint": null,
+  "extends_c4_constraint": "no_post_hoc_adjustment_of_decision_rule (extended to C-5: C_genuine decision rule not adjusted during C-5 analysis)",
+  "date": "2026-06-06",
+  "spec_commit": "bb51f2c",
+
+  "perturbations": {
+    "P1_accept_reject_ratio_shift": {
+      "description": "Re-label LC322 from 11 ACCEPT / 19 REJECT to 19 ACCEPT / 11 REJECT. The 11 solvers formerly labeled ACCEPT are relabeled REJECT; the 19 formerly labeled REJECT are relabeled ACCEPT.",
+      "input_split": "11 ACCEPT / 19 REJECT",
+      "output_split": "19 ACCEPT / 11 REJECT",
+      "rule": "invert_all_labels",
+      "same_solvers": true
+    },
+    "P2a_solver_subsample_first_20": {
+      "description": "First 20 solvers of LC322 (indices 0..19 in sorted order).",
+      "indices_zero_indexed": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+      "n_solvers": 20
+    },
+    "P2b_solver_subsample_last_20": {
+      "description": "Last 20 solvers of LC322 (indices 10..29 in sorted order).",
+      "indices_zero_indexed": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+      "n_solvers": 20
+    },
+    "P2c_solver_subsample_first10_last10": {
+      "description": "First 10 + last 10 solvers (excludes middle 10).",
+      "indices_zero_indexed": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+      "n_solvers": 20
+    },
+    "P3a_probe_family_knockout_reachability": {
+      "description": "Remove all observed probes from family 'reachability_counterfactual'.",
+      "family_knocked_out": "reachability_counterfactual"
+    },
+    "P3b_probe_family_knockout_coin_order": {
+      "description": "Remove all observed probes from family 'non_canonical_coin_order'.",
+      "family_knocked_out": "non_canonical_coin_order"
+    },
+    "P3c_probe_family_knockout_large_amount": {
+      "description": "Remove all observed probes from family 'large_amount_stress'.",
+      "family_knocked_out": "large_amount_stress"
+    },
+    "P3d_probe_family_knockout_greedy_dp": {
+      "description": "Remove all observed probes from family 'greedy_dp_threshold'.",
+      "family_knocked_out": "greedy_dp_threshold"
+    },
+    "P3e_probe_family_knockout_forward_dp": {
+      "description": "Remove all observed probes from family 'forward_dp_overwrite'.",
+      "family_knocked_out": "forward_dp_overwrite"
+    },
+    "P3f_probe_family_knockout_memo_cache": {
+      "description": "Remove all observed probes from family 'memo_cache_aliasing'.",
+      "family_knocked_out": "memo_cache_aliasing"
+    },
+    "P3_rotation_order": [
+      "reachability_counterfactual",
+      "non_canonical_coin_order",
+      "large_amount_stress",
+      "greedy_dp_threshold",
+      "forward_dp_overwrite",
+      "memo_cache_aliasing"
+    ],
+    "P4_lc45_cross_population": {
+      "description": "LC45 result from C-4. No new execution needed.",
+      "c4_verdict": "FAIL",
+      "source": "data/c4_decisions_lc45.json"
+    }
+  },
+
+  "delta": {
+    "value": 0.10,
+    "unit": "normalized_utility_gap",
+    "source": "PHASE_C1_FREEZE.json (commit 3bd286d)"
+  },
+
+  "lambda_sweep": {
+    "values": [1, 2, 5, 7, 10, 15, 20, 30, 50],
+    "lambda_A_fixed": 1,
+    "source": "PHASE_C1_FREEZE.json (commit 3bd286d)"
+  },
+
+  "falsification_criterion": {
+    "SURVIVES": "gap > 0.10 on all perturbations at all 9 lambda values",
+    "PARTIALLY_SURVIVES": "gap maintained on some perturbations, collapses on others",
+    "DOES_NOT_SURVIVE": "gap collapses on all perturbations",
+    "collapse_criterion": "gap <= 0.10 OR gap reverses (gap < 0)",
+    "per_perturbation_reporting": true,
+    "no_aggregation_across_perturbations": true
+  },
+
+  "aggregate_consistency_check": {
+    "required": true,
+    "applies_to": ["B1_count"],
+    "check": "Re-run B1 on unperturbed LC322; recomputed (WA, WR) must equal stored (WA, WR) in data/midweather_fingerprint_lc322.json",
+    "on_failure": "STOP IMMEDIATELY. Do not record any result. Surface discrepancy to Foued."
+  },
+
+  "estimators_under_comparison": ["C_genuine", "B1_count"],
+  "estimators_unchanged_from_c4": true,
+
+  "protocol_constraints": {
+    "no_new_probes": true,
+    "no_new_solver_packs": true,
+    "no_new_estimators": true,
+    "no_modification_of_c1_freeze_parameters": true,
+    "no_modification_of_c4_decision_rule": true,
+    "no_post_hoc_adjustment_of_perturbations": true,
+    "no_post_hoc_selection_of_favorable_perturbations": true,
+    "no_silent_resolution_of_aggregate_inconsistency": true,
+    "no_aggregation_across_perturbations": true,
+    "per_perturbation_reporting_only": true,
+    "c1_closure_not_reopened": true,
+    "c3a_closure_not_reopened": true,
+    "c4_closure_not_reopened": true,
+    "project_closure_004_not_reopened": true,
+    "results_doc_forbids_word_real": true
+  },
+
+  "lineage": {
+    "c1_freeze_commit": "3bd286d",
+    "c3a_freeze_commit": "a6c97bc",
+    "c4_freeze_commit": "88d0243",
+    "c4_closure_commit": "50d33e5",
+    "c4_tag": "phase-c4-results",
+    "c5_spec_commit": "bb51f2c",
+    "c5_freeze_commit": "PENDING"
+  }
+}
