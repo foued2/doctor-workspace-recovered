@@ -10,6 +10,7 @@ from doctor.asymmetric_cost import (
     compute_normalized_utility,
     is_degenerate,
     run_sweep,
+    run_sweep_aggregate,
 )
 
 # ---------------------------------------------------------------------------
@@ -348,3 +349,144 @@ class TestDeltaThreshold:
 
     def test_delta_value_matches_freeze_file(self):
         assert DELTA == 0.10
+
+
+# ---------------------------------------------------------------------------
+# 7. run_sweep_aggregate — aggregate (WA, WR) entry point
+# ---------------------------------------------------------------------------
+
+class TestRunSweepAggregate:
+
+    def test_lc322_tied_case(self):
+        # C and B1 tied on LC322: WA=0, WR=5, n=30.
+        # raw_cost = (0 * 1 + 5 * lam) / 30 = lam / 6
+        # normalized_utility = 1 - (lam / 6) / 1 = 1 - lam/6
+        result = run_sweep_aggregate(0, 5, 30, [1, 6, 12], 1.0)
+        assert result[0]["raw_cost"] == pytest.approx(1 / 6, rel=1e-6)
+        assert result[1]["raw_cost"] == pytest.approx(1.0)
+        assert result[2]["raw_cost"] == pytest.approx(2.0)
+        assert result[0]["normalized_utility"] == pytest.approx(5 / 6, rel=1e-6)
+        assert result[1]["normalized_utility"] == pytest.approx(0.0)
+        assert result[2]["normalized_utility"] == pytest.approx(-1.0)
+
+    def test_lc45_perfect_case(self):
+        # C and B1 perfect on LC45: WA=0, WR=0, n=10.
+        # raw_cost = 0, normalized_utility = 1 at every lambda.
+        result = run_sweep_aggregate(0, 0, 10, LAMBDA_SWEEP, 1.0)
+        for entry in result:
+            assert entry["raw_cost"] == 0.0
+            assert entry["normalized_utility"] == pytest.approx(1.0)
+
+    def test_degenerate_all_accept_flag(self):
+        # B0 on LC322: WA=19, WR=0, n=30, all-accept.
+        result = run_sweep_aggregate(
+            19, 0, 30, LAMBDA_SWEEP, 1.0,
+            degenerate_all_accept=True,
+        )
+        for entry in result:
+            assert entry["degenerate"] is True
+
+    def test_degenerate_all_reject_flag(self):
+        # B4 on LC322: WA=0, WR=11, n=30, all-reject.
+        result = run_sweep_aggregate(
+            0, 11, 30, LAMBDA_SWEEP, 1.0,
+            degenerate_all_reject=True,
+        )
+        for entry in result:
+            assert entry["degenerate"] is True
+
+    def test_non_degenerate_when_flags_false(self):
+        # Default flags False. WA=19, WR=0 normally would be all-accept,
+        # but the runner passes the flag explicitly. If not, non-degenerate.
+        result = run_sweep_aggregate(0, 5, 30, [1, 10], 1.0)
+        for entry in result:
+            assert entry["degenerate"] is False
+
+    def test_lambda_dependence_is_linear_in_wr(self):
+        # For fixed WA, raw_cost grows linearly with lambda_R.
+        result = run_sweep_aggregate(0, 5, 30, [1, 2, 10], 1.0)
+        costs = [e["raw_cost"] for e in result]
+        assert costs[1] == pytest.approx(2 * costs[0])
+        assert costs[2] == pytest.approx(10 * costs[0])
+
+    def test_lambda_independent_when_wr_zero(self):
+        # raw_cost depends only on WA when WR=0.
+        result = run_sweep_aggregate(5, 0, 30, [1, 10, 50], 1.0)
+        costs = [e["raw_cost"] for e in result]
+        assert costs[0] == costs[1] == costs[2] == pytest.approx(5 / 30)
+
+    def test_matches_run_sweep_when_uniform(self):
+        # If all false rejects are uniform per-solver,
+        # run_sweep_aggregate matches run_sweep.
+        from doctor.asymmetric_cost import run_sweep
+        # Build per-solver list: 5 false rejects, 25 correct
+        # (5 REJECTs on ACCEPT solvers, 25 ACCEPTs on REJECT solvers... wait
+        # actually the LC322 11/19 split is more complex; use simple case)
+        # WA=0, WR=5, n=10 (uniform 5 false rejects, 5 correct accepts)
+        gt = ["ACCEPT"] * 5 + ["REJECT"] * 5
+        decisions = ["REJECT"] * 5 + ["REJECT"] * 5  # all-REJECT → 5 FR, 5 correct
+        sweep = run_sweep(decisions, gt, [1, 5, 10], 1.0)
+        agg = run_sweep_aggregate(0, 5, 10, [1, 5, 10], 1.0)
+        for s, a in zip(sweep, agg):
+            assert s["raw_cost"] == pytest.approx(a["raw_cost"])
+            assert s["normalized_utility"] == pytest.approx(a["normalized_utility"])
+
+    def test_empty_lambda_sweep_returns_empty(self):
+        result = run_sweep_aggregate(0, 5, 30, [], 1.0)
+        assert result == []
+
+    def test_zero_n_solvers_raises(self):
+        with pytest.raises(ValueError):
+            run_sweep_aggregate(0, 0, 0, [1], 1.0)
+
+    def test_negative_wa_raises(self):
+        with pytest.raises(ValueError):
+            run_sweep_aggregate(-1, 0, 30, [1], 1.0)
+
+    def test_negative_wr_raises(self):
+        with pytest.raises(ValueError):
+            run_sweep_aggregate(0, -1, 30, [1], 1.0)
+
+    def test_wa_wr_exceeds_n_raises(self):
+        with pytest.raises(ValueError):
+            run_sweep_aggregate(20, 20, 30, [1], 1.0)
+
+    def test_zero_lambda_raises(self):
+        with pytest.raises(ValueError):
+            run_sweep_aggregate(0, 5, 30, [0], 1.0)
+
+    def test_zero_lambda_a_raises(self):
+        with pytest.raises(ValueError):
+            run_sweep_aggregate(0, 5, 30, [1], 0.0)
+
+    def test_returns_entry_per_lambda(self):
+        result = run_sweep_aggregate(0, 5, 30, LAMBDA_SWEEP, 1.0)
+        assert len(result) == len(LAMBDA_SWEEP)
+
+    def test_each_entry_has_required_keys(self):
+        result = run_sweep_aggregate(0, 5, 30, [1, 5], 1.0)
+        for entry in result:
+            assert "lambda_R" in entry
+            assert "raw_cost" in entry
+            assert "normalized_utility" in entry
+            assert "degenerate" in entry
+
+    def test_lambda_R_values_preserved(self):
+        result = run_sweep_aggregate(0, 5, 30, LAMBDA_SWEEP, 1.0)
+        assert [e["lambda_R"] for e in result] == LAMBDA_SWEEP
+
+    def test_normalization_with_lambda_a_not_one(self):
+        # If lambda_A != 1, normalization uses it.
+        # raw = (0 * 3 + 5 * 1) / 10 = 0.5
+        # nu = 1 - 0.5 / 3 = 1 - 0.1667 = 0.8333
+        result = run_sweep_aggregate(0, 5, 10, [1], 3.0)
+        assert result[0]["raw_cost"] == pytest.approx(0.5)
+        assert result[0]["normalized_utility"] == pytest.approx(1 - 0.5 / 3)
+
+    def test_tied_estimators_have_identical_sweeps(self):
+        # Two estimators with same (WA, WR) → identical sweeps.
+        c_sweep = run_sweep_aggregate(0, 5, 30, LAMBDA_SWEEP, 1.0)
+        b1_sweep = run_sweep_aggregate(0, 5, 30, LAMBDA_SWEEP, 1.0)
+        for c, b1 in zip(c_sweep, b1_sweep):
+            assert c["raw_cost"] == b1["raw_cost"]
+            assert c["normalized_utility"] == b1["normalized_utility"]

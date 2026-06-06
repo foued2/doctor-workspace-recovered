@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from doctor.asymmetric_cost import run_sweep, is_degenerate
+from doctor.asymmetric_cost import run_sweep, run_sweep_aggregate, is_degenerate
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -41,33 +41,57 @@ def load_freeze() -> dict:
         return json.load(f)
 
 
-def load_lc45_decisions(data_path: Path) -> tuple[list[str], dict[str, list[str]]]:
-    """Load ground truth and per-estimator decision lists from the LC45 data file.
+def load_lc45_aggregates(data_path: Path) -> tuple[list[str], dict[str, dict]]:
+    """Load ground truth labels and per-estimator aggregate stats from the LC45 data file.
+
+    The data file persists per-solver ground truth and per-estimator aggregate
+    statistics (wrong_accepts, wrong_rejects, degeneracy flags). It does NOT
+    persist per-solver decision lists. Under the PHASE_C1 freeze cost model,
+    (WA, WR) is a sufficient statistic for total cost, so aggregates are
+    sufficient to compute the sweep.
 
     Returns:
-        ground_truth        : list of "ACCEPT" / "REJECT" per solver
-        estimator_decisions : dict mapping estimator name → list of decisions
+        ground_truth    : list of "ACCEPT" / "REJECT" in solver-id order
+        estimator_stats : dict mapping estimator name -> {
+            wrong_accepts, wrong_rejects, n_solvers,
+            degenerate_all_accept, degenerate_all_reject
+        }
 
     Fails loudly if required keys are absent.
     """
     with data_path.open(encoding="utf-8") as f:
         data = json.load(f)
 
-    if "ground_truth" not in data:
+    if "per_solver_ground_truth" not in data:
         raise KeyError(
-            f"'ground_truth' not found in {data_path}. "
+            f"'per_solver_ground_truth' not found in {data_path}. "
             f"Available keys: {list(data.keys())}"
         )
-    ground_truth = data["ground_truth"]
+    pgt = data["per_solver_ground_truth"]
 
-    if "estimator_decisions" not in data:
+    if "estimator_table" not in data:
         raise KeyError(
-            f"'estimator_decisions' not found in {data_path}. "
+            f"'estimator_table' not found in {data_path}. "
             f"Available keys: {list(data.keys())}"
         )
-    estimator_decisions = data["estimator_decisions"]
+    et = data["estimator_table"]
 
-    return ground_truth, estimator_decisions
+    sorted_solver_ids = sorted(pgt.keys())
+    ground_truth = [pgt[sid]["truth_label"] for sid in sorted_solver_ids]
+    n_solvers = len(ground_truth)
+
+    estimator_stats = {}
+    for entry in et:
+        name = entry["estimator"]
+        estimator_stats[name] = {
+            "wrong_accepts": int(entry["wrong_accepts"]),
+            "wrong_rejects": int(entry["wrong_rejects"]),
+            "n_solvers": n_solvers,
+            "degenerate_all_accept": bool(entry["degenerate_all_accept"]),
+            "degenerate_all_reject": bool(entry["degenerate_all_reject"]),
+        }
+
+    return ground_truth, estimator_stats
 
 
 # ---------------------------------------------------------------------------
@@ -153,7 +177,7 @@ def main() -> None:
     print(f"[phase-c1] lambda_A={lambda_A}  delta={delta}")
 
     # 2. Load decisions
-    ground_truth, estimator_decisions = load_lc45_decisions(DATA_PATH)
+    ground_truth, estimator_stats = load_lc45_aggregates(DATA_PATH)
     n_solvers = len(ground_truth)
     accept_count = ground_truth.count("ACCEPT")
     reject_count = ground_truth.count("REJECT")
@@ -164,31 +188,33 @@ def main() -> None:
               f"Results are fragile. Report as stress test only.")
 
     # 3. Verify all freeze-declared estimators are present
-    missing = [e for e in estimator_list if e not in estimator_decisions]
+    missing = [e for e in estimator_list if e not in estimator_stats]
     if missing:
         raise KeyError(
             f"Estimators declared in freeze file but absent from data: {missing}"
         )
 
-    # 4. Run sweep for each estimator
+    # 4. Run sweep for each estimator (aggregate path — (WA, WR) is sufficient
+    #    under the freeze's linear cost model).
     all_results = {}
     for estimator in estimator_list:
-        decisions = estimator_decisions[estimator]
-        if len(decisions) != n_solvers:
-            raise ValueError(
-                f"Estimator {estimator}: expected {n_solvers} decisions, "
-                f"got {len(decisions)}."
-            )
-        sweep = run_sweep(
-            decisions=decisions,
-            ground_truth=ground_truth,
+        stats = estimator_stats[estimator]
+        sweep = run_sweep_aggregate(
+            wrong_accepts=stats["wrong_accepts"],
+            wrong_rejects=stats["wrong_rejects"],
+            n_solvers=stats["n_solvers"],
             lambda_sweep=lambda_sweep,
             lambda_A=lambda_A,
+            degenerate_all_accept=stats["degenerate_all_accept"],
+            degenerate_all_reject=stats["degenerate_all_reject"],
         )
         all_results[estimator] = sweep
-        deg_lambdas = [e["lambda_R"] for e in sweep if e["degenerate"]]
-        status = f"degenerate at λ={deg_lambdas}" if deg_lambdas else "non-degenerate"
-        print(f"[phase-c1]   {estimator}: {status}")
+        if sweep and sweep[0]["degenerate"]:
+            print(f"[phase-c1]   {estimator}: degenerate "
+                  f"({'all-accept' if stats['degenerate_all_accept'] else 'all-reject'})")
+        else:
+            print(f"[phase-c1]   {estimator}: non-degenerate "
+                  f"(WA={stats['wrong_accepts']}, WR={stats['wrong_rejects']})")
 
     # 5. Apply falsification criterion (primary comparison: C vs B1)
     falsification = apply_falsification(

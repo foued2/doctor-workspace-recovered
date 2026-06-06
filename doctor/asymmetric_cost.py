@@ -129,3 +129,73 @@ def run_sweep(
         )
 
     return results
+
+
+def run_sweep_aggregate(
+    wrong_accepts: int,
+    wrong_rejects: int,
+    n_solvers: int,
+    lambda_sweep: list[float],
+    lambda_A: float = 1.0,
+    *,
+    degenerate_all_accept: bool = False,
+    degenerate_all_reject: bool = False,
+) -> list[dict]:
+    """Apply cost sweep to aggregate (WA, WR) statistics.
+
+    Under the PHASE_C1 freeze cost model, (WA, WR) is a sufficient statistic
+    for total cost at any lambda. This function produces the same per-lambda
+    raw_cost and normalized_utility that run_sweep would produce if the
+    aggregate counts were expanded into per-solver decisions.
+
+    Degeneracy is taken from the saved estimator_table flags
+    (degenerate_all_accept, degenerate_all_reject), not derived from counts.
+    The runner is responsible for passing the correct flags.
+
+    The data files midweather_fingerprint_lc{322,45}.json persist per-estimator
+    aggregate statistics only (wrong_accepts, wrong_rejects,
+    degenerate_all_accept, degenerate_all_reject). They do not persist
+    per-solver decision lists. This function is the aggregate-level entry
+    point for the same sweep.
+    """
+    if n_solvers <= 0:
+        raise ValueError(f"n_solvers must be positive, got {n_solvers}")
+    if wrong_accepts < 0:
+        raise ValueError(
+            f"wrong_accepts must be non-negative, got {wrong_accepts}"
+        )
+    if wrong_rejects < 0:
+        raise ValueError(
+            f"wrong_rejects must be non-negative, got {wrong_rejects}"
+        )
+    if wrong_accepts + wrong_rejects > n_solvers:
+        raise ValueError(
+            f"wrong_accepts + wrong_rejects ({wrong_accepts + wrong_rejects}) "
+            f"exceeds n_solvers ({n_solvers})"
+        )
+    if lambda_A <= 0:
+        raise ValueError(f"lambda_A must be positive, got {lambda_A}")
+
+    degenerate = degenerate_all_accept or degenerate_all_reject
+
+    if len(lambda_sweep) == 0:
+        return []
+
+    results = []
+    for lambda_R in lambda_sweep:
+        if lambda_R <= 0:
+            raise ValueError(
+                f"lambda_R values must be positive, got {lambda_R}"
+            )
+        raw = (wrong_accepts * lambda_A + wrong_rejects * lambda_R) / n_solvers
+        nu = 1.0 - raw / float(lambda_A)
+        results.append(
+            {
+                "lambda_R": lambda_R,
+                "raw_cost": raw,
+                "normalized_utility": nu,
+                "degenerate": degenerate,
+            }
+        )
+
+    return results
