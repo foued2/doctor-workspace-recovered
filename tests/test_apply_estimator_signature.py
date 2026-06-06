@@ -66,10 +66,13 @@ def test_probe_to_fingerprint_context_renames_family_to_probe_family():
 def test_apply_estimator_backward_compat_lc322_policies():
     """The 8 C-1 LC322 policies produce identical preds with or without obs_records.
 
-    C_genuine is excluded: it intentionally uses obs_records (Phase C-4).
-    See test_c_genuine_intentionally_breaks_backward_compat below.
+    C_genuine (Phase C-4) and C_feature_threshold, C_majority, C_zero_only
+    (Phase C-6) are excluded: they intentionally use obs_records.
+    See test_c_genuine_intentionally_breaks_backward_compat and
+    test_c6_candidates_intentionally_break_backward_compat below.
     """
-    c1_estimators = [e for e in LC322_ESTIMATOR_POLICIES if e != "C_genuine"]
+    feature_aware = {"C_genuine", "C_feature_threshold", "C_majority", "C_zero_only"}
+    c1_estimators = [e for e in LC322_ESTIMATOR_POLICIES if e not in feature_aware]
     assert len(c1_estimators) == 8
     for est in c1_estimators:
         policy = LC322_ESTIMATOR_POLICIES[est]
@@ -83,10 +86,11 @@ def test_apply_estimator_backward_compat_lc322_policies():
 def test_apply_estimator_backward_compat_lc45_policies():
     """The 8 C-1 LC45 policies produce identical preds with or without obs_records.
 
-    C_genuine is excluded: it intentionally uses obs_records (Phase C-4).
-    See test_c_genuine_intentionally_breaks_backward_compat below.
+    C_genuine (Phase C-4) and C_feature_threshold, C_majority, C_zero_only
+    (Phase C-6) are excluded: they intentionally use obs_records.
     """
-    c1_estimators = [e for e in LC45_ESTIMATOR_POLICIES if e != "C_genuine"]
+    feature_aware = {"C_genuine", "C_feature_threshold", "C_majority", "C_zero_only"}
+    c1_estimators = [e for e in LC45_ESTIMATOR_POLICIES if e not in feature_aware]
     assert len(c1_estimators) == 8
     for est in c1_estimators:
         policy = LC45_ESTIMATOR_POLICIES[est]
@@ -109,6 +113,36 @@ def test_c_genuine_intentionally_breaks_backward_compat():
     preds_with = apply_estimator(c_genuine, PASS_RESULTS, OBSERVED_IDS, SAMPLE_PROBE_INDEX)
     assert preds_without != preds_with, (
         f"C_genuine must differ with vs. without obs_records; got identical: {preds_without!r}"
+    )
+
+
+def test_c6_candidates_intentionally_break_backward_compat():
+    """C_feature_threshold, C_majority, C_zero_only must produce different preds
+    with obs_records than without (or, for C_zero_only, be operationally identical
+    to B1). This is the defining property of feature-aware candidate policies
+    (Phase C-6). C_zero_only is the negative control and is identical to B1
+    by construction.
+    """
+    c_ft = LC322_ESTIMATOR_POLICIES["C_feature_threshold"]
+    c_maj = LC322_ESTIMATOR_POLICIES["C_majority"]
+    c_zo = LC322_ESTIMATOR_POLICIES["C_zero_only"]
+
+    preds_ft_without = apply_estimator(c_ft, PASS_RESULTS, OBSERVED_IDS)
+    preds_ft_with = apply_estimator(c_ft, PASS_RESULTS, OBSERVED_IDS, SAMPLE_PROBE_INDEX)
+    assert preds_ft_without != preds_ft_with, (
+        f"C_feature_threshold must differ with vs. without obs_records; got identical"
+    )
+
+    preds_maj_without = apply_estimator(c_maj, PASS_RESULTS, OBSERVED_IDS)
+    preds_maj_with = apply_estimator(c_maj, PASS_RESULTS, OBSERVED_IDS, SAMPLE_PROBE_INDEX)
+    assert preds_maj_without != preds_maj_with, (
+        f"C_majority must differ with vs. without obs_records; got identical"
+    )
+
+    preds_zo_without = apply_estimator(c_zo, PASS_RESULTS, OBSERVED_IDS)
+    preds_zo_with = apply_estimator(c_zo, PASS_RESULTS, OBSERVED_IDS, SAMPLE_PROBE_INDEX)
+    assert preds_zo_without == preds_zo_with, (
+        f"C_zero_only is the negative control; must be identical with and without obs_records"
     )
 
 

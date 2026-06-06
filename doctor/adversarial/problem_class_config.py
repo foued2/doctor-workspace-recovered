@@ -143,6 +143,100 @@ def _c_genuine_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None
     return "REJECT"
 
 
+def _c_feature_threshold_policy(
+    obs_fails: int, n_obs: int, obs_records: list[dict] | None = None,
+) -> str:
+    """C_feature_threshold policy for Phase C-6 Rule 2.
+
+    Decision rule (declared in PHASE_C6_SPEC.md before implementation):
+        ACCEPT if obs_fails == 0
+        ACCEPT if failure_rate_on_deformed_probes < 0.5
+        REJECT otherwise
+        (A 'deformed' probe has deformation_level > 0; threshold = 0.5)
+
+    Falls back to B1 behavior if obs_records is None or if no deformed probes exist.
+    Feature used: deformation_level (dim 1 of the 6-dim encode_raw_tensor output).
+    Differs from _fail_count_policy: accepts solvers whose failure rate on
+    deformed probes is below the 0.5 threshold.
+    """
+    if obs_records is None:
+        return "ACCEPT" if obs_fails == 0 else "REJECT"
+
+    deformed = [
+        r for r in obs_records
+        if (r.get("fingerprint_context", {}) or {}).get("deformation_level", 0) > 0
+    ]
+    if len(deformed) == 0:
+        return "ACCEPT" if obs_fails == 0 else "REJECT"
+
+    if obs_fails == 0:
+        return "ACCEPT"
+
+    failures_deformed = [r for r in deformed if not r.get("pass_fail", False)]
+    rate = len(failures_deformed) / len(deformed)
+    if rate < 0.5:
+        return "ACCEPT"
+    return "REJECT"
+
+
+def _c_majority_policy(
+    obs_fails: int, n_obs: int, obs_records: list[dict] | None = None,
+) -> str:
+    """C_majority policy for Phase C-6 Rule 3.
+
+    Decision rule (declared in PHASE_C6_SPEC.md before implementation):
+        ACCEPT if obs_fails == 0
+        ACCEPT if there is a unique mode in the failure-family distribution
+        REJECT otherwise
+        (A 'unique mode' = one family has more failures than any other single family.
+        Ties yield REJECT.)
+
+    Falls back to B1 behavior if obs_records is None.
+    Feature used: probe_family (same as C_genuine).
+    Differs from _c_genuine_policy: requires only plurality, not unanimity.
+    Differs from _fail_count_policy: accepts solvers with a unique-mode failure family.
+    """
+    if obs_records is None:
+        return "ACCEPT" if obs_fails == 0 else "REJECT"
+
+    failures = [r for r in obs_records if not r.get("pass_fail", False)]
+    if len(failures) == 0:
+        return "ACCEPT"
+
+    counts: dict = {}
+    for r in failures:
+        ctx = r.get("fingerprint_context", {}) or {}
+        family = ctx.get("probe_family")
+        if family is not None:
+            counts[family] = counts.get(family, 0) + 1
+
+    if not counts:
+        return "REJECT"
+
+    max_count = max(counts.values())
+    n_with_max = sum(1 for c in counts.values() if c == max_count)
+    if n_with_max == 1:
+        return "ACCEPT"
+    return "REJECT"
+
+
+def _c_zero_only_policy(
+    obs_fails: int, n_obs: int, obs_records: list[dict] | None = None,
+) -> str:
+    """C_zero_only policy for Phase C-6 Rule 4 (negative control).
+
+    Decision rule (declared in PHASE_C6_SPEC.md before implementation):
+        ACCEPT if obs_fails == 0
+        REJECT otherwise
+
+    Operationally identical to _fail_count_policy (B1). Does not consult
+    obs_records. Included as a negative control to show whether the C-4 gain
+    is associated with the coherence condition (Rule 1) or with being more
+    permissive than B1.
+    """
+    return "ACCEPT" if obs_fails == 0 else "REJECT"
+
+
 LC322_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]] = {
     "B0_prior": _b0_prior_policy,
     "B1_count": _fail_count_policy,
@@ -153,6 +247,9 @@ LC322_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]
     "B6_regularized_raw_tensor": _b6_reg_policy,
     "C_structured_fingerprint": _fail_count_policy,
     "C_genuine": _c_genuine_policy,
+    "C_feature_threshold": _c_feature_threshold_policy,
+    "C_majority": _c_majority_policy,
+    "C_zero_only": _c_zero_only_policy,
 }
 
 LC45_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]] = {
@@ -165,6 +262,9 @@ LC45_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]]
     "B6_regularized_raw_tensor": _b6_reg_policy,
     "C_structured_fingerprint": _fail_count_policy,
     "C_genuine": _c_genuine_policy,
+    "C_feature_threshold": _c_feature_threshold_policy,
+    "C_majority": _c_majority_policy,
+    "C_zero_only": _c_zero_only_policy,
 }
 
 
