@@ -3,7 +3,7 @@
 **Date:** June 2026
 **Status:** Phase 0 — hypothesis commitment, no code
 **Trigger for proceeding past Phase 0:** this document committed
-**Trigger for proceeding past Phase 1:** Phase 1 audit shows candidate dimensions auditable in current corpus, OR a clear plan for adding them is committed
+**Trigger for proceeding past Phase 1:** Phase 1 audit shows candidate dimensions auditable in current corpus under the strict definition, OR a clear plan for adding them is committed
 
 ---
 
@@ -11,51 +11,61 @@
 
 The Doctor/Bimaristan project has two fully-built problem classes (LC322, LC45) with probe families designed independently for each problem. The H1a falsification (`docs/H1A_FALSIFICATION.md`) tested within-LC322 family-conditional rate separability. The LC45 C feature audit (`docs/LC45_C_POLICY_FINDING.md`) tested within-LC45 feature separability. Both are within-problem tests. Neither tests cross-problem transfer of structural properties.
 
-The current 2-problem corpus cannot retroactively answer the cross-problem transfer question because the probe families were designed per-problem with no shared problem-independent structure. The within-problem finding "aggregate pass/fail volume is the load-bearing separator" is consistent with two readings:
+The current 2-problem corpus cannot retroactively answer the cross-problem transfer question because the probe families were designed per-problem with no shared problem-independent structure. A genuine test of cross-problem transfer requires:
 
-- **(a) Structural**: aggregate pass/fail volume is a load-bearing separator in any problem; the family axis is problem-specific descriptive structure that doesn't add separator power
-- **(b) Spurious**: this just happens to be true on LC322 and LC45 for reasons specific to those problems
+- Probe equivalence established by a finite computable signature, not by name or semantic clustering
+- A transfer test in rank-space, not scalar rates
+- A binary distinction between natural solvers and constructed adversaries
+- A calibration gate that prevents measuring under incomparable difficulty regimes
 
-A genuine test of (a) vs (b) requires problem-independent dimensions defined in advance, with probe families named identically across problems. This document commits to those dimensions and the gap threshold before any code is written. Post-hoc threshold relaxation would invalidate the test.
-
----
-
-## Discriminative gap threshold (committed before running)
-
-**Definition of `gap(D, P)` for dimension D, problem P:**
-
-```
-gap(D, P) = mean(fail_rate on D | REJECT class, problem P) - mean(fail_rate on D | ACCEPT class, problem P)
-```
-
-**Transfer on dimension D is supported if and only if all three conditions hold:**
-
-1. **Minimum gap**: `gap(D, P) ≥ 0.20` for all three problem classes P ∈ {LC322, LC45, P3}
-2. **Direction consistency**: `gap(D, P) > 0` for all three problems (ACCEPT fail rate < REJECT fail rate; no direction flips)
-3. **Cross-problem variance**: `max(gap(D, P)) / min(gap(D, P)) ≤ 2.0` across the three problems
-
-**Transfer fails on dimension D if any of:**
-
-- Gap < 0.20 on any problem
-- Direction flip (ACCEPT > REJECT on D in some problem)
-- Cross-problem variance exceeds factor of 2.0 (e.g., +0.40, +0.05, +0.02)
-
-These numbers are committed before the test runs. The "+0.40, +0.35, +0.38" example given in the plan is transfer; the "+0.40, +0.05, +0.02" example is LC322-specific. The factor-of-2 boundary is the committed cutoff.
+This document commits to all four. Post-hoc relaxation of any of them invalidates the test.
 
 ---
 
-## Null result definition
+## Probe signature and structural equivalence
 
-The data would look like this if transfer fails:
+**Probe signature:**
 
-- Boundary sensitivity gap is large on the problem where boundary cases happen to be in the probe distribution, small or zero on the others
-- Scale sensitivity gap shows direction flips (some problems have REJECT class failing less than ACCEPT class on large-magnitude probes)
-- Monotonicity violation gap is undefined or zero on at least one problem (because the problem has no monotone subproblem structure to violate)
-- No dimension simultaneously satisfies minimum gap, direction consistency, and cross-problem variance bound across all three problems
+A probe p is defined by a finite signature tuple:
 
-**If the data look like this, the conclusion is:** collapse dimensions defined problem-independently do not transfer across structurally distinct problem classes. The framework's structural-property claims are K-local to each problem, not general. This is a stronger and more specific negative result than the current paper's K-local FAIL.
+```
+signature(p) = (input_type, constraint_shape, extremum_type, perturbation_operator)
+```
 
-This is recorded as a real finding, not a limitation. The paper's central claim would then be: "structured fingerprint representations do not improve decision utility on LC322, and the structural property that aggregate pass/fail volume dominates does not transfer across problems."
+- `input_type`: the type of the problem input (e.g., list of integers, list of lists, integer)
+- `constraint_shape`: the structural shape of the problem's constraints (e.g., bounded/unbounded, ordered/unordered, contiguous/discontiguous)
+- `extremum_type`: which extremum class the probe instantiates, drawn from a fixed enumeration per transfer dimension
+- `perturbation_operator`: the perturbation applied to the input (e.g., identity, scale, swap, drop)
+
+**Equivalence rule:**
+
+Two probes p1, p2 are structurally equivalent for cross-problem comparison if and only if `signature(p1) == signature(p2)` exactly on all four tuple elements. Probes that do not exact-match across all three problems are excluded from cross-problem analysis. Exclusion is permanent; probes are not approximated, partial-matched, or re-included under any post-hoc correction.
+
+The candidate value sets for each tuple element, per transfer dimension, are enumerated in Phase 1.
+
+---
+
+## Rank-based transfer test
+
+**Test statistic:**
+
+For each problem P and dimension d with K observed matched probes, compute the rank of each probe by pass rate:
+
+```
+Δ(P, d) = E[rank of probes in dimension d for ACCEPT class] - E[rank of probes in dimension d for REJECT class]
+```
+
+**Transfer on dimension d is supported if and only if:**
+
+1. **Sign consistency**: sign(Δ(P, d)) is the same for all three problem classes
+2. **Sufficient non-emptiness**: each problem has at least K_min matched probes in dimension d (K_min is committed in Phase 1)
+
+**Magnitude is not compared across problems.** Rank-space ordinal consistency is the only cross-problem transfer criterion.
+
+**Transfer fails on dimension d if:**
+
+- Sign inconsistency across problems
+- Any problem has fewer than K_min matched probes
 
 ---
 
@@ -71,23 +81,13 @@ A solver exhibits boundary sensitivity if its failure rate on structurally edge-
 - Zero value (when zero is a valid input, e.g., zero coins, zero length, empty grid)
 - Mixed: edge case combined with one or more typical values
 
-This definition makes no reference to LC322, LC45, or any specific problem. A boundary-sensitivity probe family can be implemented for any problem with a structural notion of edge case.
+This definition makes no reference to LC322, LC45, or any specific problem.
 
-**Probe family implementation:**
-
-A `boundary_sensitivity` probe family contains inputs drawn from the set of structural edge cases above. Each probe carries metadata indicating which edge-case category it instantiates (e.g., `boundary_type: "empty"`, `boundary_type: "max_constraint"`, `boundary_type: "zero_value"`). The probe family is named identically across all three problem classes.
-
-**Solver failure on this dimension in general terms:**
-
-A solver that handles only "typical" inputs correctly will fail on boundary probes. Common patterns: index out of bounds on empty input, integer overflow on max-constraint input, division by zero on zero value, return-on-empty without explicit empty-case handling, off-by-one when the input size is exactly 1. A solver that handles boundary cases explicitly (early returns, defensive checks, problem-specific guards) will pass boundary probes.
-
-**Gap definition for this dimension:**
-
-`gap(boundary_sensitivity, P)` = mean REJECT fail rate on boundary probes - mean ACCEPT fail rate on boundary probes, computed over the K observed boundary probes per solver on problem P.
+**Rank-based test applies.** Dimension-specific signature values for `extremum_type` (e.g., `empty`, `single_element`, `max_constraint`, `zero_value`) are enumerated in Phase 1.
 
 **Why this is a transfer candidate:**
 
-Boundary cases are universal. Any problem with non-trivial input structure has boundary cases. A solver that fails on boundary cases in one problem is likely to fail on boundary cases in another, because the failure pattern (no empty-case handling, no max-constraint check, no zero handling) is problem-independent even though the specific bug instance is problem-specific. This is a prediction about solver bugs that should hold across problem classes if it holds at all.
+Boundary cases are universal. Any problem with non-trivial input structure has boundary cases. A solver that fails on boundary cases in one problem is likely to fail in another, because the failure pattern (no empty-case handling, no max-constraint check, no zero handling) is problem-independent even though the specific bug instance is problem-specific.
 
 ---
 
@@ -97,23 +97,13 @@ Boundary cases are universal. Any problem with non-trivial input structure has b
 
 A solver exhibits scale sensitivity if its failure rate on large-magnitude inputs is higher than its failure rate on small-magnitude inputs, holding structural complexity constant. The probe family varies input magnitude across a range (small, medium, large, maximum) while keeping other structural features fixed.
 
-This dimension is restricted to numeric problems (where "magnitude" is well-defined). For string, graph, or other non-numeric problems, the dimension does not apply; the third problem class will be selected from numeric problems.
+This dimension is restricted to numeric problems. For string, graph, or other non-numeric problems, the dimension does not apply; the third problem class will be selected from numeric problems.
 
-**Probe family implementation:**
-
-A `scale_sensitivity` probe family contains inputs of varying magnitude, binned into 3-4 magnitude classes (small, medium, large, maximum). Each probe carries metadata indicating its magnitude class. The probe family is named identically across all three problem classes.
-
-**Solver failure on this dimension in general terms:**
-
-A solver with hard-coded limits (constant array sizes, fixed recursion depth, O(2^n) inner loops, integer types too small for the expected range) will fail on large inputs but pass on small inputs. A solver with linear or polynomial complexity and no hidden constant limits will pass at all magnitudes.
-
-**Gap definition for this dimension:**
-
-`gap(scale_sensitivity, P)` = mean REJECT fail rate on large-magnitude probes - mean ACCEPT fail rate on large-magnitude probes, computed over the K observed large-magnitude probes per solver on problem P. (The "large-magnitude" bin is the top magnitude class.)
+**Rank-based test applies.** Dimension-specific signature values for `extremum_type` (magnitude bins, e.g., `small`, `medium`, `large`, `max`) are enumerated in Phase 1.
 
 **Why this is a transfer candidate:**
 
-Scale-related bugs are universal in algorithm implementations. A solver that has a hard-coded limit or assumes small input will fail at large magnitude in any problem. The specific limit (array size 100, recursion depth 1000) is problem-specific, but the failure pattern is problem-independent. The ACCEPT class in any problem should be the solvers that handle scale correctly, regardless of what the problem is.
+Scale-related bugs are universal in algorithm implementations. A solver that has a hard-coded limit or assumes small input will fail at large magnitude in any problem. The specific limit is problem-specific, but the failure pattern is problem-independent.
 
 ---
 
@@ -125,67 +115,99 @@ A solver exhibits monotonicity violation failure if it fails when the problem's 
 
 This dimension is restricted to problems with a monotone optimal subproblem structure. For problems without monotone structure, the dimension does not apply; the audit records the dimension as not testable for that problem.
 
-**Probe family implementation:**
+**Rank-based test applies.** Dimension-specific signature values for `extremum_type` (violation types, e.g., `unsorted_subarray`, `inverted_pair`) are enumerated in Phase 1.
 
-A `monotonicity_violation` probe family contains inputs that locally violate the natural ordering. Each probe carries metadata indicating the violation type (e.g., `violation_type: "unsorted_subarray"`, `violation_type: "inverted_pair"`). The probe family is named identically across problem classes that support the dimension.
+**Why this is a weaker transfer candidate:**
 
-**Solver failure on this dimension in general terms:**
-
-A solver that assumes sorted input, sorted coin order, or monotone subproblem values will fail when the input violates the assumption. A solver that explicitly handles the violation (sorts internally, iterates over all orderings, uses unordered data structures) will pass.
-
-**Gap definition for this dimension:**
-
-`gap(monotonicity_violation, P)` = mean REJECT fail rate on monotonicity-violation probes - mean ACCEPT fail rate on monotonicity-violation probes, computed over the K observed violation probes per solver on problem P.
-
-**Why this is a weaker transfer candidate than boundary or scale:**
-
-Monotonicity violation applies only to problems with monotone subproblem structure. Some problems (e.g., unordered set problems, graph problems without topological structure) have no natural monotonicity to violate. The third problem class must be selected from problems where this dimension is defined. Within the selected subset, the prediction is the same: solvers that fail on ordering violations in one monotone-structured problem should fail in another.
-
-This dimension is included for completeness. If the audit shows it cannot be implemented on the third problem class, it is dropped without invalidating the test for the other two dimensions.
+Monotonicity violation applies only to problems with monotone subproblem structure. The third problem class must be selected from problems where this dimension is defined. If the audit shows it cannot be implemented on the third problem class, it is dropped without invalidating the test for the other two dimensions.
 
 ---
 
-## Phase 1 audit plan
+## Solver taxonomy
 
-After this document is committed, Phase 1 reads the existing probe indexes and checks whether structurally equivalent probes exist under different names.
+Every solver in the population is labeled exactly one of:
 
-**Files to audit:**
+- `natural_solver`: emerged from independent generation (e.g., LLM generation with no transfer-dimension prompt) without deliberate construction to fail on a candidate transfer dimension
+- `constructed_adversary`: deliberately constructed to fail on at least one candidate transfer dimension
 
-- `data/midweather_fingerprint_lc322_probe_index.json` — 30 probes, 6 fingerprint axes
-- `data/midweather_fingerprint_lc45_probe_index.json` — 30 probes, 6 failure manifolds
+**Transfer analysis uses only `natural_solver` instances.** `constructed_adversary` instances are excluded from all Phase 4 transfer statistics. They may be retained for diagnostic pack validation (verifying that the probe families can detect what they claim to detect) but they do not contribute to the cross-problem transfer test.
 
-**For each candidate dimension, the audit checks:**
+No intermediate classes, no gradations, no partial labels. The taxonomy is binary and strict.
 
-1. **Boundary sensitivity**: do existing probes test empty input, single element, max constraint, or zero value? Identify probes by their input structure, not by their axis name.
-2. **Scale sensitivity**: do existing probes span a magnitude range with explicit magnitude metadata? Identify probes by their input magnitude.
-3. **Monotonicity violation**: do existing probes test unsorted or non-monotone inputs relative to the problem's natural order?
+---
 
-**Audit output for each dimension:**
+## Calibration gate (precondition, not metric)
 
-- Number of existing probes that structurally implement the dimension
-- Whether the existing axis name can be renamed to the candidate dimension name without changing probe content
-- For dimensions where probes don't exist: cost estimate for adding them (probe generation, oracle verification, freeze update)
+For each transfer dimension d, the ACCEPT-class pass rate distribution across all matched probes in d must overlap across all three problems. The check:
+
+- Compute ACCEPT-class pass rate per matched probe in dimension d, per problem
+- Apply across-problem overlap test (KS-distance with threshold t_KS, or simple overlap band)
+
+Specific threshold is committed in Phase 1.
+
+**Consequence of failure:** if the calibration gate fails on a dimension, that dimension is excluded from the transfer test. Excluded dimensions are not rescaled, not adjusted, not re-included under any post-hoc correction. The result is: this dimension is not comparable across these problems.
+
+---
+
+## Null result definition
+
+The data would look like this if transfer fails:
+
+- For at least one dimension: sign inconsistency across problems (sign of Δ flips)
+- For at least one dimension: insufficient matched probes (below K_min) on at least one problem
+- For at least one dimension: calibration gate fails (ACCEPT-class distributions disjoint across problems)
+- No dimension simultaneously satisfies sign consistency, non-emptiness, and calibration gate across all three problems
+
+**If the data look like this, the conclusion is:** collapse dimensions defined problem-independently do not transfer across structurally distinct problem classes. The framework's structural-property claims are K-local to each problem, not general. This is a stronger and more specific negative result than the current paper's K-local FAIL.
+
+This is recorded as a real finding, not a limitation.
+
+---
+
+## Phase 1 audit (strict scope)
+
+Phase 1 does exactly three things. No additional analysis is performed in Phase 1.
+
+1. **Signature matching verification**: For each candidate transfer dimension (boundary, scale, monotonicity), enumerate the signature values for that dimension. Check whether any existing probes in `data/midweather_fingerprint_lc322_probe_index.json` and `data/midweather_fingerprint_lc45_probe_index.json` have signature values that exact-match across both problems. Record: number of matched probe pairs per dimension, number of unmatched probes (which are excluded from cross-problem analysis).
+
+2. **Exclusion verification**: Confirm that probes without exact signature matches are correctly filtered out of cross-problem analysis. Document the filter rule and the count of excluded probes per problem.
+
+3. **Calibration gate check**: For each dimension with at least one matched probe pair, compute ACCEPT-class pass rate distribution per problem. Apply the calibration gate (KS-distance or overlap band, threshold committed in Phase 1). Record: pass/fail of the gate per dimension.
+
+**Phase 1 does NOT do:**
+
+- Define new dimensions
+- Introduce new scoring schemes
+- Compute cross-problem transfer statistics
+- Construct solver packs
+- Build new problem classes
+- Specify K_min or KS-threshold values (these are committed in Phase 1, not before)
 
 **Decision rule from audit result:**
 
-- If at least 2 of 3 candidate dimensions have ≥3 existing probes in both LC322 and LC45: Phase 3 build cost is moderate; proceed to Phase 2.
-- If only 1 dimension has existing data: Phase 3 cost includes adding probes to existing problems; flag this in the audit and ask whether to proceed.
-- If 0 dimensions have existing data: Phase 3 cost is high (new probes for all 3 problems); the plan says to revisit the decision to proceed.
+- If at least 2 of 3 candidate dimensions pass the calibration gate with ≥3 matched probe pairs in both LC322 and LC45: Phase 3 build cost is moderate; proceed to Phase 2.
+- If only 1 dimension passes: Phase 3 cost includes adding probes to existing problems; flag this in the audit and ask whether to proceed.
+- If 0 dimensions pass: Phase 3 cost is high; the plan says to revisit the decision to proceed.
 
 ---
 
-## What this document does and does not commit to
+## What this document commits to
 
 **Commits to:**
 
+- Probe signature as a 4-tuple: `(input_type, constraint_shape, extremum_type, perturbation_operator)`; equivalence = exact match
+- Rank-based transfer test: ordinal consistency of sign across problems; no magnitude comparison
 - Three candidate transfer dimensions with problem-independent definitions
-- A specific gap threshold (0.20 minimum, max/min ≤ 2.0) committed before running
-- A null result definition
-- A Phase 1 audit plan
+- Binary solver taxonomy: `natural_solver` vs `constructed_adversary`; transfer analysis uses only `natural_solver`
+- Calibration gate: ACCEPT-class pass rate distributions must overlap across problems; if not, dimension excluded
+- Null result definition
+- Phase 1 audit scope: signature matching, exclusion verification, calibration gate; nothing more
 
 **Does not commit to:**
 
+- Specific value sets for the signature tuple elements (enumerated in Phase 1)
+- Specific K_min threshold (committed in Phase 1)
+- Specific KS-distance threshold or overlap band (committed in Phase 1)
 - That the transfer test will be run. That decision is made after Phase 1.
 - That any specific third problem class will be built. Phase 2 is selection; Phase 3 is build.
-- That the test will be run even if Phase 1 audit is favorable. The user has stated that reopening requires the biographical motivation the assistant cannot supply; the architectural plan is offered but the decision to execute remains open.
 - Any change to the existing paper, code, freezes, or tests. Phase 0 is documentation only.
