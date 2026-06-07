@@ -11,9 +11,9 @@
       "phase": "LC3946-C5 (inferred from naming convention; mirrors C-5 on LC322)",
       "title": "Collapse Analysis (Distribution Shift) — LC3946",
       "purpose": "Test whether the LC3946 C-4 utility gain (gap=1.0) survives distribution shift via 11 pre-declared population perturbations.",
-      "status": "PENDING (Foued approval of PHASE_LC3946_C5_SPEC.md required before runner is written)",
+  "status": "CLOSED",
       "date": "2026-06-07 (session date)",
-      "spec_commit": "PENDING_LC3946_C5_SPEC_COMMIT (placeholder, to be filled at spec commit time)",
+      "spec_commit": "9414fce (LC3946-C5 spec + freeze committed at 9414fce)",
       "frozen_files": "SHA256s of all frozen artifacts to be filled at commit time",
       "perturbations.*": "Pre-declared in PHASE_LC3946_C5_SPEC.md (lines declaring P1, P2, P3, P4). Frozen values below.",
       "recovered_solver_identity_check": "solver_016 (0-indexed position 15) is the C_genuine-recovered solver. Pre-declared P2 index lists verified to include solver_016 in P2a (in), P2b (in), P2c (in). No P2 index adjustment required. See PHASE_LC3946_C5_SPEC.md Aggregate Consistency Check section.",
@@ -25,13 +25,15 @@
   "phase": "LC3946-C5",
   "title": "Collapse Analysis (Distribution Shift) — LC3946",
   "purpose": "Test whether the LC3946 C-4 utility gain (gap=1.0) survives distribution shift via 11 pre-declared population perturbations.",
-  "status": "PENDING (Foued approval of PHASE_LC3946_C5_SPEC.md required before runner is written)",
+  "status": "CLOSED",
   "authorization": "Foued override (C-5 pattern, applied to LC3946)",
   "extends_c4_constraint": "no_post_hoc_adjustment_of_decision_rule (extended to LC3946-C5: C_genuine decision rule not adjusted during LC3946-C5 analysis)",
   "date": "2026-06-07",
 
-  "spec_commit": "PENDING_LC3946_C5_SPEC_COMMIT",
-  "c5_freeze_commit": "PENDING",
+  "spec_commit": "9414fce",
+  "c5_freeze_commit": "9414fce",
+  "c5_results_commit": "PENDING (filled in follow-up commit after commit hash exists)",
+  "c5_tag": "phase-lc3946-c5-results",
 
   "recovered_solver_check": {
     "recovered_solver_id": "solver_016",
@@ -259,9 +261,11 @@
     "c7_tag": "phase-c7-results",
     "c7_closure_commit": "24ab42d",
     "project_closure_004_commit": "ccbf927",
-    "lc3946_spec_commit": "PENDING_LC3946_SPEC_COMMIT",
-    "lc3946_freeze_commit": "PENDING_LC3946_FREEZE_COMMIT",
-    "lc3946_c5_spec_commit": "PENDING_LC3946_C5_SPEC_COMMIT",
-    "lc3946_c5_freeze_commit": "PENDING"
+    "lc3946_spec_commit": "08890e8",
+    "lc3946_freeze_commit": "08890e8",
+    "lc3946_c5_spec_commit": "9414fce",
+    "lc3946_c5_freeze_commit": "9414fce",
+    "lc3946_c5_results_commit": "PENDING (filled in follow-up commit)",
+    "lc3946_c5_tag": "phase-lc3946-c5-results"
   }
 }

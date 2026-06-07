@@ -1,0 +1,399 @@
+{
+  "population": "LC3946",
+  "phase": "LC3946-C5",
+  "freeze_path": "PHASE_LC3946_C5_FREEZE.json",
+  "lc3946_freeze_path": "MIDWEATHER_FINGERPRINT_GATE_LC3946_FREEZE.json",
+  "cost_model": "uniform (no lambda sweep)",
+  "survival_threshold": "gap > 0 strictly",
+  "aggregate_consistency_check": {
+    "expected_b1": [
+      0,
+      1,
+      1.0
+    ],
+    "expected_c_genuine": [
+      0,
+      0,
+      0.0
+    ],
+    "result": "consistent"
+  },
+  "perturbations": [
+    {
+      "perturbation_id": "P1a",
+      "n_solvers": 30,
+      "n_probes_observed": 15,
+      "n_probes_target": 15,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "is_baseline_reference": true
+    },
+    {
+      "perturbation_id": "P1b",
+      "n_solvers": 30,
+      "n_probes_observed": 15,
+      "n_probes_target": 15,
+      "failure_threshold": 0.1,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "threshold_shift"
+    },
+    {
+      "perturbation_id": "P1c",
+      "n_solvers": 30,
+      "n_probes_observed": 15,
+      "n_probes_target": 15,
+      "failure_threshold": 0.2,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "threshold_shift"
+    },
+    {
+      "perturbation_id": "P2a",
+      "n_solvers": 25,
+      "n_probes_observed": 15,
+      "n_probes_target": 15,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "subsample",
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "n_dropped": 5
+    },
+    {
+      "perturbation_id": "P2b",
+      "n_solvers": 25,
+      "n_probes_observed": 15,
+      "n_probes_target": 15,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "subsample",
+      "indices": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "n_dropped": 5
+    },
+    {
+      "perturbation_id": "P2c",
+      "n_solvers": 25,
+      "n_probes_observed": 15,
+      "n_probes_target": 15,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "subsample",
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "n_dropped": 5
+    },
+    {
+      "perturbation_id": "P3a",
+      "n_solvers": 30,
+      "n_probes_observed": 12,
+      "n_probes_target": 13,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "family_knockout",
+      "family_knocked_out": "poset_universal_source",
+      "n_probes_removed_observed": 3,
+      "n_probes_removed_target": 2
+    },
+    {
+      "perturbation_id": "P3b",
+      "n_solvers": 30,
+      "n_probes_observed": 13,
+      "n_probes_target": 12,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "family_knockout",
+      "family_knocked_out": "poset_chain",
+      "n_probes_removed_observed": 2,
+      "n_probes_removed_target": 3
+    },
+    {
+      "perturbation_id": "P3c",
+      "n_solvers": 30,
+      "n_probes_observed": 12,
+      "n_probes_target": 13,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "family_knockout",
+      "family_knocked_out": "poset_antichain",
+      "n_probes_removed_observed": 3,
+      "n_probes_removed_target": 2
+    },
+    {
+      "perturbation_id": "P3d",
+      "n_solvers": 30,
+      "n_probes_observed": 13,
+      "n_probes_target": 12,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "family_knockout",
+      "family_knocked_out": "poset_lattice_boolean",
+      "n_probes_removed_observed": 2,
+      "n_probes_removed_target": 3
+    },
+    {
+      "perturbation_id": "P3e",
+      "n_solvers": 30,
+      "n_probes_observed": 12,
+      "n_probes_target": 13,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 0.0,
+      "survives": false,
+      "perturbation_type": "family_knockout",
+      "family_knocked_out": "poset_lattice_two_prime",
+      "n_probes_removed_observed": 3,
+      "n_probes_removed_target": 2
+    },
+    {
+      "perturbation_id": "P3f",
+      "n_solvers": 30,
+      "n_probes_observed": 13,
+      "n_probes_target": 12,
+      "failure_threshold": 0.05,
+      "b1_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 1,
+        "decision_loss": 1.0
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 0,
+        "wrong_rejects": 0,
+        "decision_loss": 0.0
+      },
+      "gap": 1.0,
+      "survives": true,
+      "perturbation_type": "family_knockout",
+      "family_knocked_out": "poset_isolated",
+      "n_probes_removed_observed": 2,
+      "n_probes_removed_target": 3
+    },
+    {
+      "perturbation_id": "P4",
+      "perturbation_type": "cross_population_anchor",
+      "lc322_c4_gap": 8.3,
+      "lc322_c4_signal_family": "large_amount_stress",
+      "lc322_c5_verdict": "PARTIALLY_SURVIVES",
+      "lc3946_perturbation_applied": false,
+      "source": "data/midweather_fingerprint_lc322.json + phase-c5-results tag (d1435a3)"
+    }
+  ],
+  "falsification": {
+    "verdict": "PARTIALLY_SURVIVES",
+    "n_survived": 10,
+    "n_collapse": 1,
+    "n_total": 11,
+    "per_perturbation_gaps": {
+      "P1b": 1.0,
+      "P1c": 1.0,
+      "P2a": 1.0,
+      "P2b": 1.0,
+      "P2c": 1.0,
+      "P3a": 1.0,
+      "P3b": 1.0,
+      "P3c": 1.0,
+      "P3d": 1.0,
+      "P3e": 0.0,
+      "P3f": 1.0
+    }
+  },
+  "p4_cross_population_anchor": {
+    "lc322_c4_gap": 8.3,
+    "lc322_c4_signal_family": "large_amount_stress",
+    "lc322_c5_verdict": "PARTIALLY_SURVIVES",
+    "lc3946_perturbation_applied": false
+  }
+}
