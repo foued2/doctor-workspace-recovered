@@ -433,6 +433,7 @@ class TestAggregateConsistencyCheck:
             "solver_004": {"p_001": False, "p_002": True}, # 1 fail in poset_X
         }
         target_ids = ["p_001", "p_002"]
+        observed_ids = ["p_001", "p_002"]  # toy: same as target
         # Truth labels (all 0.0 fail rate at threshold 0.05): all ACCEPT
         # B1: ACCEPT solver_001..003, REJECT solver_004 (1 fail) -> WA=0, WR=1
         # C_genuine: ACCEPT all (solver_004's 1 fail is in one family) -> WA=0, WR=0
@@ -440,6 +441,7 @@ class TestAggregateConsistencyCheck:
         # and False on a known-inconsistent input
         result = aggregate_consistency_check(
             pass_results=pass_results,
+            observed_ids=observed_ids,
             target_ids=target_ids,
             failure_threshold=0.05,
             expected_b1_wa_wr_loss=(0, 1, 1.0),
@@ -458,9 +460,11 @@ class TestAggregateConsistencyCheck:
             "solver_002": {"p_001": True, "p_002": True},
         }
         target_ids = ["p_001", "p_002"]
+        observed_ids = ["p_001", "p_002"]
         # B1 will have loss 0.0 here (no failures) but we claim it should be (0, 1, 1.0)
         result = aggregate_consistency_check(
             pass_results=pass_results,
+            observed_ids=observed_ids,
             target_ids=target_ids,
             failure_threshold=0.05,
             expected_b1_wa_wr_loss=(0, 1, 1.0),  # wrong: actual is (0, 0, 0.0)
@@ -468,6 +472,39 @@ class TestAggregateConsistencyCheck:
             probe_index=None,
         )
         assert result is False
+
+    def test_disjoint_observed_vs_target(self):
+        """Regression: observed_ids and target_ids must be treated separately.
+        Bug: previously the function used `observed_ids = list(target_ids)`,
+        which collapsed the K-observation budget to ground-truth probes.
+        Fix: function takes observed_ids and target_ids as separate parameters.
+        """
+        from doctor.adversarial.lc3946_collapse_perturbations import aggregate_consistency_check
+        # 2 solvers, 4 probes. Observed=[p_001, p_002], Target=[p_003, p_004].
+        # solver_001: 0 fails in observed, 0 fails in target -> ground ACCEPT
+        # solver_002: 1 fail in observed (p_001), 0 fails in target -> ground ACCEPT
+        # B1: REJECT solver_002 (1 fail in observed) -> WA=0, WR=1, loss=1.0
+        # B1 predicted REJECT for solver_002, ground says ACCEPT, so WR=1
+        pass_results = {
+            "solver_001": {"p_001": True, "p_002": True, "p_003": True, "p_004": True},
+            "solver_002": {"p_001": False, "p_002": True, "p_003": True, "p_004": True},
+        }
+        observed_ids = ["p_001", "p_002"]
+        target_ids = ["p_003", "p_004"]
+        # Disjoint observed vs target. B1 sees 1 fail in observed (p_001 for solver_002).
+        # If the function uses target_ids as observed_ids (the bug), it would see 0 fails
+        # and B1 would ACCEPT both -> loss=0.0 -> inconsistent with expected (0, 1, 1.0).
+        # With the fix, B1 sees 1 fail -> REJECT solver_002 -> WR=1 -> consistent.
+        result = aggregate_consistency_check(
+            pass_results=pass_results,
+            observed_ids=observed_ids,
+            target_ids=target_ids,
+            failure_threshold=0.05,
+            expected_b1_wa_wr_loss=(0, 1, 1.0),
+            expected_c_genuine_wa_wr_loss=(0, 1, 1.0),  # toy: no probe_index, so C_genuine=B1
+            probe_index=None,
+        )
+        assert result is True, "Disjoint observed/target check should detect B1 sees 1 fail"
 
 
 # ---------------------------------------------------------------------------

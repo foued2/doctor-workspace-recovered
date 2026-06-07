@@ -164,6 +164,7 @@ def main() -> None:
     # ---- Aggregate-consistency check on unperturbed LC3946 ----
     consistent = aggregate_consistency_check(
         pass_results=pass_results_full,
+        observed_ids=observed_ids_full,
         target_ids=target_ids_full,
         failure_threshold=P1A_THRESHOLD,
         expected_b1_wa_wr_loss=expected_b1,
@@ -269,9 +270,13 @@ def main() -> None:
     print(f"[phase-lc3946-c5] P4: cross-population anchor (LC322 C-4 gap={p4_anchor['lc322_c4_gap']})")
 
     # ---- Falsification criterion ----
-    # Per-perturbation gaps for the 11 actual perturbations (P1a is reference)
-    p_gaps = {p["perturbation_id"]: p.get("gap", 0.0) for p in perturbations if p["perturbation_id"] != "P4"}
-    # Ensure exactly 11 perturbation conditions (P1a + P1b + P1c + P2a + P2b + P2c + P3a..P3f)
+    # Per-perturbation gaps for the 11 actual perturbations (P1a is baseline reference; P4 is anchor)
+    p_gaps = {
+        p["perturbation_id"]: p.get("gap", 0.0)
+        for p in perturbations
+        if not p.get("is_baseline_reference") and p["perturbation_id"] != "P4"
+    }
+    # Ensure exactly 11 perturbation conditions (P1b + P1c + P2a + P2b + P2c + P3a..P3f)
     assert len(p_gaps) == 11, f"Expected 11 perturbation conditions, got {len(p_gaps)}"
     overall = falsification_criterion(p_gaps)
 

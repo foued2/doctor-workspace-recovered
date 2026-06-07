@@ -283,6 +283,7 @@ def _probe_to_fingerprint_context(probe: dict) -> dict:
 
 def aggregate_consistency_check(
     pass_results: dict[str, dict[str, bool]],
+    observed_ids: list[str],
     target_ids: list[str],
     failure_threshold: float,
     expected_b1_wa_wr_loss: tuple[int, int, float],
@@ -294,7 +295,10 @@ def aggregate_consistency_check(
 
     Args:
         pass_results: dict mapping solver_id to {probe_id: pass_bool}.
-        target_ids: list of probe_ids used to derive ground truth.
+        observed_ids: list of probe_ids used as the K-observation budget
+            input to the estimators.
+        target_ids: list of probe_ids used to derive ground truth labels
+            (must be disjoint from observed_ids in production use).
         failure_threshold: threshold for deriving truth labels.
         expected_b1_wa_wr_loss: expected (wrong_accepts, wrong_rejects,
             decision_loss) for B1.
@@ -311,8 +315,6 @@ def aggregate_consistency_check(
         _fail_count_policy,
         _c_genuine_policy,
     )
-
-    observed_ids = list(target_ids)
 
     b1_preds = _apply_policy(_fail_count_policy, pass_results, observed_ids, probe_index)
     cg_preds = _apply_policy(_c_genuine_policy, pass_results, observed_ids, probe_index)
