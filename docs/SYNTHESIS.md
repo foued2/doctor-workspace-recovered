@@ -218,7 +218,8 @@ Five observations follow from this diagnostic map.
    feature. The re-implementation (C_genuine) produced different
    per-solver decisions on LC322.
 
-4. Distribution-shift perturbations (C-5) separate estimator-level gains from dataset-geometry interactions. The C-4 gain
+4. Distribution-shift perturbations (C-5) separate estimator-level gains from dataset-geometry interactions.
+   The C-4 gain
    on unperturbed LC322 is one observation. The C-5 battery of
    11 perturbations showed the gain survives 6 of 11 and collapses
    on 5. The collapse pattern is consistent with the gain being
@@ -288,17 +289,20 @@ Question: for every named object, identify its operational definition
 and every phase where that definition changed. Find semantic drift.
 
 **"correctness"**
+
 - Operational definition: oracle_output matches solver_output on target probes.
 - Defined in `compute_ground_truth` (run_midweather_fingerprint_lc322.py).
 - Stable across C-1, C-3a, C-4, C-5, C-6. No drift.
 
 **"failure pattern"**
+
 - Operational definition: a set of (probe_id, pass_fail) pairs for a solver,
   grouped by probe_family of the failures.
 - Defined in C-4 (`_c_genuine_policy`). Inherited by C-5, C-6.
 - No drift within the C-4 lineage.
 
 **"fingerprint"** (semantic drift detected)
+
 - C-1, C-3a: a 6-dim vector from `encode_raw_tensor`
   (pf, deformation, axis_val, family_val, paired, invariant).
   `family_val` is 1.0/0.0 indicator of whether the field exists.
@@ -315,6 +319,7 @@ and every phase where that definition changed. Find semantic drift.
   on different inputs.
 
 **"algorithmic structure"**
+
 - Operational definition: not directly measured. Inferred from
   probe_family clustering of failures.
 - The 6-dim feature space does not include direct measures of
@@ -322,6 +327,7 @@ and every phase where that definition changed. Find semantic drift.
   narrative, not in measurements.
 
 **"decision utility"**
+
 - Operational definition: linear cost = (correct_accepts +
   correct_rejects - lambda_R * wrong_rejects -
   lambda_A * wrong_accepts) / n_solvers.
@@ -329,6 +335,7 @@ and every phase where that definition changed. Find semantic drift.
 - Stable across all phases.
 
 **"generalization" / "distribution-invariant"** (semantic narrowing)
+
 - C-1: lambda robustness within a single population.
 - C-4: cross-population (LC322, LC45).
 - C-5: perturbation robustness (11 perturbations on LC322).
@@ -395,6 +402,7 @@ Question: replace evocative names with neutral labels. Do conclusions
 become less convincing?
 
 Replacing names:
+
 - C_genuine → Estimator_7
 - B1 → Estimator_3
 - fingerprint → Feature_Vector_12
@@ -465,6 +473,7 @@ All three outcomes are constructable through population design.
   ≥1 failure. C and B1 produce identical decisions.
 
 Doctor's two populations:
+
 - LC322 (11/19 ACCEPT/REJECT): C-dominant. C wins on unperturbed
   (C-4 PASS).
 - LC45 (1/9 ACCEPT/REJECT, single-survivor skew): B1-dominant. B1
@@ -485,6 +494,7 @@ probe_family of each failure.
 B1 input: (obs_fails, n_obs). Ignores obs_records.
 
 For a solver with k failures:
+
 - B1's decision space: 1 of 2 (ACCEPT if k=0, REJECT if k>0).
 - C_genuine's decision space: 1 of 2 (ACCEPT if k=0 or
   all-failures-in-one-family, REJECT otherwise).
@@ -625,40 +635,40 @@ alone; the table gives the lower and upper bounds implied by the
 aggregate counts):
 
 - R1 (C_genuine):
-  - P1:  D in [5, 6],  n=30
-  - P2a: D in [2, 3],  n=20
-  - P2b: D in [5, 6],  n=20
-  - P2c: D in [3, 3],  n=20
-  - P3a: D in [5, 9],  n=30
-  - P3b: D in [5, 6],  n=30
-  - P3c: D in [3, 3],  n=30
-  - P3d: D in [5, 6],  n=30
-  - P3e: D in [5, 6],  n=30
-  - P3f: D in [5, 6],  n=30
-  - Sum of D lower bounds: 43. Sum of D upper bounds: 54.
-    Sparsity: 43/270 = 15.9% (lower), 54/270 = 20.0% (upper).
-    Effective range: ~16–20% of perturbation × solver pairs.
+    - P1:  D in [5, 6], n=30
+    - P2a: D in [2, 3], n=20
+    - P2b: D in [5, 6], n=20
+    - P2c: D in [3, 3], n=20
+    - P3a: D in [5, 9], n=30
+    - P3b: D in [5, 6], n=30
+    - P3c: D in [3, 3], n=30
+    - P3d: D in [5, 6], n=30
+    - P3e: D in [5, 6], n=30
+    - P3f: D in [5, 6], n=30
+    - Sum of D lower bounds: 43. Sum of D upper bounds: 54.
+      Sparsity: 43/270 = 15.9% (lower), 54/270 = 20.0% (upper).
+      Effective range: ~16–20% of perturbation × solver pairs.
 - R2 (C_feature_threshold): D=0 on every perturbation. The
   additional feature (deformation_level) is never informative on
   LC322. The 30 observed probes all have deformation_level=0; the
   rule vacuously falls back to B1 behavior. Information utilization:
   0/270 = 0%.
 - R3 (C_majority):
-  - P1:  D in [5, 6],   n=30
-  - P2a: D in [2, 3],   n=20
-  - P2b: D in [5, 6],   n=20
-  - P2c: D in [3, 3],   n=20
-  - P3a: D in [9, 14],  n=30
-  - P3b: D in [7, 12],  n=30
-  - P3c: D in [5, 5],   n=30
-  - P3d: D in [12, 17], n=30
-  - P3e: D in [5, 8],   n=30
-  - P3f: D in [5, 6],   n=30
-  - Sum of D lower bounds: 58. Sum of D upper bounds: 80.
-    Sparsity: 58/270 = 21.5% (lower), 80/270 = 29.6% (upper).
-    Effective range: ~21–24% of perturbation × solver pairs
-    (lower-bound central tendency; upper bound 29.6% reflects
-    high-end per-perturbation overlap, dominated by P3d).
+    - P1:  D in [5, 6], n=30
+    - P2a: D in [2, 3], n=20
+    - P2b: D in [5, 6], n=20
+    - P2c: D in [3, 3], n=20
+    - P3a: D in [9, 14], n=30
+    - P3b: D in [7, 12], n=30
+    - P3c: D in [5, 5], n=30
+    - P3d: D in [12, 17], n=30
+    - P3e: D in [5, 8], n=30
+    - P3f: D in [5, 6], n=30
+    - Sum of D lower bounds: 58. Sum of D upper bounds: 80.
+      Sparsity: 58/270 = 21.5% (lower), 80/270 = 29.6% (upper).
+      Effective range: ~21–24% of perturbation × solver pairs
+      (lower-bound central tendency; upper bound 29.6% reflects
+      high-end per-perturbation overlap, dominated by P3d).
 - R4 (C_zero_only): D=0 by construction (operationally identical
   to B1). Information utilization: 0/270 = 0%.
 
@@ -744,32 +754,32 @@ statistic; 2000 permutations, seed 20260607.
 
 ### Per-solver failure vectors (24 included solvers)
 
-| Solver      | Oracle | $f_1$ | $f_2$ | $f_3$ | $f_4$ | $f_5$ | $f_6$ | Total |
-|-------------|--------|------|------|------|------|------|------|-------|
-| solver_006  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
-| solver_007  | REJECT |    3 |    5 |    5 |    5 |    5 |    5 |    28 |
-| solver_008  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
-| solver_009  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
-| solver_010  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
-| solver_011  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
-| solver_012  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
-| solver_013  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
-| solver_014  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
-| solver_015  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
-| solver_016  | REJECT |    5 |    0 |    5 |    1 |    0 |    0 |    11 |
-| solver_017  | REJECT |    5 |    0 |    5 |    0 |    0 |    0 |    10 |
-| solver_018  | REJECT |    1 |    0 |    4 |    0 |    0 |    0 |     5 |
-| solver_019  | ACCEPT |    0 |    0 |    2 |    0 |    0 |    0 |     2 |
-| solver_020  | ACCEPT |    0 |    0 |    1 |    0 |    0 |    0 |     1 |
-| solver_021  | ACCEPT |    0 |    0 |    2 |    0 |    0 |    0 |     2 |
-| solver_022  | REJECT |    5 |    5 |    5 |    5 |    5 |    5 |    30 |
-| solver_023  | REJECT |    5 |    0 |    5 |    0 |    0 |    0 |    10 |
-| solver_024  | REJECT |    0 |    4 |    1 |    5 |    2 |    1 |    13 |
-| solver_025  | ACCEPT |    0 |    0 |    2 |    0 |    0 |    0 |     2 |
-| solver_027  | ACCEPT |    0 |    0 |    1 |    0 |    0 |    0 |     1 |
-| solver_028  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
-| solver_029  | REJECT |    3 |    5 |    5 |    5 |    5 |    4 |    27 |
-| solver_030  | REJECT |    5 |    5 |    5 |    5 |    5 |    4 |    29 |
+| Solver     | Oracle | $f_1$ | $f_2$ | $f_3$ | $f_4$ | $f_5$ | $f_6$ | Total |
+|------------|--------|-------|-------|-------|-------|-------|-------|-------|
+| solver_006 | REJECT | 0     | 4     | 0     | 5     | 2     | 1     | 12    |
+| solver_007 | REJECT | 3     | 5     | 5     | 5     | 5     | 5     | 28    |
+| solver_008 | REJECT | 0     | 4     | 0     | 5     | 2     | 1     | 12    |
+| solver_009 | REJECT | 0     | 4     | 0     | 5     | 2     | 1     | 12    |
+| solver_010 | REJECT | 0     | 4     | 0     | 5     | 2     | 1     | 12    |
+| solver_011 | REJECT | 3     | 3     | 1     | 3     | 2     | 2     | 14    |
+| solver_012 | REJECT | 3     | 3     | 1     | 3     | 2     | 2     | 14    |
+| solver_013 | REJECT | 3     | 3     | 1     | 3     | 2     | 2     | 14    |
+| solver_014 | REJECT | 3     | 3     | 1     | 3     | 2     | 2     | 14    |
+| solver_015 | REJECT | 3     | 3     | 1     | 3     | 2     | 2     | 14    |
+| solver_016 | REJECT | 5     | 0     | 5     | 1     | 0     | 0     | 11    |
+| solver_017 | REJECT | 5     | 0     | 5     | 0     | 0     | 0     | 10    |
+| solver_018 | REJECT | 1     | 0     | 4     | 0     | 0     | 0     | 5     |
+| solver_019 | ACCEPT | 0     | 0     | 2     | 0     | 0     | 0     | 2     |
+| solver_020 | ACCEPT | 0     | 0     | 1     | 0     | 0     | 0     | 1     |
+| solver_021 | ACCEPT | 0     | 0     | 2     | 0     | 0     | 0     | 2     |
+| solver_022 | REJECT | 5     | 5     | 5     | 5     | 5     | 5     | 30    |
+| solver_023 | REJECT | 5     | 0     | 5     | 0     | 0     | 0     | 10    |
+| solver_024 | REJECT | 0     | 4     | 1     | 5     | 2     | 1     | 13    |
+| solver_025 | ACCEPT | 0     | 0     | 2     | 0     | 0     | 0     | 2     |
+| solver_027 | ACCEPT | 0     | 0     | 1     | 0     | 0     | 0     | 1     |
+| solver_028 | REJECT | 0     | 4     | 0     | 5     | 2     | 1     | 12    |
+| solver_029 | REJECT | 3     | 5     | 5     | 5     | 5     | 4     | 27    |
+| solver_030 | REJECT | 5     | 5     | 5     | 5     | 5     | 4     | 29    |
 
 ### Result
 
@@ -779,6 +789,7 @@ Carlo permutation p-value: 0.0045 (8/2000 permutations with LR
 references.
 
 The fitted parameters:
+
 - $\alpha_0$ (oracle ACCEPT, n=5): (1.69, 1.69, 4.95, 1.69, 1.69, 1.69) — peaked at family 3
 - $\alpha_1$ (oracle REJECT, n=19): (1.77, 2.23, 1.69, 2.46, 1.81, 1.58) — range 1.58–2.46
 - $\alpha_{combined}$ (all, n=24): (1.82, 2.20, 2.20, 2.38, 1.85, 1.66)
@@ -794,9 +805,9 @@ The test detects that failure direction is oracle-correlated. The
 test does not discriminate between two sources of the correlation:
 
 - **Solver-internal interpretation**: the 5 recoveries fail in family
-  3. Family 3 is `large_amount_stress`. The pattern is consistent
-  with solver-internal organization — a property of the algorithms
-  rather than the probes.
+    3. Family 3 is `large_amount_stress`. The pattern is consistent
+       with solver-internal organization — a property of the algorithms
+       rather than the probes.
 - **Probe-induced interpretation**: family 3 (`large_amount_stress`)
   is constructed around amounts that stress BFS-family algorithms.
   Failure in family 3 is associated with probe construction.
@@ -868,13 +879,13 @@ P4 is the LC45 cross-population, out of scope for C-7).
 
 ### 15.2 Per-condition summary
 
-| Condition  | \|S\| | \|T_P\| | D    | B1 (WA, WR)  | C_genuine (WA, WR) | Verdict     |
-|------------|-------|---------|------|--------------|--------------------|-------------|
-| P0         | 30    | 5       | 19   | (5, 5)       | (19, 0)            | COLLAPSE    |
-| P1         | 30    | 5       | 19   | (6, 14)      | (11, 0)            | STABLE      |
-| P2a        | 20    | 4       | 11   | (4, 2)       | (13, 0)            | COLLAPSE    |
-| P2b        | 20    | 5       | 18   | (1, 5)       | (14, 0)            | COLLAPSE    |
-| P2c        | 20    | 4       | 9    | (5, 3)       | (11, 0)            | COLLAPSE    |
+| Condition | \|S\| | \|T_P\| | D  | B1 (WA, WR) | C_genuine (WA, WR) | Verdict  |
+|-----------|-------|---------|----|-------------|--------------------|----------|
+| P0        | 30    | 5       | 19 | (5, 5)      | (19, 0)            | COLLAPSE |
+| P1        | 30    | 5       | 19 | (6, 14)     | (11, 0)            | STABLE   |
+| P2a       | 20    | 4       | 11 | (4, 2)      | (13, 0)            | COLLAPSE |
+| P2b       | 20    | 5       | 18 | (1, 5)      | (14, 0)            | COLLAPSE |
+| P2c       | 20    | 4       | 9  | (5, 3)      | (11, 0)            | COLLAPSE |
 
 RQ-C7 verdict: **NEGATIVE** (P0 COLLAPSE on the unperturbed
 family-3 quotient). Aggregate consistency check on B1
@@ -990,19 +1001,20 @@ not a property of the estimators.
 
 ### 15.8 Lineage
 
-| Item                                     | Commit    |
-|------------------------------------------|-----------|
-| `PHASE_C7_SPEC.md`                       | `779f9cb` |
-| `PHASE_C7_FREEZE.json`                   | `06bbe40` |
-| `doctor/adversarial/quotient.py`         | `5963657` |
-| `tests/test_quotient.py`                 | `5963657` |
-| `runners/run_c7_quotient_lc322.py`       | `d58fc00` |
-| `data/c7_quotient_lc322.json`            | `5880f9b` |
-| `docs/PHASE_C7_RESULTS.md`               | `24ab42d` |
-| `docs/SYNTHESIS.md` (this section §15)   | (pending) |
-| Tag: `phase-c7-results`                  | `24ab42d` |
+| Item                                   | Commit    |
+|----------------------------------------|-----------|
+| `PHASE_C7_SPEC.md`                     | `779f9cb` |
+| `PHASE_C7_FREEZE.json`                 | `06bbe40` |
+| `doctor/adversarial/quotient.py`       | `5963657` |
+| `tests/test_quotient.py`               | `5963657` |
+| `runners/run_c7_quotient_lc322.py`     | `d58fc00` |
+| `data/c7_quotient_lc322.json`          | `5880f9b` |
+| `docs/PHASE_C7_RESULTS.md`             | `24ab42d` |
+| `docs/SYNTHESIS.md` (this section §15) | (pending) |
+| Tag: `phase-c7-results`                | `24ab42d` |
 
 C-7 inherits (lineage only, not modified):
+
 - C-1 freeze `3bd286d`
 - C-3a freeze `a6c97bc`, tag `phase-c3a-results` `1ad4777`
 - C-4 freeze `88d0243`, tag `phase-c4-results` `50d33e5`
@@ -1178,3 +1190,97 @@ form available in the closed record.
 - Word "real" check: passed. The C-4 gain is described as
   "previously observed" or "$\Delta_C(P_{30}) > 0$", not as
   "real".
+
+### 15.10 Layer boundary formalization (interpretation constraints)
+
+This subsection is a **pure clarification layer**, not an
+extension of the model. It defines a semantic precedence rule
+over the three syntactic layers already present in the closed
+record. It introduces no experimental claims, no redefinitions
+of C-7 results, no adjustments to $\Delta$, MDD, or quotient
+definitions, and does not retroactively reinterpret C-4, C-5,
+or C-6.
+
+#### 15.10.1 Layer separation (hard boundary)
+
+The closed record uses three syntactic layers. A statement
+belongs to exactly one layer.
+
+- **Object layer**: data + results. The committed JSON files
+  under `data/`, the results documents under
+  `docs/PHASE_C*_RESULTS.md`, and the numerical statements
+  derived directly from them. This layer carries the
+  substantive findings of the project.
+
+- **Reduction layer**: derived mathematical restatements. The
+  restatements in §15.9 above. This layer carries the
+  formalization of the C–B1 comparison as a functional over
+  probe measures.
+
+- **Audit-posture layer**: meta-evaluation of compliance. The
+  constraint declarations in §9 above, the audit-posture
+  subsection in §15.9.2 above, and equivalent statements in
+  the C-*_FREEZE.json files. This layer carries the project's
+  self-evaluation of its own compliance with the
+  epistemological constraints.
+
+#### 15.10.2 Non-interference rule
+
+Audit-posture text does not modify the semantic validity of
+object-layer or reduction-layer content.
+
+A statement in the audit-posture layer is a claim about the
+project's compliance posture, not a claim about the project's
+findings or model. It does not strengthen, weaken, alter, or
+qualify any object-layer or reduction-layer statement.
+
+For example: the declaration in §9 that "All phase results
+docs passed audit under these constraints before commit" is
+a claim about audit status. It does not modify the C-4
+finding that $\Delta_C(P_{30}) > 0$ (§15.9), nor the C-7
+finding that $\Delta_C(P_3) \leq 0$ (§15.9). The two layers
+are independent.
+
+#### 15.10.3 Non-immunity rule (key correction, explicitly encoded)
+
+The audit-posture layer is allowed to contain restricted
+vocabulary (the forbidden-word list in §9 and equivalent
+declarations) when the vocabulary is part of declaring the
+audit result. This permission is a syntactic allowance for
+meta-evaluation, not a semantic immunity.
+
+The occurrences of restricted vocabulary inside the
+audit-posture layer remain logically inspectable. They are
+subject to the same interpretation and consistency checking
+as any other text in the record. A reference to a forbidden
+word inside a constraint declaration is a reference; the
+consistency of the surrounding audit-posture statement with
+the rest of the record is a checkable property.
+
+There is no exemption. The audit-posture layer is permitted
+to *contain* the vocabulary; it is not permitted to *be
+insulated from* interpretation.
+
+This rule supersedes any prior informal reading of the
+precedent. The precedent permits mentioning; it does not
+immunize.
+
+#### 15.10.4 Scope constraint
+
+The audit-posture layer is valid only when it refers to one
+or more of:
+
+- **Validation status**: did a phase pass audit? Did a re-run
+  match stored aggregates? Is the freeze pre-declared?
+- **Constraint checking**: does a given text contain
+  forbidden vocabulary? Is a claim stronger than the
+  observation? Does it generalize beyond the tested scope?
+- **Provenance of compliance**: which commit introduced
+  which constraint? Which audit applies to which layer?
+
+The audit-posture layer is not valid when it makes a
+substantive claim about the C-4, C-7, or MDD findings, or
+when it introduces a finding-like statement that belongs to
+the object or reduction layer. A statement that asserts a
+substantive property of the C-4 or C-7 result belongs to
+those layers and is subject to those layers' rules.
