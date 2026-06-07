@@ -1,0 +1,217 @@
+{
+  "phase": "C7",
+  "title": "Response-Equivalence Quotient on `large_amount_stress`",
+  "purpose": "Test whether oracle separation on the `large_amount_stress` family boundary on LC322 survives quotient collapse by solver-response equivalence. Quotient restricted to the 5 family-3 probes; battery restricted to 4 of the 11 C-5 perturbations.",
+  "status": "APPROVED",
+  "authorization": "Foued override",
+  "date": "2026-06-07",
+  "spec_commit": "779f9cb",
+
+  "research_question": "RQ-C7: Does the `large_amount_stress` family boundary reflect solver-internal structure or probe construction geometry? Operationalized: does oracle separation on the `large_amount_stress` family survive quotient collapse by solver-response equivalence?",
+
+  "quotient_construction": {
+    "input_probe_set_P": {
+      "family": "large_amount_stress",
+      "probe_ids": ["p_fp_0011", "p_fp_0012", "p_fp_0013", "p_fp_0014", "p_fp_0015"],
+      "n_probes": 5,
+      "source": "data/midweather_fingerprint_lc322_probe_index.json",
+      "all_axis": "magnitude",
+      "all_deformation_level": 0,
+      "note": "All 5 family-3 probes have axis=magnitude and deformation_level=0. The probes vary in amount (50, 50, 100, 50, 1000) and pairing."
+    },
+    "equivalence_relation": "p ~ p' iff for all s in S: R(s, p) = R(s, p')",
+    "quotient_population_T_P": "T_P = P / ~, the set of equivalence classes of family-3 probes under solver-response equivalence",
+    "abstract_probe_inheritance": "Each abstract probe t in T_P inherits probe_family = 'large_amount_stress' from the original probes in the class",
+    "size_range": "1 <= |T_P| <= 5 (computed in Step 3; declared here as a range, not a specific value)",
+    "deterministic": true,
+    "no_new_probes": true,
+    "no_new_solver_packs": true,
+    "no_modification_of_seval_manifest": true
+  },
+
+  "populations": [
+    {
+      "id": "LC322",
+      "role": "primary",
+      "n_solvers": 30,
+      "accept_count": 11,
+      "reject_count": 19,
+      "data_source": "data/midweather_fingerprint_lc322.json",
+      "probe_index": "data/midweather_fingerprint_lc322_probe_index.json",
+      "seval_manifest": "data/midweather_fingerprint_lc322_seval_manifest.json",
+      "seval_manifest_commit": "d157d00"
+    }
+  ],
+
+  "estimators_under_comparison": ["C_genuine", "B1_count"],
+  "estimators_unchanged_from_c4": true,
+  "no_new_estimators": true,
+  "no_new_rule_functions": true,
+  "no_modification_of_problem_class_config": true,
+  "c4_decision_rule_source": "doctor/adversarial/problem_class_config.py (commit 865baf3)",
+  "b1_decision_rule_source": "PHASE_C1_FREEZE.json (commit 3bd286d)",
+
+  "delta": {
+    "value": 0.10,
+    "unit": "normalized_utility_gap",
+    "source": "PHASE_C1_FREEZE.json (commit 3bd286d)"
+  },
+
+  "lambda_sweep": {
+    "values": [1, 2, 5, 7, 10, 15, 20, 30, 50],
+    "lambda_A_fixed": 1,
+    "source": "PHASE_C1_FREEZE.json (commit 3bd286d)"
+  },
+
+  "perturbation_battery": {
+    "source": "PHASE_C5_FREEZE.json (commit 98cc8e4)",
+    "inherited_subset": ["P1_accept_reject_ratio_shift", "P2a_solver_subsample_first_20", "P2b_solver_subsample_last_20", "P2c_solver_subsample_first10_last10"],
+    "n_perturbations": 4,
+    "n_conditions_total": 5,
+    "P0_unperturbed": {
+      "description": "Unperturbed LC322. Quotient on R(s, p) for s in S_full (30 solvers).",
+      "solver_set": "S_full (30 solvers, indices 0..29)",
+      "quotient_solver_set": "S_full"
+    },
+    "P1_accept_reject_ratio_shift": {
+      "description": "Re-label LC322 from 11 ACCEPT / 19 REJECT to 19 ACCEPT / 11 REJECT. The 11 solvers formerly labeled ACCEPT are relabeled REJECT; the 19 formerly labeled REJECT are relabeled ACCEPT.",
+      "solver_set": "S_full (30 solvers)",
+      "quotient_solver_set": "S_full",
+      "quotient_unchanged_from_P0": "Equivalence relation is on R(s, p), not on oracle labels. P1 inverts oracle labels but R(s, p) is unchanged. The quotient population T_P1 equals T_P0.",
+      "estimator_decisions_unchanged": "B1 and C_genuine operate on R(s, p), not on oracle labels. P1 does not change estimator decisions.",
+      "gap_calculation_uses_inverted_labels": true
+    },
+    "P2a_solver_subsample_first_20": {
+      "description": "First 20 solvers of LC322 (indices 0..19 in sorted order).",
+      "solver_set": "S_sub_2a (20 solvers)",
+      "indices_zero_indexed": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+      "quotient_solver_set": "S_sub_2a",
+      "quotient_recomputed_on_subsample": "Equivalence relation p ~ p' is over the subsampled solvers. Two probes equivalent on S_full may not be equivalent on S_sub_2a, and vice versa. T_P2a is computed by the equivalence relation restricted to S_sub_2a."
+    },
+    "P2b_solver_subsample_last_20": {
+      "description": "Last 20 solvers of LC322 (indices 10..29 in sorted order).",
+      "solver_set": "S_sub_2b (20 solvers)",
+      "indices_zero_indexed": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+      "quotient_solver_set": "S_sub_2b",
+      "quotient_recomputed_on_subsample": true
+    },
+    "P2c_solver_subsample_first10_last10": {
+      "description": "First 10 + last 10 solvers (excludes middle 10).",
+      "solver_set": "S_sub_2c (20 solvers)",
+      "indices_zero_indexed": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+      "quotient_solver_set": "S_sub_2c",
+      "quotient_recomputed_on_subsample": true
+    },
+    "P3a_through_P3f_excluded": {
+      "rationale": "P3 perturbations knock out non-family-3 probes. On the family-3 restricted quotient, the probe set is fixed at family 3; knocking out non-family-3 probes does not change the quotient. The P3 perturbations are no-ops on T_P.",
+      "excluded_perturbations": ["P3a_probe_family_knockout_reachability", "P3b_probe_family_knockout_coin_order", "P3c_probe_family_knockout_large_amount", "P3d_probe_family_knockout_greedy_dp", "P3e_probe_family_knockout_forward_dp", "P3f_probe_family_knockout_memo_cache"],
+      "P3c_specific_note": "P3c knocks out the family under test, zeroing out T_P. Recording P3c as a 'collapse' would be a definitional artifact, not a finding."
+    },
+    "P4_excluded": {
+      "rationale": "C-7 is on LC322 only. The LC45 cross-population test was C-5's P4 and is not extended to C-7."
+    }
+  },
+
+  "success_criterion_verbatim": "Delta(M_C, M_{B1}; T_P) > 0 AND stable under the C-5 perturbation battery restricted to `large_amount_stress`.",
+
+  "failure_criterion_verbatim": "Delta <= 0 OR collapses under perturbation.",
+
+  "degeneracy_on_unperturbed_quotient": {
+    "applies_to": "Delta(M_C, M_{B1}; T_P0), the unperturbed condition",
+    "claim": "On the unperturbed family-3 quotient T_P0, the condition Delta(M_C, M_{B1}; T_P0) > 0 is an arithmetic identity, not a measurement. The condition holds by construction whenever any solver has a family-3 failure; no application of the estimators is required to verify it.",
+    "mechanism": "C_genuine accepts a solver if (a) observed failures = 0, or (b) all observed failures share one probe_family. On T_P0, every abstract probe has probe_family = 'large_amount_stress' by inheritance. The set of failures sharing one probe_family is the set of all failures. Condition (b) is vacuously satisfied for any solver with one or more failures. C_genuine accepts every solver with 0 failures (matching B1) AND every solver with one or more failures (differing from B1).",
+    "consequence_for_Delta": "Delta(M_C, M_{B1}; T_P0) equals the count of solvers with one or more family-3 failures. This is a count, not a measurement of estimator behavior on the quotient.",
+    "consequence_for_gap": "The unperturbed gap(M_C, M_{B1}; T_P0) is informative. It is not an arithmetic identity; it depends on the specific LC322 data. The unperturbed condition is necessary but uninformative for Delta; the gap is informative.",
+    "informative_condition": "The informative condition is the stability of the divergence under the four perturbations in the C-7 battery. A 'positive' C-7 result requires the divergence to hold at all 9 lambda values on all 4 perturbations. A 'positive' verdict on the unperturbed Delta alone is not a positive verdict on RQ-C7."
+  },
+
+  "per_perturbation_stability": {
+    "is_actual_test": true,
+    "applies_to_conditions": ["P0_unperturbed", "P1_accept_reject_ratio_shift", "P2a_solver_subsample_first_20", "P2b_solver_subsample_last_20", "P2c_solver_subsample_first10_last10"],
+    "n_conditions": 5,
+    "stability_criterion": "A condition C is 'stable' for C-7 if: (a) Delta(M_C, M_{B1}; T_P_C) > 0 at all 9 lambda values in the C-1 sweep, AND (b) the aggregate utility gap on T_P_C exceeds 0.10 at all 9 lambda values.",
+    "collapse_criterion": "If any lambda on any condition has Delta <= 0 or gap <= 0.10, the condition is a 'collapse'.",
+    "rq_c7_verdict_logic": "A C-7 result with one or more collapses is a 'negative' or 'mixed' result on RQ-C7, not a 'positive' result, regardless of the unperturbed Delta. The success criterion is satisfied only if all 5 conditions are stable."
+  },
+
+  "falsification_criterion": {
+    "per_condition": {
+      "STABLE": "Delta > 0 AND gap > 0.10 at all 9 lambda values",
+      "COLLAPSE": "any lambda has Delta <= 0 or gap <= 0.10",
+      "DEGENERATE": "rule or B1 collapses to all-ACCEPT or all-REJECT at a given lambda; record and exclude at that lambda; degenerate on all lambdas -> COLLAPSE"
+    },
+    "rq_c7": {
+      "POSITIVE": "all 5 conditions are STABLE on LC322. The C-4 gain survives quotient collapse by solver-response equivalence on the family-3 probe set.",
+      "NEGATIVE": "P0_unperturbed is a COLLAPSE (gap <= 0.10 at any lambda on the unperturbed quotient). The C-4 gain does not survive quotient collapse on the unperturbed family-3 probe set. The verdict is NEGATIVE regardless of perturbation stability; P0 is one of the 5 conditions and the success criterion is the conjunction of all 5 conditions being STABLE.",
+      "MIXED": "P0_unperturbed is STABLE but one or more of {P1, P2a, P2b, P2c} is a COLLAPSE. The C-4 gain survives quotient collapse on the unperturbed family-3 probe set but not on the perturbed family-3 probe set. The verdict is MIXED, with per-condition status reported."
+    },
+    "per_condition_reporting": true,
+    "no_aggregation_across_conditions": "C-7 verdict is per-condition; the RQ-C7 verdict is one of {POSITIVE, NEGATIVE, MIXED} derived from per-condition status; no other aggregation",
+    "epistemological_constraint": "A POSITIVE C-7 result does not establish that the signal is solver-internal. The H1/H2 ambiguity is not resolved by this phase (per the spec)."
+  },
+
+  "aggregate_consistency_check": {
+    "required": true,
+    "applies_to": ["B1_count"],
+    "check": "Re-run B1 on unperturbed LC322 (full 30-probe set, not restricted to family-3); recomputed (WA, WR) must equal stored (WA, WR) in data/midweather_fingerprint_lc322.json",
+    "on_failure": "STOP IMMEDIATELY. Do not record any result. Surface discrepancy to Foued."
+  },
+
+  "hard_stop_conditions": [
+    "Re-run produces (WA, WR) inconsistent with stored aggregates for B1 -> STOP",
+    "C-5 perturbation battery parameters are modified after this freeze is committed -> STOP, surface to Foued",
+    "C-4 C_genuine decision rule is modified after this freeze is committed -> STOP, surface to Foued",
+    "A new estimator is introduced without Foued override -> STOP, surface to Foued",
+    "The oracle is varied without Foued override -> STOP, surface to Foued",
+    "The quotient construction is changed after this freeze is committed -> STOP, surface to Foued"
+  ],
+
+  "protocol_constraints": {
+    "no_new_probes": true,
+    "no_new_solver_packs": true,
+    "no_new_estimators": true,
+    "no_new_rule_functions": true,
+    "no_modification_of_c1_freeze_parameters": true,
+    "no_modification_of_c4_decision_rule": true,
+    "no_modification_of_c5_perturbation_battery_for_included_perturbations": true,
+    "no_modification_of_seval_manifest": true,
+    "no_post_hoc_adjustment_of_quotient_construction": true,
+    "no_post_hoc_adjustment_of_perturbations": true,
+    "no_post_hoc_selection_of_favorable_perturbations": true,
+    "no_silent_resolution_of_aggregate_inconsistency": true,
+    "no_aggregation_across_conditions": true,
+    "per_condition_reporting_only": true,
+    "c1_closure_not_reopened": true,
+    "c3a_closure_not_reopened": true,
+    "c4_closure_not_reopened": true,
+    "c5_closure_not_reopened": true,
+    "c6_closure_not_reopened": true,
+    "project_closure_004_not_reopened": true,
+    "results_doc_forbids_word_real": true,
+    "results_doc_forbids_hidden_causal_language": true
+  },
+
+  "epistemological_constraints": [
+    "no compression drift",
+    "no negative result inflation beyond tested population (LC322), tested family (large_amount_stress), and tested perturbation set (P1, P2a-c)",
+    "no causal language: no because, therefore, explains, caused by, due to",
+    "no H1/H2 resolution claim on POSITIVE verdict"
+  ],
+
+  "lineage": {
+    "c1_freeze_commit": "3bd286d",
+    "c3a_freeze_commit": "a6c97bc",
+    "c4_freeze_commit": "88d0243",
+    "c4_closure_commit": "50d33e5",
+    "c4_tag": "phase-c4-results",
+    "c5_freeze_commit": "98cc8e4",
+    "c5_closure_commit": "d1435a3",
+    "c5_tag": "phase-c5-results",
+    "c6_freeze_commit": "6766f4c",
+    "c6_closure_commit": "788fc5b",
+    "c6_tag": "phase-c6-results",
+    "seval_manifest_commit": "d157d00",
+    "c7_spec_commit": "PENDING",
+    "c7_freeze_commit": "PENDING"
+  }
+}
