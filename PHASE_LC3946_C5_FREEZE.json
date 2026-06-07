@@ -32,7 +32,7 @@
 
   "spec_commit": "9414fce",
   "c5_freeze_commit": "9414fce",
-  "c5_results_commit": "PENDING (filled in follow-up commit after commit hash exists)",
+  "c5_results_commit": "1ad7faf",
   "c5_tag": "phase-lc3946-c5-results",
 
   "recovered_solver_check": {
@@ -265,7 +265,7 @@
     "lc3946_freeze_commit": "08890e8",
     "lc3946_c5_spec_commit": "9414fce",
     "lc3946_c5_freeze_commit": "9414fce",
-    "lc3946_c5_results_commit": "PENDING (filled in follow-up commit)",
+    "lc3946_c5_results_commit": "1ad7faf",
     "lc3946_c5_tag": "phase-lc3946-c5-results"
   }
 }
