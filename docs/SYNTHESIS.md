@@ -1284,3 +1284,226 @@ when it introduces a finding-like statement that belongs to
 the object or reduction layer. A statement that asserts a
 substantive property of the C-4 or C-7 result belongs to
 those layers and is subject to those layers' rules.
+
+### 15.11 Risk surface / conditional dominance map
+
+This subsection is a **conditional map** of the C vs B1 risk
+difference across the 18 distributions in the closed record
+and the 9 lambda values of the C-1 cost sweep. It is a
+re-expression of existing committed data. It is **not** a
+theorem layer, and it is **not** a universal claim about all
+cost models, all populations, or all future frameworks.
+
+The map is bounded to:
+
+- the C-1 asymmetric cost model
+  (`doctor/asymmetric_cost.py:run_sweep_aggregate`) with
+  lambda_A = 1 and
+  lambda_R in {1, 2, 5, 7, 10, 15, 20, 30, 50};
+- the 18 distributions present in the closed record
+  (C-4 unperturbed on LC322 and LC45, C-5 eleven
+  perturbations, C-7 five conditions);
+- the committed data values from
+  `data/c4_decisions_lc{322,45}.json` (phase-c4-results),
+  `data/c5_collapse_lc322.json` (phase-c5-results),
+  `data/c7_quotient_lc322.json` (phase-c7-results).
+
+The map makes the dependence on (D, lambda) explicit. The
+dependence is empirical, not analytic. The map is conditional
+on the C-1 cost model and the closed record; it does not
+generalize to other cost models, other probe designs, or
+other populations not present in the closed record.
+
+#### 15.11.1 Method
+
+For each (distribution D, lambda_R) pair:
+
+- R(M | D, lambda_R) = 1 - (WA * lambda_A + WR * lambda_R)
+  / (n * lambda_A), with lambda_A = 1.0.
+- Delta = R(C_genuine | D, lambda_R) - R(B1 | D, lambda_R).
+- Delta > 0: C_genuine is the lower-risk estimator on D at
+  the given lambda_R.
+- Delta < 0: B1 is the lower-risk estimator on D at the
+  given lambda_R.
+- Delta = 0: tie under the C-1 cost model.
+
+The per-distribution aggregate (WA, WR) values are taken
+verbatim from the committed JSON files. No new measurement
+is performed in this subsection. The exploration script
+and the full 18 x 9 numerical output live in
+`C:\Users\pakla\AppData\Local\Temp\opencode\risk_surface.py`
+and `.../risk_surface.json`; neither is committed to the
+repository.
+
+#### 15.11.2 The 18 x 9 condensed table
+
+The 18 distributions, with sample size n, count of lambda
+values at which Delta > 0 out of 9, the range of Delta, and
+the source:
+
+| ID                          | n  | #lambda(Delta>0) | min Delta | max Delta | source                    |
+|-----------------------------|----|------------------|-----------|-----------|---------------------------|
+| C4_unperturbed_LC322        | 30 | 9                | +0.13     | +8.30     | c4_decisions_lc322.json   |
+| C4_unperturbed_LC45         | 10 | 0                | -0.10     | -0.10     | c4_decisions_lc45.json    |
+| C5_P1 (label inversion)     | 30 | 6                | -0.13     | +1.50     | c5_collapse_lc322.json    |
+| C5_P2a                      | 20 | 9                | +0.05     | +4.95     | c5_collapse_lc322.json    |
+| C5_P2b                      | 20 | 9                | +0.20     | +12.45    | c5_collapse_lc322.json    |
+| C5_P2c                      | 20 | 9                | +0.15     | +7.50     | c5_collapse_lc322.json    |
+| C5_P3a (knockout family 1)  | 30 | 9                | +0.03     | +8.20     | c5_collapse_lc322.json    |
+| C5_P3b (knockout family 2)  | 30 | 9                | +0.13     | +8.30     | c5_collapse_lc322.json    |
+| C5_P3c (knockout family 3)  | 30 | 0                | -0.10     | -0.10     | c5_collapse_lc322.json    |
+| C5_P3d (knockout family 4)  | 30 | 9                | +0.13     | +8.30     | c5_collapse_lc322.json    |
+| C5_P3e (knockout family 5)  | 30 | 9                | +0.13     | +8.30     | c5_collapse_lc322.json    |
+| C5_P3f (knockout family 6)  | 30 | 9                | +0.13     | +8.30     | c5_collapse_lc322.json    |
+| C5_P4 (LC45 cross-pop)      | 10 | 0                | -0.10     | -0.10     | c5_collapse_lc322.json    |
+| C7_P0 (family-3 restricted) | 30 | 7                | -0.30     | +7.87     | c7_quotient_lc322.json    |
+| C7_P1 (label-inv control)   | 30 | 9                | +0.30     | +23.17    | c7_quotient_lc322.json    |
+| C7_P2a                      | 20 | 7                | -0.35     | +4.55     | c7_quotient_lc322.json    |
+| C7_P2b                      | 20 | 7                | -0.40     | +11.85    | c7_quotient_lc322.json    |
+| C7_P2c                      | 20 | 7                | -0.15     | +7.20     | c7_quotient_lc322.json    |
+
+The full 18 x 9 cell-level numerical output is not inlined
+here; the table is a per-distribution summary of the same
+data.
+
+#### 15.11.3 The four collapse regimes
+
+The 18 distributions include 4 where Delta <= 0 at all 9
+lambda values, or at 2 of 9 lambda values for the partial
+case. The four regimes are:
+
+1. **C4_unperturbed_LC45 (n=10)**: B1 has 0 wrong accepts
+   and 0 wrong rejects on LC45 (0, 0); C_genuine has 1 wrong
+   accept and 0 wrong rejects (1, 0). Delta = -0.10 at all
+   9 lambda. The C-4 verdict FAIL on LC45 is consistent
+   with this surface entry. C_genuine is uniformly
+   dominated by B1 on this distribution under the C-1
+   cost model.
+
+2. **C5_P3c (n=30, knockout family 3)**: removing the
+   `large_amount_stress` probes alone flips the C-4 PASS
+   pattern to a uniform collapse. Delta = -0.10 at all 9
+   lambda. All other C-5 P3* knockouts (families 1, 2, 4, 5,
+   6) preserve the 9/9 dominance pattern of C-4 unperturbed
+   LC322.
+
+3. **C5_P4 (n=10, LC45 cross-population)**: identical to
+   C-4 LC45 in (WA, WR) aggregates, same n=10, same
+   Delta = -0.10 at all 9 lambda. The cross-population
+   direction of the C-5 battery reproduces the LC45
+   collapse.
+
+4. **C7_P0 (n=30, family-3 restricted quotient)**: the only
+   partial-collapse entry. Delta = -0.30 at lambda = 1 and
+   Delta = -0.13 at lambda = 2. At lambda >= 5, Delta is
+   positive (0.37 at lambda=5, rising to 7.87 at lambda=50).
+   The C-7 NEGATIVE verdict on P0 follows from the
+   pre-declared "STABLE at all 9 lambda" criterion: the
+   criterion is binding at lambda = 1 and lambda = 2 only.
+
+The four regimes are the only entries in the 18
+distributions where Delta <= 0 at all 9 lambda, or at 2
+of 9 lambda for the partial case.
+
+#### 15.11.4 C-4 LC322 as the only full 9/9 unperturbed regime
+
+`C4_unperturbed_LC322` (n=30) is the only unperturbed,
+non-control distribution in the closed record where
+Delta > 0 at all 9 lambda values. The other 9/9 entries in
+the table are either:
+
+- perturbations of the C-4 LC322 regime (C-5 P2* and the
+  C-5 P3* family knockouts on families 1, 2, 4, 5, 6);
+- the C-7 P1 label-inversion control, which is a control
+  condition, not a regime where C's structural property
+  is under test.
+
+The C-4 LC322 entry is the entry from which the C-4 PASS
+verdict follows. The other 9/9 entries are derived from
+this entry by perturbation or by control construction.
+They do not establish a separate full 9/9 regime.
+
+#### 15.11.5 Family-3 dependence
+
+Across the C-5 P3* family-knockout battery, all knockouts
+except family 3 (large_amount_stress) preserve the 9/9
+dominance pattern of C-4 unperturbed LC322. Knocking out
+family 3 alone flips to 0/9 (uniform collapse). The
+single-family sensitivity is consistent with the MDD
+concentration documented in section 14: the 5 C-4
+recoveries (out of 30) all occur in family 3.
+
+The C-7 P0 entry, on the family-3 restricted quotient,
+reaches the same conclusion from a different operation:
+restricting the probe space to family 3 produces Delta < 0
+at lambda = 1, 2 (collapse at low lambda), even though
+Delta > 0 at lambda >= 5. The C-7 P0 entry is consistent
+with the C-5 P3c observation: the family-3 probes are the
+load-bearing family for the C vs B1 dominance pattern in
+the closed record.
+
+The family-3 dependence is bounded to the closed record:
+it is an empirical statement about the 18 distributions in
+the table. It is not a claim about all future probe
+designs, all future families, or all populations.
+
+#### 15.11.6 Lambda-dependent sign-flip in C-7 P0
+
+C-7 P0 is the only entry in the 18 x 9 table with a sign
+change across lambda. The per-lambda Delta for C7_P0:
+
+| lambda | Delta    |
+|--------|----------|
+| 1      | -0.30    |
+| 2      | -0.13    |
+| 5      | +0.37    |
+| 7      | +0.70    |
+| 10     | +1.20    |
+| 15     | +2.10    |
+| 20     | +3.10    |
+| 30     | +4.95    |
+| 50     | +7.87    |
+
+The sign-flip is associated with the C-1 cost model
+weighted by the per-solver (WA, WR) of the family-3
+restricted population: at low lambda, the cost of B1's
+extra wrong-rejects is below the cost of C_genuine's extra
+wrong-accepts; at high lambda, the ordering reverses.
+The asymmetry in (WA_B1, WR_B1) vs (WA_C, WR_C) is the
+input to the cost model; the cost model is the input to
+the sign-flip. The sign-flip is a property of the
+combination, not of any single factor.
+
+The C-7 verdict is NEGATIVE on P0 under the pre-declared
+criterion that required stability at all 9 lambda: the
+criterion is not satisfied at lambda = 1 and lambda = 2.
+The surface shows the criterion binding in a specific,
+lambda-localized way: it is not a property of all lambda
+values, and it is not a property of the (D, lambda) pair
+in general.
+
+#### 15.11.7 Audit posture
+
+This subsection is a **conditional map**, not a theorem,
+not a universal claim, and not a refutation of distribution
+invariance in full generality. The map records the
+empirical pattern of Delta = R(C_genuine) - R(B1) across
+the 18 committed distributions and 9 lambda values, under
+the C-1 cost model. The map does not generalize to other
+cost models, other populations, or other probe designs.
+
+Hidden causal language check: passed. The forbidden
+vocabulary (because, therefore, explains, caused by, due
+to, results in, leads to, comes from, as a result, hence,
+failed because) does not appear in this subsection.
+
+Word "real" check: passed. The C-4 LC322 dominance is
+described as Delta > 0 at all 9 lambda, not as a global
+property of C_genuine.
+
+The map does not redefine any prior phase result, does not
+introduce a new measurement, and does not modify the C-4,
+C-5, C-7, or MDD verdicts. The map is a re-expression
+of the committed data under a single unified cost
+functional, with the dependence on (D, lambda) made
+explicit.
