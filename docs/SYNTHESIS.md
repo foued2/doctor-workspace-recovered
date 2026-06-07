@@ -687,3 +687,150 @@ matters locally and sparsely.
 The more primitive question the prior phases did not ask is
 quantitative: how many decision changes per bit of additional
 information? The data exists to answer it.
+
+---
+
+## 14. Three-model comparison and MDD null result
+
+The identifiability framing in §12 leaves the H1/H2 question unresolved
+by the closed record. Three models at three different levels sharpen
+the question.
+
+### The three models
+
+- **Epistemic ceiling (this synthesis, §12)**: the closed record is
+  finite-sample evidence within a single measurement regime. The C-5
+  battery is a sample of the natural class $\mathcal{T}$, not
+  $\mathcal{T}$ itself. Finite-sample evidence cannot establish a
+  universal claim (H2). The closure statement is the isolation of an
+  unresolved ambiguity.
+
+- **Structural diagnosis (external analysis, not in this document)**:
+  the observation channel is closed under probe-family dominance.
+  Both $C$ and $B1$ are functions of the same sufficient statistic.
+  Three exit paths require architectural changes outside the current
+  observation channel: causal intervention, solver-space modeling,
+  quotient-space equivalence.
+
+- **Cheapest diagnostic (this section)**: fit Dirichlet parameters
+  $\alpha_0$ and $\alpha_1$ separately on per-solver failure vectors
+  split by oracle label. Test $H_0: \alpha_0 = \alpha_1$ via
+  likelihood ratio. The data is in the closed record; no new
+  measurement is required.
+
+### The MDD test setup
+
+The per-solver failure vector is $f(s) = (f_1, \ldots, f_6)$ where
+$f_i$ = count of failures in family $i$ across all 30 probes on
+LC322. Six families in axis-declaration order:
+`reachability_counterfactual`, `non_canonical_coin_order`,
+`large_amount_stress`, `greedy_dp_threshold`,
+`forward_dp_overwrite`, `memo_cache_aliasing`. Solvers with
+$M(s) = 0$ (all-zero failure vector) are excluded; they carry no
+directional information.
+
+The exclusion removed 6 solvers (solver_001 through solver_005, the
+DP-survivors, and solver_026, the Hybrid; all oracle ACCEPT, all 30
+probes passed). The remaining 24 solvers split into 5 oracle ACCEPT
+(solver_019, 020, 021, 025, 027 — the 5 recoveries from C-4) and 19
+oracle REJECT.
+
+The likelihood ratio test uses a Newton MLE for each Dirichlet (with
+pseudo-count 0.5 per family for regularization, lower bound 0.05 on
+$\alpha_i$). The asymptotic reference is $\chi^2_6$ (six additional
+parameters in the alternative). The permutation reference shuffles
+oracle labels across the 24 included solvers and recomputes the LR
+statistic; 2000 permutations, seed 20260607.
+
+### Per-solver failure vectors (24 included solvers)
+
+| Solver      | Oracle | $f_1$ | $f_2$ | $f_3$ | $f_4$ | $f_5$ | $f_6$ | Total |
+|-------------|--------|------|------|------|------|------|------|-------|
+| solver_006  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
+| solver_007  | REJECT |    3 |    5 |    5 |    5 |    5 |    5 |    28 |
+| solver_008  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
+| solver_009  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
+| solver_010  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
+| solver_011  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
+| solver_012  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
+| solver_013  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
+| solver_014  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
+| solver_015  | REJECT |    3 |    3 |    1 |    3 |    2 |    2 |    14 |
+| solver_016  | REJECT |    5 |    0 |    5 |    1 |    0 |    0 |    11 |
+| solver_017  | REJECT |    5 |    0 |    5 |    0 |    0 |    0 |    10 |
+| solver_018  | REJECT |    1 |    0 |    4 |    0 |    0 |    0 |     5 |
+| solver_019  | ACCEPT |    0 |    0 |    2 |    0 |    0 |    0 |     2 |
+| solver_020  | ACCEPT |    0 |    0 |    1 |    0 |    0 |    0 |     1 |
+| solver_021  | ACCEPT |    0 |    0 |    2 |    0 |    0 |    0 |     2 |
+| solver_022  | REJECT |    5 |    5 |    5 |    5 |    5 |    5 |    30 |
+| solver_023  | REJECT |    5 |    0 |    5 |    0 |    0 |    0 |    10 |
+| solver_024  | REJECT |    0 |    4 |    1 |    5 |    2 |    1 |    13 |
+| solver_025  | ACCEPT |    0 |    0 |    2 |    0 |    0 |    0 |     2 |
+| solver_027  | ACCEPT |    0 |    0 |    1 |    0 |    0 |    0 |     1 |
+| solver_028  | REJECT |    0 |    4 |    0 |    5 |    2 |    1 |    12 |
+| solver_029  | REJECT |    3 |    5 |    5 |    5 |    5 |    4 |    27 |
+| solver_030  | REJECT |    5 |    5 |    5 |    5 |    5 |    4 |    29 |
+
+### Result
+
+LR statistic: 21.12. Asymptotic $\chi^2_6$ p-value: 0.0017. Monte
+Carlo permutation p-value: 0.0045 (8/2000 permutations with LR
+≥ observed). **Null verdict: REJECT at $\alpha = 0.05$** under both
+references.
+
+The fitted parameters:
+- $\alpha_0$ (oracle ACCEPT, n=5): (1.69, 1.69, 4.95, 1.69, 1.69, 1.69) — peaked at family 3
+- $\alpha_1$ (oracle REJECT, n=19): (1.77, 2.23, 1.69, 2.46, 1.81, 1.58) — range 1.58–2.46
+- $\alpha_{combined}$ (all, n=24): (1.82, 2.20, 2.20, 2.38, 1.85, 1.66)
+
+The signal is concentrated: the 5 oracle-ACCEPT solvers with failures
+all fail in family 3 only. The 19 oracle-REJECT solvers show
+failures across multiple families, with 4 solvers (solver_007, 022,
+029, 030) close to uniform failure distributions.
+
+### Caveat on the source of the signal
+
+The test detects that failure direction is oracle-correlated. The
+test does not discriminate between two sources of the correlation:
+
+- **Solver-internal interpretation**: the 5 recoveries fail in family
+  3. Family 3 is `large_amount_stress`. The pattern is consistent
+  with solver-internal organization — a property of the algorithms
+  rather than the probes.
+- **Probe-induced interpretation**: family 3 (`large_amount_stress`)
+  is constructed around amounts that stress BFS-family algorithms.
+  Failure in family 3 is associated with probe construction.
+
+The detected $\alpha_0 \neq \alpha_1$ is consistent with both
+interpretations. The MDD test is informative for the existence of
+the signal, not for the source.
+
+### Logical consequence
+
+With $H_0$ rejected, the question is no longer whether
+oracle-correlated directional information exists in the closed
+record (it does), and no longer whether finite-sample evidence can
+establish H2 (it cannot, per §12). The remaining question is the
+source of the signal.
+
+This is the structural-diagnosis question: is the detected signal
+solver-internal organization or probe construction, and which
+architectural intervention would discriminate between them? The MDD
+test answers neither. The question passes to the structural-diagnosis
+model.
+
+### Methodological notes
+
+- Pseudo-count 0.5 per family: Laplace-style regularization. The
+  qualitative pattern (alpha_0 peaked at family 3) holds across
+  pseudo-count 0.1 to 1.0; the LR statistic magnitude scales with
+  pseudo-count choice.
+- Permutation seed: 20260607. Reproducible.
+- Test script: `C:\Users\pakla\AppData\Local\Temp\opencode\mdd_test.py`
+  (exploratory, not committed; temp script per the test setup).
+- Result JSON: `C:\Users\pakla\AppData\Local\Temp\opencode\mdd_result.json`
+  (exploratory, not committed).
+- Per-solver per-probe pass/fail data: computed in-memory by
+  `runners/run_midweather_fingerprint_lc322.py:execute_solvers` from
+  the seval_manifest and probe_index. The data is not stored in any
+  committed JSON; running the C-4 / C-1 runners regenerates it.
