@@ -1011,3 +1011,170 @@ C-7 inherits (lineage only, not modified):
 - seval_manifest `d157d00`
 - project-closure-004 `ccbf927`
 - SYNTHESIS.md §14 (MDD test, commit `8d594a7`)
+
+### 15.9 Mathematical reduction of the three-phase sequence
+
+The material in this subsection is a **mathematical reduction**, not
+a new measurement result. It is a definitional equivalence inside
+the formalization consistent with the data, applied to the
+trajectory C-4 → MDD → C-7. It does not reopen any prior phase. It
+does not introduce new estimators, new probes, or new data. The
+audit constraints from §Epistemological Constraints (no claim
+stronger than the observation; no hidden causal language) apply to
+this subsection.
+
+The framing: C-7 did not add a new layer of structure to the
+project. It stress-tested whether the previously observed
+C–B1 separation survives quotient restriction and perturbation. It
+does not, except in the trivial control regime. The question
+collapses from "what happens if we refine the estimator" to
+"what object is being measured when C appears to outperform B1".
+
+The mathematical reduction is the following.
+
+Let $S$ be the LC322 solver set ($|S| = 30$). Let $P$ be a probe
+set on LC322. Let $O: S \to \{0, 1\}$ be the oracle partition.
+Let $R(s, p) \in \{0, 1\}$ be the response of solver $s$ on probe
+$p$ (0 = pass, 1 = fail; recorded at
+`runners/run_midweather_fingerprint_lc322.py:execute_solvers`).
+
+Define the induced partitions:
+
+- B1 induces a scalar projection:
+  [
+  \phi_{B1}(s) = \sum_{p \in P} \mathbf{1}[R(s,p) = 1]
+  ]
+  This is a function of marginal failure mass only. B1 is invariant
+  under probe relabeling.
+
+- Any C-class estimator (such as `C_genuine`) induces a structured
+  functional:
+  [
+  \phi_C(s) = F(\{R(s, p)\}_{p \in P})
+  ]
+  This depends on the joint structure of $R$, not only the marginal
+  sum. C is not invariant under probe relabeling.
+
+Define the only object that carries the C–B1 comparison across
+phases:
+[
+\Delta_C(P) = \mathbb{E}_{s \sim S}[ \mathbf{1}[\phi_C(s) = O(s)] - \mathbf{1}[\phi_{B1}(s) = O(s)] ]
+]
+
+C–B1 "beats" reduces, under the current model, to:
+[
+\Delta_C(P) > 0
+]
+
+C-4, MDD, and C-7 are three test points on the function
+$\Delta_C(\cdot)$:
+
+- C-4 (commit `50d33e5`): $\Delta_C(P_{30}) > 0$ on the full
+  30-probe LC322 population, where $P_{30}$ is the full probe set.
+- MDD (SYNTHESIS §14, commit `8d594a7`): the C-4 gain is
+  concentrated in family-3 failures on LC322.
+- C-7 (commit `24ab42d`): $\Delta_C(P_{3}) \leq 0$ on the
+  family-3 restricted quotient, where $P_{3}$ is the family-3 probe
+  set. The collapse pattern is {P0 COLLAPSE, P1 STABLE, P2a
+  COLLAPSE, P2b COLLAPSE, P2c COLLAPSE} (§15.2 above).
+
+C-7 is the decisive constraint: $\Delta_C(P)$ changes sign under
+restriction to a single family and is not stable under quotient
+restriction. This kills the strong form:
+[
+\forall P' \subseteq P:\ \Delta_C(P') \geq 0
+]
+
+The surviving mathematical statement is strictly weaker:
+[
+\exists P' \subseteq P:\ \Delta_C(P') > 0
+]
+and
+[
+\exists P'' \subseteq P:\ \Delta_C(P'') \leq 0
+]
+
+This is the only form compatible with all observed phases
+(C-4, MDD, C-7).
+
+The key structural conclusion of the reduction: **C is not an
+estimator that dominates B1 on an invariant ordering. It is a
+functional that reshapes the partition induced by the probe
+distribution.**
+
+B1 is invariant under probe relabeling (it depends on marginal
+failure mass). C is not; it depends on joint structure
+$R(s, p)$.
+
+This is a definitional equivalence inside the formalization, not a
+new measurement result. The "tie-breaker" models considered
+elsewhere in the project (Dirichlet-multinomial decomposition in
+SYNTHESIS §14, mutual information between $\phi_C$ and $O$ at the
+proposal level, quotient algebra in C-7) are all projections of
+the same fact: the system being measured is non-commuting in the
+sense
+[
+\phi_C \not\perp P
+]
+— the partition induced by $\phi_C$ over $S$ varies with the probe
+distribution $P$.
+
+From this: any apparent gain is a property of the interaction
+between the estimator and the probe geometry, not a property of a
+dominance relation between solvers as elements of $S$.
+
+The final reduction is the equivalence (definitional inside the
+formalization, not a new measurement): C beats B1 is equivalent
+to the condition that the probe distribution $P$ induces a
+feature-aligned subspace where $F(R)$ correlates with $O$. C-7
+shows that this alignment is **not closed under restriction**,
+the closure-under-restriction notion of fragility observed across
+the C-4 → MDD → C-7 trajectory.
+
+The "break the tie" answer under this reduction: there is no
+global ordering $C > B1$. There is only a signed functional over
+probe measures:
+[
+\Delta_C : \mathcal{P}(P) \to \mathbb{R}
+]
+
+The project is the empirical characterization of the regions of
+$\mathcal{P}(P)$ where $\Delta_C$ is positive, zero, or negative.
+
+That is the complete mathematical content of the C–B1
+comparison under the existing data: the C-4 gain is a property of
+the full-population cost geometry on $P_{30}$, and is not a
+property of the estimators as elements of a dominance order on
+$S$. The C-7 collapse on the family-3 restricted quotient
+$\tilde{P}$ (§15.2) is the only formal refutation of the strong
+form available in the closed record.
+
+#### 15.9.1 What the reduction does not establish
+
+- The reduction does not resolve the H1/H2 ambiguity (see C-7
+  spec §Epistemological Constraint, lines 232-249).
+- The reduction does not introduce a new estimator.
+- The reduction does not generalize beyond LC322, beyond
+  $\phi_{B1}$ and $\phi_{C_{\text{genuine}}}$, or beyond the C-1
+  asymmetric cost model.
+- The reduction does not modify the C-4 result
+  (commit `50d33e5`) or the C-7 result (commit `24ab42d`).
+- The reduction is consistent with the data; it is not derived
+  from a new measurement.
+
+#### 15.9.2 Audit posture
+
+- "The mathematical reduction is...", "Under the current model,
+  the tie reduces to...", "This is a definitional equivalence
+  inside the formalization, not a new measurement result" — all
+  framing statements. The substantive claims are restricted to
+  the three test points (C-4 PASS, MDD concentration, C-7
+  NEGATIVE) already recorded in §15.2, §14, and the C-4 / C-7
+  results docs.
+- Hidden causal language check: passed. The forbidden words
+  (because, therefore, explains, caused by, due to, results in,
+  leads to, comes from, as a result, hence, failed because) do
+  not appear in this subsection.
+- Word "real" check: passed. The C-4 gain is described as
+  "previously observed" or "$\Delta_C(P_{30}) > 0$", not as
+  "real".
