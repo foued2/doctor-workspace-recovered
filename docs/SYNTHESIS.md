@@ -1,6 +1,9 @@
 # docs/SYNTHESIS.md
+
 # Doctor/Bimaristan — Cross-Phase Synthesis
+
 # Date: 2026-06-06
+
 # Status: Final documentation layer. Does not reopen any closed phase.
 
 ---
@@ -15,13 +18,13 @@ All statements are observations from the closed phase record.
 
 ## 2. The phase sequence
 
-| Phase | Tag | Finding |
-|---|---|---|
-| project-closure-004 | `ccbf927` | Transfer hypothesis. C_structured_fingerprint does not improve decision utility over B1 under symmetric decision_loss on frozen populations. |
-| C-1 | `phase-c1-results` | Asymmetric-cost sweep. Gap identically 0 at all 9 λ values on both populations. FAIL with mathematical certainty under the freeze's linear cost model. |
-| C-3a | `phase-c3a-results` | Per-solver identity resolution. D=0, A=0 on both populations. C_structured_fingerprint and B1 misclassify identical solver sets. FULL_EQUIVALENCE. |
-| C-4 | `phase-c4-results` | C_genuine (probe_family coherence rule) produces D=6, A=50, gap > 0.10 at all 9 λ on LC322 (PASS). Introduces 1 false accept on LC45 where B1 is perfect (FAIL). |
-| C-5 | `phase-c5-results` | Distribution shift analysis. C-4 gain survives 6 of 11 pre-declared perturbations. PARTIALLY_SURVIVES. |
+| Phase               | Tag                 | Finding                                                                                                                                                          |
+|---------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| project-closure-004 | `ccbf927`           | Transfer hypothesis. C_structured_fingerprint does not improve decision utility over B1 under symmetric decision_loss on frozen populations.                     |
+| C-1                 | `phase-c1-results`  | Asymmetric-cost sweep. Gap identically 0 at all 9 λ values on both populations. FAIL with mathematical certainty under the freeze's linear cost model.           |
+| C-3a                | `phase-c3a-results` | Per-solver identity resolution. D=0, A=0 on both populations. C_structured_fingerprint and B1 misclassify identical solver sets. FULL_EQUIVALENCE.               |
+| C-4                 | `phase-c4-results`  | C_genuine (probe_family coherence rule) produces D=6, A=50, gap > 0.10 at all 9 λ on LC322 (PASS). Introduces 1 false accept on LC45 where B1 is perfect (FAIL). |
+| C-5                 | `phase-c5-results`  | Distribution shift analysis. C-4 gain survives 6 of 11 pre-declared perturbations. PARTIALLY_SURVIVES.                                                           |
 
 ---
 
@@ -46,11 +49,13 @@ REJECT otherwise.
 This is a different decision language from B1, not a refinement of the same language.
 
 C-4 did not establish:
+
 - that C as an estimator class is superior to B1
 - that structured fingerprints produce generalizable utility gains
 - that the observed gap is an estimator property
 
 C-4 established:
+
 - that a decision rule using probe_family produces measurable divergence from B1
   on LC322 under the C-1 asymmetric-cost protocol
 - that the divergence satisfies the pre-declared falsification criterion on LC322
@@ -93,15 +98,29 @@ It is not answerable by iterating on the current populations or cost model.
 It requires either a theoretical argument about the representation class
 or empirical testing across a substantially wider distribution family.
 
-A theoretical characterization of the open question: a population would need
-to contain solvers whose failure patterns are structured in a way that
-correlates with correctness, not solely with probe family membership.
-The LC322 probe geometry clusters failures by family, and that clustering
-is observable in the probe design rather than in the solvers' algorithmic
-behavior. A population where structural failure patterns reflect genuine
-algorithmic differences would be a different kind of test. This is a
-property the population would need to have, not a property of any
-candidate rule.
+A theoretical characterization of the open question: the population the
+question refers to would need to satisfy a property the current record
+does not satisfy. Two conditions need to be distinguished. First,
+failure patterns would need to correlate with correctness — failure
+clustering that predicts accept/reject. Second, those patterns would
+need to reflect genuine algorithmic differences — interpretable as
+properties of solver internals, not as artifacts of probe design. A
+population could satisfy the first without the second: predictive
+clustering is not the same as interpretable clustering. The LC322 probe
+geometry clusters failures by family; that clustering is observable
+in the probe design. Whether it reflects genuine algorithmic
+differences is not answered by the closed phases.
+
+A further observation: probes designed to test specific algorithmic
+families build in probe-family structure by construction. The
+clustering observed on LC322 is not an accident of this particular
+probe set. It is a property of probes that target specific algorithmic
+properties. A population where failure clustering is driven by solver
+internals rather than probe internals would require a method for
+distinguishing the two sources of clustering. Such a method would
+itself be a version of the structured estimator the phases are trying
+to test. The requirement may not be satisfiable through probe design
+alone.
 
 ---
 
@@ -199,8 +218,7 @@ Five observations follow from this diagnostic map.
    feature. The re-implementation (C_genuine) produced different
    per-solver decisions on LC322.
 
-4. Distribution-shift perturbations (C-5) separate estimator-
-   level gains from dataset-geometry interactions. The C-4 gain
+4. Distribution-shift perturbations (C-5) separate estimator-level gains from dataset-geometry interactions. The C-4 gain
    on unperturbed LC322 is one observation. The C-5 battery of
    11 perturbations showed the gain survives 6 of 11 and collapses
    on 5. The collapse pattern is consistent with the gain being
