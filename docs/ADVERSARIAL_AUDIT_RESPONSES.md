@@ -1,288 +1,14 @@
-# docs/SYNTHESIS.md
-
-# Doctor/Bimaristan — Cross-Phase Synthesis
-
+# ADVERSARIAL_AUDIT_RESPONSES.md
+# Doctor/Bimaristan — Adversarial Audit Responses
 # Date: 2026-06-07
-
-# Status: Final documentation layer. Does not reopen any closed phase.
-
----
-
-## 1. What this document is
-
-A single-layer synthesis of findings across all closed phases.
-No new measurements. No new claims. No causal language.
-All statements are observations from the closed phase record.
+# Status: Folded into SYNTHESIS.md as §13 (this commit). Standalone file
+# retained for direct reference. Audit 11 numerical claims corrected
+# pre-fold: numerator sums 43 (R1) and 58 (R3); denominator 270 =
+# 7×30 + 3×20, tied to perturbation-dependent sample sizes.
 
 ---
 
-## 2. The phase sequence
-
-| Phase               | Tag                 | Finding                                                                                                                                                          |
-|---------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| project-closure-004 | `ccbf927`           | Transfer hypothesis. C_structured_fingerprint does not improve decision utility over B1 under symmetric decision_loss on frozen populations.                     |
-| C-1                 | `phase-c1-results`  | Asymmetric-cost sweep. Gap identically 0 at all 9 λ values on both populations. FAIL with mathematical certainty under the freeze's linear cost model.           |
-| C-3a                | `phase-c3a-results` | Per-solver identity resolution. D=0, A=0 on both populations. C_structured_fingerprint and B1 misclassify identical solver sets. FULL_EQUIVALENCE.               |
-| C-4                 | `phase-c4-results`  | C_genuine (probe_family coherence rule) produces D=6, A=50, gap > 0.10 at all 9 λ on LC322 (PASS). Introduces 1 false accept on LC45 where B1 is perfect (FAIL). |
-| C-5                 | `phase-c5-results`  | Distribution shift analysis. C-4 gain survives 6 of 11 pre-declared perturbations. PARTIALLY_SURVIVES.                                                           |
-
----
-
-## 3. Why C-1 and C-3a produced equivalence
-
-C_structured_fingerprint was bound to `_fail_count_policy` — the same policy as B1.
-The structured fingerprint context (`obs_records`) was accepted by the interface
-but not consulted in the decision function.
-Both estimators reduced to the same functional:
-count failures → threshold decision.
-Same input function produces same decision manifold.
-Equivalence under C-1 and C-3a is a property of the implementation,
-not a property of the representation class.
-
----
-
-## 4. What C-4 introduced and what it did not introduce
-
-C_genuine introduced a new dependency: probe_family from obs_records.
-Decision rule: ACCEPT if 0 failures OR all failures share one probe_family;
-REJECT otherwise.
-This is a different decision language from B1, not a refinement of the same language.
-
-C-4 did not establish:
-
-- that C as an estimator class is superior to B1
-- that structured fingerprints produce generalizable utility gains
-- that the observed gap is an estimator property
-
-C-4 established:
-
-- that a decision rule using probe_family produces measurable divergence from B1
-  on LC322 under the C-1 asymmetric-cost protocol
-- that the divergence satisfies the pre-declared falsification criterion on LC322
-- that the same rule introduces a false accept on LC45
-
----
-
-## 5. What C-5 established
-
-The C-4 gain survives 6 of 11 pre-declared perturbations and collapses on 5.
-The collapse pattern is not random:
-
-- P1 (label inversion): collapses. The rule's accept bias becomes a liability
-  when the majority class flips.
-- P2 (solver subsample): unstable across the three fixed draws.
-- P3 (probe family knockout): collapses on knockouts of families the 5 recovered
-  solvers' failures belong to. Survives knockouts of unrelated families.
-- P4 (LC45 cross-population): collapses. C_genuine introduces false accept
-  where B1 is perfect.
-
-The survival pattern is consistent with the gain being an interaction between
-C_genuine's decision rule and the specific structural geometry of the LC322
-solver population. It is not consistent with the gain being a stable property
-of C_genuine as an estimator across distribution transformations.
-
----
-
-## 6. The open question this record does not answer
-
-The phase sequence tested one decision rule (probe_family coherence)
-on two populations (LC322, LC45) under a fixed cost model.
-
-The following question is not answered by any phase in this record:
-
-> Can any estimator built on the structured fingerprint representation class
-> produce distribution-invariant separation from B1?
-
-This is a different question from anything tested here.
-It is not answerable by iterating on the current populations or cost model.
-It requires either a theoretical argument about the representation class
-or empirical testing across a substantially wider distribution family.
-
-A theoretical characterization of the open question: the population the
-question refers to would need to satisfy a property the current record
-does not satisfy. Two conditions need to be distinguished. First,
-failure patterns would need to correlate with correctness — failure
-clustering that predicts accept/reject. Second, those patterns would
-need to reflect genuine algorithmic differences — interpretable as
-properties of solver internals, not as artifacts of probe design. A
-population could satisfy the first without the second: predictive
-clustering is not the same as interpretable clustering. The LC322 probe
-geometry clusters failures by family; that clustering is observable
-in the probe design. Whether it reflects genuine algorithmic
-differences is not answered by the closed phases.
-
-A further observation: probes designed to test specific algorithmic
-families build in probe-family structure by construction. The
-clustering observed on LC322 is not an accident of this particular
-probe set. It is a property of probes that target specific algorithmic
-properties. A population where failure clustering is driven by solver
-internals rather than probe internals would require a method for
-distinguishing the two sources of clustering. Such a method would
-itself be a version of the structured estimator the phases are trying
-to test. The requirement may not be satisfiable through probe design
-alone.
-
----
-
-## 7. What the project record supports
-
-The following claims are supported by the closed phase record:
-
-1. Under the frozen protocol with C_structured_fingerprint bound to
-   _fail_count_policy, no utility gain over B1 is observable at any
-   tested λ value on either population.
-
-2. The equivalence in (1) is per-solver identity equivalence, not
-   aggregation artifact.
-
-3. A decision rule that consults probe_family produces measurable
-   divergence from B1 on LC322 under specific population conditions.
-
-4. That divergence does not survive all tested distribution transformations.
-
-5. The survival pattern of the divergence is consistent with a dataset
-   geometry interaction, not estimator superiority.
-
----
-
-## 8. What the project record does not support
-
-The following claims are not supported:
-
-1. That C_structured_fingerprint has no utility advantage over B1 under
-   any possible implementation or decision rule.
-
-2. That structured fingerprints cannot produce distribution-invariant
-   separation from B1 under any conditions.
-
-3. That the probe_family coherence rule is the best possible structured
-   decision rule for this representation class.
-
-4. That the C-4 gain is generalizable beyond the tested populations
-   and perturbations.
-
----
-
-## 9. Epistemological constraints applied throughout
-
-1. Compression drift: no claim stronger than the observation.
-2. Negative result inflation: no generalization beyond tested populations,
-   λ range, and perturbation set.
-3. Hidden causal language: no because / therefore / explains /
-   caused by / due to.
-
-All phase results docs passed audit under these constraints before commit.
-
----
-
-## 10. Closure reference
-
-Substantive closure: project-closure-004 (`ccbf927`).
-Transfer hypothesis as operationalized: not supported.
-No future formulation claimed to be ruled out.
-This document does not reopen that closure.
-
----
-
-## 11. Five lessons from the closed phase record
-
-The phase record can be restated as a diagnostic map with three coordinates:
-
-- Where separation can appear: structured clustering that is observable
-  in the probe geometry (probe_family coherence on LC322).
-- Where it disappears: under distribution shift (label inversion,
-  solver subsampling, probe family knockout, cross-population to LC45).
-- What kinds of gains are not durable: gains that depend on dataset
-  geometry rather than on properties of the estimator itself.
-
-Five observations follow from this diagnostic map.
-
-1. A gap of zero between two estimators on a frozen protocol (C-1)
-   is informative. It distinguishes estimators that are operationally
-   the same on the tested populations and cost model from estimators
-   that could differ. The observation is stronger than "we did not
-   find a better model." It is a property of the two estimators on
-   the tested scope.
-
-2. Per-solver identity resolution (C-3a) precedes per-aggregate
-   comparison. Aggregation can mask structural differences or
-   simulate differences that are not present at the per-solver
-   level. Confirming per-solver equivalence or per-solver difference
-   is a prerequisite for interpreting aggregate utility gaps.
-
-3. A structured-feature estimator is operationally distinct from
-   a feature-blind estimator only when the structured feature is
-   actually consulted (C-4). The C-3a finding that C_structured_
-   fingerprint and B1_count were bound to the same function was
-   the trigger for re-implementing C to consult the structured
-   feature. The re-implementation (C_genuine) produced different
-   per-solver decisions on LC322.
-
-4. Distribution-shift perturbations (C-5) separate estimator-level gains from dataset-geometry interactions. The C-4 gain
-   on unperturbed LC322 is one observation. The C-5 battery of
-   11 perturbations showed the gain survives 6 of 11 and collapses
-   on 5. The collapse pattern is consistent with the gain being
-   an interaction between the decision rule and the specific
-   probe geometry of the unperturbed LC322.
-
-5. The right unit of falsification for a representation class
-   is the class, not the individual rule (C-6). Four pre-declared
-   candidate rules were tested against the C-5 battery on LC322.
-   None survives all 11 perturbations. The class-level verdict
-   is a structured negative result, not a claim that no estimator
-   on the class can work in any context.
-
----
-
-## 12. The identifiability framing
-
-The closed phase record supports a narrower claim than "Doctor
-established an impossibility result." It supports the isolation of
-an identifiability problem.
-
-The phases repeatedly failed to separate solver structure from
-probe structure. Each failure is an observation about the attempted
-separation. The pattern of failures is consistent with two
-hypotheses, neither of which the record establishes:
-
-- H1: the project's measurement apparatus could not resolve the
-  ambiguity. A different apparatus, with different probe geometry,
-  solver populations, or decision rules, would resolve it.
-- H2: the underlying evaluation paradigm (probe-response) cannot
-  resolve the ambiguity in principle. No apparatus built on this
-  paradigm would resolve it.
-
-The closed phases tested one paradigm under several internal
-variants. The internal variants produced consistent collapses. To
-establish a boundary condition on the paradigm itself, evidence
-across multiple fundamentally different measurement regimes would
-be needed. The record contains evidence within a single regime.
-
-The defensible endpoint is the isolation of an unresolved ambiguity:
-the failure to separate solver structure from probe structure
-persisted across the redesigns attempted within the project's scope.
-The question of whether a different scope would resolve the ambiguity
-is not answered by this record.
-
----
-
-## 13. Adversarial audits of the phase record
-
-The following 11 audits were applied to the closed phase record.
-Each audit is observational. None reopens a closed phase, introduces
-new measurements, or modifies findings. Audits 1-9 are the original
-10-audit battery. Audit 10 reframes the load-bearing beam question
-from a philosophical claim to an engineering claim (supervised
-partitioning). Audit 11 is added post-closure (Information
-Utilization). All audits honor the three constraints in §9.
-
-The audit content in this section is also available as a standalone
-file at `docs/ADVERSARIAL_AUDIT_RESPONSES.md` for direct reference.
-The standalone file contains the same text; Audit 11 was
-numerically corrected (numerator sums 43 R1 / 58 R3; denominator
-270 = 7×30 + 3×20) before being folded in.
-
-### Audit 1 — Ontology Audit
+## Audit 1 — Ontology Audit
 
 Question: for every named object, identify its operational definition
 and every phase where that definition changed. Find semantic drift.
@@ -336,7 +62,9 @@ and every phase where that definition changed. Find semantic drift.
 - By C-6, the term carries the constraint of invariance across
   the full 4-rule, 11-perturbation, 2-population, 9-lambda scope.
 
-### Audit 2 — Null-Reconstruction Audit (revised)
+---
+
+## Audit 2 — Null-Reconstruction Audit (revised)
 
 Question: reconstruct the project under the null (no algorithmic
 structure, no fingerprints, no robustness signal, no solver taxonomy).
@@ -366,7 +94,9 @@ The findings are **compatible with the null**, but not specifically
 The findings do not refute the null. They are also not confirmed by
 the null. Compatibility is a weaker claim than derivability.
 
-### Audit 3 — Reverse-Causality Audit
+---
+
+## Audit 3 — Reverse-Causality Audit
 
 Question: for every causal narrative, construct the reverse
 explanation.
@@ -389,7 +119,9 @@ The reverse-causality audit finds that the project has minimal causal
 structure to reverse. The findings are co-occurrences, not causal
 chains.
 
-### Audit 4 — Adversarial Renaming Audit
+---
+
+## Audit 4 — Adversarial Renaming Audit
 
 Question: replace evocative names with neutral labels. Do conclusions
 become less convincing?
@@ -418,7 +150,9 @@ The renaming reduces evocative power. It does not change the data.
 The findings are about estimators and data, not about
 "fingerprints" or "structure" as concepts.
 
-### Audit 5 — Hidden Symmetry Audit
+---
+
+## Audit 5 — Hidden Symmetry Audit
 
 Question: which results are mathematically forced by design choices?
 
@@ -447,7 +181,9 @@ already in the code. The distinction between *discovering
 equivalence* and *empirically verifying an equivalence implied by
 implementation* is worth preserving.
 
-### Audit 6 — Counterfactual Population Audit
+---
+
+## Audit 6 — Counterfactual Population Audit
 
 Question: generate synthetic populations where the opposite
 conclusion is guaranteed.
@@ -476,7 +212,9 @@ mix these conditions within LC322.
 The findings are population-dependent. The "true" answer is
 "it depends on the population."
 
-### Audit 7 — Information-Theoretic Audit
+---
+
+## Audit 7 — Information-Theoretic Audit
 
 Question: what information does C use that B1 does not? Count bits.
 
@@ -504,7 +242,9 @@ This number (6/30) suggests a more primitive question that the prior
 phases did not ask: what is the marginal value per bit of additional
 information? See Audit 11.
 
-### Audit 8 — Uniqueness Audit
+---
+
+## Audit 8 — Uniqueness Audit
 
 Question: for every finding, list alternative models explaining it.
 
@@ -528,7 +268,9 @@ Question: for every finding, list alternative models explaining it.
 For each finding, 3-6 alternative explanations are not excluded by
 the data. The findings are underdetermined.
 
-### Audit 9 — Research-Laundering Audit
+---
+
+## Audit 9 — Research-Laundering Audit
 
 Question: which results were genuinely surprising vs formalized
 known facts?
@@ -554,7 +296,9 @@ C-3a is the clearest case of research-laundering: it documented a
 known fact (the binding of C_structured_fingerprint to
 `_fail_count_policy`) as a phase finding.
 
-### Audit 10 — Impossible Audit (revised)
+---
+
+## Audit 10 — Impossible Audit (revised)
 
 Question: if Doctor is completely wrong, what is the single deepest
 load-bearing assumption without which the project ceases to make
@@ -592,7 +336,9 @@ a designed function, not a natural truth. The phases assume the
 oracle is the ground truth. Whether the oracle's labels correspond
 to anything stable is not established by the closed record.
 
-### Audit 11 — Information Utilization Audit (new)
+---
+
+## Audit 11 — Information Utilization Audit (new)
 
 Question: how much of the additional feature space ever influences
 decisions?
