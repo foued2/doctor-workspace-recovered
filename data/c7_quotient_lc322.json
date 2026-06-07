@@ -1,0 +1,1515 @@
+{
+  "population": "LC322",
+  "n_solvers": 30,
+  "spec_commit": "779f9cb",
+  "freeze_commit": "06bbe40",
+  "family3_probe_ids": [
+    "p_fp_0011",
+    "p_fp_0012",
+    "p_fp_0013",
+    "p_fp_0014",
+    "p_fp_0015"
+  ],
+  "b1_aggregate_full": {
+    "wrong_accepts": 0,
+    "wrong_rejects": 5
+  },
+  "per_condition": [
+    {
+      "condition_id": "P0_unperturbed",
+      "n_solvers": 30,
+      "n_quotient": 5,
+      "solver_ids": [
+        "solver_001",
+        "solver_002",
+        "solver_003",
+        "solver_004",
+        "solver_005",
+        "solver_006",
+        "solver_007",
+        "solver_008",
+        "solver_009",
+        "solver_010",
+        "solver_011",
+        "solver_012",
+        "solver_013",
+        "solver_014",
+        "solver_015",
+        "solver_016",
+        "solver_017",
+        "solver_018",
+        "solver_019",
+        "solver_020",
+        "solver_021",
+        "solver_022",
+        "solver_023",
+        "solver_024",
+        "solver_025",
+        "solver_026",
+        "solver_027",
+        "solver_028",
+        "solver_029",
+        "solver_030"
+      ],
+      "quotient": [
+        {
+          "member_probes": [
+            "p_fp_0011"
+          ],
+          "representative_probe_id": "p_fp_0011",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0012"
+          ],
+          "representative_probe_id": "p_fp_0012",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0013"
+          ],
+          "representative_probe_id": "p_fp_0013",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0014"
+          ],
+          "representative_probe_id": "p_fp_0014",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0015"
+          ],
+          "representative_probe_id": "p_fp_0015",
+          "probe_family": "large_amount_stress"
+        }
+      ],
+      "b1_aggregate": {
+        "wrong_accepts": 5,
+        "wrong_rejects": 5
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 19,
+        "wrong_rejects": 0
+      },
+      "D": 19,
+      "gap_table": [
+        {
+          "lambda_R": 1,
+          "b1_utility": 0.6666666666666667,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": -0.30000000000000004,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 2,
+          "b1_utility": 0.5,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": -0.1333333333333333,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 5,
+          "b1_utility": 0.0,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": 0.3666666666666667,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 7,
+          "b1_utility": -0.33333333333333326,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": 0.7,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 10,
+          "b1_utility": -0.8333333333333333,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": 1.2,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 15,
+          "b1_utility": -1.6666666666666665,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": 2.033333333333333,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 20,
+          "b1_utility": -2.5,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": 2.8666666666666667,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 30,
+          "b1_utility": -4.166666666666667,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": 4.533333333333333,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 50,
+          "b1_utility": -7.5,
+          "c_genuine_utility": 0.3666666666666667,
+          "gap": 7.866666666666667,
+          "eligible": true,
+          "degenerate": false
+        }
+      ],
+      "verdict": "COLLAPSE",
+      "degenerate_at_any_lambda": false,
+      "per_solver": [
+        {
+          "solver_id": "solver_001",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_002",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_003",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_004",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_005",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_006",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_007",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_008",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_009",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_010",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_011",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_012",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_013",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_014",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_015",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_016",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_017",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_018",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_019",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_020",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_021",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_022",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_023",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_024",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_025",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_026",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_027",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_028",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_029",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_030",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        }
+      ]
+    },
+    {
+      "condition_id": "P1_accept_reject_ratio_shift",
+      "n_solvers": 30,
+      "n_quotient": 5,
+      "solver_ids": [
+        "solver_001",
+        "solver_002",
+        "solver_003",
+        "solver_004",
+        "solver_005",
+        "solver_006",
+        "solver_007",
+        "solver_008",
+        "solver_009",
+        "solver_010",
+        "solver_011",
+        "solver_012",
+        "solver_013",
+        "solver_014",
+        "solver_015",
+        "solver_016",
+        "solver_017",
+        "solver_018",
+        "solver_019",
+        "solver_020",
+        "solver_021",
+        "solver_022",
+        "solver_023",
+        "solver_024",
+        "solver_025",
+        "solver_026",
+        "solver_027",
+        "solver_028",
+        "solver_029",
+        "solver_030"
+      ],
+      "quotient": [
+        {
+          "member_probes": [
+            "p_fp_0011"
+          ],
+          "representative_probe_id": "p_fp_0011",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0012"
+          ],
+          "representative_probe_id": "p_fp_0012",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0013"
+          ],
+          "representative_probe_id": "p_fp_0013",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0014"
+          ],
+          "representative_probe_id": "p_fp_0014",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0015"
+          ],
+          "representative_probe_id": "p_fp_0015",
+          "probe_family": "large_amount_stress"
+        }
+      ],
+      "b1_aggregate": {
+        "wrong_accepts": 6,
+        "wrong_rejects": 14
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 11,
+        "wrong_rejects": 0
+      },
+      "D": 19,
+      "gap_table": [
+        {
+          "lambda_R": 1,
+          "b1_utility": 0.33333333333333337,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 0.29999999999999993,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 2,
+          "b1_utility": -0.1333333333333333,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 0.7666666666666666,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 5,
+          "b1_utility": -1.5333333333333332,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 2.1666666666666665,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 7,
+          "b1_utility": -2.466666666666667,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 3.1,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 10,
+          "b1_utility": -3.8666666666666663,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 4.5,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 15,
+          "b1_utility": -6.2,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 6.833333333333334,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 20,
+          "b1_utility": -8.533333333333333,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 9.166666666666666,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 30,
+          "b1_utility": -13.2,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 13.833333333333332,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 50,
+          "b1_utility": -22.533333333333335,
+          "c_genuine_utility": 0.6333333333333333,
+          "gap": 23.166666666666668,
+          "eligible": true,
+          "degenerate": false
+        }
+      ],
+      "verdict": "STABLE",
+      "degenerate_at_any_lambda": false,
+      "per_solver": [
+        {
+          "solver_id": "solver_001",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_002",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_003",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_004",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_005",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_006",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_007",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_008",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_009",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_010",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_011",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_012",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_013",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_014",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_015",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_016",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_017",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_018",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_019",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_020",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_021",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_022",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_023",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_024",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_025",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_026",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_027",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_028",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_029",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_030",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        }
+      ]
+    },
+    {
+      "condition_id": "P2a_solver_subsample_first_20",
+      "n_solvers": 20,
+      "n_quotient": 4,
+      "solver_ids": [
+        "solver_001",
+        "solver_002",
+        "solver_003",
+        "solver_004",
+        "solver_005",
+        "solver_006",
+        "solver_007",
+        "solver_008",
+        "solver_009",
+        "solver_010",
+        "solver_011",
+        "solver_012",
+        "solver_013",
+        "solver_014",
+        "solver_015",
+        "solver_016",
+        "solver_017",
+        "solver_018",
+        "solver_019",
+        "solver_020"
+      ],
+      "quotient": [
+        {
+          "member_probes": [
+            "p_fp_0011"
+          ],
+          "representative_probe_id": "p_fp_0011",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0012",
+            "p_fp_0013"
+          ],
+          "representative_probe_id": "p_fp_0012",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0014"
+          ],
+          "representative_probe_id": "p_fp_0014",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0015"
+          ],
+          "representative_probe_id": "p_fp_0015",
+          "probe_family": "large_amount_stress"
+        }
+      ],
+      "b1_aggregate": {
+        "wrong_accepts": 4,
+        "wrong_rejects": 2
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 13,
+        "wrong_rejects": 0
+      },
+      "D": 11,
+      "gap_table": [
+        {
+          "lambda_R": 1,
+          "b1_utility": 0.7,
+          "c_genuine_utility": 0.35,
+          "gap": -0.35,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 2,
+          "b1_utility": 0.6,
+          "c_genuine_utility": 0.35,
+          "gap": -0.25,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 5,
+          "b1_utility": 0.30000000000000004,
+          "c_genuine_utility": 0.35,
+          "gap": 0.04999999999999993,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 7,
+          "b1_utility": 0.09999999999999998,
+          "c_genuine_utility": 0.35,
+          "gap": 0.25,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 10,
+          "b1_utility": -0.19999999999999996,
+          "c_genuine_utility": 0.35,
+          "gap": 0.5499999999999999,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 15,
+          "b1_utility": -0.7,
+          "c_genuine_utility": 0.35,
+          "gap": 1.0499999999999998,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 20,
+          "b1_utility": -1.2000000000000002,
+          "c_genuine_utility": 0.35,
+          "gap": 1.5500000000000003,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 30,
+          "b1_utility": -2.2,
+          "c_genuine_utility": 0.35,
+          "gap": 2.5500000000000003,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 50,
+          "b1_utility": -4.2,
+          "c_genuine_utility": 0.35,
+          "gap": 4.55,
+          "eligible": true,
+          "degenerate": false
+        }
+      ],
+      "verdict": "COLLAPSE",
+      "degenerate_at_any_lambda": false,
+      "per_solver": [
+        {
+          "solver_id": "solver_001",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_002",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_003",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_004",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_005",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_006",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_007",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_008",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_009",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_010",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_011",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_012",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_013",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_014",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_015",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_016",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_017",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_018",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_019",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_020",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        }
+      ]
+    },
+    {
+      "condition_id": "P2b_solver_subsample_last_20",
+      "n_solvers": 20,
+      "n_quotient": 5,
+      "solver_ids": [
+        "solver_011",
+        "solver_012",
+        "solver_013",
+        "solver_014",
+        "solver_015",
+        "solver_016",
+        "solver_017",
+        "solver_018",
+        "solver_019",
+        "solver_020",
+        "solver_021",
+        "solver_022",
+        "solver_023",
+        "solver_024",
+        "solver_025",
+        "solver_026",
+        "solver_027",
+        "solver_028",
+        "solver_029",
+        "solver_030"
+      ],
+      "quotient": [
+        {
+          "member_probes": [
+            "p_fp_0011"
+          ],
+          "representative_probe_id": "p_fp_0011",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0012"
+          ],
+          "representative_probe_id": "p_fp_0012",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0013"
+          ],
+          "representative_probe_id": "p_fp_0013",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0014"
+          ],
+          "representative_probe_id": "p_fp_0014",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0015"
+          ],
+          "representative_probe_id": "p_fp_0015",
+          "probe_family": "large_amount_stress"
+        }
+      ],
+      "b1_aggregate": {
+        "wrong_accepts": 1,
+        "wrong_rejects": 5
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 14,
+        "wrong_rejects": 0
+      },
+      "D": 18,
+      "gap_table": [
+        {
+          "lambda_R": 1,
+          "b1_utility": 0.7,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": -0.3999999999999999,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 2,
+          "b1_utility": 0.44999999999999996,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": -0.1499999999999999,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 5,
+          "b1_utility": -0.30000000000000004,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": 0.6000000000000001,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 7,
+          "b1_utility": -0.8,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": 1.1,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 10,
+          "b1_utility": -1.5499999999999998,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": 1.8499999999999999,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 15,
+          "b1_utility": -2.8,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": 3.0999999999999996,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 20,
+          "b1_utility": -4.05,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": 4.35,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 30,
+          "b1_utility": -6.55,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": 6.85,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 50,
+          "b1_utility": -11.55,
+          "c_genuine_utility": 0.30000000000000004,
+          "gap": 11.850000000000001,
+          "eligible": true,
+          "degenerate": false
+        }
+      ],
+      "verdict": "COLLAPSE",
+      "degenerate_at_any_lambda": false,
+      "per_solver": [
+        {
+          "solver_id": "solver_011",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_012",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_013",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_014",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_015",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_016",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_017",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_018",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_019",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_020",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_021",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_022",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_023",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_024",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_025",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_026",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_027",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_028",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_029",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_030",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        }
+      ]
+    },
+    {
+      "condition_id": "P2c_solver_subsample_first10_last10",
+      "n_solvers": 20,
+      "n_quotient": 4,
+      "solver_ids": [
+        "solver_001",
+        "solver_002",
+        "solver_003",
+        "solver_004",
+        "solver_005",
+        "solver_006",
+        "solver_007",
+        "solver_008",
+        "solver_009",
+        "solver_010",
+        "solver_021",
+        "solver_022",
+        "solver_023",
+        "solver_024",
+        "solver_025",
+        "solver_026",
+        "solver_027",
+        "solver_028",
+        "solver_029",
+        "solver_030"
+      ],
+      "quotient": [
+        {
+          "member_probes": [
+            "p_fp_0011"
+          ],
+          "representative_probe_id": "p_fp_0011",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0012",
+            "p_fp_0014"
+          ],
+          "representative_probe_id": "p_fp_0012",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0013"
+          ],
+          "representative_probe_id": "p_fp_0013",
+          "probe_family": "large_amount_stress"
+        },
+        {
+          "member_probes": [
+            "p_fp_0015"
+          ],
+          "representative_probe_id": "p_fp_0015",
+          "probe_family": "large_amount_stress"
+        }
+      ],
+      "b1_aggregate": {
+        "wrong_accepts": 5,
+        "wrong_rejects": 3
+      },
+      "c_genuine_aggregate": {
+        "wrong_accepts": 11,
+        "wrong_rejects": 0
+      },
+      "D": 9,
+      "gap_table": [
+        {
+          "lambda_R": 1,
+          "b1_utility": 0.6,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": -0.15000000000000002,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 2,
+          "b1_utility": 0.44999999999999996,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": 0.0,
+          "eligible": false,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 5,
+          "b1_utility": 0.0,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": 0.44999999999999996,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 7,
+          "b1_utility": -0.30000000000000004,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": 0.75,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 10,
+          "b1_utility": -0.75,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": 1.2,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 15,
+          "b1_utility": -1.5,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": 1.95,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 20,
+          "b1_utility": -2.25,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": 2.7,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 30,
+          "b1_utility": -3.75,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": 4.2,
+          "eligible": true,
+          "degenerate": false
+        },
+        {
+          "lambda_R": 50,
+          "b1_utility": -6.75,
+          "c_genuine_utility": 0.44999999999999996,
+          "gap": 7.2,
+          "eligible": true,
+          "degenerate": false
+        }
+      ],
+      "verdict": "COLLAPSE",
+      "degenerate_at_any_lambda": false,
+      "per_solver": [
+        {
+          "solver_id": "solver_001",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_002",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_003",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_004",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_005",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_006",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_007",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_008",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_009",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_010",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_021",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_022",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_023",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_024",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_025",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_026",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_027",
+          "ground_truth": "ACCEPT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_028",
+          "ground_truth": "REJECT",
+          "b1_decision": "ACCEPT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_029",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        },
+        {
+          "solver_id": "solver_030",
+          "ground_truth": "REJECT",
+          "b1_decision": "REJECT",
+          "c_genuine_decision": "ACCEPT"
+        }
+      ]
+    }
+  ],
+  "rq_c7_verdict": "NEGATIVE",
+  "falsification": {
+    "verdict": "NEGATIVE",
+    "delta": 0.1,
+    "p0_verdict": "COLLAPSE",
+    "other_verdicts": [
+      "STABLE",
+      "COLLAPSE",
+      "COLLAPSE",
+      "COLLAPSE"
+    ],
+    "epistemological_constraint": "A POSITIVE C-7 result does not establish that the signal is solver-internal. The H1/H2 ambiguity is not resolved by this phase."
+  }
+}
