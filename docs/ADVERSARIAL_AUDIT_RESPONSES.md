@@ -1,7 +1,7 @@
 # ADVERSARIAL_AUDIT_RESPONSES.md
 # Doctor/Bimaristan — Adversarial Audit Responses
 # Date: 2026-06-07
-# Status: Folded into SYNTHESIS.md as §13 (this commit). Standalone file
+# Status: Folded into SYNTHESIS.md as §13 (commit 7371776). Standalone file
 # retained for direct reference. Audit 11 numerical claims corrected
 # pre-fold: numerator sums 43 (R1) and 58 (R3); denominator 270 =
 # 7×30 + 3×20, tied to perturbation-dependent sample sizes.
