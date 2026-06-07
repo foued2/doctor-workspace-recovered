@@ -1,0 +1,267 @@
+{
+  "_provenance": {
+    "sources": {
+      "PHASE_LC3946_C5_SPEC.md": "LC3946-C5 spec (DRAFT, awaiting Foued final approval; pre-declared parameters)",
+      "PHASE_C5_SPEC.md": "LC322 C-5 spec (the LC322 C-5 protocol pattern)",
+      "PHASE_C5_FREEZE.json": "LC322 C-5 freeze (parameter structure reference)",
+      "MIDWEATHER_FINGERPRINT_GATE_LC3946_FREEZE.json": "LC3946 onboarding freeze (the unperturbed baseline)",
+      "data/midweather_fingerprint_lc3946.json": "unperturbed LC3946 C-4 result (B1 (0,1,1.0), C_genuine (0,0,0.0))"
+    },
+    "field_provenance": {
+      "phase": "LC3946-C5 (inferred from naming convention; mirrors C-5 on LC322)",
+      "title": "Collapse Analysis (Distribution Shift) — LC3946",
+      "purpose": "Test whether the LC3946 C-4 utility gain (gap=1.0) survives distribution shift via 11 pre-declared population perturbations.",
+      "status": "PENDING (Foued approval of PHASE_LC3946_C5_SPEC.md required before runner is written)",
+      "date": "2026-06-07 (session date)",
+      "spec_commit": "PENDING_LC3946_C5_SPEC_COMMIT (placeholder, to be filled at spec commit time)",
+      "frozen_files": "SHA256s of all frozen artifacts to be filled at commit time",
+      "perturbations.*": "Pre-declared in PHASE_LC3946_C5_SPEC.md (lines declaring P1, P2, P3, P4). Frozen values below.",
+      "recovered_solver_identity_check": "solver_016 (0-indexed position 15) is the C_genuine-recovered solver. Pre-declared P2 index lists verified to include solver_016 in P2a (in), P2b (in), P2c (in). No P2 index adjustment required. See PHASE_LC3946_C5_SPEC.md Aggregate Consistency Check section.",
+      "aggregate_consistency_check.*": "Mirrors LC322 C-5 aggregate consistency check. Expected (WA, WR, loss) for unperturbed B1 and C_genuine.",
+      "survival_threshold": "gap > 0 strictly (per Foued's Point 1 decision; uniform cost model, no lambda sweep)",
+      "no_post_hoc_adjustment_of_decision_rule": "C_genuine and B1 decision rules unchanged from C-4 (carried forward from PHASE_LC3946_C5_SPEC.md)"
+    }
+  },
+  "phase": "LC3946-C5",
+  "title": "Collapse Analysis (Distribution Shift) — LC3946",
+  "purpose": "Test whether the LC3946 C-4 utility gain (gap=1.0) survives distribution shift via 11 pre-declared population perturbations.",
+  "status": "PENDING (Foued approval of PHASE_LC3946_C5_SPEC.md required before runner is written)",
+  "authorization": "Foued override (C-5 pattern, applied to LC3946)",
+  "extends_c4_constraint": "no_post_hoc_adjustment_of_decision_rule (extended to LC3946-C5: C_genuine decision rule not adjusted during LC3946-C5 analysis)",
+  "date": "2026-06-07",
+
+  "spec_commit": "PENDING_LC3946_C5_SPEC_COMMIT",
+  "c5_freeze_commit": "PENDING",
+
+  "recovered_solver_check": {
+    "recovered_solver_id": "solver_016",
+    "recovered_solver_zero_indexed_position": 15,
+    "in_p2a_first_25_indices_0_to_24": true,
+    "in_p2b_last_25_indices_5_to_29": true,
+    "in_p2c_first10_last15_indices_0_to_9_plus_15_to_29": true,
+    "check_result": "ALL_THREE_P2_SUBSAMPLES_INCLUDE_RECOVERED_SOLVER",
+    "index_list_adjustment_required": false,
+    "p2_subsample_indices_match_spec": true
+  },
+
+  "perturbations": {
+    "P1a_threshold_baseline": {
+      "description": "Baseline reference: failure_threshold = 0.05. Recorded for reference only; not counted as a perturbation.",
+      "failure_threshold": 0.05,
+      "rule": "use_existing_threshold",
+      "is_baseline_reference": true
+    },
+    "P1b_threshold_0p10": {
+      "description": "failure_threshold = 0.10. Re-derive ground truth labels with stricter threshold.",
+      "failure_threshold": 0.10,
+      "rule": "use_threshold_0p10"
+    },
+    "P1c_threshold_0p20": {
+      "description": "failure_threshold = 0.20. Re-derive ground truth labels with stricter threshold.",
+      "failure_threshold": 0.20,
+      "rule": "use_threshold_0p20"
+    },
+    "P2a_solver_subsample_first_25": {
+      "description": "First 25 solvers of LC3946 (indices 0..24 in sorted solver_id order).",
+      "indices_zero_indexed": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+      "n_solvers": 25,
+      "dropped_solvers": ["solver_026", "solver_027", "solver_028", "solver_029", "solver_030"],
+      "recovered_solver_present": true
+    },
+    "P2b_solver_subsample_last_25": {
+      "description": "Last 25 solvers of LC3946 (indices 5..29 in sorted solver_id order).",
+      "indices_zero_indexed": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+      "n_solvers": 25,
+      "dropped_solvers": ["solver_001", "solver_002", "solver_003", "solver_004", "solver_005"],
+      "recovered_solver_present": true
+    },
+    "P2c_solver_subsample_first10_last15": {
+      "description": "First 10 + last 15 solvers of LC3946 (excludes middle 5 = indices 10..14).",
+      "indices_zero_indexed": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+      "n_solvers": 25,
+      "dropped_solvers": ["solver_011", "solver_012", "solver_013", "solver_014", "solver_015"],
+      "recovered_solver_present": true
+    },
+    "P3a_probe_family_knockout_poset_universal_source": {
+      "description": "Remove all observed probes from family 'poset_universal_source'.",
+      "family_knocked_out": "poset_universal_source",
+      "observed_probes_removed": ["p_lc3946_0001", "p_lc3946_0003", "p_lc3946_0005"]
+    },
+    "P3b_probe_family_knockout_poset_chain": {
+      "description": "Remove all observed probes from family 'poset_chain'.",
+      "family_knocked_out": "poset_chain",
+      "observed_probes_removed": ["p_lc3946_0007", "p_lc3946_0009"]
+    },
+    "P3c_probe_family_knockout_poset_antichain": {
+      "description": "Remove all observed probes from family 'poset_antichain'.",
+      "family_knocked_out": "poset_antichain",
+      "observed_probes_removed": ["p_lc3946_0011", "p_lc3946_0013", "p_lc3946_0015"]
+    },
+    "P3d_probe_family_knockout_poset_lattice_boolean": {
+      "description": "Remove all observed probes from family 'poset_lattice_boolean'.",
+      "family_knocked_out": "poset_lattice_boolean",
+      "observed_probes_removed": ["p_lc3946_0017", "p_lc3946_0019"]
+    },
+    "P3e_probe_family_knockout_poset_lattice_two_prime": {
+      "description": "Remove all observed probes from family 'poset_lattice_two_prime'.",
+      "family_knocked_out": "poset_lattice_two_prime",
+      "observed_probes_removed": ["p_lc3946_0021", "p_lc3946_0023", "p_lc3946_0025"],
+      "note": "This family contains the only observed failure for the recovered solver (solver_016). Empirical prediction: P3e will collapse the C_genuine advantage to 0 (B1 will trivially ACCEPT solver_016 because its only observed failure is removed; C_genuine will also ACCEPT trivially; gap = 0). The prediction is consistent with LC322's large_amount_stress family being the signal driver."
+    },
+    "P3f_probe_family_knockout_poset_isolated": {
+      "description": "Remove all observed probes from family 'poset_isolated'.",
+      "family_knocked_out": "poset_isolated",
+      "observed_probes_removed": ["p_lc3946_0027", "p_lc3946_0029"]
+    },
+    "P3_rotation_order": [
+      "poset_universal_source",
+      "poset_chain",
+      "poset_antichain",
+      "poset_lattice_boolean",
+      "poset_lattice_two_prime",
+      "poset_isolated"
+    ],
+    "P4_cross_population_reference": {
+      "description": "LC322 C-4 result is recorded as the cross-population anchor. No new execution needed for P4.",
+      "lc322_c4_gap": 8.30,
+      "lc322_c4_signal_family": "large_amount_stress",
+      "lc322_c5_verdict": "PARTIALLY_SURVIVES",
+      "source": "data/midweather_fingerprint_lc322.json + phase-c5-results tag (d1435a3)"
+    }
+  },
+
+  "total_perturbation_conditions": 11,
+  "perturbation_conditions_list": [
+    "P1b_threshold_0p10",
+    "P1c_threshold_0p20",
+    "P2a_solver_subsample_first_25",
+    "P2b_solver_subsample_last_25",
+    "P2c_solver_subsample_first10_last15",
+    "P3a_probe_family_knockout_poset_universal_source",
+    "P3b_probe_family_knockout_poset_chain",
+    "P3c_probe_family_knockout_poset_antichain",
+    "P3d_probe_family_knockout_poset_lattice_boolean",
+    "P3e_probe_family_knockout_poset_lattice_two_prime",
+    "P3f_probe_family_knockout_poset_isolated"
+  ],
+
+  "cost_model": {
+    "model": "uniform_cost",
+    "wrong_accept_cost": 1,
+    "wrong_reject_cost": 1,
+    "lambda_sweep": "none",
+    "lambda_A_fixed": "n/a",
+    "rationale": "Per Foued's Point 1 decision. No new cost-model runner. Survival threshold = gap > 0 strictly."
+  },
+
+  "survival_threshold": {
+    "value": "gap > 0 strictly",
+    "gap_definition": "gap = B1_loss - C_genuine_loss",
+    "rationale": "Per Foued's Point 1 decision. gap = 0 is collapse (not survival). Ties are not admissible.",
+    "frozen": true
+  },
+
+  "falsification_criterion": {
+    "SURVIVES": "gap > 0 on all 11 perturbation conditions (P1b, P1c, P2a, P2b, P2c, P3a..P3f)",
+    "PARTIALLY_SURVIVES": "gap > 0 on some, gap <= 0 on others. Per-perturbation reporting only; no aggregation.",
+    "DOES_NOT_SURVIVE": "gap <= 0 on all 11 perturbation conditions",
+    "collapse_criterion": "gap <= 0 (i.e., B1_loss - C_genuine_loss <= 0)",
+    "per_perturbation_reporting": true,
+    "no_aggregation_across_perturbations": true,
+    "no_post_hoc_selection_of_favorable_perturbations": true
+  },
+
+  "aggregate_consistency_check": {
+    "required": true,
+    "applies_to": ["B1_count", "C_genuine"],
+    "expected_b1_wa_wr_loss": {"wrong_accepts": 0, "wrong_rejects": 1, "decision_loss": 1.0},
+    "expected_c_genuine_wa_wr_loss": {"wrong_accepts": 0, "wrong_rejects": 0, "decision_loss": 0.0},
+    "check": "Re-run B1 and C_genuine on unperturbed LC3946; recomputed (WA, WR, loss) must equal expected values above. Source: data/midweather_fingerprint_lc3946.json (post-C_genuine run).",
+    "on_failure": "STOP IMMEDIATELY. Do not record any result. Surface discrepancy for review.",
+    "oracle_5case_check_also_required": "lc3946_brute_force 5-case manual check must pass before any edit per DOCTOR_EXECUTION_PROTOCOL.md §3"
+  },
+
+  "estimators_under_comparison": ["C_genuine", "B1_count"],
+  "estimators_unchanged_from_c4": true,
+
+  "protocol_constraints": {
+    "no_new_probes": true,
+    "no_new_solver_packs": true,
+    "no_new_estimators": true,
+    "no_modification_of_c1_freeze_parameters": true,
+    "no_modification_of_c4_decision_rule": true,
+    "no_modification_of_lc3946_onboarding_freeze_parameters": true,
+    "no_post_hoc_adjustment_of_perturbations": true,
+    "no_post_hoc_adjustment_of_p1_thresholds": true,
+    "no_post_hoc_adjustment_of_p2_subsample_indices": true,
+    "no_post_hoc_adjustment_of_p3_rotation_order": true,
+    "no_post_hoc_adjustment_of_survival_threshold": true,
+    "no_post_hoc_selection_of_favorable_perturbations": true,
+    "no_silent_resolution_of_aggregate_inconsistency": true,
+    "no_aggregation_across_perturbations": true,
+    "per_perturbation_reporting_only": true,
+    "c1_closure_not_reopened": true,
+    "c3a_closure_not_reopened": true,
+    "c4_closure_not_reopened": true,
+    "c5_closure_not_reopened": true,
+    "c6_closure_not_reopened": true,
+    "c7_closure_not_reopened": true,
+    "project_closure_004_not_reopened": true,
+    "results_doc_forbids_word_real": true
+  },
+
+  "runner_design_decision": {
+    "decision": "option (a): small wrapper runner that imports apply_estimator and compute_decision_loss from the existing midweather-fingerprint runner",
+    "path": "runners/run_c5_collapse_lc3946.py",
+    "rationale": "Mirrors LC322 C-5 runner pattern (run_c5_collapse_lc322.py). Reuses existing functions, no duplication. Sidecar pass_fail matrix file written by the main midweather-fingerprint run is read by the C-5 runner to avoid 900 solver re-executions per perturbation."
+  },
+
+  "frozen_files": [
+    {
+      "path": "PHASE_LC3946_C5_FREEZE.json",
+      "sha256": "PENDING_SELF_REFERENCE_AT_FREEZE_TIME"
+    },
+    {
+      "path": "PHASE_LC3946_C5_SPEC.md",
+      "sha256": "319a87e6045275983248d10bd1af2c3d4f7fd049c709a3afc8120115a6827c68"
+    },
+    {
+      "path": "MIDWEATHER_FINGERPRINT_GATE_LC3946_FREEZE.json",
+      "sha256": "c16e1afc5c88504748a445a9c43ed8b1146183752b31ed282bf6312c91ace60f"
+    },
+    {
+      "path": "data/midweather_fingerprint_lc3946.json",
+      "sha256": "13c58239b9864a040dcb671ccd2d21ca8e490108228ce724a3ec0d7fb0efc6fb"
+    },
+    {
+      "path": "doctor/adversarial/lc3946_ground_truth.py",
+      "sha256": "91b717937c99bd93b865d2fd8163aa88985f317a2a92feeaecbca3996770bdcb"
+    },
+    {
+      "path": "doctor/adversarial/problem_class_config.py",
+      "sha256": "9ff383fe6c132b07f7431200a9b7a77addf33c2dd4220bed343fc05dec655108"
+    }
+  ],
+
+  "lineage": {
+    "c1_freeze_commit": "3bd286d",
+    "c3a_freeze_commit": "a6c97bc",
+    "c4_freeze_commit": "88d0243",
+    "c4_closure_commit": "50d33e5",
+    "c4_tag": "phase-c4-results",
+    "c5_freeze_commit_lc322": "bb51f2c",
+    "c5_tag_lc322": "phase-c5-results",
+    "c5_closure_commit_lc322": "d1435a3",
+    "c6_freeze_commit": "6766f4c",
+    "c6_tag": "phase-c6-results",
+    "c6_closure_commit": "788fc5b",
+    "c7_freeze_commit": "06bbe40",
+    "c7_tag": "phase-c7-results",
+    "c7_closure_commit": "24ab42d",
+    "project_closure_004_commit": "ccbf927",
+    "lc3946_spec_commit": "PENDING_LC3946_SPEC_COMMIT",
+    "lc3946_freeze_commit": "PENDING_LC3946_FREEZE_COMMIT",
+    "lc3946_c5_spec_commit": "PENDING_LC3946_C5_SPEC_COMMIT",
+    "lc3946_c5_freeze_commit": "PENDING"
+  }
+}
