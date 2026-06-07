@@ -231,3 +231,35 @@ Five observations follow from this diagnostic map.
    None survives all 11 perturbations. The class-level verdict
    is a structured negative result, not a claim that no estimator
    on the class can work in any context.
+
+---
+
+## 12. The identifiability framing
+
+The closed phase record supports a narrower claim than "Doctor
+established an impossibility result." It supports the isolation of
+an identifiability problem.
+
+The phases repeatedly failed to separate solver structure from
+probe structure. Each failure is an observation about the attempted
+separation. The pattern of failures is consistent with two
+hypotheses, neither of which the record establishes:
+
+- H1: the project's measurement apparatus could not resolve the
+  ambiguity. A different apparatus, with different probe geometry,
+  solver populations, or decision rules, would resolve it.
+- H2: the underlying evaluation paradigm (probe-response) cannot
+  resolve the ambiguity in principle. No apparatus built on this
+  paradigm would resolve it.
+
+The closed phases tested one paradigm under several internal
+variants. The internal variants produced consistent collapses. To
+establish a boundary condition on the paradigm itself, evidence
+across multiple fundamentally different measurement regimes would
+be needed. The record contains evidence within a single regime.
+
+The defensible endpoint is the isolation of an unresolved ambiguity:
+the failure to separate solver structure from probe structure
+persisted across the redesigns attempted within the project's scope.
+The question of whether a different scope would resolve the ambiguity
+is not answered by this record.
