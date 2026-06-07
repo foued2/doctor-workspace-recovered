@@ -1,0 +1,168 @@
+{
+  "_provenance": {
+    "sources": {
+      "MIDWEATHER_FINGERPRINT_GATE_FREEZE.json": "LC322 freeze (commit 6ca6c28); structure mirrored for LC3946",
+      "doctor/adversarial/lc3946_ground_truth.py": "5-case manual oracle test (the protected oracle for LC3946)",
+      "doctor/adversarial/lc3946_candidates.py": "30-solver pool across 6 strategy families",
+      "data/midweather_fingerprint_lc3946_probe_index.json": "30 probes, 5 per axis, 6 fingerprint axes (poset_universal_source, poset_chain, poset_antichain, poset_lattice_boolean, poset_lattice_two_prime, poset_isolated)",
+      "data/midweather_fingerprint_lc3946_seval_manifest.json": "EXTERNAL_BLIND_PACK of 30 solvers, sha256-hashed"
+    },
+    "field_provenance": {
+      "freeze_id": "inferred from naming convention (midweather_fingerprint_lc3946_clean_001)",
+      "experiment": "Midweather-Fingerprint-Gate, extended to LC3946",
+      "created_at": "2026-06-07 (session date)",
+      "protocol_commit": "PENDING_LC3946_FREEZE_COMMIT (placeholder, to be filled at commit time)",
+      "frozen_files": "ALL 7 non-self SHA256s computed. self-SHA for MIDWEATHER_FINGERPRINT_GATE_LC3946_FREEZE.json = PENDING_SELF_REFERENCE_AT_FREEZE_TIME (frozen-file self-reference is exempt from the SHAs-required check by convention; the validator accepts the placeholder).",
+      "primary_target": "heldout_failure_rate (mirrors LC322)",
+      "primary_utility": "decision_loss (mirrors LC322)",
+      "observation_budget.K": "K=15 (mirrors LC322 frozen observation budget)",
+      "observation_budget.observed_probe_ids": "PATCHED FROM data/midweather_fingerprint_lc3946_probe_index.json — 15 probe IDs at odd within-axis positions",
+      "observation_budget.target_probe_ids": "PATCHED FROM data/midweather_fingerprint_lc3946_probe_index.json — 15 probe IDs at even within-axis positions",
+      "decision_spec.*": "Mirrors LC322 ACCEPT_REJECT_SPEC; failure_threshold=0.05, minimum_accept_rate=0.2 (carried forward from LC322)",
+      "weakest_baseline_config.*": "Mirrors LC322; seed = 3946001 (LC3946 + 001 placeholder)",
+      "status": "FROZEN"
+    }
+  },
+  "freeze_id": "midweather_fingerprint_lc3946_clean_001",
+  "experiment": "Midweather-Fingerprint-Gate",
+  "created_at": "2026-06-07T00:00:00Z",
+  "protocol_commit": "PENDING_LC3946_FREEZE_COMMIT",
+  "frozen_files": [
+    {
+      "path": "MIDWEATHER_FINGERPRINT_GATE_LC3946_FREEZE.json",
+      "sha256": "PENDING_SELF_REFERENCE_AT_FREEZE_TIME"
+    },
+    {
+      "path": "MIDWEATHER_FINGERPRINT_SEVAL_MANIFEST.schema.json",
+      "sha256": "8dce4eee6007a19882a2e4fc2924f8f3ae658fe73f934937b4d68d2260a62e8d"
+    },
+    {
+      "path": "data/midweather_fingerprint_lc3946_seval_manifest.json",
+      "sha256": "2a99b7e1b4b74e3fa3688791cc99b56626b0f3820be43bb16b2cd29bd1567bf4"
+    },
+    {
+      "path": "data/midweather_fingerprint_lc3946.json",
+      "sha256": "13c58239b9864a040dcb671ccd2d21ca8e490108228ce724a3ec0d7fb0efc6fb"
+    },
+    {
+      "path": "data/midweather_fingerprint_lc3946_probe_index.json",
+      "sha256": "c3c3cbda2239a7e1be150fbc67911e2ada424728a73b1ea0a47c5de33d7d350e"
+    },
+    {
+      "path": "doctor/adversarial/lc3946_ground_truth.py",
+      "sha256": "91b717937c99bd93b865d2fd8163aa88985f317a2a92feeaecbca3996770bdcb"
+    },
+    {
+      "path": "doctor/adversarial/lc3946_candidates.py",
+      "sha256": "8c764ef25fe24d65335f7bd09618737c4e69f4a253af85596c8543e8d0c20e45"
+    },
+    {
+      "path": "doctor/adversarial/problem_class_config.py",
+      "sha256": "9ff383fe6c132b07f7431200a9b7a77addf33c2dd4220bed343fc05dec655108"
+    }
+  ],
+  "primary_target": "heldout_failure_rate",
+  "primary_utility": "decision_loss",
+  "observation_budget": {
+    "K": 15,
+    "unit": "one solver execution on one probe_id",
+    "observed_probe_ids": [
+      "p_lc3946_0001",
+      "p_lc3946_0003",
+      "p_lc3946_0005",
+      "p_lc3946_0007",
+      "p_lc3946_0009",
+      "p_lc3946_0011",
+      "p_lc3946_0013",
+      "p_lc3946_0015",
+      "p_lc3946_0017",
+      "p_lc3946_0019",
+      "p_lc3946_0021",
+      "p_lc3946_0023",
+      "p_lc3946_0025",
+      "p_lc3946_0027",
+      "p_lc3946_0029"
+    ],
+    "target_probe_ids": [
+      "p_lc3946_0002",
+      "p_lc3946_0004",
+      "p_lc3946_0006",
+      "p_lc3946_0008",
+      "p_lc3946_0010",
+      "p_lc3946_0012",
+      "p_lc3946_0014",
+      "p_lc3946_0016",
+      "p_lc3946_0018",
+      "p_lc3946_0020",
+      "p_lc3946_0022",
+      "p_lc3946_0024",
+      "p_lc3946_0026",
+      "p_lc3946_0028",
+      "p_lc3946_0030"
+    ]
+  },
+  "weakest_baseline_config": {
+    "model_type": "leave-one-out ridge regression",
+    "regularization": "L2 (alpha=1.0, fixed)",
+    "hyperparameter_selection": "fixed",
+    "cv_strategy": "leave_one_out_cv",
+    "random_seed": 3946001,
+    "predeclared": true
+  },
+  "decision_spec": {
+    "name": "ACCEPT_REJECT",
+    "action_space": ["ACCEPT", "REJECT"],
+    "policy_input": "K observations from O_obs including fingerprint_context",
+    "policy_output": "one action from action_space per solver",
+    "failure_threshold": 0.05,
+    "minimum_accept_rate": 0.2,
+    "degenerate_policy_policy": "REFUSE_OR_MARK_INCONCLUSIVE",
+    "wrong_accept_cost": 1,
+    "wrong_reject_cost": 1,
+    "utility_function": "Minimize cost-weighted decision_loss = wrong_accept_cost * wrong_accepts + wrong_reject_cost * wrong_rejects.",
+    "cost_model": {
+      "wrong_accept_cost": 1,
+      "wrong_reject_cost": 1
+    },
+    "primary_utility_metric": "decision_loss",
+    "success_rule": "C must have strictly lower decision_loss than every same-information baseline (B0-B6), satisfy minimum_accept_rate, and not be degenerate."
+  },
+  "success_rule": "C must strictly beat every same-observation baseline (B0-B6) on decision_loss. Ties are FAIL.",
+  "split_configuration": {
+    "O_obs": [
+      "p_lc3946_0001",
+      "p_lc3946_0003",
+      "p_lc3946_0005",
+      "p_lc3946_0007",
+      "p_lc3946_0009",
+      "p_lc3946_0011",
+      "p_lc3946_0013",
+      "p_lc3946_0015",
+      "p_lc3946_0017",
+      "p_lc3946_0019",
+      "p_lc3946_0021",
+      "p_lc3946_0023",
+      "p_lc3946_0025",
+      "p_lc3946_0027",
+      "p_lc3946_0029"
+    ],
+    "D_target": [
+      "p_lc3946_0002",
+      "p_lc3946_0004",
+      "p_lc3946_0006",
+      "p_lc3946_0008",
+      "p_lc3946_0010",
+      "p_lc3946_0012",
+      "p_lc3946_0014",
+      "p_lc3946_0016",
+      "p_lc3946_0018",
+      "p_lc3946_0020",
+      "p_lc3946_0022",
+      "p_lc3946_0024",
+      "p_lc3946_0026",
+      "p_lc3946_0028",
+      "p_lc3946_0030"
+    ]
+  },
+  "status": "FROZEN"
+}

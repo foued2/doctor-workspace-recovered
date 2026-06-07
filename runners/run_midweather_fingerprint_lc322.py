@@ -93,7 +93,7 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--problem-class",
         default="lc322",
-        choices=["lc322", "lc45"],
+        choices=["lc322", "lc45", "lc3946"],
         help="Problem class to evaluate (default: lc322).",
     )
     parser.add_argument("--freeze", type=Path, help="Override the freeze path.")

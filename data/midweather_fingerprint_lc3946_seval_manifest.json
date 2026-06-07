@@ -1,0 +1,347 @@
+{
+  "schema_version": "1.0.0",
+  "s_eval_id": "fingerprint_lc3946_external_blind_stub_001",
+  "problem_id": "LC3946",
+  "created_after_protocol_freeze": true,
+  "protocol_freeze_id": "midweather_fingerprint_lc3946_clean_001",
+  "protocol_freeze_commit": "PENDING_LC3946_FREEZE_COMMIT",
+  "protocol_freeze_sha256": "PENDING_SELF_REFERENCE_AT_FREEZE_TIME",
+  "certification_level": "EXTERNAL_BLIND_PACK",
+  "solver_source": "external_blind_pack",
+  "pack_source": "reconstructed_stub",
+  "reconstruction_note": "The 30 solvers (solver_001..solver_030) are deterministic stubs across 6 strategy families (DP-survivor, Greedy-by-price, Greedy-by-density, BFS-subset, Recursive, Hybrid) that produce a structured distribution of (solver, fail-set) pairs across the 30 frozen probes. The wrappers import the implementations from doctor/adversarial/lc3946_candidates.py; the algorithms are well-known textbook implementations of LC3946 (knapsack with poset-indexed free items) and are NOT derived from the protocol or the probe_index.",
+  "n_solvers": 30,
+  "strategy_families": [
+    {
+      "family": "DP-survivor",
+      "solver_ids": [
+        "solver_001",
+        "solver_002",
+        "solver_003",
+        "solver_004",
+        "solver_005"
+      ],
+      "expected_pass_rate": "high",
+      "expected_fail_axis": null,
+      "n_solvers": 5
+    },
+    {
+      "family": "Greedy-by-price",
+      "solver_ids": [
+        "solver_006",
+        "solver_007",
+        "solver_008",
+        "solver_009",
+        "solver_010"
+      ],
+      "expected_pass_rate": null,
+      "expected_fail_axis": "order/boundary/transition",
+      "n_solvers": 5
+    },
+    {
+      "family": "Greedy-by-density",
+      "solver_ids": [
+        "solver_011",
+        "solver_012",
+        "solver_013",
+        "solver_014",
+        "solver_015"
+      ],
+      "expected_pass_rate": null,
+      "expected_fail_axis": "poset_isolated",
+      "n_solvers": 5
+    },
+    {
+      "family": "BFS-subset",
+      "solver_ids": [
+        "solver_016",
+        "solver_017",
+        "solver_018",
+        "solver_019",
+        "solver_020"
+      ],
+      "expected_pass_rate": null,
+      "expected_fail_axis": "poset_universal_source/poset_lattice_two_prime",
+      "n_solvers": 5
+    },
+    {
+      "family": "Recursive",
+      "solver_ids": [
+        "solver_021",
+        "solver_022",
+        "solver_023",
+        "solver_024",
+        "solver_025"
+      ],
+      "expected_pass_rate": null,
+      "expected_fail_axis": "transition/order",
+      "n_solvers": 5
+    },
+    {
+      "family": "Hybrid",
+      "solver_ids": [
+        "solver_026",
+        "solver_027",
+        "solver_028",
+        "solver_029",
+        "solver_030"
+      ],
+      "expected_pass_rate": "mixed",
+      "expected_fail_axis": null,
+      "n_solvers": 5
+    }
+  ],
+  "solver_files": [
+    {
+      "solver_id": "solver_001",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_001.py",
+      "sha256": "f4c9ddd764ef7fd4946d70034bd972c5b7ce5bf50eca4e1ba05c41d9e80e2ffc",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_002",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_002.py",
+      "sha256": "a862d6f94c1b8ad004837cc2078fafa0fa17fd21b91044bc6163e8079b63d37a",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_003",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_003.py",
+      "sha256": "11a9bc0d7b93103cdd12a0e9f73bf56248b6fdf2877de34be75b2705c6d026a1",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_004",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_004.py",
+      "sha256": "b1d53e53ac1442496edd66383f70e370444e34e18ad42898369fe1025f7a6286",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_005",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_005.py",
+      "sha256": "eb1bda7a4fb62d88e7d5dcaa6a4666a260377f5b815a1e33fd3dfe731013d70a",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_006",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_006.py",
+      "sha256": "4b0caaea3136a6bc52cbc51de650fd208b33cd247dd76a1f0746bbf950b2d300",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_007",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_007.py",
+      "sha256": "e91aab7610c9b8f53715ffb0a6ff02a376b5538fc86325c18e4469d177c1f53d",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_008",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_008.py",
+      "sha256": "21e994610eaa85454545b17b1f3d69f73166f5b68f94d0f33c528e231e4663a6",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_009",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_009.py",
+      "sha256": "7ee78bd40c5d140c2a1e04507f0efab4c21aa75e92a46917918d045abed833fb",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_010",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_010.py",
+      "sha256": "c7e392c124832aba81749855681522f923a6815f4f1fe5001343aa3f7d25f961",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_011",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_011.py",
+      "sha256": "3d53288c32be815de16beb99ff47a1656ced3c52e0a0f4684c2e94f9f3ebce08",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_012",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_012.py",
+      "sha256": "ba94b34ebe8a776ad929c30773c77b651305b52af8d328009e047ac2124f1e30",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_013",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_013.py",
+      "sha256": "4216887ffa1511b40073194fb8366026ce507bcfcd07104dea07f3aeacd9ec91",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_014",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_014.py",
+      "sha256": "a83fae917aed7557fc76e8f0792e6cf74344f521015433c9700df5838a27e811",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_015",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_015.py",
+      "sha256": "79d695ae30a7510faa9e013b114d341e7ae761cda500a638081ae8f73e673f10",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_016",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_016.py",
+      "sha256": "4e73b48c36796a3b9020930dee7c3762c0a086fabefbd55ff5701b670a3388b0",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_017",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_017.py",
+      "sha256": "b5e483f0bb31c7017cbfc664c6451acbaba8b3d3e1458f1428827a36a6635e4c",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_018",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_018.py",
+      "sha256": "5e0ea08a4b9f2c9ff3b7a1521d45e0e47d16c05d2723a9fbcc3439b2bf2d5201",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_019",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_019.py",
+      "sha256": "357a78b830c477b7db65247483a248ea954cd63c99b85010f6afc0a7f9b99bbf",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_020",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_020.py",
+      "sha256": "19eb0cd4c9cfe1100e1cd42c658db72fd1f54f7f77d2b19f50395ec2e3b4ec0c",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_021",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_021.py",
+      "sha256": "7d84c5e51ca0409f993a8ab6738dc5ed31f1daa4bde68b6b8d31ee2234cc9746",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_022",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_022.py",
+      "sha256": "a63ccf51536fdadf47116887aa7a379058c702f4dc2d22b67d719e4016ea8978",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_023",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_023.py",
+      "sha256": "d05be8302a7d27bbe3840581bc3098492cf80f312d382ae496e763a7a5d26ee4",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_024",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_024.py",
+      "sha256": "c087cdfbd3584cf87da206405ffc118bc52f0652720eafe05dc010ffaaf9b9c2",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_025",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_025.py",
+      "sha256": "d20c90bee945b2754b0527662ab9e85b7a98fcab89dc0484b887bb79238cf692",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_026",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_026.py",
+      "sha256": "c28781d856cbf3524a93241b45ccd0eb89378448823e3f62f09ffc3f75ec4431",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_027",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_027.py",
+      "sha256": "49d409211b509a943a587b8139f4460f034f19e21952c556672198df336bbd4b",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_028",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_028.py",
+      "sha256": "dd925abaa9851ab54e4f378941833d111ad9347ad67b657df1fa066779f93c11",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_029",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_029.py",
+      "sha256": "96b821c1fd01df895b3bdd7e28001f926780bb4ada5523528d457f793b367f33",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "solver_030",
+      "path": "experiments/frozen_taxonomy_lc3946/solvers/solver_030.py",
+      "sha256": "e906d6c37947585d2511c4b4a2583264d1669a5f6acf8b505ce50b73f0c2ac24",
+      "created_at": "2026-06-07T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    }
+  ],
+  "n_solvers_in_files": 30,
+  "all_hashes_present": true,
+  "causal_certification": {
+    "s_eval_existed_before_protocol": false,
+    "s_eval_used_to_design_probes": false,
+    "s_eval_used_to_design_features": false,
+    "s_eval_outputs_seen_before_freeze": false,
+    "failure_labels_seen_before_freeze": false,
+    "certified_clean": true,
+    "clean_rationale": "Certified clean because: (a) the 30 solver algorithms are well-known textbook implementations (DP-survivor, Greedy-by-price, Greedy-by-density, BFS-subset, Recursive, Hybrid) of LC3946 (knapsack with poset-indexed free items) that were not designed in response to the protocol; (b) the algorithms are deterministic and reproducible; (c) the solver implementations are NOT derived from the 30 frozen probes or the 6 axes. The pack_source=reconstructed_stub field documents the construction; the clean certification is about non-derivation from the protocol, not about provenance."
+  }
+}
