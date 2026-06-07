@@ -834,3 +834,180 @@ model.
   `runners/run_midweather_fingerprint_lc322.py:execute_solvers` from
   the seval_manifest and probe_index. The data is not stored in any
   committed JSON; running the C-4 / C-1 runners regenerates it.
+
+---
+
+## 15. Phase C-7: quotient on `large_amount_stress` — RQ-C7 NEGATIVE
+
+Phase C-7 is a new program authorized by Foued override. The
+research question, quotient construction, perturbation battery,
+and verdict criteria are pre-declared in `PHASE_C7_SPEC.md`
+(commit `779f9cb`) and `PHASE_C7_FREEZE.json` (commit
+`06bbe40`). The phase record is in `docs/PHASE_C7_RESULTS.md`
+(commit `24ab42d`) and `data/c7_quotient_lc322.json` (commit
+`5880f9b`). Tag: `phase-c7-results`. This section places C-7 in
+the cross-phase sequence; it does not introduce new claims beyond
+what the C-7 results doc §6 and §7 state.
+
+### 15.1 Setup
+
+Population: LC322 (30 solvers, 11 ACCEPT / 19 REJECT). The probe
+set is restricted to the 5 `large_amount_stress` (family 3)
+probes: `p_fp_0011` through `p_fp_0015`. The quotient population
+$\tilde{P}$ is the set of equivalence classes of family-3 probes
+under solver-response equivalence, restricted to a given solver
+set $S$. On the unperturbed population, $|T_P| = 5$ (the 5
+family-3 probes are in 5 distinct response classes). The
+estimators under test are `B1_count` and `C_genuine` (existing,
+unchanged). The cost model is the C-1 asymmetric cost with delta
+= 0.10 and 9 lambda values. The C-7 battery has 5 conditions:
+P0 (unperturbed) plus P1 (label inversion) and P2a, P2b, P2c
+(solver subsamples of 20). P3a-f and P4 from C-5 are excluded
+(P3a-f are no-ops on the family-3 quotient; P3c is degenerate;
+P4 is the LC45 cross-population, out of scope for C-7).
+
+### 15.2 Per-condition summary
+
+| Condition  | \|S\| | \|T_P\| | D    | B1 (WA, WR)  | C_genuine (WA, WR) | Verdict     |
+|------------|-------|---------|------|--------------|--------------------|-------------|
+| P0         | 30    | 5       | 19   | (5, 5)       | (19, 0)            | COLLAPSE    |
+| P1         | 30    | 5       | 19   | (6, 14)      | (11, 0)            | STABLE      |
+| P2a        | 20    | 4       | 11   | (4, 2)       | (13, 0)            | COLLAPSE    |
+| P2b        | 20    | 5       | 18   | (1, 5)       | (14, 0)            | COLLAPSE    |
+| P2c        | 20    | 4       | 9    | (5, 3)       | (11, 0)            | COLLAPSE    |
+
+RQ-C7 verdict: **NEGATIVE** (P0 COLLAPSE on the unperturbed
+family-3 quotient). Aggregate consistency check on B1
+(full 30-probe set) matches stored (WA=0, WR=5). **PASS.**
+
+The unperturbed gap on P0 at lambda=1 is -0.30; at lambda=2 is
+-0.13. Both are below delta=0.10. The C-1 cost model weights
+wrong_rejects at lambda_R times the rate. At larger lambdas, the
+gap sign-flips: B1's reject-bias becomes more costly, and C
+catches up. The sign-flip with lambda is a property of the cost
+model, not of the quotient.
+
+### 15.3 P1 STABLE is an artifact, not a finding
+
+P1 inverts the oracle labels (11/19 → 19/11). The quotient on
+$R(s, p)$ is unchanged (equivalence is on solver responses, not on
+labels). Estimator decisions are unchanged (B1 and C_genuine
+operate on $R(s, p)$, not on the oracle). The label inversion
+flips the cost calculation: C's 19 wrong_accepts on the original
+labels become 19 correct_accepts on the inverted labels. B1's 5
+wrong_rejects on the original become 5 wrong_accepts on the
+inverted labels.
+
+P1 surviving while P0, P2a, P2b, P2c all collapse is consistent
+with the cost model operating correctly under a label-flip
+perturbation, not with the quotient separation surviving any
+meaningful perturbation. P1 is a control demonstrating the cost
+model is operating correctly, not evidence that the family-3
+quotient supports cost-weighted separation.
+
+### 15.4 What C-7 adds to the three-phase sequence
+
+C-4 showed the gain on the full 30-probe set on LC322. The MDD
+test (SYNTHESIS §14) showed the gain is concentrated in family-3
+failures. C-7 shows that when the probe space is restricted to
+family-3 and the quotient is applied, C_genuine's accept-bias
+becomes a liability: 19 false_accepts (the 19 oracle REJECT
+solvers with at least one family-3 failure) versus B1's 5
+false_rejects (the 5 C-4 recoveries). The C-4 gain on the
+family-3 restricted population is a property of the
+full-population cost geometry, not of estimator behavior on the
+signal family.
+
+The three-phase sequence (C-4 → MDD → C-7) is a sequence of
+narrowing questions on the same closed data. Each step is a
+doc-only analysis or a phase with a pre-declared criterion. No
+step modifies any prior phase. The C-4 result stands at
+`phase-c4-results` (commit `50d33e5`). The C-7 result stands at
+`phase-c7-results` (tag).
+
+### 15.5 What the C-7 result does not establish
+
+(Mirrors `docs/PHASE_C7_RESULTS.md` §6. No new claims.)
+
+1. The C-4 gain is not refuted by C-7. C-7 tests the family-3
+   restricted quotient only, not the full 30-probe set. The
+   full-30 C-4 result stands at `phase-c4-results`.
+
+2. The C-4 gain is not established as probe-internal by C-7. A
+   NEGATIVE C-7 result is consistent with the C-4 gain being a
+   within-family probe distinction, but does not establish this.
+   The H1/H2 ambiguity is not resolved by C-7 (per the spec).
+
+3. `C_genuine` is not refuted as a decision rule. C-7 applies
+   the rule on a restricted probe set where the rule's
+   accept-bias produces many false_accepts. The full-30 result
+   (C-4 PASS on LC322) and the family-3 restricted result (C-7
+   NEGATIVE) are observations on different probe spaces; they
+   are not in contradiction.
+
+### 15.6 What the C-7 result does establish
+
+(Mirrors `docs/PHASE_C7_RESULTS.md` §7. No new claims.)
+
+On the unperturbed family-3 quotient population (P0, n=30
+solvers, $|T_P| = 5$ abstract probes):
+
+- The C-4 gain on the full 30-probe set does not survive
+  restriction to the family-3 probe set.
+- B1 has 5 wrong_rejects (the 5 C-4 recoveries). C_genuine has 0
+  wrong_rejects and 19 wrong_accepts.
+- The unperturbed gap at lambda=1 is -0.30; at lambda=2 is
+  -0.13. Both are below delta=0.10.
+- C_genuine's accept-bias is a liability on the family-3
+  restricted population, where most solvers with family-3
+  failures are oracle REJECT.
+
+The collapse pattern (P0, P2a, P2b, P2c all collapse; only P1 is
+stable, and P1 is the label-inversion control) is consistent
+with the C-4 gain on the family-3 restricted population being a
+property of the original accept/reject rate of the population,
+not a property of the estimators.
+
+### 15.7 Methodological notes
+
+- Quotient construction is deterministic (sorted by
+  representative_probe_id). See `tests/test_quotient.py`
+  (commit `5963657`).
+- Quotient on subsamples (P2a, P2b, P2c) is recomputed on the
+  subsample solver set. The equivalence relation is over the
+  subsampled solvers; two probes equivalent on the full 30 may
+  not be equivalent on a subsample of 20.
+- T_P sizes: P0=5, P1=5 (unchanged from P0), P2a=4, P2b=5,
+  P2c=4. The P2a and P2c subsamples collapse one equivalence
+  class; the discriminating solver is not in the subsample.
+- Per-condition gap tables: see
+  `data/c7_quotient_lc322.json` (commit `5880f9b`).
+- The degeneracy on the unperturbed $\Delta$ is an arithmetic
+  identity; the gap on the unperturbed quotient is informative
+  and is the actual test. C-7 reports per-condition verdicts; the
+  RQ-C7 verdict is the conjunction of all 5 conditions being
+  STABLE, with P0 as one of the 5 conditions.
+
+### 15.8 Lineage
+
+| Item                                     | Commit    |
+|------------------------------------------|-----------|
+| `PHASE_C7_SPEC.md`                       | `779f9cb` |
+| `PHASE_C7_FREEZE.json`                   | `06bbe40` |
+| `doctor/adversarial/quotient.py`         | `5963657` |
+| `tests/test_quotient.py`                 | `5963657` |
+| `runners/run_c7_quotient_lc322.py`       | `d58fc00` |
+| `data/c7_quotient_lc322.json`            | `5880f9b` |
+| `docs/PHASE_C7_RESULTS.md`               | `24ab42d` |
+| `docs/SYNTHESIS.md` (this section §15)   | (pending) |
+| Tag: `phase-c7-results`                  | `24ab42d` |
+
+C-7 inherits (lineage only, not modified):
+- C-1 freeze `3bd286d`
+- C-3a freeze `a6c97bc`, tag `phase-c3a-results` `1ad4777`
+- C-4 freeze `88d0243`, tag `phase-c4-results` `50d33e5`
+- C-5 freeze `98cc8e4`, tag `phase-c5-results` `d1435a3`
+- C-6 freeze `6766f4c`, tag `phase-c6-results` `788fc5b`
+- seval_manifest `d157d00`
+- project-closure-004 `ccbf927`
+- SYNTHESIS.md §14 (MDD test, commit `8d594a7`)
