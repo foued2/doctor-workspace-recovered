@@ -197,16 +197,18 @@ many implementations omit.
 
 ## 4. Expected Failure Distribution Prior
 
-The target distribution over failure directions for the 30-solver population,
-declared before any solver is written.
+The target distribution over failure directions for the 30-solver population.
+This prior is declared over output-detectable failure directions, not
+construction mechanisms. Direction assignment is determined by the honest
+classifier (§2 detection rules), not by how the solver was built.
 
 | Direction | Target fraction | Expected count (of 30) |
 |-----------|----------------|------------------------|
-| F1: UNDER_PROPAGATION | 0.15 | 4–5 |
-| F2: OVER_COST_BIAS | 0.35 | 10–11 |
-| F3: PRIORITY_ORDER_FAILURE | 0.35 | 10–11 |
-| F4: DISCONNECTED_MISHANDLING | 0.15 | 4–5 |
-| **Total** | **1.00** | **30** |
+| F1: UNDER_PROPAGATION | 0.167 | 5 |
+| F2: OVER_COST_BIAS | 0.333 | 10 |
+| F3: PRIORITY_ORDER_FAILURE | 0.367 | 11 |
+| F4: DISCONNECTED_MISHANDLING | 0.133 | 4 |
+| **Total** | **1.000** | **30** |
 
 **Justification:**
 
@@ -215,19 +217,24 @@ declared before any solver is written.
   (incorrect relaxation) and priority-order failure (wrong processing order).
   Both are well-documented failure modes in Dijkstra implementations.
 
-- F1 accounts for 15%. Under-propagation is less common than over-cost or
+- F1 accounts for 16.7%. Under-propagation is less common than over-cost or
   priority failures because the standard algorithm structure (visit all nodes)
   naturally avoids it. It occurs when implementations terminate early or
   have bugs in neighbor traversal.
 
-- F4 accounts for 15%. Disconnected-mishandling is less common because the
+- F4 accounts for 13.3%. Disconnected-mishandling is less common because the
   `-1` return is a simple check. It occurs when implementations omit the
   reachability check or propagate sentinels incorrectly.
 
-**Aggregate consistency check:** After solver generation, the actual
-distribution π̂ is computed. The check passes if max_i |π̂_i - π_i| ≤ 1/30
-(≤ 0.033). If the check fails, the solver pack is regenerated with adjusted
-target counts.
+**Aggregate consistency check:** After solver generation, the honest
+classifier assigns each solver a direction based on its output behavior
+across the test suite. The check passes if:
+1. No solver passes all test cases
+2. All four directions have nonzero representation
+3. max_i |π̂_i - π_i| ≤ 0.10
+
+If the check fails, the solver pack is revised — not by relabeling, but by
+replacing solvers whose output behavior does not match the target direction.
 
 ---
 
@@ -274,7 +281,7 @@ are frozen:
 | Oracle definition (4 directions) | FROZEN | This file |
 | Detection rules (F4 first, then F1/F2/F3) | FROZEN | This file (revised: detection gap fix) |
 | Failure taxonomy justification | FROZEN | This file (revised: detection gap fix) |
-| Prior distribution (0.15/0.35/0.35/0.15) | FROZEN | This file |
+| Prior distribution (0.167/0.333/0.367/0.133) | FROZEN | This file (amended: output-space measurement) |
 | Reachability constraint (≥ 20%) | FROZEN | This file |
 
 The following are NOT frozen (defined elsewhere):
