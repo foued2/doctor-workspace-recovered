@@ -33,9 +33,8 @@ from doctor.oracles.lc743_oracle import CANONICAL_TEST_SUITE
 from doctor.solvers.lc_743_solvers import SOLVER_REGISTRY
 
 N_CASES = len(CANONICAL_TEST_SUITE)
-FAILURE_THRESHOLD = 0.5
+FAILURE_THRESHOLD = 0.05
 RANDOM_SEED = 42
-N_OBSERVED = 6
 
 
 def check_connected(times, n, k):
@@ -110,7 +109,7 @@ def estimator_b2(obs_pass_rate):
 def main():
     n_solvers = len(SOLVER_REGISTRY)
 
-    # Stratified split: 1-2 observed + 4-5 target per direction
+    # Stratified split: 3 observed + 3 target per direction (frozen protocol)
     # Actual direction mapping: 0-5=F1, 6-11=F2, 12-17=F3, 18-23=F4
     rng = random.Random(RANDOM_SEED)
     by_dir = {
@@ -125,10 +124,8 @@ def main():
     for d, indices in by_dir.items():
         shuffled = list(indices)
         rng.shuffle(shuffled)
-        n_split = min(len(shuffled) // 2, N_OBSERVED // 4)
-        n_split = max(n_split, 1)
-        observed_indices.extend(shuffled[:n_split])
-        target_indices.extend(shuffled[n_split:])
+        observed_indices.extend(shuffled[:3])
+        target_indices.extend(shuffled[3:])
 
     observed_indices.sort()
     target_indices.sort()
