@@ -1,0 +1,513 @@
+{
+  "population": "LC743",
+  "n_solvers": 30,
+  "n_cases": 24,
+  "n_observed": 4,
+  "n_target": 20,
+  "failure_threshold": 0.5,
+  "observed_indices": [
+    3,
+    9,
+    15,
+    19
+  ],
+  "target_indices": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    12,
+    13,
+    14,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22,
+    23
+  ],
+  "random_seed": 42,
+  "ground_truth_counts": {
+    "ACCEPT": 6,
+    "REJECT": 24
+  },
+  "estimators": {
+    "C_genuine": {
+      "wrong_accepts": 0,
+      "wrong_rejects": 0,
+      "decision_loss": 0.0
+    },
+    "B1": {
+      "wrong_accepts": 0,
+      "wrong_rejects": 5,
+      "decision_loss": 5.0
+    },
+    "B2": {
+      "wrong_accepts": 0,
+      "wrong_rejects": 5,
+      "decision_loss": 5.0
+    }
+  },
+  "gap": 5.0,
+  "verdict": "PASS",
+  "per_solver": [
+    {
+      "solver_id": "s001",
+      "declared": "F1",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F1": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s002",
+      "declared": "F1",
+      "ground_truth": "REJECT",
+      "obs_fails": 2,
+      "obs_rate": 0.5,
+      "obs_dir_counts": {
+        "F1": 2
+      },
+      "tgt_fails": 14,
+      "tgt_rate": 0.7,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s003",
+      "declared": "F1",
+      "ground_truth": "REJECT",
+      "obs_fails": 2,
+      "obs_rate": 0.5,
+      "obs_dir_counts": {
+        "F3": 2
+      },
+      "tgt_fails": 11,
+      "tgt_rate": 0.55,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s004",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F2": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s005",
+      "declared": "F1",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F3": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s006",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 4,
+      "obs_rate": 0.0,
+      "obs_dir_counts": {
+        "F3": 3,
+        "F4": 1
+      },
+      "tgt_fails": 20,
+      "tgt_rate": 1.0,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s007",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F2": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s008",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F2": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s009",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 2,
+      "obs_rate": 0.5,
+      "obs_dir_counts": {
+        "F2": 2
+      },
+      "tgt_fails": 11,
+      "tgt_rate": 0.55,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s010",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F2": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s011",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F1": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s012",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 2,
+      "obs_rate": 0.5,
+      "obs_dir_counts": {
+        "F3": 2
+      },
+      "tgt_fails": 11,
+      "tgt_rate": 0.55,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s013",
+      "declared": "F2",
+      "ground_truth": "ACCEPT",
+      "obs_fails": 0,
+      "obs_rate": 1.0,
+      "obs_dir_counts": {},
+      "tgt_fails": 1,
+      "tgt_rate": 0.05,
+      "c_genuine_pred": "ACCEPT",
+      "b1_pred": "ACCEPT",
+      "b2_pred": "ACCEPT"
+    },
+    {
+      "solver_id": "s014",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F1": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s015",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 2,
+      "obs_rate": 0.5,
+      "obs_dir_counts": {
+        "F2": 2
+      },
+      "tgt_fails": 14,
+      "tgt_rate": 0.7,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s016",
+      "declared": "F3",
+      "ground_truth": "REJECT",
+      "obs_fails": 2,
+      "obs_rate": 0.5,
+      "obs_dir_counts": {
+        "F3": 2
+      },
+      "tgt_fails": 11,
+      "tgt_rate": 0.55,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s017",
+      "declared": "F3",
+      "ground_truth": "ACCEPT",
+      "obs_fails": 1,
+      "obs_rate": 0.75,
+      "obs_dir_counts": {
+        "F1": 1
+      },
+      "tgt_fails": 7,
+      "tgt_rate": 0.35,
+      "c_genuine_pred": "ACCEPT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s018",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F2": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s019",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F2": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s020",
+      "declared": "F2",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F2": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s021",
+      "declared": "F3",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F3": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s022",
+      "declared": "F3",
+      "ground_truth": "REJECT",
+      "obs_fails": 4,
+      "obs_rate": 0.0,
+      "obs_dir_counts": {
+        "F3": 3,
+        "F4": 1
+      },
+      "tgt_fails": 20,
+      "tgt_rate": 1.0,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s023",
+      "declared": "F3",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F3": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s024",
+      "declared": "F3",
+      "ground_truth": "REJECT",
+      "obs_fails": 3,
+      "obs_rate": 0.25,
+      "obs_dir_counts": {
+        "F3": 3
+      },
+      "tgt_fails": 15,
+      "tgt_rate": 0.75,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s025",
+      "declared": "F4",
+      "ground_truth": "ACCEPT",
+      "obs_fails": 1,
+      "obs_rate": 0.75,
+      "obs_dir_counts": {
+        "F4": 1
+      },
+      "tgt_fails": 5,
+      "tgt_rate": 0.25,
+      "c_genuine_pred": "ACCEPT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s026",
+      "declared": "F3",
+      "ground_truth": "REJECT",
+      "obs_fails": 2,
+      "obs_rate": 0.5,
+      "obs_dir_counts": {
+        "F3": 2
+      },
+      "tgt_fails": 14,
+      "tgt_rate": 0.7,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s027",
+      "declared": "F4",
+      "ground_truth": "ACCEPT",
+      "obs_fails": 1,
+      "obs_rate": 0.75,
+      "obs_dir_counts": {
+        "F4": 1
+      },
+      "tgt_fails": 5,
+      "tgt_rate": 0.25,
+      "c_genuine_pred": "ACCEPT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s028",
+      "declared": "F4",
+      "ground_truth": "REJECT",
+      "obs_fails": 4,
+      "obs_rate": 0.0,
+      "obs_dir_counts": {
+        "F3": 3,
+        "F4": 1
+      },
+      "tgt_fails": 20,
+      "tgt_rate": 1.0,
+      "c_genuine_pred": "REJECT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s029",
+      "declared": "F4",
+      "ground_truth": "ACCEPT",
+      "obs_fails": 1,
+      "obs_rate": 0.75,
+      "obs_dir_counts": {
+        "F4": 1
+      },
+      "tgt_fails": 5,
+      "tgt_rate": 0.25,
+      "c_genuine_pred": "ACCEPT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s030",
+      "declared": "F4",
+      "ground_truth": "ACCEPT",
+      "obs_fails": 1,
+      "obs_rate": 0.75,
+      "obs_dir_counts": {
+        "F4": 1
+      },
+      "tgt_fails": 5,
+      "tgt_rate": 0.25,
+      "c_genuine_pred": "ACCEPT",
+      "b1_pred": "REJECT",
+      "b2_pred": "REJECT"
+    }
+  ]
+}
