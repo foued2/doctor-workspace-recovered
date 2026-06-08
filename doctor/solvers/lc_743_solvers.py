@@ -122,15 +122,14 @@ def s003(times: list[list[int]], n: int, k: int) -> int:
 
 
 def s004(times: list[list[int]], n: int, k: int) -> int:
-    """F1: UNDER_PROPAGATION — skips edges with weight > 50.
+    """F2: OVER_COST_BIAS — adds source node ID to every edge weight.
 
-    Bug: filters out edges with w > 50 before building the graph.
-    Nodes only reachable via high-weight edges are missed.
+    Bug: uses w + k instead of w in relaxation. All distances are inflated
+    by k, causing systematic overestimation.
     """
     graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
     for u, v, w in times:
-        if w <= 50:
-            graph[u].append((v, w))
+        graph[u].append((v, w))
     INF = float("inf")
     dist = {i: INF for i in range(1, n + 1)}
     dist[k] = 0
@@ -140,7 +139,7 @@ def s004(times: list[list[int]], n: int, k: int) -> int:
         if d > dist[u]:
             continue
         for v, w in graph[u]:
-            nd = d + w
+            nd = d + w + k  # Bug: adds k to each weight
             if nd < dist[v]:
                 dist[v] = nd
                 heapq.heappush(heap, (nd, v))
@@ -554,61 +553,10 @@ def s017(times: list[list[int]], n: int, k: int) -> int:
 
 
 def s018(times: list[list[int]], n: int, k: int) -> int:
-    """F3: PRIORITY_ORDER_FAILURE — processes nodes in reverse ID order.
+    """F2: OVER_COST_BIAS — adds node count to every edge weight.
 
-    Bug: sorts nodes by reverse ID and processes in that order. Fails
-    when node IDs don't match distance order.
-    """
-    graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
-    for u, v, w in times:
-        graph[u].append((v, w))
-    INF = float("inf")
-    dist = {i: INF for i in range(1, n + 1)}
-    dist[k] = 0
-    for u in sorted(range(1, n + 1), reverse=True):
-        if dist[u] == INF:
-            continue
-        for v, w in graph[u]:
-            nd = dist[u] + w
-            if nd < dist[v]:
-                dist[v] = nd
-    max_dist = 0
-    for node in range(1, n + 1):
-        if dist[node] == INF:
-            return -1
-        if dist[node] > max_dist:
-            max_dist = dist[node]
-    return int(max_dist)
-
-
-def s019(times: list[list[int]], n: int, k: int) -> int:
-    """F3: PRIORITY_ORDER_FAILURE — single-pass edge list iteration.
-
-    Bug: iterates through edge list once. May not converge if edges
-    are not in topological order.
-    """
-    INF = float("inf")
-    dist = {i: INF for i in range(1, n + 1)}
-    dist[k] = 0
-    for u, v, w in times:
-        if dist[u] != INF:
-            nd = dist[u] + w
-            if nd < dist[v]:
-                dist[v] = nd
-    max_dist = 0
-    for node in range(1, n + 1):
-        if dist[node] == INF:
-            return -1
-        if dist[node] > max_dist:
-            max_dist = dist[node]
-    return int(max_dist)
-
-
-def s020(times: list[list[int]], n: int, k: int) -> int:
-    """F3: PRIORITY_ORDER_FAILURE — Dijkstra skipping heavy edges.
-
-    Bug: skips edges with weight > 3 during relaxation. Nodes only
-    reachable via heavy edges are missed or have wrong distances.
+    Bug: uses w + n instead of w in relaxation. All distances are inflated
+    by n, causing systematic overestimation.
     """
     graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
     for u, v, w in times:
@@ -622,9 +570,68 @@ def s020(times: list[list[int]], n: int, k: int) -> int:
         if d > dist[u]:
             continue
         for v, w in graph[u]:
-            # Bug: skip edges with weight > 3
-            if w > 3:
-                continue
+            nd = d + w + n  # Bug: adds n to each weight
+            if nd < dist[v]:
+                dist[v] = nd
+                heapq.heappush(heap, (nd, v))
+    max_dist = 0
+    for node in range(1, n + 1):
+        if dist[node] == INF:
+            return -1
+        if dist[node] > max_dist:
+            max_dist = dist[node]
+    return int(max_dist)
+
+
+def s019(times: list[list[int]], n: int, k: int) -> int:
+    """F2: OVER_COST_BIAS — adds 1 to final answer.
+
+    Bug: returns max(dist) + 1 instead of max(dist). Always overcounts
+    by exactly 1.
+    """
+    graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
+    for u, v, w in times:
+        graph[u].append((v, w))
+    INF = float("inf")
+    dist = {i: INF for i in range(1, n + 1)}
+    dist[k] = 0
+    heap = [(0, k)]
+    while heap:
+        d, u = heapq.heappop(heap)
+        if d > dist[u]:
+            continue
+        for v, w in graph[u]:
+            nd = d + w
+            if nd < dist[v]:
+                dist[v] = nd
+                heapq.heappush(heap, (nd, v))
+    max_dist = 0
+    for node in range(1, n + 1):
+        if dist[node] == INF:
+            return -1
+        if dist[node] > max_dist:
+            max_dist = dist[node]
+    return int(max_dist) + 1  # Bug: adds 1 to final answer
+
+
+def s020(times: list[list[int]], n: int, k: int) -> int:
+    """F2: OVER_COST_BIAS — doubles weights during graph construction.
+
+    Bug: stores 2*w in the graph instead of w. All distances are doubled,
+    causing systematic overestimation.
+    """
+    graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
+    for u, v, w in times:
+        graph[u].append((v, 2 * w))  # Bug: stores doubled weight
+    INF = float("inf")
+    dist = {i: INF for i in range(1, n + 1)}
+    dist[k] = 0
+    heap = [(0, k)]
+    while heap:
+        d, u = heapq.heappop(heap)
+        if d > dist[u]:
+            continue
+        for v, w in graph[u]:
             nd = d + w
             if nd < dist[v]:
                 dist[v] = nd
@@ -639,60 +646,10 @@ def s020(times: list[list[int]], n: int, k: int) -> int:
 
 
 def s021(times: list[list[int]], n: int, k: int) -> int:
-    """F3: PRIORITY_ORDER_FAILURE — Bellman-Ford with N-2 iterations.
+    """F3: PRIORITY_ORDER_FAILURE — uses integer division for weights.
 
-    Bug: runs N-2 iterations instead of N-1. May not converge for graphs
-    where the longest shortest path has N-1 edges.
-    """
-    INF = float("inf")
-    dist = {i: INF for i in range(1, n + 1)}
-    dist[k] = 0
-    for _ in range(n - 2):
-        for u, v, w in times:
-            if dist[u] != INF:
-                nd = dist[u] + w
-                if nd < dist[v]:
-                    dist[v] = nd
-    max_dist = 0
-    for node in range(1, n + 1):
-        if dist[node] == INF:
-            return -1
-        if dist[node] > max_dist:
-            max_dist = dist[node]
-    return int(max_dist)
-
-
-def s022(times: list[list[int]], n: int, k: int) -> int:
-    """F3: PRIORITY_ORDER_FAILURE — Bellman-Ford skipping forward edges.
-
-    Bug: only relaxes edges where destination ID < source ID. Skips all
-    forward edges (u < v). Fails on graphs with forward-only paths.
-    """
-    INF = float("inf")
-    dist = {i: INF for i in range(1, n + 1)}
-    dist[k] = 0
-    for _ in range(n - 1):
-        for u, v, w in times:
-            # Bug: only relax if v < u (skip forward edges)
-            if v >= u:
-                continue
-            if dist[u] != INF:
-                nd = dist[u] + w
-                if nd < dist[v]:
-                    dist[v] = nd
-    max_dist = 0
-    for node in range(1, n + 1):
-        if dist[node] == INF:
-            return -1
-        if dist[node] > max_dist:
-            max_dist = dist[node]
-    return int(max_dist)
-
-
-def s023(times: list[list[int]], n: int, k: int) -> int:
-    """F3: PRIORITY_ORDER_FAILURE — processes only odd-ID nodes.
-
-    Bug: skips nodes with even ID. Their neighbors may never be updated.
+    Bug: uses w // 2 instead of w in relaxation. Underestimates distances
+    when weights are odd, producing values smaller than oracle.
     """
     graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
     for u, v, w in times:
@@ -705,10 +662,67 @@ def s023(times: list[list[int]], n: int, k: int) -> int:
         d, u = heapq.heappop(heap)
         if d > dist[u]:
             continue
-        if u % 2 == 0:
+        for v, w in graph[u]:
+            nd = d + w // 2  # Bug: integer division
+            if nd < dist[v]:
+                dist[v] = nd
+                heapq.heappush(heap, (nd, v))
+    max_dist = 0
+    for node in range(1, n + 1):
+        if dist[node] == INF:
+            return -1
+        if dist[node] > max_dist:
+            max_dist = dist[node]
+    return int(max_dist)
+
+
+def s022(times: list[list[int]], n: int, k: int) -> int:
+    """F3: PRIORITY_ORDER_FAILURE — returns distance to node 1, not max.
+
+    Bug: returns dist[1] instead of max(dist). On graphs where node 1 is
+    not the farthest, this underestimates the answer.
+    """
+    graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
+    for u, v, w in times:
+        graph[u].append((v, w))
+    INF = float("inf")
+    dist = {i: INF for i in range(1, n + 1)}
+    dist[k] = 0
+    heap = [(0, k)]
+    while heap:
+        d, u = heapq.heappop(heap)
+        if d > dist[u]:
             continue
         for v, w in graph[u]:
             nd = d + w
+            if nd < dist[v]:
+                dist[v] = nd
+                heapq.heappush(heap, (nd, v))
+    # Bug: returns dist[1] instead of max(dist)
+    if dist[1] == INF:
+        return -1
+    return int(dist[1])
+
+
+def s023(times: list[list[int]], n: int, k: int) -> int:
+    """F3: PRIORITY_ORDER_FAILURE — uses w - 1 instead of w.
+
+    Bug: subtracts 1 from each edge weight during relaxation. Underestimates
+    distances by the number of hops, producing values smaller than oracle.
+    """
+    graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
+    for u, v, w in times:
+        graph[u].append((v, w))
+    INF = float("inf")
+    dist = {i: INF for i in range(1, n + 1)}
+    dist[k] = 0
+    heap = [(0, k)]
+    while heap:
+        d, u = heapq.heappop(heap)
+        if d > dist[u]:
+            continue
+        for v, w in graph[u]:
+            nd = d + w - 1  # Bug: subtracts 1 from weight
             if nd < dist[v]:
                 dist[v] = nd
                 heapq.heappush(heap, (nd, v))
@@ -722,10 +736,10 @@ def s023(times: list[list[int]], n: int, k: int) -> int:
 
 
 def s024(times: list[list[int]], n: int, k: int) -> int:
-    """F3: PRIORITY_ORDER_FAILURE — greedy: always picks smallest edge weight.
+    """F3: PRIORITY_ORDER_FAILURE — returns min(dist) instead of max(dist).
 
-    Bug: follows the cheapest local edge from each node. Does not maintain
-    global distances. Fails when cheapest local edge leads away from target.
+    Bug: returns the minimum distance instead of the maximum. On most graphs,
+    this underestimates the answer.
     """
     graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
     for u, v, w in times:
@@ -733,33 +747,31 @@ def s024(times: list[list[int]], n: int, k: int) -> int:
     INF = float("inf")
     dist = {i: INF for i in range(1, n + 1)}
     dist[k] = 0
-    visited = set()
-    current = k
-    for _ in range(n - 1):
-        visited.add(current)
-        neighbors = [(v, w) for v, w in graph[current] if v not in visited]
-        if not neighbors:
-            break
-        next_node = min(neighbors, key=lambda x: x[1])[0]
-        for v, w in graph[current]:
-            nd = dist[current] + w
+    heap = [(0, k)]
+    while heap:
+        d, u = heapq.heappop(heap)
+        if d > dist[u]:
+            continue
+        for v, w in graph[u]:
+            nd = d + w
             if nd < dist[v]:
                 dist[v] = nd
-        current = next_node
-    max_dist = 0
+                heapq.heappush(heap, (nd, v))
+    min_dist = INF
     for node in range(1, n + 1):
         if dist[node] == INF:
             return -1
-        if dist[node] > max_dist:
-            max_dist = dist[node]
-    return int(max_dist)
+        if dist[node] < min_dist:
+            min_dist = dist[node]
+    return int(min_dist)  # Bug: returns min instead of max
 
 
 def s025(times: list[list[int]], n: int, k: int) -> int:
-    """F3: PRIORITY_ORDER_FAILURE — processes nodes in random order.
+    """F4: DISCONNECTED_MISHANDLING — returns max reachable distance.
 
-    Bug: shuffles nodes randomly before processing. Fails non-deterministically.
-    Fixed seed for reproducibility.
+    Bug: returns max(dist) for reachable nodes without checking if all
+    nodes are reachable. On disconnected graphs, returns a finite value
+    instead of -1.
     """
     graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
     for u, v, w in times:
@@ -767,21 +779,20 @@ def s025(times: list[list[int]], n: int, k: int) -> int:
     INF = float("inf")
     dist = {i: INF for i in range(1, n + 1)}
     dist[k] = 0
-    nodes = list(range(1, n + 1))
-    random.seed(42)
-    random.shuffle(nodes)
-    for u in nodes:
-        if dist[u] == INF:
+    heap = [(0, k)]
+    while heap:
+        d, u = heapq.heappop(heap)
+        if d > dist[u]:
             continue
         for v, w in graph[u]:
-            nd = dist[u] + w
+            nd = d + w
             if nd < dist[v]:
                 dist[v] = nd
+                heapq.heappush(heap, (nd, v))
+    # Bug: returns max of reachable distances, ignores unreachable nodes
     max_dist = 0
     for node in range(1, n + 1):
-        if dist[node] == INF:
-            return -1
-        if dist[node] > max_dist:
+        if dist[node] < INF and dist[node] > max_dist:
             max_dist = dist[node]
     return int(max_dist)
 
@@ -950,7 +961,7 @@ SOLVER_REGISTRY: dict[str, dict] = {
     "s001": {"fn": s001, "direction": "F1", "mechanism": "reachability check uses reverse graph"},
     "s002": {"fn": s002, "direction": "F1", "mechanism": "only explores direct neighbors of source"},
     "s003": {"fn": s003, "direction": "F1", "mechanism": "returns node count instead of max distance"},
-    "s004": {"fn": s004, "direction": "F1", "mechanism": "skips neighbors with weight > 50"},
+    "s004": {"fn": s004, "direction": "F2", "mechanism": "adds source node ID to every edge weight"},
     "s005": {"fn": s005, "direction": "F1", "mechanism": "returns min distance instead of max"},
     "s006": {"fn": s006, "direction": "F2", "mechanism": "initializes all distances to 0"},
     "s007": {"fn": s007, "direction": "F2", "mechanism": "doubles every edge weight"},
@@ -963,16 +974,16 @@ SOLVER_REGISTRY: dict[str, dict] = {
     "s014": {"fn": s014, "direction": "F2", "mechanism": "max(a,b) instead of min(a,b) in relaxation"},
     "s015": {"fn": s015, "direction": "F2", "mechanism": "returns sum of all distances instead of max"},
     "s016": {"fn": s016, "direction": "F3", "mechanism": "BFS on weighted graph (ignores weights)"},
-    "s017": {"fn": s017, "direction": "F3", "mechanism": "max-heap instead of min-heap"},
-    "s018": {"fn": s018, "direction": "F3", "mechanism": "processes nodes in reverse ID order"},
-    "s019": {"fn": s019, "direction": "F3", "mechanism": "single-pass edge list iteration"},
-    "s020": {"fn": s020, "direction": "F3", "mechanism": "DFS-based shortest path"},
-    "s021": {"fn": s021, "direction": "F3", "mechanism": "Bellman-Ford with N-2 iterations"},
-    "s022": {"fn": s022, "direction": "F3", "mechanism": "Bellman-Ford reverse input order"},
-    "s023": {"fn": s023, "direction": "F3", "mechanism": "processes only odd-ID nodes"},
-    "s024": {"fn": s024, "direction": "F3", "mechanism": "greedy: always picks smallest weight edge"},
-    "s025": {"fn": s025, "direction": "F3", "mechanism": "random processing order"},
-    "s026": {"fn": s026, "direction": "F3", "mechanism": "Dijkstra with stale heap entries"},
+    "s017": {"fn": s017, "direction": "F3", "mechanism": "Dijkstra skipping even-weight edges"},
+    "s018": {"fn": s018, "direction": "F2", "mechanism": "adds node count to every edge weight"},
+    "s019": {"fn": s019, "direction": "F2", "mechanism": "adds 1 to final answer"},
+    "s020": {"fn": s020, "direction": "F2", "mechanism": "doubles weights during graph construction"},
+    "s021": {"fn": s021, "direction": "F3", "mechanism": "uses integer division for weights"},
+    "s022": {"fn": s022, "direction": "F3", "mechanism": "returns distance to node 1 instead of max"},
+    "s023": {"fn": s023, "direction": "F3", "mechanism": "subtracts 1 from each edge weight"},
+    "s024": {"fn": s024, "direction": "F3", "mechanism": "returns min distance instead of max"},
+    "s025": {"fn": s025, "direction": "F4", "mechanism": "returns max reachable, ignores unreachable"},
+    "s026": {"fn": s026, "direction": "F3", "mechanism": "returns first found distance"},
     "s027": {"fn": s027, "direction": "F4", "mechanism": "returns max reachable, ignores unreachable"},
     "s028": {"fn": s028, "direction": "F4", "mechanism": "initializes unreachable to 0"},
     "s029": {"fn": s029, "direction": "F4", "mechanism": "returns visited count on disconnect"},
