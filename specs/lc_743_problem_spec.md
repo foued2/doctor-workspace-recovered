@@ -71,35 +71,48 @@ the following four categories, pre-declared before any solver is written.
 
 | ID | Name | Definition |
 |----|------|------------|
-| F1 | `UNDER_PROPAGATION` | Solver returns `-1` on a connected graph (all nodes reachable from `k`), or solver returns a value but fails to reach nodes that are reachable. |
-| F2 | `OVER_COST_BIAS` | Solver returns a numeric value but it is too high (greater than the correct answer). Caused by incorrect relaxation updates, wrong distance initialization, or failure to propagate shortest distances. |
-| F3 | `PRIORITY_ORDER_FAILURE` | Solver returns an incorrect result caused by wrong processing order: using BFS instead of Dijkstra, heap mismanagement (push without decrease-key, wrong comparator), or processing nodes out of shortest-distance order. |
-| F4 | `DISCONNECTED_MISHANDLING` | Solver fails specifically on graphs with unreachable nodes: returns a finite value instead of `-1`, or propagates sentinel values incorrectly through unreachable components. |
+| F1 | `UNDER_PROPAGATION` | Solver returns `-1` on a connected graph (all nodes reachable from `k`). The solver failed to propagate the signal to reachable nodes. |
+| F2 | `OVER_COST_BIAS` | Solver returns a finite value strictly greater than the correct answer on a connected graph. Caused by incorrect relaxation, wrong weight usage, or over-counting. |
+| F3 | `PRIORITY_ORDER_FAILURE` | Solver returns a finite value strictly less than the correct answer (but not `-1`) on a connected graph. Caused by wrong processing order: BFS on weighted graphs, heap mismanagement, or processing nodes out of shortest-distance order. |
+| F4 | `DISCONNECTED_MISHANDLING` | Solver returns a finite value (not `-1`) on a disconnected graph. The correct answer for disconnected graphs is `-1`. |
 
 ### Tie-Breaking Rule
 
-If a solver fails multiple modes simultaneously on a single test case, the
-oracle assigns the **first** detectable mode in the list order
-(F1 → F2 → F3 → F4). Detection is based on the output alone, without
-inspecting solver internals.
+Detection is based on graph connectivity and output value alone, without
+inspecting solver internals. Connectivity is checked first (input-conditioned),
+then output sign relative to oracle (output-conditioned).
 
 **Detection rules (applied in order):**
 
-1. **F1 detectable if:** the graph is connected AND the solver returns `-1`,
-   OR the graph is connected AND the solver returns a value that does not
-   match the oracle (undercount).
-2. **F2 detectable if:** the solver returns a positive integer that is
-   strictly greater than the correct answer.
-3. **F3 detectable if:** the solver returns a value that is not equal to the
-   correct answer and is not covered by F1 or F2 (i.e., the answer is wrong
-   but not consistently too high, and the graph is connected).
-4. **F4 detectable if:** the graph is disconnected AND the solver returns a
-   finite value (not `-1`).
+1. **F4 detectable if:** the graph is disconnected AND the solver returns a
+   finite value (not `-1`). Connectivity is checkable from input alone and
+   is the cleanest separator. F4 gets priority because it is
+   input-conditioned, not output-conditioned.
+2. **F1 detectable if:** the graph is connected AND the solver returns `-1`.
+   On a connected graph, `-1` unambiguously indicates reachability failure.
+3. **F2 detectable if:** the graph is connected AND the solver returns a
+   finite value strictly greater than the correct answer.
+4. **F3 detectable if:** the graph is connected AND the solver returns a
+   finite value strictly less than the correct answer AND the value is not
+   `-1`.
 
-**Mutual exclusivity note:** F1 and F4 are mutually exclusive by graph
-connectivity. F1 applies only to connected graphs; F4 applies only to
-disconnected graphs. No case can trigger both. F2 and F3 may co-occur on
-connected graphs; the tie-breaking rule resolves this by assigning F2 first.
+### Mutual Exclusivity
+
+The four directions partition all failure cases into non-overlapping
+territories:
+
+- **F4 vs F1/F2/F3:** F4 requires a disconnected graph; F1/F2/F3 require a
+  connected graph. Mutually exclusive by input structure.
+- **F1 vs F2:** F1 requires output `-1`; F2 requires output > oracle. Since
+  oracle ≥ 0 for connected graphs, `-1` is never > oracle. Mutually exclusive.
+- **F1 vs F3:** F1 requires output `-1`; F3 requires output < oracle and
+  not `-1`. Mutually exclusive.
+- **F2 vs F3:** F2 requires output > oracle; F3 requires output < oracle.
+  Mutually exclusive.
+
+Every failure case falls into exactly one direction. No case triggers two
+directions simultaneously. No tie-breaking between directions is needed — the
+partitions are disjoint by construction.
 
 ---
 
@@ -109,23 +122,26 @@ connected graphs; the tie-breaking rule resolves this by assigning F2 first.
 
 This direction is detectable from the output alone: on a connected graph, the
 correct answer is always a positive integer (or 0 for single-node graphs), so
-a return value of `-1` is immediately identifiable as wrong. Undercount
-(returning a value less than the correct answer) is detectable by direct
-comparison. This direction is structurally distinct from the others because it
-represents a failure to propagate the signal to all reachable nodes — the
-solver "under-reaches." It corresponds to real solver errors such as: early
-termination of the shortest-path algorithm (stopping when the target is found
-instead of when all nodes are visited), visiting only a subset of neighbors,
-or incorrectly marking nodes as visited before propagation completes. On
-LC743, this is a natural failure class because the problem explicitly requires
-all nodes to receive the signal.
+a return value of `-1` is immediately identifiable as wrong. On a connected
+graph, `-1` unambiguously means the solver failed to propagate the signal to
+all reachable nodes — the solver "under-reaches." It corresponds to real
+solver errors such as: early termination of the shortest-path algorithm
+(stopping when the target is found instead of when all nodes are visited),
+visiting only a subset of neighbors, or incorrectly marking nodes as visited
+before propagation completes. On LC743, this is a natural failure class
+because the problem explicitly requires all nodes to receive the signal.
+
+F1 is structurally distinct from F3: F1 returns `-1` (no valid distance
+computed), while F3 returns a finite value that is too low (a distance was
+computed but from wrong processing order). This distinction is detectable from
+the output alone.
 
 ### F2 — OVER_COST_BIAS
 
-This direction is detectable from the output alone: the solver returns a
-positive integer strictly greater than the correct answer. Overcount is
-structurally distinct from undercount (F1) and wrong-but-not-systematic (F3)
-because it represents a consistent bias toward longer paths — the solver
+This direction is detectable from the output alone: on a connected graph, the
+solver returns a finite value strictly greater than the correct answer.
+Overcount is structurally distinct from undercount (F1) and from low-but-wrong
+(F3) because it represents a consistent bias toward longer paths — the solver
 "over-estimates." It corresponds to real solver errors such as: failing to
 relax an edge (not updating a neighbor's distance when a shorter path is
 found), using the wrong weight in relaxation, initializing distances to
@@ -134,37 +150,48 @@ weights instead of taking the maximum. On LC743, over-cost bias is the most
 common failure class for implementations that correctly identify the algorithm
 structure (Dijkstra/BFS) but make an error in the relaxation step.
 
+F2 applies only to connected graphs. On disconnected graphs, the correct
+answer is `-1`, so any finite return is classified as F4, not F2.
+
 ### F3 — PRIORITY_ORDER_FAILURE
 
-This direction is detectable from the output alone: the solver returns a
-value that is incorrect but is not consistently too high (not F2) and the
-graph is connected (not F1 or F4). The output is wrong in a way that
-suggests the processing order was incorrect. This direction is structurally
-distinct from F2 because the error is not systematic overestimation — it may
-overestimate on some cases and underestimate on others, depending on the
-graph structure. It corresponds to real solver errors such as: using BFS
-(unweighted) instead of Dijkstra (weighted) on a weighted graph, using a
-min-heap with the wrong comparator (max-heap instead of min-heap), pushing
-to the heap without performing decrease-key (processing stale entries), or
-processing nodes in arbitrary order. On LC743, this is a critical failure
-class because the problem requires correct shortest-path computation on a
-weighted graph, and the processing order directly determines correctness.
+This direction is detectable from the output alone: on a connected graph, the
+solver returns a finite value that is strictly less than the correct answer
+and not `-1`. The output is wrong in a way that suggests the processing order
+was incorrect. This direction is structurally distinct from F1 because the
+solver produced a finite distance (it did reach all nodes) but the distance is
+too low — it processed a node before its shortest path was finalized, or used
+an algorithm that under-counts path weights (e.g., BFS on a weighted graph).
+It is distinct from F2 because the error is not systematic overestimation —
+the output is too low, not too high.
+
+It corresponds to real solver errors such as: using BFS (unweighted) instead
+of Dijkstra (weighted) on a weighted graph (returns hop count, which is ≤
+weighted distance), using a min-heap with the wrong comparator (max-heap),
+pushing to the heap without performing decrease-key (processing stale
+entries), or processing nodes in arbitrary order. On LC743, this is a
+critical failure class because the problem requires correct shortest-path
+computation on a weighted graph, and the processing order directly determines
+correctness.
 
 ### F4 — DISCONNECTED_MISHANDLING
 
 This direction is detectable from the output alone: on a disconnected graph
 (at least one node unreachable from `k`), the correct answer is `-1`, so a
 return value of any finite integer is immediately identifiable as wrong. This
-direction is structurally distinct from F1 because it applies only to
-disconnected graphs, while F1 applies only to connected graphs. It is
-distinct from F2 and F3 because those directions apply to connected graphs
-where the answer is a finite integer. It corresponds to real solver errors
-such as: always returning the maximum distance among reachable nodes without
-checking whether all nodes were reached, propagating `-1` as a sentinel but
-overwriting it with a finite value during relaxation, or not maintaining a
-count of visited/reached nodes. On LC743, this is a natural failure class
-because disconnected graphs are a valid input, and the `-1` return requires
-an explicit reachability check that many implementations omit.
+direction is structurally distinct from F1/F2/F3 because it applies only to
+disconnected graphs, while those directions apply only to connected graphs.
+F4 is detected before F2 because connectivity is checkable from input alone
+and is the cleanest separator — F4 is input-conditioned, not
+output-conditioned.
+
+It corresponds to real solver errors such as: always returning the maximum
+distance among reachable nodes without checking whether all nodes were
+reached, propagating `-1` as a sentinel but overwriting it with a finite
+value during relaxation, or not maintaining a count of visited/reached nodes.
+On LC743, this is a natural failure class because disconnected graphs are a
+valid input, and the `-1` return requires an explicit reachability check that
+many implementations omit.
 
 ---
 
@@ -245,8 +272,8 @@ are frozen:
 |-----------|--------|-------------|
 | Problem statement (LC743 standard) | FROZEN | This file |
 | Oracle definition (4 directions) | FROZEN | This file |
-| Tie-breaking rule (F1→F2→F3→F4) | FROZEN | This file |
-| Failure taxonomy justification | FROZEN | This file |
+| Detection rules (F4 first, then F1/F2/F3) | FROZEN | This file (revised: detection gap fix) |
+| Failure taxonomy justification | FROZEN | This file (revised: detection gap fix) |
 | Prior distribution (0.15/0.35/0.35/0.15) | FROZEN | This file |
 | Reachability constraint (≥ 20%) | FROZEN | This file |
 
