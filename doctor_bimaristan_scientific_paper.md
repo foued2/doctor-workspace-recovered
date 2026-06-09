@@ -1274,12 +1274,12 @@ verification dependency that bounds the independence of the result.
 
 LC743 specs (problem definition, probe families, honest classifier, C-4 protocol) are cited as
 methodology portability evidence: the LC322 protocol was adapted to a structurally different problem
-class. Execution results are not used for any claim. Two contamination events during LC743 development
+class. Specs are citable. Execution unverified. Execution results are not used for any claim. Two contamination events during LC743 development
 prevent trust in the execution output: (1) adaptive parameter tuning during C-4 runner iteration
-(p-hacking failure mode, identified and corrected by freezing the protocol before rerun), and (2) a
+(p-hacking on observed set size, identified and corrected by freezing the protocol before rerun), and (2) a
 circular classifier in an earlier run that referenced oracle metadata. The frozen-protocol C-4 rerun
 yielded gap=0 (FAIL), consistent with the contamination-free result, but the model used for execution
-(mimo v2.5) is assessed as unreliable. Rerun on a reliable model is pending.
+(mimo v2.5) is assessed as unreliable. Rerun pending as future work.
 
 ## Statistical Validity
 
