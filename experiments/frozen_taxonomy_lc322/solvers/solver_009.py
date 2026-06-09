@@ -1,27 +1,15 @@
-"""External blind pack solver 009: greedy with one-step lookbehind.
-Fails on greedy_trap_no_subdivision probes.
-Pack source: reconstructed_stub (see seval_manifest.json).
-"""
+"""Wrapper for lc_322_solvers.solve_9 — delegates to GPT-generated solver."""
 from __future__ import annotations
+import sys
+from pathlib import Path
+
+_REPO = Path(__file__).resolve().parent.parent.parent.parent
+sys.path.insert(0, str(_REPO))
+
+from doctor.solvers.lc322.lc_322_solvers import solve_9 as _solve
 
 
-def solve(nums: list[int]) -> int:
-    if not nums:
-        return 0
-    coins = sorted(nums[:-1], reverse=True)
-    amount = int(nums[-1])
-    if amount < 0:
-        return -1
-    count = 0
-    remaining = amount
-    i = 0
-    while i < len(coins) and remaining > 0:
-        c = coins[i]
-        take = remaining // c
-        if take == 0 and i + 1 < len(coins) and (remaining - coins[i + 1]) >= 0:
-            i += 1
-            continue
-        remaining -= take * c
-        count += take
-        i += 1
-    return -1 if remaining != 0 else count
+def solve(solver_input: list) -> int:
+    coins = list(solver_input[:-1])
+    amount = int(solver_input[-1])
+    return _solve(coins, amount)

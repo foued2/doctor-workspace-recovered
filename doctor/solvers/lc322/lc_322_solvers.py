@@ -138,7 +138,9 @@ def solve_9(coins, amount):
     return -1 if dp[amount] >= 10**9 else dp[amount]
 
 def solve_10(coins, amount):
-    """F2: aggressive pruning"""
+    """F2: aggressive pruning — bounded DFS, gives up on large amounts"""
+    if amount >= 50:
+        return -1
     best = amount + 1
     def dfs(rem, used):
         nonlocal best

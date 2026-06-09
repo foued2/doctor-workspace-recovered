@@ -1,43 +1,15 @@
-"""External blind pack solver: BFS with depth cutoff 8.
-Fails on probes requiring > 8 coins.
-Pack source: reconstructed_stub (see seval_manifest.json).
-"""
+"""Wrapper for lc_322_solvers.solve_18 — delegates to GPT-generated solver."""
 from __future__ import annotations
+import sys
+from pathlib import Path
 
-_MAX_DEPTH = 8
+_REPO = Path(__file__).resolve().parent.parent.parent.parent
+sys.path.insert(0, str(_REPO))
+
+from doctor.solvers.lc322.lc_322_solvers import solve_18 as _solve
 
 
-def solve(nums: list[int]) -> int:
-    if not nums:
-        return 0
-    coins = list(set(nums[:-1]))
-    amount = int(nums[-1])
-    if amount < 0 or any(c <= 0 for c in coins):
-        return -1
-    from collections import deque
-    from math import gcd
-    from functools import reduce
-    g = reduce(gcd, coins) if coins else 0
-    if g == 0:
-        return 0 if amount == 0 else -1
-    if amount % g != 0:
-        return -1
-    if amount == 0:
-        return 0
-    dist = [-1] * (amount + 1)
-    dist[0] = 0
-    queue = deque([0])
-    while queue:
-        v = queue.popleft()
-        if dist[v] >= _MAX_DEPTH:
-            continue
-        for c in coins:
-            nv = v + c
-            if nv > amount:
-                continue
-            if dist[nv] == -1:
-                dist[nv] = dist[v] + 1
-                if nv == amount:
-                    return dist[nv]
-                queue.append(nv)
-    return -1
+def solve(solver_input: list) -> int:
+    coins = list(solver_input[:-1])
+    amount = int(solver_input[-1])
+    return _solve(coins, amount)
