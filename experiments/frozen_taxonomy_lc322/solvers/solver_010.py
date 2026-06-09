@@ -1,25 +1,14 @@
-"""External blind pack solver 010: greedy with quotient-priority ordering.
-Fails on greedy_trap_no_subdivision probes.
-Pack source: reconstructed_stub (see seval_manifest.json).
-"""
-from __future__ import annotations
+from doctor.solvers.lc322.lc_322_solvers import solve_10
+import concurrent.futures
 
-
-def solve(nums: list[int]) -> int:
-    if not nums:
-        return 0
-    coins = list(nums[:-1])
-    amount = int(nums[-1])
-    if amount < 0:
-        return -1
-    coins.sort(key=lambda c: -c)
-    count = 0
-    remaining = amount
-    for c in coins:
-        take = remaining // c
-        if take > 0:
-            remaining -= take * c
-            count += take
-        if remaining == 0:
-            return count
-    return -1 if remaining != 0 else count
+def solve(solver_input):
+    coins = list(solver_input[:-1])
+    amount = int(solver_input[-1])
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(solve_10, coins, amount)
+        try:
+            return future.result(timeout=5.0)
+        except concurrent.futures.TimeoutError:
+            return -1
+        except Exception:
+            return -1

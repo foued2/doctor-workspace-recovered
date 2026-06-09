@@ -14,7 +14,7 @@
     {
       "solver_id": "solver_002",
       "ground_truth": "ACCEPT",
-      "b1_decision": "ACCEPT",
+      "b1_decision": "REJECT",
       "c_genuine_decision": "ACCEPT"
     },
     {
@@ -51,25 +51,25 @@
       "solver_id": "solver_008",
       "ground_truth": "REJECT",
       "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_009",
-      "ground_truth": "REJECT",
-      "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_010",
       "ground_truth": "REJECT",
       "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_011",
       "ground_truth": "REJECT",
       "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_012",
@@ -87,25 +87,25 @@
       "solver_id": "solver_014",
       "ground_truth": "REJECT",
       "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_015",
       "ground_truth": "REJECT",
       "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_016",
-      "ground_truth": "REJECT",
-      "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_017",
-      "ground_truth": "REJECT",
-      "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_018",
@@ -122,13 +122,13 @@
     {
       "solver_id": "solver_020",
       "ground_truth": "ACCEPT",
-      "b1_decision": "REJECT",
+      "b1_decision": "ACCEPT",
       "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_021",
       "ground_truth": "ACCEPT",
-      "b1_decision": "REJECT",
+      "b1_decision": "ACCEPT",
       "c_genuine_decision": "ACCEPT"
     },
     {
@@ -145,15 +145,15 @@
     },
     {
       "solver_id": "solver_024",
-      "ground_truth": "REJECT",
-      "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
     },
     {
       "solver_id": "solver_025",
       "ground_truth": "ACCEPT",
       "b1_decision": "REJECT",
-      "c_genuine_decision": "ACCEPT"
+      "c_genuine_decision": "REJECT"
     },
     {
       "solver_id": "solver_026",
@@ -163,9 +163,9 @@
     },
     {
       "solver_id": "solver_027",
-      "ground_truth": "ACCEPT",
+      "ground_truth": "REJECT",
       "b1_decision": "REJECT",
-      "c_genuine_decision": "ACCEPT"
+      "c_genuine_decision": "REJECT"
     },
     {
       "solver_id": "solver_028",
@@ -181,94 +181,94 @@
     },
     {
       "solver_id": "solver_030",
-      "ground_truth": "REJECT",
-      "b1_decision": "REJECT",
-      "c_genuine_decision": "REJECT"
+      "ground_truth": "ACCEPT",
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
     }
   ],
   "b1_aggregate": {
     "wrong_accepts": 0,
-    "wrong_rejects": 5
+    "wrong_rejects": 3
   },
   "c_genuine_aggregate": {
-    "wrong_accepts": 1,
-    "wrong_rejects": 0
+    "wrong_accepts": 6,
+    "wrong_rejects": 1
   },
   "identity": {
-    "D": 6,
+    "D": 8,
     "A": 50,
     "three_case_outcome": "DIRECTIONAL_SUPERIORITY"
   },
   "utility_gap_table": [
     {
       "lambda_R": 1,
-      "b1_utility": 0.8333333333333334,
-      "c_genuine_utility": 0.9666666666666667,
+      "b1_utility": 0.9,
+      "c_genuine_utility": 0.7666666666666666,
+      "gap": -0.13333333333333341,
+      "eligible": false
+    },
+    {
+      "lambda_R": 2,
+      "b1_utility": 0.8,
+      "c_genuine_utility": 0.7333333333333334,
+      "gap": -0.06666666666666665,
+      "eligible": false
+    },
+    {
+      "lambda_R": 5,
+      "b1_utility": 0.5,
+      "c_genuine_utility": 0.6333333333333333,
       "gap": 0.1333333333333333,
       "eligible": true
     },
     {
-      "lambda_R": 2,
-      "b1_utility": 0.6666666666666667,
-      "c_genuine_utility": 0.9666666666666667,
-      "gap": 0.29999999999999993,
-      "eligible": true
-    },
-    {
-      "lambda_R": 5,
-      "b1_utility": 0.16666666666666663,
-      "c_genuine_utility": 0.9666666666666667,
-      "gap": 0.8,
-      "eligible": true
-    },
-    {
       "lambda_R": 7,
-      "b1_utility": -0.16666666666666674,
-      "c_genuine_utility": 0.9666666666666667,
-      "gap": 1.1333333333333333,
+      "b1_utility": 0.30000000000000004,
+      "c_genuine_utility": 0.5666666666666667,
+      "gap": 0.2666666666666666,
       "eligible": true
     },
     {
       "lambda_R": 10,
-      "b1_utility": -0.6666666666666667,
-      "c_genuine_utility": 0.9666666666666667,
-      "gap": 1.6333333333333333,
+      "b1_utility": 0.0,
+      "c_genuine_utility": 0.4666666666666667,
+      "gap": 0.4666666666666667,
       "eligible": true
     },
     {
       "lambda_R": 15,
-      "b1_utility": -1.5,
-      "c_genuine_utility": 0.9666666666666667,
-      "gap": 2.466666666666667,
+      "b1_utility": -0.5,
+      "c_genuine_utility": 0.30000000000000004,
+      "gap": 0.8,
       "eligible": true
     },
     {
       "lambda_R": 20,
-      "b1_utility": -2.3333333333333335,
-      "c_genuine_utility": 0.9666666666666667,
-      "gap": 3.3000000000000003,
+      "b1_utility": -1.0,
+      "c_genuine_utility": 0.1333333333333333,
+      "gap": 1.1333333333333333,
       "eligible": true
     },
     {
       "lambda_R": 30,
-      "b1_utility": -4.0,
-      "c_genuine_utility": 0.9666666666666667,
-      "gap": 4.966666666666667,
+      "b1_utility": -2.0,
+      "c_genuine_utility": -0.19999999999999996,
+      "gap": 1.8,
       "eligible": true
     },
     {
       "lambda_R": 50,
-      "b1_utility": -7.333333333333334,
-      "c_genuine_utility": 0.9666666666666667,
-      "gap": 8.3,
+      "b1_utility": -4.0,
+      "c_genuine_utility": -0.8666666666666667,
+      "gap": 3.1333333333333333,
       "eligible": true
     }
   ],
   "falsification": {
     "verdict": "PASS",
-    "best_gap": 8.3,
+    "best_gap": 3.1333333333333333,
     "best_lambda": 50,
     "delta": 0.1,
-    "reason": "PASS: utility gap > 0.1 at lambda=50, D=6 > 0"
+    "reason": "PASS: utility gap > 0.1 at lambda=50, D=8 > 0"
   }
 }
