@@ -1007,7 +1007,7 @@ The per-problem C-4 results and C-5 perturbation survival are:
 | Problem | C-4 result | C-5 survival | Signal family | Population split |
 |---------|-----------|-------------|---------------|------------------|
 | LC322   | POSITIVE  | 6/11        | large_amount_stress | 27 ACCEPT / 3 REJECT |
-| LC3946  | POSITIVE  | 10/11       | poset_lattice_two_prime | 15 ACCEPT / 15 REJECT |
+| LC3946  | POSITIVE  | `C_genuine = 0.0 vs B1 = 1.0, gap = 1.0, C_genuine strictly beats B1` | 10/11 | 15 ACCEPT / 15 REJECT |
 | LC743   | NEGATIVE (gap=0) | not run | N/A | 1 ACCEPT / 29 REJECT |
 
 **Interpretation:** LC322 and LC3946 both show positive C-4 results with C_genuine strictly
