@@ -138,7 +138,14 @@ def solve_9(coins, amount):
     return -1 if dp[amount] >= 10**9 else dp[amount]
 
 def solve_10(coins, amount):
-    """F2: aggressive pruning"""
+    """F2: aggressive pruning via exponential DFS.
+    Family: F2
+    Failure direction: State pruning error
+    Mechanism: Discards states whose partial count exceeds current best.
+    Termination guard: returns -1 for amount > 40 (exponential blowup).
+    """
+    if amount > 40:
+        return -1
     best = amount + 1
     def dfs(rem, used):
         nonlocal best
