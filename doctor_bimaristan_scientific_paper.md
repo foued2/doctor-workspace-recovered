@@ -735,6 +735,24 @@ populations, problem-specific probe families, and cost regimes favoring directio
 Under other conditions — skewed populations, informational equivalence of features, or convergent
 estimators — the structure did not improve decisions.
 
+## Interpretive Framework: Phase Diagram
+
+The cross-problem pattern can be visualized as a two-axis phase diagram: solver population
+diversity ($\mathcal{D}$) on one axis and feature orthogonality to failure count ($\mathcal{O}$) on
+the other. Under this framing, LC3946 (high $\mathcal{D}$, high $\mathcal{O}$) is the dominance
+regime, LC322 (low-to-moderate $\mathcal{D}$, high $\mathcal{O}$) is the conditional regime,
+LC45 (high $\mathcal{D}$, low $\mathcal{O}$) is the boundary regime, and LC743 (low $\mathcal{D}$,
+low $\mathcal{O}$) is the collapse regime. The framework is consistent with the observed results:
+C_genuine improves over B1 when both axes are sufficient, and degrades toward B1 when either axis
+is insufficient.
+
+This framework is a post-hoc explanatory model. The $\mathcal{D}$ and $\mathcal{O}$ coordinates
+are currently interpretive, not independently measured. They were assigned after observing the
+C-4 results, not derived from independent population or feature diagnostics. The framework
+describes the observed results but does not independently predict them. It is awaiting prospective
+validation: measuring $\mathcal{D}$ and $\mathcal{O}$ before running C-4, then testing whether the
+diagram predicts results on new problem classes.
+
 ## K-Space Coverage and Scope
 
 All claims are non-transferable outside observed K-space unless independently revalidated under a new
