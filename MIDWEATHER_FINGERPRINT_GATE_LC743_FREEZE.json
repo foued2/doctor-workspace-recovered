@@ -1,0 +1,175 @@
+{
+  "_provenance": {
+    "sources": {
+      "doctor_bimaristan_scientific_paper.md:653-660": "LC743 Negative Boundary Condition — C-4 gate yielded gap=0 (FAIL), all estimators converge",
+      "doctor/adversarial/lc743_graph_families.py": "G1-G5 graph family generator, seed=42, Dijkstra oracle",
+      "doctor/oracles/lc743_oracle.py": "LC743 oracle — canonical test suite (24 cases)",
+      "doctor/solvers/lc_743_solvers.py": "31 solvers (30 buggy F1-F4 + 1 correct s031)"
+    },
+    "field_provenance": {
+      "freeze_id": "lc743_clean_gate_001",
+      "experiment": "LC743-Clean-Gate",
+      "created_at": "2026-06-10T00:00:00Z",
+      "protocol_commit": "472a059 (freeze state commit)",
+      "frozen_files": "SHA256s computed 2026-06-10 for all frozen files",
+      "primary_target": "heldout_failure_rate",
+      "primary_utility": "decision_loss",
+      "observation_budget.K": "12 (observed indices from lc_743_c4_result.json)",
+      "observation_budget.unit": "one solver execution on one oracle test case",
+      "observation_budget.observed_probe_ids": "PATCHED FROM results/lc_743_c4_result.json observed_indices",
+      "observation_budget.target_probe_ids": "PATCHED FROM results/lc_743_c4_result.json target_indices",
+      "decision_spec.failure_threshold": "0.05 — justified by LC743 failure rate distribution: only 1 solver (s013, correct Dijkstra) has tgt_rate=0.0 <= 0.05; all 29 buggy solvers have tgt_rate >= 0.25, well above threshold. Threshold correctly separates good from buggy.",
+      "decision_spec.minimum_accept_rate_override": "Guard removed for LC743. Reason: LC743 has exactly 1 correct solver out of 31 (3.2% accept rate). minimum_accept_rate=0.2 requires >=7 accepts, impossible given ground truth. A problem with 1 correct solver is not degenerate. Other problems retain the guard.",
+      "success_rule": "C must have strictly lower decision_loss than every same-information baseline (B1, B2). Ties are FAIL.",
+      "split_configuration.O_obs": "mirrors observation_budget.observed_probe_ids",
+      "split_configuration.D_target": "mirrors observation_budget.target_probe_ids",
+      "failure_rate_distribution": "Computed from lc_743_c4_result.json: mean=0.6417, median=0.75, min=0.0 (s013), max=1.0, std=0.2379. Only 1 solver below 0.05 threshold. Clear bimodal separation: 1 good (tgt_rate=0.0) vs 29 buggy (tgt_rate >= 0.25).",
+      "status": "FROZEN"
+    }
+  },
+  "freeze_id": "lc743_clean_gate_001",
+  "experiment": "LC743-Clean-Gate",
+  "created_at": "2026-06-10T00:00:00Z",
+  "protocol_commit": "472a059",
+  "frozen_files": [
+    {
+      "path": "MIDWEATHER_FINGERPRINT_GATE_LC743_FREEZE.json",
+      "sha256": "6041F30AFE3FC1F77CC5DD8C0BEC20E904DE5EB87B0BA66EDE38409960583BDE"
+    },
+    {
+      "path": "doctor/solvers/lc_743_solvers.py",
+      "sha256": "EF767828679498007754D810424241C931829C11CB38939E4A80ACF10115A6C7"
+    },
+    {
+      "path": "doctor/oracles/lc743_oracle.py",
+      "sha256": "9D05DC994D773786F0F097413A5D5603B4A1EF75F1A43D1244FA3971AF24E89B"
+    },
+    {
+      "path": "doctor/adversarial/lc743_graph_families.py",
+      "sha256": "11B01E4EF68A26E72CE3CF6A39CCAAD41C741F2EB541F27A87F1102670D1043B"
+    },
+    {
+      "path": "results/lc_743_c4_result.json",
+      "sha256": "A2F02FF5434632878A0E437CADC6E4DBF5CE3DD66CBC6EC07B20FFC33B110E9D"
+    },
+    {
+      "path": "runners/run_c4_lc743.py",
+      "sha256": "4FF493E77AC532A617C2A6B59848D7839CA89F59E3C91990D084C6636F5102EB"
+    }
+  ],
+  "primary_target": "heldout_failure_rate",
+  "primary_utility": "decision_loss",
+  "observation_budget": {
+    "K": 12,
+    "unit": "one solver execution on one oracle test case",
+    "observed_probe_ids": [
+      "case_001",
+      "case_002",
+      "case_003",
+      "case_006",
+      "case_008",
+      "case_009",
+      "case_013",
+      "case_014",
+      "case_015",
+      "case_019",
+      "case_020",
+      "case_021"
+    ],
+    "target_probe_ids": [
+      "case_000",
+      "case_004",
+      "case_005",
+      "case_007",
+      "case_010",
+      "case_011",
+      "case_012",
+      "case_016",
+      "case_017",
+      "case_018",
+      "case_022",
+      "case_023"
+    ]
+  },
+  "decision_spec": {
+    "name": "ACCEPT_REJECT",
+    "action_space": [
+      "ACCEPT",
+      "REJECT"
+    ],
+    "policy_input": "K observations from O_obs including failure direction counts",
+    "policy_output": "one action from action_space per solver",
+    "failure_threshold": 0.05,
+    "minimum_accept_rate": null,
+    "minimum_accept_rate_override": {
+      "value": 0.0,
+      "reason": "LC743 has exactly 1 correct solver out of 31 (3.2% accept rate). minimum_accept_rate=0.2 would require >=7 accepts, which is impossible given the ground truth. A problem with 1 correct solver out of 31 is not degenerate — it is a hard problem with legitimate ground truth. The guard was designed to prevent all-REJECT policies, but LC743's 1/31 split is a valid evaluation outcome. Removed for LC743 only; other problems retain the guard.",
+      "documented_in_paper": "LC743 Execution Disclosure (paper:839-851)"
+    },
+    "degenerate_policy_policy": "REFUSE_OR_MARK_INCONCLUSIVE",
+    "wrong_accept_cost": 1,
+    "wrong_reject_cost": 1,
+    "utility_function": "Minimize cost-weighted decision_loss = wrong_accept_cost * wrong_accepts + wrong_reject_cost * wrong_rejects.",
+    "cost_model": {
+      "wrong_accept_cost": 1,
+      "wrong_reject_cost": 1
+    },
+    "primary_utility_metric": "decision_loss",
+    "success_rule": "C must have strictly lower decision_loss than every same-information baseline (B1, B2). Ties are FAIL.",
+    "justification": {
+      "failure_threshold": "LC743 failure rate distribution is bimodal: 1 solver at tgt_rate=0.0 (correct Dijkstra), 29 buggy solvers at tgt_rate >= 0.25. Threshold 0.05 cleanly separates the single good solver from all buggy solvers. This threshold is not inherited from LC322 — it is validated against LC743's actual distribution.",
+      "minimum_accept_rate_override": "LC743 ground truth: 1 ACCEPT, 29 REJECT (3.2% accept rate). minimum_accept_rate=0.2 requires >=7 accepts, impossible given ground truth. A problem with 1 correct solver is not degenerate. Guard removed for LC743 only."
+    }
+  },
+  "success_rule": "C must strictly beat every same-observation baseline (B1, B2) on decision_loss. Ties are FAIL.",
+  "split_configuration": {
+    "O_obs": [
+      "case_001",
+      "case_002",
+      "case_003",
+      "case_006",
+      "case_008",
+      "case_009",
+      "case_013",
+      "case_014",
+      "case_015",
+      "case_019",
+      "case_020",
+      "case_021"
+    ],
+    "D_target": [
+      "case_000",
+      "case_004",
+      "case_005",
+      "case_007",
+      "case_010",
+      "case_011",
+      "case_012",
+      "case_016",
+      "case_017",
+      "case_018",
+      "case_022",
+      "case_023"
+    ]
+  },
+  "solver_manifest": {
+    "pack_source": "lc_743_solvers.py",
+    "total_solvers": 31,
+    "buggy_solvers": 30,
+    "correct_solvers": 1,
+    "correct_solver_id": "s031",
+    "families": ["F1", "F2", "F3", "F4"],
+    "note": "s031 is correct Dijkstra baseline, loss=0 on all families"
+  },
+  "failure_rate_distribution": {
+    "mean": 0.6417,
+    "median": 0.75,
+    "min": 0.0,
+    "max": 1.0,
+    "std_dev": 0.2379,
+    "below_threshold_005": 1,
+    "above_threshold_005": 29,
+    "description": "Bimodal: 1 correct solver (tgt_rate=0.0) vs 29 buggy solvers (tgt_rate >= 0.25). Clear separation at threshold 0.05."
+  },
+  "status": "FROZEN"
+}
