@@ -654,10 +654,12 @@ finding is formally negative and is documented in `docs/LC45_C_POLICY_FINDING.md
 
 LC743 (Network Delay Time) is cited as methodology portability evidence: the LC322 protocol was
 adapted to a structurally different problem class. The C-4 gate yielded gap=0 (FAIL): all three
-estimators (C_genuine, B1, B2) make identical predictions (1 ACCEPT, 29 REJECT). Artifact state:
+estimators (C_genuine, B1, B2) make identical predictions (2 ACCEPT, 29 REJECT). Artifact state:
 ARTIFACT-VERIFIED. This is a negative boundary condition: the mechanism does not improve over baselines
 when all estimators converge to identical predictions. The governed rerun was executed under the frozen
-protocol with no contamination.
+protocol with no contamination. One F2 solver (s013) achieved tgt_rate=0.0 on the 12-case target set
+due to coincidental alignment between its bug pattern and the specific probe instances, and was
+classified ACCEPT by ground truth.
 
 ## Real Benchmark (hand-curated)
 
@@ -678,7 +680,7 @@ The per-problem C-4 results and C-5 perturbation survival are:
 |---------|------------------|---------------------|-------------------------|-----------------------|
 | LC3946  | POSITIVE         | 10/11               | poset_lattice_two_prime | 15 ACCEPT / 15 REJECT |
 | LC322   | POSITIVE (λ-dep) | PARTIALLY_SURVIVES  | large_amount_stress     | 11 ACCEPT / 19 REJECT |
-| LC743   | NEGATIVE (gap=0) | not run             | N/A                     | 1 ACCEPT / 29 REJECT  |
+| LC743   | NEGATIVE (gap=0) | not run             | N/A                     | 2 ACCEPT / 29 REJECT  |
 | LC45    | NEGATIVE         | N/A (feature audit) | N/A                     | 1 ACCEPT / 9 REJECT   |
 
 **Interpretation:** LC3946 provides the strongest positive case: the balanced 15/15 population split
@@ -842,7 +844,7 @@ LC743 specs (problem definition, probe families, honest classifier, C-4 protocol
 methodology portability evidence: the LC322 protocol was adapted to a structurally different problem
 class. Execution was completed under SSC-v2 governance with a clean governed rerun. The C-4
 decision-utility gate yielded gap=0 (FAIL): all three estimators (C_genuine, B1, B2) make identical
-predictions on the LC743 population (1 ACCEPT, 29 REJECT). Artifact state: ARTIFACT-VERIFIED.
+predictions on the LC743 population (2 ACCEPT, 29 REJECT). Artifact state: ARTIFACT-VERIFIED.
 
 Historical contamination events during LC743 development — (1) adaptive parameter tuning during C-4
 runner iteration (p-hacking on observed set size, identified and corrected by freezing the protocol
