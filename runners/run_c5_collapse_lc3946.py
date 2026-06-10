@@ -45,6 +45,7 @@ from doctor.adversarial.lc3946_collapse_perturbations import (
     threshold_shift,
 )
 from doctor.adversarial.problem_class_config import get_problem_class_config
+from doctor.adversarial.transition_gate import write_gated_artifact
 from runners.run_midweather_fingerprint_lc322 import (
     apply_estimator,
     compute_ground_truth,
@@ -319,8 +320,7 @@ def main() -> None:
         "p4_cross_population_anchor": p4_anchor,
     }
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    write_gated_artifact(OUTPUT_PATH, output, "A6", "ARTIFACT_WRITE", ("C-5",))
     print()
     print(f"[phase-lc3946-c5] written -> {OUTPUT_PATH}")
 

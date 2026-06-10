@@ -18,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from doctor.adversarial.transition_gate import write_gated_artifact
 from doctor.asymmetric_cost import run_sweep, run_sweep_aggregate, is_degenerate
 
 # ---------------------------------------------------------------------------
@@ -235,9 +236,7 @@ def main() -> None:
     }
 
     # 7. Write output
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with OUTPUT_PATH.open("w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2)
+    write_gated_artifact(OUTPUT_PATH, output, "A16", "ARTIFACT_WRITE", ("C-1",))
     print(f"[phase-c1] written -> {OUTPUT_PATH}")
 
 

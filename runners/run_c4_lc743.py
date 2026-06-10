@@ -31,6 +31,7 @@ sys.path.insert(0, str(ROOT))
 
 from doctor.oracles.lc743_oracle import CANONICAL_TEST_SUITE
 from doctor.solvers.lc_743_solvers import SOLVER_REGISTRY
+from doctor.adversarial.transition_gate import write_gated_artifact
 
 N_CASES = len(CANONICAL_TEST_SUITE)
 FAILURE_THRESHOLD = 0.05
@@ -262,8 +263,7 @@ def main():
     }
 
     out_path = ROOT / "results" / "lc_743_c4_result.json"
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    write_gated_artifact(out_path, output, "A_LC743_C4", "ARTIFACT_WRITE", ("C-4",))
     print(f"\n[C-4] Written -> {out_path}")
 
 

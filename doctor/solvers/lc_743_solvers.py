@@ -957,6 +957,37 @@ def s030(times: list[list[int]], n: int, k: int) -> int:
 # Registry: all 30 solvers with metadata
 # ============================================================================
 
+def s031(times: list[list[int]], n: int, k: int) -> int:
+    """CORRECT — canonical Dijkstra. No bugs."""
+    graph: dict[int, list[tuple[int, int]]] = defaultdict(list)
+    for u, v, w in times:
+        graph[u].append((v, w))
+    INF = float("inf")
+    dist = {i: INF for i in range(1, n + 1)}
+    dist[k] = 0
+    heap = [(0, k)]
+    while heap:
+        d, u = heapq.heappop(heap)
+        if d > dist[u]:
+            continue
+        for v, w in graph[u]:
+            nd = d + w
+            if nd < dist[v]:
+                dist[v] = nd
+                heapq.heappush(heap, (nd, v))
+    max_dist = 0
+    for node in range(1, n + 1):
+        if dist[node] == INF:
+            return -1
+        if dist[node] > max_dist:
+            max_dist = dist[node]
+    return int(max_dist)
+
+
+# ============================================================================
+# Registry: all 31 solvers with metadata
+# ============================================================================
+
 SOLVER_REGISTRY: dict[str, dict] = {
     "s001": {"fn": s001, "direction": "F1", "mechanism": "reachability check uses reverse graph"},
     "s002": {"fn": s002, "direction": "F1", "mechanism": "only explores direct neighbors of source"},
@@ -988,4 +1019,5 @@ SOLVER_REGISTRY: dict[str, dict] = {
     "s028": {"fn": s028, "direction": "F4", "mechanism": "initializes unreachable to 0"},
     "s029": {"fn": s029, "direction": "F4", "mechanism": "returns visited count on disconnect"},
     "s030": {"fn": s030, "direction": "F4", "mechanism": "returns 0 on disconnect"},
+    "s031": {"fn": s031, "direction": "CORRECT", "mechanism": "canonical Dijkstra, no bugs"},
 }

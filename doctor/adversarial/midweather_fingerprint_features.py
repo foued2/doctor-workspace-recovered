@@ -358,6 +358,11 @@ def decide_accept_reject(
         default=float("inf"),
     )
     for c_row in c_rows:
+        # FP TIEBREAK RULE (strict superiority):
+        # C passes only if its decision_loss is strictly less than every
+        # non-degenerate baseline. Equality is treated as insufficient
+        # evidence of superiority and yields FAIL. Burden of proof is on
+        # C to demonstrate strict improvement.
         if c_row.get("decision_loss", float("inf")) < min_b_loss:
             return "PASS", "C beats all baselines on decision_loss"
 

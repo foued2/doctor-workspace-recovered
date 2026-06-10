@@ -46,6 +46,12 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+from doctor.adversarial.artifact_schema_validators import (
+    validate_fp_freeze,
+    validate_probe_index,
+    validate_seval_manifest,
+)
+from doctor.adversarial.transition_gate import write_gated_artifact
 from doctor.adversarial.midweather_fingerprint_features import (
     ACCEPT_REJECT_SPEC,
     SevalManifestValidationError,
@@ -274,8 +280,11 @@ def main(argv: list[str] | None = None) -> int:
     t0 = time.time()
     try:
         freeze = load_freeze(freeze_path)
+        validate_fp_freeze(freeze, path=str(freeze_path))
         probe_index = load_probe_index(probe_index_path)
+        validate_probe_index(probe_index, path=str(probe_index_path))
         seval_manifest = load_seval_manifest(seval_manifest_path)
+        validate_seval_manifest(seval_manifest, path=str(seval_manifest_path))
     except FileNotFoundError as e:
         print(f"ERROR: file_not_found: {e.filename}", file=sys.stderr)
         return EXIT_ERROR
@@ -456,8 +465,7 @@ def main(argv: list[str] | None = None) -> int:
         "wallclock_seconds": round(time.time() - t0, 3),
     }
 
-    result_path.parent.mkdir(parents=True, exist_ok=True)
-    result_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+    write_gated_artifact(result_path, result, "A2", "ARTIFACT_WRITE", ("FP",))
     print(f"Wrote {result_path}")
     print()
     print(f"Decision: {decision}")

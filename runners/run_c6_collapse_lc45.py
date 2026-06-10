@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from doctor.adversarial.problem_class_config import get_problem_class_config
+from doctor.adversarial.transition_gate import write_gated_artifact
 from doctor.asymmetric_cost import run_sweep_aggregate
 from doctor.identity_resolution import check_aggregate_consistency
 from runners.run_midweather_fingerprint_lc322 import (
@@ -199,8 +200,7 @@ def main() -> None:
         },
     }
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    write_gated_artifact(OUTPUT_PATH, output, "A14", "ARTIFACT_WRITE", ("C-6",))
     print(f"[phase-c6] written -> {OUTPUT_PATH}")
 
 

@@ -19,6 +19,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from doctor.adversarial.artifact_schema_validators import (
+    validate_c4_decisions,
+    validate_c4_freeze,
+    validate_fp_freeze,
+    validate_fingerprint_result,
+    validate_probe_index,
+    validate_seval_manifest,
+)
+from doctor.adversarial.transition_gate import write_gated_artifact
 from doctor.adversarial.problem_class_config import get_problem_class_config
 from doctor.asymmetric_cost import run_sweep_aggregate
 from doctor.identity_resolution import (
@@ -62,6 +71,7 @@ def _aggregate(preds: dict[str, str], sorted_ids: list[str], ground_truth: list[
 
 def main() -> None:
     c4_freeze = json.loads(C4_FREEZE_PATH.read_text(encoding="utf-8"))
+    validate_c4_freeze(c4_freeze, path=str(C4_FREEZE_PATH))
     spec_commit  = c4_freeze["spec_commit"]
     c1_freeze    = c4_freeze["lineage"]["c1_freeze_commit"]
     lambda_sweep = c4_freeze["lambda_sweep"]["values"]
@@ -74,6 +84,7 @@ def main() -> None:
     print(f"[phase-c4] lambda_sweep={lambda_sweep}")
 
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+    validate_fingerprint_result(data, path=str(DATA_PATH))
     pgt = data["per_solver_ground_truth"]
     sorted_ids = sorted(pgt.keys())
     ground_truth = [pgt[sid]["truth_label"] for sid in sorted_ids]
@@ -94,8 +105,11 @@ def main() -> None:
           f"accept={ground_truth.count('ACCEPT')}  reject={ground_truth.count('REJECT')}")
 
     freeze = json.loads(FINGERPRINT_FREEZE.read_text(encoding="utf-8"))
+    validate_fp_freeze(freeze, path=str(FINGERPRINT_FREEZE))
     probe_index = json.loads(PROBE_INDEX_PATH.read_text(encoding="utf-8"))
+    validate_probe_index(probe_index, path=str(PROBE_INDEX_PATH))
     seval_manifest = json.loads(SEVAL_MANIFEST_PATH.read_text(encoding="utf-8"))
+    validate_seval_manifest(seval_manifest, path=str(SEVAL_MANIFEST_PATH))
 
     config = get_problem_class_config("lc322")
     observed_ids = freeze["observation_budget"]["observed_probe_ids"]
@@ -215,8 +229,7 @@ def main() -> None:
         },
     }
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    write_gated_artifact(OUTPUT_PATH, output, "A1", "ARTIFACT_WRITE", ("C-4",))
     print(f"[phase-c4] written -> {OUTPUT_PATH}")
 
 

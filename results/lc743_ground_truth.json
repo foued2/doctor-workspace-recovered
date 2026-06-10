@@ -1,0 +1,130 @@
+{
+  "population": "LC743",
+  "ground_truth": [
+    {
+      "graph_id": "G1_0",
+      "family": "G1",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G1_1",
+      "family": "G1",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G1_2",
+      "family": "G1",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G1_3",
+      "family": "G1",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G1_4",
+      "family": "G1",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G2_0",
+      "family": "G2",
+      "ground_truth": 29
+    },
+    {
+      "graph_id": "G2_1",
+      "family": "G2",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G2_2",
+      "family": "G2",
+      "ground_truth": 37
+    },
+    {
+      "graph_id": "G2_3",
+      "family": "G2",
+      "ground_truth": 40
+    },
+    {
+      "graph_id": "G2_4",
+      "family": "G2",
+      "ground_truth": 25
+    },
+    {
+      "graph_id": "G3_0",
+      "family": "G3",
+      "ground_truth": 18
+    },
+    {
+      "graph_id": "G3_1",
+      "family": "G3",
+      "ground_truth": 25
+    },
+    {
+      "graph_id": "G3_2",
+      "family": "G3",
+      "ground_truth": 11
+    },
+    {
+      "graph_id": "G3_3",
+      "family": "G3",
+      "ground_truth": 9
+    },
+    {
+      "graph_id": "G3_4",
+      "family": "G3",
+      "ground_truth": 20
+    },
+    {
+      "graph_id": "G4_0",
+      "family": "G4",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G4_1",
+      "family": "G4",
+      "ground_truth": 102
+    },
+    {
+      "graph_id": "G4_2",
+      "family": "G4",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G4_3",
+      "family": "G4",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G4_4",
+      "family": "G4",
+      "ground_truth": 112
+    },
+    {
+      "graph_id": "G5_0",
+      "family": "G5",
+      "ground_truth": 0
+    },
+    {
+      "graph_id": "G5_1",
+      "family": "G5",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G5_2",
+      "family": "G5",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G5_3",
+      "family": "G5",
+      "ground_truth": -1
+    },
+    {
+      "graph_id": "G5_4",
+      "family": "G5",
+      "ground_truth": -1
+    }
+  ]
+}

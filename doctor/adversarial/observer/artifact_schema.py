@@ -11,6 +11,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from doctor.adversarial.transition_gate import write_gated_artifact
+
 
 ROOT = Path(__file__).resolve().parents[3]
 ARTIFACT_ROOT = ROOT / "doctor" / "adversarial" / "observer" / "artifacts"
@@ -441,5 +443,4 @@ def _compute_divergence_sign_axis(scan_records: list[dict[str, Any]]) -> Diverge
 
 def _write_artifact(artifact: ManifoldArtifact) -> None:
     path = ARTIFACT_ROOT / artifact.problem_id / f"{artifact.manifold_id}.json"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(artifact.to_dict(), indent=2, sort_keys=True), encoding="utf-8")
+    write_gated_artifact(path, artifact.to_dict(), "META", "ARTIFACT_WRITE", ("META",))
