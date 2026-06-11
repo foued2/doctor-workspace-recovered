@@ -296,17 +296,27 @@ training or prediction.
 
 ## Domain Completeness Gate (DCG)
 
-Cross-domain comparison of P(D) is valid only when the solver source satisfies the Domain Completeness
-Gate. DCG is defined on generation provenance and interface compatibility, not on observed outcomes.
-It is evaluated after computing P(D), as an interpretation constraint on cross-domain comparison.
-It does not affect which solvers enter computation or which P(D) values are produced.
+DCG is a comparability relation over the space of experimental domains. It determines whether
+P(D) values from different (source, problem) pairs are admissible for joint inference. DCG is
+defined on generation provenance and interface compatibility, not on observed outcomes. It is
+evaluated after computing P(D), as a structural constraint on the inference space. It does not
+affect which solvers enter computation or which P(D) values are produced.
 
-DCG is a three-layer observability model, not a hard gate. It decomposes into three components:
+Formally, DCG is a binary relation on pairs of (source, problem) tuples:
 
-    DCG(S,P) := (GDC(S,P) ∧ EVC(S,P)) under assumption R-coverage(S,P)
+    DCG : (S₁,P₁) × (S₂,P₂) → {comparable, not comparable}
+
+It decomposes into three layers:
+
+    DCG((S₁,P₁), (S₂,P₂)) := (GDC(S₁,P₁) ∧ GDC(S₂,P₂) ∧ EVC(S₁,P₁) ∧ EVC(S₂,P₂))
+                                under assumption R-coverage(S₁,S₂,P₁,P₂)
 
 where GDC is observable (provable), EVC is observable (empirical), and R-coverage is a
-non-observable constraint on sampling assumptions (unidentifiable from observed sample alone).
+non-observable assumption about sampling completeness (unidentifiable from observed sample alone).
+
+DCG partitions experimental domains into equivalence classes: results within the same class can
+be compared; results across classes cannot. This is a partial equivalence relation over the
+domain space, not metadata or post-hoc labeling.
 
 ### GDC — Generation Domain Constraint
 
@@ -360,15 +370,15 @@ P satisfies EVC iff:
 
 ### DCG Classification
 
-Each (source, problem) pair is assigned one of:
+Each (source, problem) pair is classified by its position in the comparability relation:
 
-- **VALID** — GDC and EVC both hold; cross-domain P(D) comparison allowed
-- **GDC-FAILING** — source shares mutation lineage with CSSE; internal measurement only
-- **EVC-FAILING** — evaluation constraints not met (insufficient sample, interface instability)
-- **INVALID** — both GDC and EVC fail
+- **VALID** — GDC and EVC both hold; comparable with other VALID pairs
+- **GDC-FAILING** — source shares mutation lineage with CSSE; comparable only with other GDC-FAILING pairs
+- **EVC-FAILING** — evaluation constraints not met; comparable only with other EVC-FAILING pairs
+- **INVALID** — both GDC and EVC fail; not comparable with any other pair
 
 DCG is evaluated on generation provenance and behavioral equivalence properties, not on P(D), CE
-rate, or any observed outcome statistic. It governs which P(D) values can be compared across
+rate, or any observed outcome statistic. It defines which P(D) values can be compared across
 domains, not which solvers enter computation. All solvers are evaluated regardless of DCG status;
 DCG only constrains interpretation of cross-domain results.
 
@@ -436,6 +446,8 @@ The bi-level system separates DCG constraints:
   independent of behavioral equivalence
 - **EVC** operates on B-domain: evaluation validity depends on behavioral equivalence classes,
   not on syntactic representation
+- **DCG** operates on the space of (source, problem) pairs: it defines a comparability relation
+  that determines which P(D) values can be jointly reasoned about
 
 This resolves the earlier "non-comparable" collapse: LC79/LC743 external was EVC-FAILING because
 of insufficient B-domain sample (n=1), not because of R-domain interface issues. The adapter
