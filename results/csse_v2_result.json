@@ -1,0 +1,38 @@
+{
+  "seed": 20260611,
+  "n_solvers_per_class": 500,
+  "summary": [
+    {
+      "problem_class": "lc322",
+      "n_valid": 317,
+      "n_disagree": 6,
+      "p_hat": 0.01892744479495268,
+      "ci_lo": 0.006309148264984227,
+      "ci_hi": 0.03470031545741325
+    },
+    {
+      "problem_class": "lc3946",
+      "n_valid": 161,
+      "n_disagree": 0,
+      "p_hat": 0.0,
+      "ci_lo": 0.0,
+      "ci_hi": 0.0
+    },
+    {
+      "problem_class": "lc79",
+      "n_valid": 219,
+      "n_disagree": 0,
+      "p_hat": 0.0,
+      "ci_lo": 0.0,
+      "ci_hi": 0.0
+    },
+    {
+      "problem_class": "lc743",
+      "n_valid": 240,
+      "n_disagree": 66,
+      "p_hat": 0.275,
+      "ci_lo": 0.22083333333333333,
+      "ci_hi": 0.32916666666666666
+    }
+  ]
+}

@@ -1,0 +1,245 @@
+[
+  {
+    "problem_id": "LC79",
+    "source_origin": "ChatGPT-CodeGenAnalysis",
+    "raw_code": "class Solution:\n    def exist(self, board: List[List[str]], word: str) -> bool:\n        \n        def dfs(i, j, idx):\n            if idx == len(word): # all characters matched\n                return True\n            \n            if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or board[i][j] != word[idx]:\n                # out of board bounds or character not matching\n                return False\n            \n            # mark board position as visited\n            board[i][j] = '#'\n            \n            # check adjacent cells\n            res = dfs(i+1, j, idx+1) or dfs(i-1, j, idx+1) or dfs(i, j+1, idx+1) or dfs(i, j-1, idx+1)\n            \n            # unmark board position to make it consider for other paths\n            board[i][j] = word[idx]\n            \n            return res\n        \n        # iterate board cells and start dfs search\n        for i in range(len(board)):\n            for j in range(len(board[0])):\n                if dfs(i, j, 0):\n                    return True\n        \n        return False",
+    "known_outcome": "pass",
+    "error_info": ""
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "ChatGPT-CodeGenAnalysis",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        \"\"\"\n        :type coins: List[int]\n        :type amount: int\n        :rtype: int\n        \"\"\"\n        # Create a table to store the minimum number of coins required to make up the amount\n        dp = [float('inf')] * (amount + 1)\n        dp[0] = 0\n        \n        # Iterate through all the coins and update the table for every amount value\n        for coin in coins:\n            for i in range(coin, amount + 1):\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n                \n        # Check if it's possible to make up the amount with given coins\n        return dp[amount] if dp[amount] != float('inf') else -1",
+    "known_outcome": "pass",
+    "error_info": ""
+  },
+  {
+    "problem_id": "LC743",
+    "source_origin": "ChatGPT-CodeGenAnalysis",
+    "raw_code": "from typing import List\nimport heapq\n\nclass Solution:\n    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:\n        #create adjacency list\n        adj_list = [[] for _ in range(n+1)]\n        for u, v, w in times:\n            adj_list[u].append((v, w))\n        \n        #initialize distance dictionary for all nodes, set all to infinite except source node\n        dist = {node: float('inf') for node in range(1, n+1)}\n        dist[k] = 0\n        \n        #initialize heap to track visited nodes\n        heap = [(0, k)]\n        \n        while heap:\n            time, node = heapq.heappop(heap)\n            if time > dist[node]:\n                continue\n            for neighbor, neighbor_time in adj_list[node]:\n                new_time = time + neighbor_time\n                if new_time < dist[neighbor]:\n                    dist[neighbor] = new_time\n                    heapq.heappush(heap, (new_time, neighbor))\n        \n        max_time = max(dist.values())\n        return max_time if max_time < float('inf') else -1",
+    "known_outcome": "pass",
+    "error_info": ""
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_2d_dp.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        n = len(coins)\n        INF = float(\"inf\")\n        dp = [[INF] * (amount + 1) for _ in range(n + 1)]\n        for i in range(n + 1):\n            dp[i][0] = 0\n        for i in range(1, n + 1):\n            for j in range(1, amount + 1):\n                if coins[i-1] <= j:\n                    dp[i][j] = min(1 + dp[i][j - coins[i-1]], dp[i-1][j])\n                else:\n                    dp[i][j] = dp[i-1][j]\n        return dp[n][amount] if dp[n][amount] != INF else -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_2d_dp_v2.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        n = len(coins)\n        INF = float(\"inf\")\n        dp = [[INF] * (amount + 1) for _ in range(n + 1)]\n        for i in range(n + 1):\n            dp[i][0] = 0\n        for i in range(1, n + 1):\n            for j in range(1, amount + 1):\n                if coins[i-1] <= j:\n                    dp[i][j] = min(1 + dp[i][j - coins[i-1]], dp[i-1][j])\n                else:\n                    dp[i][j] = dp[i-1][j]\n        return dp[n][amount] if dp[n][amount] != INF else -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_bfs_v1.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        q = deque()\n        visit = set([0])\n        q.append([0,0])\n        while q:\n            curr,steps = q.popleft()\n            if curr == amount:\n                return steps\n            for coin in coins:\n                nxt = curr + coin\n                if nxt <= amount and nxt not in visit:\n                    q.append((nxt,steps+1))\n                    visit.add(nxt)\n        return -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_bfs_v2.py",
+    "raw_code": "def coinChange(self, coins: List[int], amount: int) -> int:\n        q = deque([(amount,0)])\n        visited = set()\n        while q:\n            cur, n_coins = q.popleft()\n            if cur == 0:\n                return n_coins\n            for c in coins:\n                new_cur = cur - c\n                if new_cur in visited or new_cur < 0:\n                    continue\n                q.append((new_cur,n_coins+1))\n                visited.add(new_cur)\n        return -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_bfs_v3.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        if amount == 0:\n            return 0\n        if amount in coins:\n            return 1\n        queue = deque([(amount, 0)])\n        lookup = set([amount])\n        while queue:\n            remainingAmount, coinsUsed = queue.popleft()\n            if remainingAmount == 0:\n                return coinsUsed\n            for coin in coins:\n                if remainingAmount - coin >= 0 and remainingAmount - coin not in lookup:\n                    queue.append((remainingAmount - coin, coinsUsed + 1))\n                    lookup.add(remainingAmount - coin)\n        return -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_bfs_v4.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        queue = deque()\n        queue.append([0,0])\n        visited = set()\n        while queue:\n            current, level = queue.popleft()\n            if current == amount:\n                return level\n            for coin in coins:\n                candidate = current+coin\n                if candidate <= amount and candidate not in visited:\n                    queue.append([candidate, level+1])\n                    visited.add(candidate)\n        return -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_bottomup_dp_v2.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: list[int], amount: int) -> int:\n        dp = [amount + 1] * (amount + 1)\n        dp[0] = 0\n        for i in range(1, amount + 1):\n            for coin in coins:\n                if i - coin >= 0:\n                    dp[i] = min(dp[i], 1 + dp[i - coin])\n        return dp[amount] if dp[amount] != amount + 1 else -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_bottomup_dp_v3.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        min_coins = [amount + 1] * (amount + 1)\n        min_coins[0] = 0\n        for i in range(1, amount + 1):\n            for c in coins:\n                if i - c >= 0:\n                    min_coins[i] = min(min_coins[i], 1 + min_coins[i - c])\n        return min_coins[-1] if min_coins[-1] != amount + 1 else -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_bottomup_dp_v4.py",
+    "raw_code": "class Solution(object):\n    def coinChange(self, coins, amount):\n        max_value = amount + 1\n        dp = [max_value] * (amount + 1)\n        dp[0] = 0\n        for coin in coins:\n            for x in range(coin, amount + 1):\n                dp[x] = min(dp[x], dp[x - coin] + 1)\n        return dp[amount] if dp[amount] != max_value else -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_bottomup_dp_v5.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins, amount):\n        dp = [float(\"inf\")] * (amount + 1)\n        dp[0] = 0\n        for coin in coins:\n            for i in range(coin, amount + 1):\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n        return dp[amount] if dp[amount] != float(\"inf\") else -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_greedy_gcd.py",
+    "raw_code": "from math import gcd\nclass Solution:\n    @staticmethod\n    def coinChange(coins, target):\n        if target == 0:\n            return 0\n        n = len(coins)\n        if n == 1:\n            return target // coins[0] if target % coins[0] == 0 else -1\n        coins.sort()\n        minCoin = coins[0]\n        if target == minCoin:\n            return 1\n        idx = 1\n        gcdVal = minCoin\n        while idx < n and target >= coins[idx]:\n            if target == coins[idx]:\n                return 1\n            gcdVal = gcd(coins[idx], gcdVal)\n            coins[idx] -= minCoin\n            idx += 1\n        if target % gcdVal != 0:\n            return -1\n        minVal = (target - 1) // (coins[idx - 1] + minCoin) + 1\n        maxVal = target // minCoin\n        for i in range(minVal, maxVal + 1):\n            if Solution.findCombination(coins, 1, idx - 1, target - i * minCoin, i):\n                return i\n        return -1\n    @staticmethod\n    def findCombination(coins, left, right, target, maxCoins):\n        if target == 0:\n            return True\n        if target < coins[left] or target // coins[right] > maxCoins:\n            return False\n        if target % coins[right] == 0:\n            return True\n        if left == right:\n            return False\n        for k in range(target // coins[right] + 1):\n            if Solution.findCombination(coins, left, right - 1, target - k * coins[right], maxCoins - k):\n                return True\n        return False\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_leetcode_bottomup_dp.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        dp = [0] + ([float(\"inf\")] * amount)\n        for i in range(1, amount + 1):\n            for coin in coins:\n                if coin <= i:\n                    dp[i] = min(dp[i], dp[i - coin] + 1)\n        if dp[-1] == float(\"inf\"):\n            return -1\n        return dp[-1]\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_python-4-solutions-top-down-dp-bottom-up-56n2.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        @lru_cache(None)\n        def dp(i, amount):\n            if amount == 0:\n                return 0\n            if i == -1:\n                return math.inf\n            \n            ans = dp(i-1, amount)  # Skip ith coin\n            if amount >= coins[i]:  # Used ith coin\n                ans = min(ans, dp(i, amount - coins[i]) + 1)\n            return ans\n        \n        n = len(coins)\n        ans = dp(n-1, amount)\n        return ans if ans != math.inf else -1",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_python-4-solutions-top-down-dp-bottom-up.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        @lru_cache(None)\n        def dp(i, amount):\n            if amount == 0:\n                return 0\n            if i == -1:\n                return math.inf\n            \n            ans = dp(i-1, amount)  # Skip ith coin\n            if amount >= coins[i]:  # Used ith coin\n                ans = min(ans, dp(i, amount - coins[i]) + 1)\n            return ans\n        \n        n = len(coins)\n        ans = dp(n-1, amount)\n        return ans if ans != math.inf else -1",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_python-beat-100-optimal-solution-100-eff-509j.py",
+    "raw_code": "class Solution(object):\n   def coinChange(self, coins, amount):\n       \"\"\"\n       :type coins: List[int]\n       :type amount: int\n       :rtype: int\n       \"\"\"\n       # A large value greater than the maximum possible number of coins required\n       max_value = amount + 1\n       \n       # Initialize dp array where dp[i] represents the minimum number of coins needed for amount i\n       # dp[i] is initialized with max_value, which is essentially infinity\n       dp = [max_value] * (amount + 1)\n       \n       # Base case: No coins are needed to make the amount 0\n       dp[0] = 0\n       \n       # Iterate through each coin denomination\n       for coin in coins:\n           # Iterate through all amounts from the current coin value to the target amount\n           for x in range(coin, amount + 1):\n               # Update dp[x] with the minimum of:\n               # 1. The current value of dp[x] (minimum coins needed without considering the current coin)\n               # 2. dp[x - coin] + 1 (minimum coins needed for the remaining amount (x - coin) plus the current coin)\n               dp[x] = min(dp[x], dp[x - coin] + 1)\n       \n       # If dp[amount] is still max_value, it means the target amount cannot be made up by any combination of the coins\n       # In that case, return -1 to indicate that it's not possible to make the change\n       # Otherwise, return dp[amount], which represents the minimum number of coins needed\n       return dp[amount] if dp[amount] != max_value else -1",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_python-beat-100-optimal-solution-100-eff.py",
+    "raw_code": "class Solution(object):\n   def coinChange(self, coins, amount):\n       \"\"\"\n       :type coins: List[int]\n       :type amount: int\n       :rtype: int\n       \"\"\"\n       # A large value greater than the maximum possible number of coins required\n       max_value = amount + 1\n       \n       # Initialize dp array where dp[i] represents the minimum number of coins needed for amount i\n       # dp[i] is initialized with max_value, which is essentially infinity\n       dp = [max_value] * (amount + 1)\n       \n       # Base case: No coins are needed to make the amount 0\n       dp[0] = 0\n       \n       # Iterate through each coin denomination\n       for coin in coins:\n           # Iterate through all amounts from the current coin value to the target amount\n           for x in range(coin, amount + 1):\n               # Update dp[x] with the minimum of:\n               # 1. The current value of dp[x] (minimum coins needed without considering the current coin)\n               # 2. dp[x - coin] + 1 (minimum coins needed for the remaining amount (x - coin) plus the current coin)\n               dp[x] = min(dp[x], dp[x - coin] + 1)\n       \n       # If dp[amount] is still max_value, it means the target amount cannot be made up by any combination of the coins\n       # In that case, return -1 to indicate that it's not possible to make the change\n       # Otherwise, return dp[amount], which represents the minimum number of coins needed\n       return dp[amount] if dp[amount] != max_value else -1",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_recursive_no_memo.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: list[int], amount: int) -> int:\n        if amount < 0:\n            return -1\n        if amount == 0:\n            return 0\n        min_count = float(\"inf\")\n        for coin in coins:\n            res = self.coinChange(coins, amount - coin)\n            if res != -1:\n                min_count = min(min_count, 1 + res)\n        return min_count if min_count != float(\"inf\") else -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_recursive_with_memo.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: list[int], amount: int) -> int:\n        memo = {}\n        def solve(rem):\n            if rem < 0:\n                return -1\n            if rem == 0:\n                return 0\n            if rem in memo:\n                return memo[rem]\n            min_count = float(\"inf\")\n            for coin in coins:\n                res = solve(rem - coin)\n                if res != -1:\n                    min_count = min(min_count, 1 + res)\n            memo[rem] = min_count if min_count != float(\"inf\") else -1\n            return memo[rem]\n        return solve(amount)\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_video-keep-minimum-number-of-coins-to-ma-b5ft.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        min_coins = [amount + 1] * (amount + 1)\n        min_coins[0] = 0\n\n        for i in range(1, amount + 1):\n            for c in coins:\n                if i - c >= 0:\n                    min_coins[i] = min(min_coins[i], 1 + min_coins[i - c])\n        \n        return min_coins[-1] if min_coins[-1] != amount + 1 else -1",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_video-keep-minimum-number-of-coins-to-ma.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        min_coins = [amount + 1] * (amount + 1)\n        min_coins[0] = 0\n\n        for i in range(1, amount + 1):\n            for c in coins:\n                if i - c >= 0:\n                    min_coins[i] = min(min_coins[i], 1 + min_coins[i - c])\n        \n        return min_coins[-1] if min_coins[-1] != amount + 1 else -1",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_video-visualization-of-bottom-up-dynamic-i47n.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        dp = [0] + ([float('inf')] * amount)\n        for i in range(1, amount + 1):\n            for coin in coins:\n                if coin <= i:\n                    dp[i] = min(dp[i], dp[i - coin] + 1)\n\n        if dp[-1] == float('inf'):\n            return -1\n        return dp[-1]\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/lc_video-visualization-of-bottom-up-dynamic.py",
+    "raw_code": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        dp = [0] + ([float('inf')] * amount)\n        for i in range(1, amount + 1):\n            for coin in coins:\n                if coin <= i:\n                    dp[i] = min(dp[i], dp[i - coin] + 1)\n\n        if dp[-1] == float('inf'):\n            return -1\n        return dp[-1]\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_41479112_1.py",
+    "raw_code": "def coinChange(coins, amount):\n    coins.sort()\n    dp = [0] + [float('inf')] * amount\n    for i in coins:\n        for j in range(i, amount + 1):\n            dp[j] = min(dp[j], int(j / i) + dp[j % i])\n    if dp[-1] == float('inf'):\n        return -1\n    else:\n        return dp[-1]\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_41479112_1_wrapped.py",
+    "raw_code": "def solve(solver_input):\n    coins = list(solver_input[:-1])\n    amount = int(solver_input[-1])\n    coins.sort()\n    dp = [0] + [float('inf')] * amount\n    for i in coins:\n        for j in range(i, amount + 1):\n            dp[j] = min(dp[j], int(j / i) + dp[j % i])\n    if dp[-1] == float('inf'):\n        return -1\n    else:\n        return dp[-1]\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_58925669_1.py",
+    "raw_code": "import sys\n\nlookup_dict = {}\nminimum = sys.maxsize\n\ndef coinChange(coins, amount):\n    result = coinChangeAux(coins, amount)\n    return -1 if result == sys.maxsize else result\n\ndef coinChangeAux(coins, amount):\n    global minimum, lookup_dict\n    if amount in lookup_dict.keys():\n        return lookup_dict[amount]\n    if amount <= 0:\n        lookup_dict[amount] = 0\n        return lookup_dict[amount]\n    if not coins:\n        return -1\n    for i in coins:\n        if amount >= i:\n            minimum = min(minimum, coinChange(coins, amount - i) + 1)\n    lookup_dict[amount] = minimum\n    return lookup_dict[amount]\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_58925669_1_wrapped.py",
+    "raw_code": "import sys\n\ndef solve(solver_input):\n    coins = list(solver_input[:-1])\n    amount = int(solver_input[-1])\n    lookup_dict = {}\n    minimum = sys.maxsize\n\n    def coinChangeAux(coins, amount):\n        nonlocal minimum\n        if amount in lookup_dict:\n            return lookup_dict[amount]\n        if amount <= 0:\n            lookup_dict[amount] = 0\n            return 0\n        if not coins:\n            return -1\n        for i in coins:\n            if amount >= i:\n                minimum = min(minimum, coinChange(coins, amount - i) + 1)\n        lookup_dict[amount] = minimum\n        return lookup_dict[amount]\n\n    def coinChange(coins, amount):\n        result = coinChangeAux(coins, amount)\n        return -1 if result == sys.maxsize else result\n\n    return coinChange(coins, amount)\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\correct.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin >= 0:\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "unknown"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_10_equals_only.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin == 0:  # BUG: should be >= 0\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_1_off_by_one.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin > 0:  # BUG: should be >= 0\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_2_wrong_init.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 1  # BUG: should be 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin >= 0:\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_3_missing_return_check.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin >= 0:\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount]  # BUG: doesn't check for inf\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_4_wrong_loop_start.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(0, amount + 1):  # BUG: should start at 1\n        for coin in coins:\n            if i - coin >= 0:\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_5_wrong_initial_value.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [amount] * (amount + 1)  # BUG: should be float('inf')\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin >= 0:\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != amount else -1\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_6_max_instead_of_min.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin >= 0:\n                dp[i] = max(dp[i], dp[i - coin] + 1)  # BUG: should be min\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_7_only_first_coin.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        coin = coins[0]  # BUG: only checks first coin\n        if i - coin >= 0:\n            dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_8_wrong_index.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin >= 0:\n                dp[i] = min(dp[i], dp[i] + 1)  # BUG: should be dp[i-coin]\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "fail"
+  },
+  {
+    "problem_id": "LC322",
+    "source_origin": "human_solvers/so_sources\\wrong_9_edge_case.py",
+    "raw_code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for coin in coins:\n            if i - coin >= 0:\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "known_outcome": "fail"
+  }
+]
