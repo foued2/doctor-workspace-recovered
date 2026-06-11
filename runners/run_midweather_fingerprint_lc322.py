@@ -37,6 +37,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import copy
 import importlib.util
 import json
 import sys
@@ -99,7 +100,7 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--problem-class",
         default="lc322",
-        choices=["lc322", "lc45", "lc3946"],
+        choices=["lc322", "lc45", "lc3946", "lc79"],
         help="Problem class to evaluate (default: lc322).",
     )
     parser.add_argument("--freeze", type=Path, help="Override the freeze path.")
@@ -147,7 +148,11 @@ def execute_solvers(
             solver_input = config.probe_to_solver_input(probe)
             truth = config.oracle(solver_input)
             try:
-                observed = solver(solver_input)
+                # LC79 solvers expect (board, word), not a dict
+                if isinstance(solver_input, dict):
+                    observed = solver(copy.deepcopy(solver_input["board"]), solver_input["word"])
+                else:
+                    observed = solver(copy.deepcopy(solver_input))
             except Exception:
                 observed = "EXC"
             results[sid][probe["probe_id"]] = (observed == truth)
