@@ -17,17 +17,12 @@ external corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG
 determines which cross-domain comparisons are valid, evaluated on generation provenance and interface
 compatibility before computing P(D). On LC3946 (poset-based lattice), C_genuine achieves
 decision_loss=0.0 versus B1's 1.0, strictly improving over all non-degenerate baselines, with the
-advantage surviving 10 of 11 perturbation conditions — but LC3946 is non-externalizable (synthetic
-evaluator geometry, GDC-FAILING). On LC322 (Coin Change), C_genuine shows λ-dependent superiority
-internally (gap=3.13 at λ=50) and is the only DCG-valid external anchor: external P(D)=0.053 (n=38)
-compared to CSSE v2 internal P(D)=0.019 (n=317, GDC-FAILING). Two negative boundary cases constrain
-interpretation: on LC45 (Jump Game II), the classifier cannot differentiate from B1 due to
-informational equivalence of separating features, and on LC743 (Network Delay Time), all estimators
-converge to identical predictions internally while external support is insufficient (n=1, EVC-FAILING).
-The CSSE v2 experiment reveals P(D) is problem-dependent (0.000–0.275), killing single-global-mechanism
-interpretation. The contribution is a conditional empirical finding with one valid external anchor.
-No universality claim is made.
-
+advantage surviving 10 of 11 perturbation conditions — but LC3946 is structurally excluded from
+external comparison (synthetic evaluator geometry). On LC322 (Coin Change), C_genuine shows
+λ-dependent superiority internally (gap=3.13 at λ=50) and is the only DCG-valid external
+consistency probe: external P(D)=0.053 (n=38) compared to CSSE v2 internal P(D)=0.019
+(n=317, GDC-FAILING). The external sample is underpowered and interface-conditioned; it is
+compatible with the same directionality but does not constitute confirmation.
 ---
 
 # Introduction
@@ -91,7 +86,8 @@ lineage with CSSE v2 probes).
 
 LC322 shows λ-dependent superiority internally (gap=3.13 at λ=50) and is the only DCG-valid
 external anchor: external P(D)=0.053 (n=38) compared to CSSE v2 internal P(D)=0.019 (n=317,
-GDC-FAILING). The external sample is underpowered but confirms the phenomenon exists under
+GDC-FAILING). The external sample is underpowered and interface-conditioned; it is compatible
+with the same directionality but does not constitute confirmation.
 independent solver lineage.
 
 ### Negative Boundary Conditions — LC45, LC743, Midweather
@@ -917,10 +913,10 @@ solver space. LC3946 is valid for internal measurement but outside the domain of
 comparison by structural exclusion.
 
 LC322 provides conditional supporting evidence internally (λ-dependent superiority) and is the
-sole DCG-valid external anchor. External P(D)=0.053 (n=38) is comparable to the CSSE v2
-internal P(D)=0.019 (n=317), confirming that the phenomenon exists under independent solver
-lineage — but the sample is small and the comparison is underpowered. CSSE v2 is GDC-FAILING
-(shared mutation lineage), so it serves as an internal contrast, not a valid external comparator.
+sole DCG-valid external consistency probe. External P(D)=0.053 (n=38) is compatible with the
+CSSE v2 internal P(D)=0.019 (n=317) in directionality, but the sample is underpowered and
+interface-conditioned — it does not constitute confirmation. CSSE v2 is GDC-FAILING (shared
+mutation lineage), so it serves as an internal contrast, not a valid external comparator.
 
 LC45 and LC743 are negative boundary conditions. LC45 fails because the separating features are
 informationally equivalent to B1 (encoder artifact). LC743 fails internally (gap=0) and has
@@ -930,8 +926,9 @@ probe families under C_genuine's rule but are treated uniformly by B1.
 
 The cross-problem pattern under DCG is: C_genuine improves over B1 when (1) the solver population
 has balanced failure-class diversity and (2) the probe index contains families where single-family
-failure concentration triggers C_genuine's acceptance branch. The only valid external confirmation
-is LC322, and it is underpowered. All other cross-domain claims are blocked by DCG.
+failure concentration triggers C_genuine's acceptance branch. The only DCG-valid external probe
+(LC322) is compatible in directionality but underpowered. All other cross-domain claims are
+blocked by DCG.
 
 ## Hardening Sequence Summary
 
@@ -966,10 +963,12 @@ additionally has insufficient external support (n=1, EVC-FAILING), so no cross-d
 permitted. These are not failures of the project; they are boundary conditions that define when and
 why the mechanism works.
 
-The correct interpretation under DCG is: the system measured a real phenomenon (P(D) > 0 under
-neutral mutation on LC322 and LC743), and the only valid external confirmation is LC322 at
-P(D)=0.053. All other cross-domain claims are blocked by DCG. The contribution is a conditional
-empirical finding with one valid external anchor, not a universal claim.
+The correct interpretation under DCG is: CSSE v2 establishes that P(D) is problem-dependent
+(0.000–0.275) and threshold-localized under controlled mutation. The external LC322 consistency
+probe (P(D)=0.053) is compatible in directionality but underpowered and interface-conditioned;
+it does not constitute confirmation. All other cross-domain claims are blocked by DCG. The
+contribution is a conditional internal finding with one compatible external probe, not a
+universal claim.
 
 ## Interpretive Framework: Phase Diagram
 
@@ -1064,12 +1063,10 @@ metamorphic-testing baseline, independent oracle comparison, or non-repository r
 The Domain Completeness Gate (DCG) formalizes when cross-domain P(D) comparison is valid. DCG is
 defined on generation provenance and interface compatibility (GDC ∧ EVC), not on observed outcomes.
 Of all (source, problem) pairs tested, only LC322 External satisfies DCG. CSSE v2 is GDC-FAILING
-(shared mutation lineage), so it serves as an internal contrast. LC3946 is non-externalizable. LC79
-and LC743 are EVC-FAILING (insufficient sample, n=1). The single valid external anchor (LC322,
-external P(D)=0.053) is underpowered but confirms the phenomenon exists under independent solver
-lineage.
-external anchor (LC322, external P(D)=0.053) is underpowered but confirms the phenomenon exists
-under independent solver lineage.
+(shared mutation lineage), so it serves as an internal contrast. LC3946 is structurally excluded
+(non-externalizable domain). LC79 and LC743 are EVC-FAILING (insufficient sample, n=1). The
+external LC322 consistency probe (P(D)=0.053, n=38) is underpowered and interface-conditioned;
+it is compatible with the CSSE v2 directionality but does not constitute confirmation.
 
 ## Geometry Audit Limitations
 
@@ -1233,11 +1230,11 @@ However, LC3946 is a synthetic evaluator geometry — it cannot be embedded into
 space. The hand-coded solvers pass GDC, but the problem itself is non-externalizable by structural
 exclusion.
 
-The supporting result has one valid external anchor. On LC322 (Coin Change), C_genuine shows
+The supporting result has one external consistency probe. On LC322 (Coin Change), C_genuine shows
 λ-dependent superiority internally (gap=3.13 at λ=50). Externally, P(D)=0.053 (n=38) compared to
-CSSE v2 internal P(D)=0.019 (n=317, GDC-FAILING). This is the only DCG-valid external anchor.
-The external sample is underpowered but the point estimate confirms the phenomenon exists under
-independent solver lineage.
+CSSE v2 internal P(D)=0.019 (n=317, GDC-FAILING). This is the only DCG-valid external probe. The
+external sample is underpowered and interface-conditioned; it is compatible with the CSSE v2
+directionality but does not constitute confirmation.
 
 Two negative boundary cases constrain interpretation. On LC45 (Jump Game II), the only separating
 features are informationally equivalent to B1 (encoder artifact). On LC743 (Network Delay Time),
@@ -1248,11 +1245,13 @@ The CSSE v2 experiment reveals that P(D) is problem-dependent: 0.019 (LC322), 0.
 LC79), 0.275 (LC743). Disagreements are threshold-localized at single k-values. This kills any
 single-global-mechanism interpretation.
 
-The contribution is a conditional empirical finding with one valid external anchor: C_genuine adds
-decision utility over B1 specifically when (1) the solver population has balanced failure-class
-diversity, (2) the probe index contains problem-specific structural families, and (3) the cost
-regime favors wrong-reject avoidance. The only valid external confirmation is LC322 at P(D)=0.053.
-All other cross-domain claims are blocked by DCG. No universality claim is made.
+The contribution is a conditional internal finding with one compatible external probe: CSSE v2
+establishes that C_genuine adds decision utility over B1 specifically when (1) the solver
+population has balanced failure-class diversity, (2) the probe index contains problem-specific
+structural families, and (3) the cost regime favors wrong-reject avoidance. The external LC322
+consistency probe (P(D)=0.053) is compatible in directionality but underpowered and
+interface-conditioned. All other cross-domain claims are blocked by DCG. No universality
+claim is made.
 
 # References
 
