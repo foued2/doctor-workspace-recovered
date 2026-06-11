@@ -298,7 +298,8 @@ training or prediction.
 
 Cross-domain comparison of P(D) is valid only when the solver source satisfies the Domain Completeness
 Gate. DCG is defined on generation provenance and interface compatibility, not on observed outcomes.
-It is evaluated before computing P(D), not after.
+It is evaluated after computing P(D), as an interpretation constraint on cross-domain comparison.
+It does not affect which solvers enter computation or which P(D) values are produced.
 
 DCG is a three-layer observability model, not a hard gate. It decomposes into three components:
 
@@ -367,8 +368,9 @@ Each (source, problem) pair is assigned one of:
 - **INVALID** — both GDC and EVC fail
 
 DCG is evaluated on generation provenance and behavioral equivalence properties, not on P(D), CE
-rate, or any observed outcome statistic. It prevents false equivalence between distributional
-spaces that are not comparable.
+rate, or any observed outcome statistic. It governs which P(D) values can be compared across
+domains, not which solvers enter computation. All solvers are evaluated regardless of DCG status;
+DCG only constrains interpretation of cross-domain results.
 
 ## Bi-Level Equivalence System
 
@@ -460,7 +462,7 @@ not imply structural absence in B-space). R-coverage is partially evidenced for 
 (mixed R-classes, sufficient B-sample after filtering, but not provably invariant).
 
 **Consequence:** EVC is defined but not yet statistically transportable across solver ecosystems.
-DCG is an epistemic filter, not a hard gate.
+DCG is an interpretation constraint, not a hard gate.
 
 ### R as Sampling Operator
 
