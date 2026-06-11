@@ -918,21 +918,24 @@ failure surfaces not covered by the current artifacts.
 
 ## Limitations
 
-### L1. Generator Support Collapse
+### L1. Human Population Validity
 
-The solver populations used in all experiments were generated under constrained templates or prompted LLM
-sampling with explicit family distributions. Empirical measurement of τ-vectors across LC743 and LC756
-populations revealed approximately six distinct behavioral regimes within the observed populations. Effective
-rank analysis of the solver feature matrix confirmed near-rank-1 structure.
+Accessible human wrong solver sources (Stack Overflow, public GitHub WA submissions) are systematically
+biased toward obvious failures. Authors post code when they recognize it is clearly broken — failure rates
+typically exceed 20–30%. The decision boundary regime where C_genuine and B1 diverge requires solvers with
+subtle errors (failure rates near 5%) that pass most tests but fail on edge cases the author has not yet
+encountered. This population by definition does not know it is wrong, does not post publicly, and does not
+exist in accessible human corpora.
 
-This means the generator does not explore the full behavioral space of candidate solvers. The observed
-τ-space is a small finite regime set determined by the generator's construction method, not by the
-problem's combinatorial structure. Any claim about the geometry of τ-space — dimensionality, clustering,
-separation between failure modes — is conditionally unidentifiable from this data. The experiments
-characterize the image of the generator, not the space of all possible solvers.
+A human validation sprint was conducted. Two human-authored wrong solvers sourced from Stack Overflow (Diyi
+Wang, 2017; M00000001, 2019) and eight synthetic bug-injected solvers were evaluated under the same
+protocol. All ten produced failure rates between 0.20 and 1.0. Gap was zero across all cases — both B1 and
+C_genuine rejected trivially. This is consistent with the structural observation: obviously broken solvers
+carry no information about Doctor's value at the decision boundary.
 
-This limitation applies directly to LC743 and LC756. It does not apply to the estimator comparison
-results in LC322 and LC3946, which make no claim about τ-space geometry.
+Doctor's value proposition operates where solvers fool B1 but not C_genuine. That population is invisible
+by nature and inaccessible through public sources. Results reported in this paper are valid for LLM-generated
+solver populations. The human boundary-adjacent regime remains untested.
 
 ### L2. dm as Projection Under Collapsed Support
 
