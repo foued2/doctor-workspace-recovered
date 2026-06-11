@@ -298,25 +298,25 @@ training or prediction.
 
 DCG is a comparability relation over the space of experimental domains. It determines whether
 P(D) values from different (source, problem) pairs are admissible for joint inference. DCG is
-defined on generation provenance and interface compatibility, not on observed outcomes. It is
-evaluated after computing P(D), as a structural constraint on the inference space. It does not
-affect which solvers enter computation or which P(D) values are produced.
+external to the quotient chain (R, B) that produces solver classes—it is a constraint on
+cross-comparison of results, not on their generation. It is evaluated after computing P(D).
+It does not affect which solvers enter computation or which P(D) values are produced.
 
-Formally, DCG is a binary relation on pairs of (source, problem) tuples:
+Formally, DCG is a binary relation on pairs of behavioral classes:
 
-    DCG : (S₁,P₁) × (S₂,P₂) → {comparable, not comparable}
+    DCG : (S/B × S/B) → {comparable, not comparable}
 
 It decomposes into three layers:
 
-    DCG((S₁,P₁), (S₂,P₂)) := (GDC(S₁,P₁) ∧ GDC(S₂,P₂) ∧ EVC(S₁,P₁) ∧ EVC(S₂,P₂))
-                                under assumption R-coverage(S₁,S₂,P₁,P₂)
+    DCG((S₁/B), (S₂/B)) := (GDC(S₁) ∧ GDC(S₂) ∧ EVC(S₁) ∧ EVC(S₂))
+                             under assumption R-coverage(S₁,S₂)
 
 where GDC is observable (provable), EVC is observable (empirical), and R-coverage is a
 non-observable assumption about sampling completeness (unidentifiable from observed sample alone).
 
-DCG partitions experimental domains into equivalence classes: results within the same class can
-be compared; results across classes cannot. This is a partial equivalence relation over the
-domain space, not metadata or post-hoc labeling.
+DCG partitions behavioral classes into equivalence classes: results within the same class can
+be compared; results across classes cannot. This is an external constraint on the result space,
+not part of the internal quotient structure (R, B) that produces solver classes.
 
 ### GDC — Generation Domain Constraint
 
