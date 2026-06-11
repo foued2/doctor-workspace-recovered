@@ -920,22 +920,11 @@ failure surfaces not covered by the current artifacts.
 
 ### L1. Human Population Validity
 
-Accessible human wrong solver sources (Stack Overflow, public GitHub WA submissions) are systematically
-biased toward obvious failures. Authors post code when they recognize it is clearly broken — failure rates
-typically exceed 20–30%. The decision boundary regime where C_genuine and B1 diverge requires solvers with
-subtle errors (failure rates near 5%) that pass most tests but fail on edge cases the author has not yet
-encountered. This population by definition does not know it is wrong, does not post publicly, and does not
-exist in accessible human corpora.
-
-A human validation sprint was conducted. Two human-authored wrong solvers sourced from Stack Overflow (Diyi
-Wang, 2017; M00000001, 2019) and eight synthetic bug-injected solvers were evaluated under the same
-protocol. All ten produced failure rates between 0.20 and 1.0. Gap was zero across all cases — both B1 and
-C_genuine rejected trivially. This is consistent with the structural observation: obviously broken solvers
-carry no information about Doctor's value at the decision boundary.
-
-Doctor's value proposition operates where solvers fool B1 but not C_genuine. That population is invisible
-by nature and inaccessible through public sources. Results reported in this paper are valid for LLM-generated
-solver populations. The human boundary-adjacent regime remains untested.
+A human validation attempt was conducted using two human-authored Stack Overflow wrong solvers and eight
+synthetic bug-injected solvers. All exhibited high failure rates (0.20–1.0), producing trivial agreement
+between B1 and C_genuine (gap = 0 in all cases). These populations therefore did not probe the
+decision-boundary regime where disagreement between policies could occur. Consequently, the present study
+provides no evidence regarding Doctor's behavior on boundary-adjacent human solver populations.
 
 ### L2. dm as Projection Under Collapsed Support
 
