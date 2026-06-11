@@ -13,8 +13,8 @@ This paper asks when a directional failure-family classifier (C_genuine) improve
 utility over a failure-count baseline (B1) on algorithmic solver populations. Four problem classes were
 evaluated under governed protocols with pre-declared solver populations and frozen evaluation procedures.
 Two measurement domains are present: an internal mutation measure (CSSE v2, n=500 per class) and an
-external corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG = GDC ∧ EVC)
-determines which cross-domain comparisons are valid, evaluated on generation provenance and interface
+external corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG) determines which
+cross-domain comparisons are valid, evaluated on generation provenance and interface
 compatibility before computing P(D). On LC3946 (poset-based lattice), C_genuine achieves
 decision_loss=0.0 versus B1's 1.0, strictly improving over all non-degenerate baselines, with the
 advantage surviving 10 of 11 perturbation conditions — but LC3946 is structurally excluded from
@@ -72,7 +72,7 @@ solver-population structures, and the results determine the conditions under whi
 
 The paper presents four problem classes evaluated under comparable frozen protocols, with two
 measurement domains (internal mutation measure and external corpus measure). The Domain Completeness
-Gate (DCG = GDC ∧ EVC) determines which cross-domain comparisons are valid, evaluated on generation
+Gate (DCG) determines which cross-domain comparisons are valid, evaluated on generation
 provenance and interface compatibility before computing P(D).
 
 ### Primary Evidence — LC3946 (Positive, Non-Externalizable)
@@ -302,7 +302,7 @@ It is evaluated before computing P(D), not after.
 
 DCG is a three-layer observability model, not a hard gate. It decomposes into three components:
 
-    DCG(S,P) = GDC(S,P) ∧ EVC(S,P) ∧ R-coverage(S,P)
+    DCG(S,P) := (GDC(S,P) ∧ EVC(S,P)) under assumption R-coverage(S,P)
 
 where GDC is observable (provable), EVC is observable (empirical), and R-coverage is a
 non-observable constraint on sampling assumptions (unidentifiable from observed sample alone).
@@ -472,7 +472,7 @@ R determines which parts of B-space are observable. This means:
 - Cross-ecosystem comparison requires R-coverage invariance, not just GDC + EVC
 
 The system now has three components: GDC (R-domain provenance), EVC (B-domain evaluation),
-and R-coverage (sampling invariance). DCG = GDC ∧ EVC ∧ R-coverage.
+and R-coverage (sampling assumption). DCG := (GDC ∧ EVC) under assumption R-coverage.
 
 ## S_eval Provenance
 
@@ -973,7 +973,7 @@ measure. The Domain Completeness Gate (DCG) determines which cross-domain compar
 
 ### DCG Classification Summary (Pre-Result Evaluation)
 
-DCG = GDC ∧ EVC ∧ R-coverage. GDC is R-domain (provenance, observable). EVC is B-domain
+DCG := (GDC ∧ EVC) under assumption R-coverage. GDC is R-domain (provenance, observable). EVC is B-domain
 (evaluation, empirical). R-coverage is a non-observable constraint on sampling assumptions
 (unidentifiable from observed sample alone).
 
@@ -1171,7 +1171,8 @@ include third-party benchmark validation, EvalPlus execution, LiveCodeBench exec
 metamorphic-testing baseline, independent oracle comparison, or non-repository replication.
 
 The Domain Completeness Gate (DCG) formalizes when cross-domain P(D) comparison is valid. DCG is
-defined on generation provenance and interface compatibility (GDC ∧ EVC), not on observed outcomes.
+defined on generation provenance and interface compatibility (GDC, EVC under assumption R-coverage),
+not on observed outcomes.
 Of all (source, problem) pairs tested, only LC322 External satisfies DCG. CSSE v2 is GDC-FAILING
 (shared mutation lineage), so it serves as an internal contrast. LC3946 is structurally excluded
 (non-externalizable domain). LC79 and LC743 are EVC-FAILING (insufficient sample, n=1). The
@@ -1314,7 +1315,7 @@ conditional estimator behavior under the tested populations and λ values, nothi
 
 ### L4. DCG Is a Formalization, Not a Discovery
 
-The Domain Completeness Gate (DCG = GDC ∧ EVC) formalizes an already-known sampling limitation:
+The Domain Completeness Gate (DCG) formalizes an already-known sampling limitation:
 the external corpus is sparse (n=38 for LC322, n=1 for LC79/LC743) and structurally biased
 (interface-filtered, source-constrained). DCG does not fix this limitation; it prevents false
 equivalence between distributional spaces that are not comparable. DCG is evaluated on generation
@@ -1329,7 +1330,7 @@ This paper asked when a directional failure-family classifier (C_genuine) improv
 decision utility over a failure-count baseline (B1). Four problem classes were tested under governed
 protocols with pre-declared solver populations and frozen evaluation procedures. Two measurement
 domains were present: an internal mutation measure (CSSE v2, n=500 per class) and an external
-corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG = GDC ∧ EVC) determines
+corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG) determines
 which cross-domain comparisons are valid, evaluated on generation provenance and interface
 compatibility before computing P(D).
 
