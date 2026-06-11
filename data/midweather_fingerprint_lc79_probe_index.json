@@ -1,0 +1,1025 @@
+{
+  "problem": "LC79",
+  "num_probes": 30,
+  "axis_set": ["path_finding", "visited_tracking", "boundary", "recursion_depth", "backtracking", "exhaustive_search"],
+  "probe_index_set_id": "lc79_v1",
+  "construction_rule": "oracle_first: probes designed to exercise backtracking, visited tracking, boundary conditions, and grid navigation in LC79 Word Search. Expected values computed by lc79_brute_force oracle and verified post-creation.",
+  "probes": [
+    {
+      "probe_id": "p_lc79_001",
+      "axis": "path_finding",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "E"
+        ],
+        [
+          "S",
+          "F",
+          "C",
+          "S"
+        ],
+        [
+          "A",
+          "D",
+          "E",
+          "E"
+        ]
+      ],
+      "word": "ABCCED",
+      "expected": true,
+      "note": "Down-right-up path",
+      "probe_family": "non_obvious_path",
+      "fingerprint_context": {
+        "probe_family": "non_obvious_path",
+        "axis": "path_finding"
+      }
+    },
+    {
+      "probe_id": "p_lc79_002",
+      "axis": "path_finding",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "E"
+        ],
+        [
+          "S",
+          "F",
+          "C",
+          "S"
+        ],
+        [
+          "A",
+          "D",
+          "E",
+          "E"
+        ]
+      ],
+      "word": "SEE",
+      "expected": true,
+      "note": "Down-left path",
+      "probe_family": "non_obvious_path",
+      "fingerprint_context": {
+        "probe_family": "non_obvious_path",
+        "axis": "path_finding"
+      }
+    },
+    {
+      "probe_id": "p_lc79_003",
+      "axis": "path_finding",
+      "board": [
+        [
+          "C",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "C",
+          "D"
+        ]
+      ],
+      "word": "AAB",
+      "expected": true,
+      "note": "Navigate through A's",
+      "probe_family": "non_obvious_path",
+      "fingerprint_context": {
+        "probe_family": "non_obvious_path",
+        "axis": "path_finding"
+      }
+    },
+    {
+      "probe_id": "p_lc79_004",
+      "axis": "path_finding",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "H",
+          "G",
+          "F",
+          "E"
+        ],
+        [
+          "I",
+          "J",
+          "K",
+          "L"
+        ]
+      ],
+      "word": "ABCDEFGHIJKL",
+      "expected": true,
+      "note": "Snake: row1 L->R, row2 R->L, row3 L->R",
+      "probe_family": "non_obvious_path",
+      "fingerprint_context": {
+        "probe_family": "non_obvious_path",
+        "axis": "path_finding"
+      }
+    },
+    {
+      "probe_id": "p_lc79_005",
+      "axis": "path_finding",
+      "board": [
+        [
+          "X",
+          "A",
+          "X"
+        ],
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "X",
+          "A",
+          "X"
+        ]
+      ],
+      "word": "AAA",
+      "expected": true,
+      "note": "Cross pattern",
+      "probe_family": "non_obvious_path",
+      "fingerprint_context": {
+        "probe_family": "non_obvious_path",
+        "axis": "path_finding"
+      }
+    },
+    {
+      "probe_id": "p_lc79_006",
+      "axis": "backtracking",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "E"
+        ],
+        [
+          "S",
+          "F",
+          "C",
+          "S"
+        ],
+        [
+          "A",
+          "D",
+          "E",
+          "E"
+        ]
+      ],
+      "word": "ABCB",
+      "expected": false,
+      "note": "C->B requires revisit",
+      "probe_family": "near_miss",
+      "fingerprint_context": {
+        "probe_family": "near_miss",
+        "axis": "backtracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_007",
+      "axis": "backtracking",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "E",
+          "F",
+          "G",
+          "H"
+        ],
+        [
+          "I",
+          "J",
+          "K",
+          "L"
+        ]
+      ],
+      "word": "ABCDHGF",
+      "expected": true,
+      "note": "A->B->C->D->H->G->F is valid",
+      "probe_family": "near_miss",
+      "fingerprint_context": {
+        "probe_family": "near_miss",
+        "axis": "backtracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_008",
+      "axis": "backtracking",
+      "board": [
+        [
+          "A",
+          "B",
+          "C"
+        ],
+        [
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "G",
+          "H",
+          "I"
+        ]
+      ],
+      "word": "ABEABC",
+      "expected": false,
+      "note": "ABE then can't reach A without revisit",
+      "probe_family": "near_miss",
+      "fingerprint_context": {
+        "probe_family": "near_miss",
+        "axis": "backtracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_009",
+      "axis": "backtracking",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "E",
+          "F",
+          "G",
+          "H"
+        ],
+        [
+          "I",
+          "J",
+          "K",
+          "L"
+        ]
+      ],
+      "word": "ABFG",
+      "expected": true,
+      "note": "A->B->F->G is valid",
+      "probe_family": "near_miss",
+      "fingerprint_context": {
+        "probe_family": "near_miss",
+        "axis": "backtracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_010",
+      "axis": "backtracking",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "E"
+        ],
+        [
+          "S",
+          "F",
+          "C",
+          "S"
+        ],
+        [
+          "A",
+          "D",
+          "E",
+          "E"
+        ]
+      ],
+      "word": "ABCEF",
+      "expected": false,
+      "note": "E not adjacent to F in path",
+      "probe_family": "near_miss",
+      "fingerprint_context": {
+        "probe_family": "near_miss",
+        "axis": "backtracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_011",
+      "axis": "visited_tracking",
+      "board": [
+        [
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A",
+          "A"
+        ]
+      ],
+      "word": "AAAAAAAAAAAA",
+      "expected": true,
+      "note": "12 A's in 3x4 grid snake",
+      "probe_family": "repeated_chars",
+      "fingerprint_context": {
+        "probe_family": "repeated_chars",
+        "axis": "visited_tracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_012",
+      "axis": "visited_tracking",
+      "board": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A"
+        ]
+      ],
+      "word": "AAAAAAAAA",
+      "expected": false,
+      "note": "3x3 all A's border, 9 chars",
+      "probe_family": "repeated_chars",
+      "fingerprint_context": {
+        "probe_family": "repeated_chars",
+        "axis": "visited_tracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_013",
+      "axis": "visited_tracking",
+      "board": [
+        [
+          "A",
+          "B",
+          "A",
+          "B"
+        ],
+        [
+          "B",
+          "A",
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "B",
+          "A",
+          "B"
+        ]
+      ],
+      "word": "ABABABABA",
+      "expected": true,
+      "note": "Checkerboard 9 chars",
+      "probe_family": "repeated_chars",
+      "fingerprint_context": {
+        "probe_family": "repeated_chars",
+        "axis": "visited_tracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_014",
+      "axis": "visited_tracking",
+      "board": [
+        [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "B",
+          "B",
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A",
+          "B",
+          "A"
+        ]
+      ],
+      "word": "AAAAAABBB",
+      "expected": true,
+      "note": "Can't get all A's then B's without revisit",
+      "probe_family": "repeated_chars",
+      "fingerprint_context": {
+        "probe_family": "repeated_chars",
+        "axis": "visited_tracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_015",
+      "axis": "visited_tracking",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "B",
+          "C",
+          "D",
+          "A"
+        ],
+        [
+          "C",
+          "D",
+          "A",
+          "B"
+        ]
+      ],
+      "word": "ABCDBCDA",
+      "expected": false,
+      "note": "Repeats require revisit",
+      "probe_family": "repeated_chars",
+      "fingerprint_context": {
+        "probe_family": "repeated_chars",
+        "axis": "visited_tracking"
+      }
+    },
+    {
+      "probe_id": "p_lc79_016",
+      "axis": "recursion_depth",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L"
+        ],
+        [
+          "M",
+          "N",
+          "O",
+          "P",
+          "Q",
+          "R"
+        ],
+        [
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X"
+        ],
+        [
+          "Y",
+          "Z",
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ]
+      ],
+      "word": "ABCDEFGHIJKLMNOPQRSTUVWX",
+      "expected": false,
+      "note": "6x6 snake 24 chars",
+      "probe_family": "large_grid",
+      "fingerprint_context": {
+        "probe_family": "large_grid",
+        "axis": "recursion_depth"
+      }
+    },
+    {
+      "probe_id": "p_lc79_017",
+      "axis": "recursion_depth",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "F",
+          "E",
+          "D",
+          "C",
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "F",
+          "E",
+          "D",
+          "C",
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "F",
+          "E",
+          "D",
+          "C",
+          "B",
+          "A"
+        ]
+      ],
+      "word": "ABCDEFABCDEFABCDEF",
+      "expected": true,
+      "note": "Zigzag 6x6",
+      "probe_family": "large_grid",
+      "fingerprint_context": {
+        "probe_family": "large_grid",
+        "axis": "recursion_depth"
+      }
+    },
+    {
+      "probe_id": "p_lc79_018",
+      "axis": "recursion_depth",
+      "board": [
+        [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "A"
+        ]
+      ],
+      "word": "AAAAAAAAAA",
+      "expected": true,
+      "note": "6x6 all A's short word",
+      "probe_family": "large_grid",
+      "fingerprint_context": {
+        "probe_family": "large_grid",
+        "axis": "recursion_depth"
+      }
+    },
+    {
+      "probe_id": "p_lc79_019",
+      "axis": "recursion_depth",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L"
+        ],
+        [
+          "M",
+          "N",
+          "O",
+          "P",
+          "Q",
+          "R"
+        ],
+        [
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X"
+        ],
+        [
+          "Y",
+          "Z",
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ]
+      ],
+      "word": "ABCDEFGHIJKLmnopqrstuvwxyz",
+      "expected": false,
+      "note": "Lowercase not in grid",
+      "probe_family": "large_grid",
+      "fingerprint_context": {
+        "probe_family": "large_grid",
+        "axis": "recursion_depth"
+      }
+    },
+    {
+      "probe_id": "p_lc79_020",
+      "axis": "recursion_depth",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H"
+        ],
+        [
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "P"
+        ],
+        [
+          "Q",
+          "R",
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X"
+        ]
+      ],
+      "word": "ABCDEFGHIJKLMNOPQRSTUVWX",
+      "expected": false,
+      "note": "3x8 snake",
+      "probe_family": "large_grid",
+      "fingerprint_context": {
+        "probe_family": "large_grid",
+        "axis": "recursion_depth"
+      }
+    },
+    {
+      "probe_id": "p_lc79_021",
+      "axis": "exhaustive_search",
+      "board": [
+        [
+          "A",
+          "B",
+          "C"
+        ],
+        [
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "G",
+          "H",
+          "I"
+        ]
+      ],
+      "word": "ABCDEFGH",
+      "expected": false,
+      "note": "2x3 snake A-F then down to G-H",
+      "probe_family": "word_absent",
+      "fingerprint_context": {
+        "probe_family": "word_absent",
+        "axis": "exhaustive_search"
+      }
+    },
+    {
+      "probe_id": "p_lc79_022",
+      "axis": "exhaustive_search",
+      "board": [
+        [
+          "A",
+          "B",
+          "C"
+        ],
+        [
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "G",
+          "H",
+          "I"
+        ]
+      ],
+      "word": "AEIM",
+      "expected": false,
+      "note": "Diagonal not adjacent",
+      "probe_family": "word_absent",
+      "fingerprint_context": {
+        "probe_family": "word_absent",
+        "axis": "exhaustive_search"
+      }
+    },
+    {
+      "probe_id": "p_lc79_023",
+      "axis": "exhaustive_search",
+      "board": [
+        [
+          "A",
+          "B",
+          "C"
+        ],
+        [
+          "D",
+          "E",
+          "F"
+        ],
+        [
+          "G",
+          "H",
+          "I"
+        ]
+      ],
+      "word": "ABCABC",
+      "expected": false,
+      "note": "Repeats require revisit",
+      "probe_family": "word_absent",
+      "fingerprint_context": {
+        "probe_family": "word_absent",
+        "axis": "exhaustive_search"
+      }
+    },
+    {
+      "probe_id": "p_lc79_024",
+      "axis": "exhaustive_search",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "E",
+          "F",
+          "G",
+          "H"
+        ]
+      ],
+      "word": "ABCDEFGH",
+      "expected": false,
+      "note": "2x4 snake",
+      "probe_family": "word_absent",
+      "fingerprint_context": {
+        "probe_family": "word_absent",
+        "axis": "exhaustive_search"
+      }
+    },
+    {
+      "probe_id": "p_lc79_025",
+      "axis": "exhaustive_search",
+      "board": [
+        [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "E",
+          "F",
+          "G",
+          "H"
+        ]
+      ],
+      "word": "ABCDEFGHGFEDCBA",
+      "expected": false,
+      "note": "Long palindrome can't traverse back",
+      "probe_family": "word_absent",
+      "fingerprint_context": {
+        "probe_family": "word_absent",
+        "axis": "exhaustive_search"
+      }
+    },
+    {
+      "probe_id": "p_lc79_026",
+      "axis": "boundary",
+      "board": [
+        [
+          "a"
+        ]
+      ],
+      "word": "a",
+      "expected": true,
+      "note": "Single cell match",
+      "probe_family": "edge_case",
+      "fingerprint_context": {
+        "probe_family": "edge_case",
+        "axis": "boundary"
+      }
+    },
+    {
+      "probe_id": "p_lc79_027",
+      "axis": "boundary",
+      "board": [
+        [
+          "a"
+        ]
+      ],
+      "word": "b",
+      "expected": false,
+      "note": "Single cell no match",
+      "probe_family": "edge_case",
+      "fingerprint_context": {
+        "probe_family": "edge_case",
+        "axis": "boundary"
+      }
+    },
+    {
+      "probe_id": "p_lc79_028",
+      "axis": "boundary",
+      "board": [
+        [
+          "a",
+          "b"
+        ],
+        [
+          "c",
+          "d"
+        ]
+      ],
+      "word": "abdc",
+      "expected": true,
+      "note": "2x2 full traversal",
+      "probe_family": "edge_case",
+      "fingerprint_context": {
+        "probe_family": "edge_case",
+        "axis": "boundary"
+      }
+    },
+    {
+      "probe_id": "p_lc79_029",
+      "axis": "boundary",
+      "board": [
+        [
+          "a",
+          "b",
+          "c"
+        ],
+        [
+          "d",
+          "e",
+          "f"
+        ],
+        [
+          "g",
+          "h",
+          "i"
+        ]
+      ],
+      "word": "abehifedcba",
+      "expected": false,
+      "note": "3x3 long path with backtrack",
+      "probe_family": "edge_case",
+      "fingerprint_context": {
+        "probe_family": "edge_case",
+        "axis": "boundary"
+      }
+    },
+    {
+      "probe_id": "p_lc79_030",
+      "axis": "boundary",
+      "board": [
+        [
+          "A",
+          "B",
+          "C"
+        ],
+        [
+          "B",
+          "D",
+          "B"
+        ],
+        [
+          "C",
+          "B",
+          "A"
+        ]
+      ],
+      "word": "ABCBDAB",
+      "expected": false,
+      "note": "Classic backtracking",
+      "probe_family": "edge_case",
+      "fingerprint_context": {
+        "probe_family": "edge_case",
+        "axis": "boundary"
+      }
+    }
+  ]
+}

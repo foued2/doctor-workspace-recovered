@@ -1,0 +1,325 @@
+{
+  "schema_version": "1.0.0",
+  "s_eval_id": "fingerprint_lc79_experimental_001",
+  "problem_id": "LC79",
+  "created_after_protocol_freeze": true,
+  "protocol_freeze_id": "lc79_v1",
+  "protocol_freeze_commit": "f994e30c90e7257ef329b0447ba8ffb0422925ed",
+  "protocol_freeze_sha256": "PENDING_SELF_REFERENCE_AT_FREEZE_TIME",
+  "certification_level": "EXTERNAL_BLIND_PACK",
+  "solver_source": "gpt_generated",
+  "pack_source": "gpt_generated",
+  "reconstruction_note": "30 GPT-generated solvers across 4 strategy families (F1: correct backtracking, F2: wrong visited tracking, F3: wrong boundary conditions, F4: fundamentally wrong approach). Generated from known bug patterns for LC79 Word Search.",
+  "n_solvers": 30,
+  "strategy_families": [
+    {
+      "family": "F1_correct_backtracking",
+      "solver_ids": [
+        "s001_correct_std",
+        "s002_correct_visited_set",
+        "s003_correct_directions",
+        "s004_correct_early_term",
+        "s005_correct_neighbors"
+      ],
+      "expected_pass_rate": "high",
+      "n_solvers": 5
+    },
+    {
+      "family": "F2_wrong_visited_tracking",
+      "solver_ids": [
+        "s006_f2_no_unmark",
+        "s007_f2_early_unmark",
+        "s008_f2_mark_neighbor",
+        "s009_f2_no_add_visited",
+        "s010_f2_late_add",
+        "s011_f2_wrong_order",
+        "s012_f2_wrong_marker",
+        "s013_f2_no_visited_check",
+        "s014_f2_shared_visited",
+        "s015_f2_depth_key"
+      ],
+      "expected_fail_axis": "visited_tracking",
+      "n_solvers": 10
+    },
+    {
+      "family": "F3_wrong_boundary_conditions",
+      "solver_ids": [
+        "s016_f3_rows_off_by_one",
+        "s017_f3_cols_off_by_one",
+        "s018_f3_swapped_dims",
+        "s019_f3_wrong_idx",
+        "s020_f3_extra_check",
+        "s021_f3_both_off",
+        "s022_f3_no_boundary",
+        "s023_f3_cols_for_both",
+        "s024_f3_rows_for_both",
+        "s025_f3_case_insensitive",
+        "s026_f3_start_offset"
+      ],
+      "expected_fail_axis": "boundary",
+      "n_solvers": 11
+    },
+    {
+      "family": "F4_fundamentally_wrong_approach",
+      "solver_ids": [
+        "s027_f4_bfs",
+        "s028_f4_greedy",
+        "s029_f4_dp",
+        "s030_f4_random"
+      ],
+      "expected_fail_axis": "multiple",
+      "n_solvers": 4
+    }
+  ],
+  "solver_files": [
+    {
+      "solver_id": "s001_correct_std",
+      "path": "doctor/adversarial/lc79_candidates/s001_correct_std.py",
+      "sha256": "8dcbd763e016d583d4a81c4c477f5634a40d60266d9108fb0ebb3533bd37fbe0",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s002_correct_visited_set",
+      "path": "doctor/adversarial/lc79_candidates/s002_correct_visited_set.py",
+      "sha256": "02b7bee763220f15288e106e2336f4f51e25e5484f10e30b7970dba2db59ba0c",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s003_correct_directions",
+      "path": "doctor/adversarial/lc79_candidates/s003_correct_directions.py",
+      "sha256": "e34d3b50c976488a623c6da63fbdae2f0a45f6e19f12ae1ee29063a32b8f83f0",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s004_correct_early_term",
+      "path": "doctor/adversarial/lc79_candidates/s004_correct_early_term.py",
+      "sha256": "5a4fc9402c25bf2a09b6cb725dd1f7b3035f8001f251bef09a744d3b918d4161",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s005_correct_neighbors",
+      "path": "doctor/adversarial/lc79_candidates/s005_correct_neighbors.py",
+      "sha256": "0e56680ce003007d628919bfd57f117e0a0794333abbac6caf7103fa510c0d9b",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s006_f2_no_unmark",
+      "path": "doctor/adversarial/lc79_candidates/s006_f2_no_unmark.py",
+      "sha256": "96894bcd4f2beb251ccb06561529dd5e6d737608fbaf3ee9129f41544709aa2d",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s007_f2_early_unmark",
+      "path": "doctor/adversarial/lc79_candidates/s007_f2_early_unmark.py",
+      "sha256": "8abeb8d3c427d4968ecde18eddd47c3e3106977774a873e30c2af76f4b9e22b8",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s008_f2_mark_neighbor",
+      "path": "doctor/adversarial/lc79_candidates/s008_f2_mark_neighbor.py",
+      "sha256": "8175158be6abd9e6dd395ea6d9bf8536be4a19b812aa2c70bd6a6d5285e15f74",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s009_f2_no_add_visited",
+      "path": "doctor/adversarial/lc79_candidates/s009_f2_no_add_visited.py",
+      "sha256": "7d0f8a7248b060d781cb0d43735d401aeda0d770bdb18883ae199fcf853e054b",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s010_f2_late_add",
+      "path": "doctor/adversarial/lc79_candidates/s010_f2_late_add.py",
+      "sha256": "ca9b435da6562b52bffa4a987a8ce2c35629cf719bef20ce2e8b74b61e9b22b8",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s011_f2_wrong_order",
+      "path": "doctor/adversarial/lc79_candidates/s011_f2_wrong_order.py",
+      "sha256": "910595d0cc9232abb36d844134ad73f3b3456de2c5d241c94829677e0da3f018",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s012_f2_wrong_marker",
+      "path": "doctor/adversarial/lc79_candidates/s012_f2_wrong_marker.py",
+      "sha256": "dc6104abc3dd8969dd80af0a8cead8c3df54c3ec399044513df859811363605b",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s013_f2_no_visited_check",
+      "path": "doctor/adversarial/lc79_candidates/s013_f2_no_visited_check.py",
+      "sha256": "e373e0856430a90012a0aa518a981314bc0e98df59c7558eca28966b66a6d164",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s014_f2_shared_visited",
+      "path": "doctor/adversarial/lc79_candidates/s014_f2_shared_visited.py",
+      "sha256": "090c29116deecc1cd987296c4000825180d0088d6334ae7378ca5e45308ab011",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s015_f2_depth_key",
+      "path": "doctor/adversarial/lc79_candidates/s015_f2_depth_key.py",
+      "sha256": "f76bc053d3ad94407a575eb81bda869348f8fa300c7eacdbd597db28bff97e2a",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s016_f3_rows_off_by_one",
+      "path": "doctor/adversarial/lc79_candidates/s016_f3_rows_off_by_one.py",
+      "sha256": "104574d19a72e42bfe01b0ee2d87af98acabaae3cda9754be0336b80e86d9627",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s017_f3_cols_off_by_one",
+      "path": "doctor/adversarial/lc79_candidates/s017_f3_cols_off_by_one.py",
+      "sha256": "a61877e59e832ebb1943f07a50158e5bab770147824a27dc99b6b6994a8316f3",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s018_f3_swapped_dims",
+      "path": "doctor/adversarial/lc79_candidates/s018_f3_swapped_dims.py",
+      "sha256": "a7991d246558bea87a4261f7c4a5a987cc6d59e03e0cecb7397a18b67b2aff0a",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s019_f3_wrong_idx",
+      "path": "doctor/adversarial/lc79_candidates/s019_f3_wrong_idx.py",
+      "sha256": "91994378b99159412c79e1de7a1d05c2413193889f858ec6581010fbcb57febb",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s020_f3_extra_check",
+      "path": "doctor/adversarial/lc79_candidates/s020_f3_extra_check.py",
+      "sha256": "a243a259e6e5c52f52dc97a25d154cf5f43d28aa7619c8575df5a663d3244013",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s021_f3_both_off",
+      "path": "doctor/adversarial/lc79_candidates/s021_f3_both_off.py",
+      "sha256": "771a634bafa546e6955a8bdb0e602416eb430a0092b16d1f5b16edd3eef036d0",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s022_f3_no_boundary",
+      "path": "doctor/adversarial/lc79_candidates/s022_f3_no_boundary.py",
+      "sha256": "d1c0a1f7814173bfef8f8025a7495ffe90375e42a274e7b70a5a50bf278ab84f",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s023_f3_cols_for_both",
+      "path": "doctor/adversarial/lc79_candidates/s023_f3_cols_for_both.py",
+      "sha256": "3da5391b23a6627f84b38081899e7dc0a0a8117c9c20458418ec464fc62abb75",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s024_f3_rows_for_both",
+      "path": "doctor/adversarial/lc79_candidates/s024_f3_rows_for_both.py",
+      "sha256": "0329eb9270757d72012d4aab5ade703aa58d31c4e8179328ea3daec8a3526a56",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s025_f3_case_insensitive",
+      "path": "doctor/adversarial/lc79_candidates/s025_f3_case_insensitive.py",
+      "sha256": "889c4db7eb3f2f3aed8332ca9b94c0eb7d90c320827c35d20821383545f77810",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s026_f3_start_offset",
+      "path": "doctor/adversarial/lc79_candidates/s026_f3_start_offset.py",
+      "sha256": "568d20cc9791379627a5e45392730d1eddbada94f55daf7599bb34a5db7c6a9b",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s027_f4_bfs",
+      "path": "doctor/adversarial/lc79_candidates/s027_f4_bfs.py",
+      "sha256": "3bed77455c553542ed73b47205f21cb06412311999460705bd96c28127040347",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s028_f4_greedy",
+      "path": "doctor/adversarial/lc79_candidates/s028_f4_greedy.py",
+      "sha256": "1d3dc53aa7948d4d0b67fe5556e8201326b711c87eda49a3cd3e9b70d5b7e4ac",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s029_f4_dp",
+      "path": "doctor/adversarial/lc79_candidates/s029_f4_dp.py",
+      "sha256": "36ec65b407e829634544293f034890f1458a42b31b71e37b54095c5e387fd94b",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    },
+    {
+      "solver_id": "s030_f4_random",
+      "path": "doctor/adversarial/lc79_candidates/s030_f4_random.py",
+      "sha256": "1d12ace18cb9c27ece57bcec800164579ea3cb33a1a64120c6d449b0c468d407",
+      "created_at": "2026-06-11T00:00:00Z",
+      "inspected_before_protocol_freeze": false,
+      "derived_from_prior_failures": false
+    }
+  ],
+  "causal_certification": {
+    "s_eval_existed_before_protocol": false,
+    "s_eval_used_to_design_probes": false,
+    "s_eval_used_to_design_features": false,
+    "s_eval_outputs_seen_before_freeze": false,
+    "failure_labels_seen_before_freeze": false,
+    "certified_clean": true,
+    "clean_rationale": "Certified clean because: (a) the 30 solver algorithms are GPT-generated from known bug patterns for LC79 Word Search; (b) the algorithms are deterministic and reproducible; (c) the solver implementations are NOT derived from the 30 frozen probes or the 6 axes."
+  }
+}

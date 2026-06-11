@@ -1,0 +1,303 @@
+{
+  "result_id": "midweather_fingerprint_lc79_clean_001",
+  "problem_class": "lc79",
+  "experiment": "Midweather-Fingerprint-Gate",
+  "protocol_freeze_id": "lc79_v1",
+  "protocol_freeze_commit": "f994e30c90e7257ef329b0447ba8ffb0422925ed",
+  "decision_spec_name": "ACCEPT_REJECT",
+  "n_solvers": 30,
+  "n_probes": 30,
+  "K_observed": 15,
+  "K_target": 15,
+  "failure_threshold": 0.05,
+  "minimum_accept_rate": 0.2,
+  "ground_truth_summary": {
+    "n_good_solvers": 11,
+    "n_bad_solvers": 19,
+    "verdict_split": "11 ACCEPT / 19 REJECT (held-out fail rate < 0.05)"
+  },
+  "per_solver_ground_truth": {
+    "s001_correct_std": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s002_correct_visited_set": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s003_correct_directions": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s004_correct_early_term": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s005_correct_neighbors": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.0667
+    },
+    "s006_f2_no_unmark": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s007_f2_early_unmark": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.1333
+    },
+    "s008_f2_mark_neighbor": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.3333
+    },
+    "s009_f2_no_add_visited": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.1333
+    },
+    "s010_f2_late_add": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.1333
+    },
+    "s011_f2_wrong_order": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s012_f2_wrong_marker": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s013_f2_no_visited_check": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.1333
+    },
+    "s014_f2_shared_visited": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s015_f2_depth_key": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s016_f3_rows_off_by_one": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.2667
+    },
+    "s017_f3_cols_off_by_one": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.7333
+    },
+    "s018_f3_swapped_dims": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.3333
+    },
+    "s019_f3_wrong_idx": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.0667
+    },
+    "s020_f3_extra_check": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.2667
+    },
+    "s021_f3_both_off": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.8
+    },
+    "s022_f3_no_boundary": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.8
+    },
+    "s023_f3_cols_for_both": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.1333
+    },
+    "s024_f3_rows_for_both": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.2
+    },
+    "s025_f3_case_insensitive": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s026_f3_start_offset": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.2
+    },
+    "s027_f4_bfs": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.4
+    },
+    "s028_f4_greedy": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.4
+    },
+    "s029_f4_dp": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.1333
+    },
+    "s030_f4_random": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    }
+  },
+  "guard_statuses": [
+    {
+      "guard": "K=15 frozen (observed probes = 15, budget unit = one solver execution)",
+      "status": "passed",
+      "evidence": "observed_probe_ids = 15 ids, K = 15"
+    },
+    {
+      "guard": "decision_spec present (failure_threshold=0.05, minimum_accept_rate=0.2)",
+      "status": "passed",
+      "evidence": "failure_threshold=0.05, minimum_accept_rate=0.2"
+    },
+    {
+      "guard": "weakest baseline config frozen (leave-one-out ridge, alpha=1.0)",
+      "status": "passed",
+      "evidence": "model_type=leave-one-out ridge regression, regularization=L2 (alpha=1.0, fixed)"
+    },
+    {
+      "guard": "Axis provenance clean (problem_specification_only)",
+      "status": "passed",
+      "evidence": "axis_set_source=None, contamination_risk=None"
+    },
+    {
+      "guard": "S_eval certified EXTERNAL_BLIND_PACK",
+      "status": "passed",
+      "evidence": "certification_level=EXTERNAL_BLIND_PACK, pack_source=gpt_generated"
+    },
+    {
+      "guard": "S_eval freeze linkage matches",
+      "status": "passed",
+      "evidence": "protocol_freeze_id=lc79_v1 matches freeze_id=lc79_v1"
+    },
+    {
+      "guard": "Solver file hashes present",
+      "status": "passed",
+      "evidence": "30 solver files, all with sha256"
+    },
+    {
+      "guard": "No degenerate target collapse",
+      "status": "passed",
+      "evidence": "good=11, bad=19; degenerate_target_reasons=[]"
+    },
+    {
+      "guard": "No degenerate C policy (not all-ACCEPT, not all-REJECT)",
+      "status": "passed",
+      "evidence": "C predictions: 0.5333 accept rate"
+    },
+    {
+      "guard": "All estimators receive identical O_obs",
+      "status": "passed",
+      "evidence": "all 9 estimators consume the same K=15 observed_probe_ids"
+    }
+  ],
+  "estimator_table": [
+    {
+      "estimator": "B0_prior",
+      "wrong_accepts": 19,
+      "wrong_rejects": 0,
+      "decision_loss": 19,
+      "accept_rate": 1.0,
+      "satisfies_minimum_accept_rate": true,
+      "degenerate_all_accept": true,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.2999
+    },
+    {
+      "estimator": "B1_count",
+      "wrong_accepts": 6,
+      "wrong_rejects": 1,
+      "decision_loss": 7,
+      "accept_rate": 0.5333,
+      "satisfies_minimum_accept_rate": true,
+      "degenerate_all_accept": false,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.4772
+    },
+    {
+      "estimator": "B2_calibrated_count",
+      "wrong_accepts": 6,
+      "wrong_rejects": 1,
+      "decision_loss": 7,
+      "accept_rate": 0.5333,
+      "satisfies_minimum_accept_rate": true,
+      "degenerate_all_accept": false,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.4772
+    },
+    {
+      "estimator": "B3_raw_pf_vector",
+      "wrong_accepts": 6,
+      "wrong_rejects": 1,
+      "decision_loss": 7,
+      "accept_rate": 0.5333,
+      "satisfies_minimum_accept_rate": true,
+      "degenerate_all_accept": false,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.4772
+    },
+    {
+      "estimator": "B4_raw_full_tensor",
+      "wrong_accepts": 0,
+      "wrong_rejects": 11,
+      "decision_loss": 11,
+      "accept_rate": 0.0,
+      "satisfies_minimum_accept_rate": false,
+      "degenerate_all_accept": false,
+      "degenerate_all_reject": true,
+      "rmse_secondary": 0.8439
+    },
+    {
+      "estimator": "B5_nearest_neighbor_raw_tensor",
+      "wrong_accepts": 19,
+      "wrong_rejects": 0,
+      "decision_loss": 19,
+      "accept_rate": 1.0,
+      "satisfies_minimum_accept_rate": true,
+      "degenerate_all_accept": true,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.2999
+    },
+    {
+      "estimator": "B6_regularized_raw_tensor",
+      "wrong_accepts": 19,
+      "wrong_rejects": 0,
+      "decision_loss": 19,
+      "accept_rate": 1.0,
+      "satisfies_minimum_accept_rate": true,
+      "degenerate_all_accept": true,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.2999
+    },
+    {
+      "estimator": "C_structured_fingerprint",
+      "wrong_accepts": 6,
+      "wrong_rejects": 1,
+      "decision_loss": 7,
+      "accept_rate": 0.5333,
+      "satisfies_minimum_accept_rate": true,
+      "degenerate_all_accept": false,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.4772
+    },
+    {
+      "estimator": "C_genuine",
+      "wrong_accepts": 6,
+      "wrong_rejects": 1,
+      "decision_loss": 7,
+      "accept_rate": 0.5333,
+      "satisfies_minimum_accept_rate": true,
+      "degenerate_all_accept": false,
+      "degenerate_all_reject": false,
+      "rmse_secondary": 0.4772
+    }
+  ],
+  "decision": "FAIL",
+  "decision_reason": "degenerate: all-reject in B4_raw_full_tensor",
+  "reconstruction_disclosure": {
+    "pack_source": "gpt_generated",
+    "solver_count": 30,
+    "paper_claim": "27 good / 3 bad solvers; C decision_loss=1.0, RMSE=0.024; B0/B4/B5/B6 degenerate; C ties B1/B2/B3 on decision_loss -> FAIL",
+    "actual_summary": "11 good / 19 bad solvers; decision=FAIL, reason=degenerate: all-reject in B4_raw_full_tensor"
+  },
+  "wallclock_seconds": 0.103
+}

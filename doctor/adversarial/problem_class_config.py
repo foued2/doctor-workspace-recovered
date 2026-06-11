@@ -82,6 +82,20 @@ def _lc3946_oracle_factory() -> Callable[[list], int]:
     return _oracle
 
 
+def _lc79_oracle_factory() -> Callable[[dict], bool]:
+    """Returns a function that computes LC79 ground truth from a solver input.
+
+    Convention: solver input is {"board": list[list[str]], "word": str}.
+    The oracle calls lc79_brute_force(board, word).
+    """
+    from doctor.adversarial.lc79_ground_truth import lc79_brute_force
+    def _oracle(solver_input: dict) -> bool:
+        board = [row[:] for row in solver_input["board"]]
+        word = solver_input["word"]
+        return lc79_brute_force(board, word)
+    return _oracle
+
+
 # ---------------------------------------------------------------------------
 # Slot 2: Probe-to-solver-input adapter
 # ---------------------------------------------------------------------------
@@ -116,6 +130,14 @@ def lc3946_probe_to_solver_input(probe: dict) -> list:
     return flat
 
 
+def lc79_probe_to_solver_input(probe: dict) -> dict:
+    """LC79 probe format: {board: list[list[str]], word: str}.
+
+    Solver input: {"board": list[list[str]], "word": str} (no transformation).
+    """
+    return {"board": [row[:] for row in probe["board"]], "word": probe["word"]}
+
+
 # ---------------------------------------------------------------------------
 # Slot 3: Solver entry-point name
 # ---------------------------------------------------------------------------
@@ -123,6 +145,7 @@ def lc3946_probe_to_solver_input(probe: dict) -> list:
 LC322_SOLVER_ENTRY_POINT: str = "solve"
 LC45_SOLVER_ENTRY_POINT: str = "solve"  # assumes a wrapper or in-place rename of LC45 candidates
 LC3946_SOLVER_ENTRY_POINT: str = "solve"
+LC79_SOLVER_ENTRY_POINT: str = "solve"
 
 
 # ---------------------------------------------------------------------------
@@ -142,6 +165,13 @@ LC45_ESTIMATOR_NAMES: list[str] = [
 ]
 
 LC3946_ESTIMATOR_NAMES: list[str] = [
+    "B0_prior", "B1_count", "B2_calibrated_count", "B3_raw_pf_vector",
+    "B4_raw_full_tensor", "B5_nearest_neighbor_raw_tensor",
+    "B6_regularized_raw_tensor", "C_structured_fingerprint",
+    "C_genuine",
+]
+
+LC79_ESTIMATOR_NAMES: list[str] = [
     "B0_prior", "B1_count", "B2_calibrated_count", "B3_raw_pf_vector",
     "B4_raw_full_tensor", "B5_nearest_neighbor_raw_tensor",
     "B6_regularized_raw_tensor", "C_structured_fingerprint",
@@ -340,6 +370,21 @@ LC3946_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str
     "C_zero_only": _c_zero_only_policy,
 }
 
+LC79_ESTIMATOR_POLICIES: dict[str, Callable[[int, int, list[dict] | None], str]] = {
+    "B0_prior": _b0_prior_policy,
+    "B1_count": _fail_count_policy,
+    "B2_calibrated_count": _fail_count_policy,
+    "B3_raw_pf_vector": _fail_count_policy,
+    "B4_raw_full_tensor": _b4_raw_full_tensor_policy,
+    "B5_nearest_neighbor_raw_tensor": _b5_nn_policy,
+    "B6_regularized_raw_tensor": _b6_reg_policy,
+    "C_structured_fingerprint": _fail_count_policy,
+    "C_genuine": _c_genuine_policy,
+    "C_feature_threshold": _c_feature_threshold_policy,
+    "C_majority": _c_majority_policy,
+    "C_zero_only": _c_zero_only_policy,
+}
+
 
 # ---------------------------------------------------------------------------
 # Slot 5: Fingerprint axes (declared; runtime value comes from probe_index)
@@ -360,6 +405,15 @@ LC3946_FINGERPRINT_AXES: list[str] = [
     "poset_lattice_boolean",       # powers of 2 forming a boolean lattice
     "poset_lattice_two_prime",     # 2-prime lattice {2,3,6,12,...}
     "poset_isolated",              # factors with no divisibility relations
+]
+
+LC79_FINGERPRINT_AXES: list[str] = [
+    "path_finding",               # board path existence
+    "visited_tracking",           # cell revisitation prevention
+    "boundary",                   # grid boundary handling
+    "recursion_depth",            # DFS depth management
+    "backtracking",               # state restoration on failure
+    "exhaustive_search",          # complete exploration guarantee
 ]
 
 
@@ -644,6 +698,65 @@ def lc3946_raw_tensor_encoder(obs_rows: list[dict]) -> dict[str, list[float]]:
     return out
 
 
+def lc79_raw_tensor_encoder(obs_rows: list[dict]) -> dict[str, list[float]]:
+    """LC79's 6-feature encoder. Mirrors the LC322 encoder shape exactly.
+
+    Per-probe row has a `board` and `word` in the probe dict. The 6 features
+    are derived from the per-solver pass/fail pattern and the probe metadata.
+
+    Output layout (per solver):
+      [0] pass_fail rate        (per-solver mean pass rate)
+      [1] grid_size             (normalized; max observed)
+      [2] axis_val              (1.0 if axis field present, else 0.0)
+      [3] family_val            (1.0 if probe_family present, else 0.0)
+      [4] paired                (1.0 if paired_probe_id present, else 0.0)
+      [5] invariant             (1.0 if expected_invariant present, else 0.0)
+    """
+    by_solver: dict[str, list[dict]] = {}
+    for row in obs_rows:
+        sid = str(row["solver_id"])
+        by_solver.setdefault(sid, []).append(row)
+
+    out: dict[str, list[float]] = {}
+    for sid, rows in by_solver.items():
+        n = len(rows)
+        if n == 0:
+            out[sid] = [0.0] * 6
+            continue
+
+        pf_rate = sum(1.0 if r.get("pass_fail") else 0.0 for r in rows) / n
+        grid_max = max(
+            (len(r.get("probe", {}).get("board", [])) * len(r.get("probe", {}).get("board", [[]])[0]) if r.get("probe", {}).get("board") else 0 for r in rows),
+            default=0,
+        )
+        grid_norm = float(grid_max) / 100.0  # arbitrary normalization
+        grid_norm = min(grid_norm, 1.0)
+
+        axis_val = 1.0 if any(
+            (r.get("fingerprint_context", {}) or {}).get("axis") for r in rows
+        ) else 0.0
+        family_val = 1.0 if any(
+            (r.get("fingerprint_context", {}) or {}).get("probe_family") for r in rows
+        ) else 0.0
+        paired = 1.0 if any(
+            (r.get("fingerprint_context", {}) or {}).get("paired_probe_id") for r in rows
+        ) else 0.0
+        invariant = 1.0 if any(
+            (r.get("fingerprint_context", {}) or {}).get("expected_invariant") for r in rows
+        ) else 0.0
+
+        out[sid] = [
+            pf_rate,
+            grid_norm,
+            axis_val,
+            family_val,
+            paired,
+            invariant,
+        ]
+
+    return out
+
+
 # ---------------------------------------------------------------------------
 # ProblemClassConfig + factory
 # ---------------------------------------------------------------------------
@@ -701,5 +814,16 @@ def get_problem_class_config(problem_id: str) -> ProblemClassConfig:
             estimator_policies=dict(LC3946_ESTIMATOR_POLICIES),
             fingerprint_axes=list(LC3946_FINGERPRINT_AXES),
             raw_tensor_encoder=lc3946_raw_tensor_encoder,
+        )
+    if problem_id == "lc79":
+        return ProblemClassConfig(
+            problem_id="lc79",
+            oracle=_lc79_oracle_factory(),
+            probe_to_solver_input=lc79_probe_to_solver_input,
+            solver_entry_point=LC79_SOLVER_ENTRY_POINT,
+            estimator_names=list(LC79_ESTIMATOR_NAMES),
+            estimator_policies=dict(LC79_ESTIMATOR_POLICIES),
+            fingerprint_axes=list(LC79_FINGERPRINT_AXES),
+            raw_tensor_encoder=lc79_raw_tensor_encoder,
         )
     raise NotImplementedError(f"unknown problem_class: {problem_id!r}")
