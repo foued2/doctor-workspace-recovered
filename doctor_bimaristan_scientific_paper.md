@@ -13,17 +13,18 @@ This paper asks when a directional failure-family classifier (C_genuine) improve
 utility over a failure-count baseline (B1) on algorithmic solver populations. Four problem classes were
 evaluated under governed protocols with pre-declared solver populations and frozen evaluation procedures.
 Two measurement domains are present: an internal mutation measure (CSSE v2, n=500 per class) and an
-external corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG) determines which
-cross-domain comparisons are valid. On LC3946 (poset-based lattice), C_genuine achieves
+external corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG = GDC ∧ EVC)
+determines which cross-domain comparisons are valid, evaluated on generation provenance and interface
+compatibility before computing P(D). On LC3946 (poset-based lattice), C_genuine achieves
 decision_loss=0.0 versus B1's 1.0, strictly improving over all non-degenerate baselines, with the
 advantage surviving 10 of 11 perturbation conditions — but LC3946 is non-externalizable (synthetic
-evaluator geometry). On LC322 (Coin Change), C_genuine shows λ-dependent superiority internally
-(gap=3.13 at λ=50) and is the only DCG-valid cross-domain bridge: external P(D)=0.053 (n=38)
-compared to CSSE v2 P(D)=0.019 (n=317). Two negative boundary cases constrain interpretation: on
-LC45 (Jump Game II), the classifier cannot differentiate from B1 due to informational equivalence
-of separating features, and on LC743 (Network Delay Time), all estimators converge to identical
-predictions internally while external support is insufficient (n=1, DCG.4 fails). The CSSE v2
-experiment reveals P(D) is problem-dependent (0.000–0.275), killing single-global-mechanism
+evaluator geometry, GDC-FAILING). On LC322 (Coin Change), C_genuine shows λ-dependent superiority
+internally (gap=3.13 at λ=50) and is the only DCG-valid external anchor: external P(D)=0.053 (n=38)
+compared to CSSE v2 internal P(D)=0.019 (n=317, GDC-FAILING). Two negative boundary cases constrain
+interpretation: on LC45 (Jump Game II), the classifier cannot differentiate from B1 due to
+informational equivalence of separating features, and on LC743 (Network Delay Time), all estimators
+converge to identical predictions internally while external support is insufficient (n=1, EVC-FAILING).
+The CSSE v2 experiment reveals P(D) is problem-dependent (0.000–0.275), killing single-global-mechanism
 interpretation. The contribution is a conditional empirical finding with one valid external anchor.
 No universality claim is made.
 
@@ -76,20 +77,22 @@ solver-population structures, and the results determine the conditions under whi
 
 The paper presents four problem classes evaluated under comparable frozen protocols, with two
 measurement domains (internal mutation measure and external corpus measure). The Domain Completeness
-Gate (DCG) determines which cross-domain comparisons are valid.
+Gate (DCG = GDC ∧ EVC) determines which cross-domain comparisons are valid, evaluated on generation
+provenance and interface compatibility before computing P(D).
 
 ### Primary Evidence — LC3946 (Positive, Non-Externalizable)
 
 LC3946 is the flagship internal result: a balanced 15/15 population where C_genuine achieves
 decision_loss=0.0 versus B1's 1.0, with 10/11 perturbation survival. However, LC3946 is a synthetic
-evaluator geometry — it cannot be embedded into an external solver space. DCG: INVALID for
-cross-domain comparison.
+evaluator geometry — it cannot be embedded into an external solver space. DCG: GDC-FAILING (shared
+lineage with CSSE v2 probes).
 
 ### Supporting Evidence — LC322 (Conditional Positive, One Valid External Anchor)
 
 LC322 shows λ-dependent superiority internally (gap=3.13 at λ=50) and is the only DCG-valid
-cross-domain bridge: external P(D)=0.053 (n=38) compared to CSSE v2 P(D)=0.019 (n=317). The
-external sample is underpowered but confirms the phenomenon exists under independent solver lineage.
+external anchor: external P(D)=0.053 (n=38) compared to CSSE v2 internal P(D)=0.019 (n=317,
+GDC-FAILING). The external sample is underpowered but confirms the phenomenon exists under
+independent solver lineage.
 
 ### Negative Boundary Conditions — LC45, LC743, Midweather
 
@@ -97,7 +100,7 @@ These cases demonstrate where the mechanism fails:
 
 - LC45: the only separating features are informationally identical to B1 (encoder artifact)
 - LC743: all estimators converge to identical predictions (no behavioral diversity); external
-  support insufficient (n=1, DCG.4 fails)
+  support insufficient (n=1, EVC-FAILING)
 - Midweather retrospective: contaminated audit, no clean superiority claim
 
 These are not failures of the project. They are boundary conditions that define when and why the
@@ -298,61 +301,64 @@ training or prediction.
 ## Domain Completeness Gate (DCG)
 
 Cross-domain comparison of P(D) is valid only when the solver source satisfies the Domain Completeness
-Gate. A solver source S for problem P is comparable iff all four conditions hold.
+Gate. DCG is defined on generation provenance and interface compatibility, not on observed outcomes.
+It is evaluated before computing P(D), not after.
 
-### DCG.1 — Canonical Interface Mappability
+DCG decomposes into two independent predicates:
 
-There exists a lossless transformation φ_S : S → S_canon such that all solvers execute under a
-single evaluation signature. No semantic reinterpretation is permitted; only syntactic normalization
-is allowed. If adaptation requires behavioral guessing (e.g., reconstructing missing arguments),
-DCG fails.
+    DCG(S,P) = GDC(S,P) ∧ EVC(S,P)
 
-### DCG.2 — Unified Evaluator Constraint
+### GDC — Generation Domain Constraint
 
-A single evaluator E_P is applied across all sources:
+GDC tests whether solver source S is independent of the mutation lineage used to generate CSSE v2
+solvers. A source S for problem P satisfies GDC iff:
 
-    E_P^{CSSE} ≡ E_P^{EXT}
+1. **Provenance independence.** S was not generated by the CSSE mutation engine or any system
+   sharing its lineage. Human-written solutions, platform-native submissions, and independently
+   generated blind packs satisfy this. CSSE v2 solvers do not.
 
-If evaluator behavior depends on source origin (even implicitly), comparison is invalid.
+2. **No shared generator artifacts.** S does not inherit structure from the CSSE probe index,
+   failure taxonomy, or mutation operators. If S was generated under knowledge of the probe
+   families or failure categories used by B1/C_genuine, GDC fails.
 
-### DCG.3 — Endogenous Failure Requirement
+### EVC — Evaluation Validity Condition
 
-Failures must be generated by evaluation:
+EVC tests whether source S can be evaluated under a unified protocol. A source S for problem P
+satisfies EVC iff:
 
-    F(x) := 1[E_P(x) ≠ y_true]
+1. **Interface closure.** All solvers in S can be mapped into canonical form via syntactic
+   normalization only (no behavioral guessing). If adaptation requires reconstructing missing
+   arguments or guessing intent, EVC fails.
 
-and must not be dataset-encoded labels (e.g., `is_pass`). If ground-truth failure is pre-attached,
-the source is descriptive-only, not generative.
+2. **Unified evaluator.** A single evaluator E_P is applied across all sources:
 
-### DCG.4 — Non-Degenerate Support
+       E_P^{CSSE} ≡ E_P^{EXT}
 
-Define failure variance:
+   If evaluator behavior depends on source origin, EVC fails.
 
-    Var(F_S) > 0
+3. **Endogenous failure.** Failures are generated by evaluation:
 
-If all samples collapse into a single failure regime or no failure regime, then P(D) exists but
-is not comparable across sources.
+       F(x) := 1[E_P(x) ≠ y_true]
 
-### DCG Predicate
+   and are not dataset-encoded labels (e.g., `is_pass`). If ground-truth failure is pre-attached,
+   the source is descriptive-only.
 
-A source S is comparable iff:
-
-    DCG(S,P) = 1 ⟺ (1) ∧ (2) ∧ (3) ∧ (4)
-
-Cross-domain comparison is valid iff:
-
-    DCG(S_1,P) ∧ DCG(S_2,P)
+4. **Sufficient sample.** The source contains enough solvers to estimate P(D) with non-degenerate
+   variance. A minimum of n ≥ 30 valid solvers is required. Below this threshold, P(D) exists
+   but is not estimable with useful precision.
 
 ### DCG Classification
 
 Each (source, problem) pair is assigned one of:
 
-- **VALID** — cross-domain P(D) comparison allowed
-- **MEASURABLE BUT NON-COMPARABLE** — internal statistics only
-- **INVALID** — no statistical interpretation permitted
+- **VALID** — GDC and EVC both hold; cross-domain P(D) comparison allowed
+- **GDC-FAILING** — source shares mutation lineage with CSSE; internal measurement only
+- **EVC-FAILING** — evaluation constraints not met (insufficient sample, interface instability)
+- **INVALID** — both GDC and EVC fail
 
-DCG prevents false equivalence between distributions that live in different measurement spaces.
-It does not improve the system; it prevents category errors in interpretation.
+DCG is evaluated on generation provenance and interface properties, not on P(D), CE rate, or
+any observed outcome statistic. It prevents false equivalence between distributional spaces
+that are not comparable.
 
 ## S_eval Provenance
 
@@ -748,9 +754,10 @@ applied 1–3× per solver. Each solver is evaluated against B1 and C_genuine on
 
 ### DCG Classification
 
-All four CSSE v2 sources satisfy DCG.1–DCG.4: canonical interface is trivial (all solvers are
-generated with the correct `solve()` signature), evaluator is unified, failures are endogenous,
-and failure variance is positive for LC322 and LC743. DCG = VALID for all four.
+All four CSSE v2 sources are GDC-FAILING: they share mutation lineage with the CSSE v2 generator.
+They satisfy EVC (canonical interface, unified evaluator, endogenous failures, sufficient sample)
+but fail GDC. CSSE v2 is valid for internal measurement (P(D | mutation distribution)) but not
+for cross-domain comparison.
 
 ### Key Observations
 
@@ -765,13 +772,16 @@ An external solver corpus was assembled from human-written solutions (Stack Over
 human_solvers/) and ChatGPT-generated solutions. Solvers are mapped into canonical form via an
 adapter layer (syntactic normalization only, no behavioral guessing).
 
-### DCG Classification
+### DCG Classification (Pre-Result)
 
-| (Source, Problem) | DCG.1 | DCG.2 | DCG.3 | DCG.4 | Classification |
-|-------------------|-------|-------|-------|-------|----------------|
-| External, LC322   | pass  | pass  | pass  | pass  | VALID |
-| External, LC79    | pass  | pass  | pass  | fail (n=1) | MEASURABLE BUT NON-COMPARABLE |
-| External, LC743   | pass  | pass  | pass  | fail (n=1) | MEASURABLE BUT NON-COMPARABLE |
+| (Source, Problem) | GDC | EVC | DCG | Notes |
+|-------------------|-----|-----|-----|-------|
+| External, LC322   | pass | pass | VALID | independent provenance, n=38 ≥ 30 |
+| External, LC79    | pass | EVC-FAILING | EVC-FAILING | n=1 < 30 |
+| External, LC743   | pass | EVC-FAILING | EVC-FAILING | n=1 < 30 |
+
+GDC passes for all external sources: they are independent of CSSE v2 mutation lineage. EVC fails
+for LC79 and LC743 due to insufficient sample size (n=1 < 30).
 
 ### LC322 External Result (Valid Cross-Domain Comparison)
 
@@ -797,28 +807,30 @@ P(D | k) distribution:
 
 ### LC322 Cross-Domain Comparison
 
-The only valid DCG-bridged comparison:
+The only valid DCG comparison:
 
-| Source | P(D) | n | Failure variance |
-|--------|------|---|------------------|
-| CSSE v2 (internal) | 0.019 | 317 | positive |
-| External (human+GPT) | 0.053 | 38 | positive |
+| Source | P(D) | n | DCG |
+|--------|------|---|-----|
+| CSSE v2 (internal mutation) | 0.019 | 317 | GDC-FAILING |
+| External (human+GPT) | 0.053 | 38 | VALID |
 
-Both sources satisfy DCG for LC322. The comparison is valid. External P(D) is higher than
-CSSE v2 P(D), but the confidence intervals overlap (external CI not yet computed; CSSE v2
-CI: [0.006, 0.035]). The difference is not statistically identifiable at current sample sizes.
+CSSE v2 is GDC-FAILING (shared mutation lineage), so it is not a valid external comparator.
+The comparison is between External P(D) and the internal CSSE v2 P(D), with the caveat that
+CSSE v2 is an internal measure for contrast only. External P(D) is higher than CSSE v2 P(D).
+Both are low. The confidence intervals have not been formally compared (external CI not yet
+computed), but the point estimates are in the same order of magnitude.
 
 The two disagreements in the external corpus occur at k=2 and k=4 (low failure rates), where
 B1 rejects (obs_fails > 0) but C_genuine accepts (single-family failures). This is the same
 arithmetic mechanism observed in CSSE v2: at ObsF=1, B1=REJECT, C_genuine=ACCEPT by construction.
 
-### LC79/LC743 External Results (Non-Comparable)
+### LC79/LC743 External Results (EVC-Failing)
 
-LC79: 1 valid solver, P(D)=0.000. Insufficient support (n=1, Var(F)=0). DCG.4 fails.
+LC79: 1 valid solver, P(D)=0.000. EVC-FAILING (n=1 < 30).
 
-LC743: 1 valid solver, P(D)=0.000. Insufficient support (n=1, Var(F)=0). DCG.4 fails.
+LC743: 1 valid solver, P(D)=0.000. EVC-FAILING (n=1 < 30).
 
-These are labeled MEASURABLE BUT NON-COMPARABLE. No cross-domain P(D) inference is permitted.
+These are labeled EVC-FAILING. No cross-domain P(D) inference is permitted.
 
 ## Real Benchmark (hand-curated)
 
@@ -845,50 +857,61 @@ measure. The Domain Completeness Gate (DCG) determines which cross-domain compar
 | LC743   | NEGATIVE (gap=0) | not run             | N/A                     | 2 ACCEPT / 29 REJECT  |
 | LC45    | NEGATIVE         | N/A (feature audit) | N/A                     | 1 ACCEPT / 9 REJECT   |
 
-### DCG Classification Summary
+### DCG Classification Summary (Pre-Result Evaluation)
 
-| (Source, Problem) | DCG | P(D) | Notes |
-|-------------------|-----|------|-------|
-| CSSE v2, LC322    | VALID | 0.019 | n=317, CI=[0.006, 0.035] |
-| CSSE v2, LC3946   | VALID | 0.000 | n=161 |
-| CSSE v2, LC79     | VALID | 0.000 | n=219 |
-| CSSE v2, LC743    | VALID | 0.275 | n=240, CI=[0.221, 0.329] |
-| External, LC322   | VALID | 0.053 | n=38 |
-| External, LC79    | NON-COMPARABLE | 0.000 | n=1, DCG.4 fails |
-| External, LC743   | NON-COMPARABLE | 0.000 | n=1, DCG.4 fails |
-| CSSE v2, LC3946   | INVALID | — | non-externalizable domain |
+DCG is evaluated on generation provenance and interface properties, before computing P(D).
+
+| (Source, Problem) | GDC | EVC | DCG | Notes |
+|-------------------|-----|-----|-----|-------|
+| CSSE v2, LC322    | GDC-FAILING | pass | GDC-FAILING | shared mutation lineage |
+| CSSE v2, LC3946   | GDC-FAILING | pass | GDC-FAILING | shared mutation lineage |
+| CSSE v2, LC79     | GDC-FAILING | pass | GDC-FAILING | shared mutation lineage |
+| CSSE v2, LC743    | GDC-FAILING | pass | GDC-FAILING | shared mutation lineage |
+| External, LC322   | pass | pass | VALID | independent provenance, n=38 ≥ 30 |
+| External, LC79    | pass | EVC-FAILING | EVC-FAILING | n=1 < 30 |
+| External, LC743   | pass | EVC-FAILING | EVC-FAILING | n=1 < 30 |
+
+GDC-FAILING means the source shares mutation lineage with CSSE v2; it is valid for internal
+measurement but not for cross-domain comparison. EVC-FAILING means evaluation constraints are
+not met (insufficient sample). VALID means both GDC and EVC hold.
 
 ### The Only Valid Cross-Domain Comparison
 
-LC322 is the only (source, problem) pair where both CSSE v2 and External satisfy DCG. The
-comparison:
+LC322 is the only (source, problem) pair where External satisfies DCG. CSSE v2 is GDC-FAILING
+(shared mutation lineage), so the cross-domain comparison is between External and the CSSE v2
+internal measure — but CSSE v2 is not a valid external comparator. The comparison is therefore
+between External P(D) and the internal CSSE v2 P(D), with the caveat that CSSE v2 is
+GDC-FAILING.
 
-| Source | P(D) | n |
-|--------|------|---|
-| CSSE v2 (internal mutation) | 0.019 | 317 |
-| External (human+GPT) | 0.053 | 38 |
+| Source | P(D) | n | DCG |
+|--------|------|---|-----|
+| CSSE v2 (internal mutation) | 0.019 | 317 | GDC-FAILING |
+| External (human+GPT) | 0.053 | 38 | VALID |
 
 External P(D) is higher than CSSE v2 P(D). Both are low. The confidence intervals have not
 been formally compared (external CI not yet computed), but the point estimates are in the same
-order of magnitude. This is the only legally comparable cross-domain statement in the system.
+order of magnitude. The comparison is informative but CSSE v2 is not a DCG-valid external
+anchor — it is an internal measure for contrast only.
 
 ### Interpretation
 
 LC3946 provides the strongest positive case: the balanced 15/15 population split avoids the floor
 effect that limits LC322, and C_genuine achieves perfect decision_loss (0.0) with 10/11
 perturbation survival. However, LC3946 is non-externalizable — it is a synthetic evaluator
-geometry, not a real-world domain. Its P(D) cannot be compared to external measures.
+geometry, not a real-world domain. Its P(D) is GDC-FAILING (shared lineage with CSSE v2
+probes) and cannot be compared to external measures.
 
 LC322 provides conditional supporting evidence internally (λ-dependent superiority) and is the
-sole valid cross-domain bridge. The external P(D)=0.053 is comparable to the CSSE v2
-P(D)=0.019, confirming that the phenomenon exists under independent solver lineage — but the
-sample is small (n=38) and the comparison is underpowered.
+sole DCG-valid external anchor. External P(D)=0.053 (n=38) is comparable to the CSSE v2
+internal P(D)=0.019 (n=317), confirming that the phenomenon exists under independent solver
+lineage — but the sample is small and the comparison is underpowered. CSSE v2 is GDC-FAILING
+(shared mutation lineage), so it serves as an internal contrast, not a valid external comparator.
 
 LC45 and LC743 are negative boundary conditions. LC45 fails because the separating features are
 informationally equivalent to B1 (encoder artifact). LC743 fails internally (gap=0) and has
-insufficient external support (n=1). These failures constrain interpretation: the C_genuine/B1
-divergence appears when the solver population has failures that split across multiple probe
-families under C_genuine's rule but are treated uniformly by B1.
+insufficient external support (n=1, EVC-FAILING). These failures constrain interpretation: the
+C_genuine/B1 divergence appears when the solver population has failures that split across multiple
+probe families under C_genuine's rule but are treated uniformly by B1.
 
 The cross-problem pattern under DCG is: C_genuine improves over B1 when (1) the solver population
 has balanced failure-class diversity and (2) the probe index contains families where single-family
@@ -914,16 +937,17 @@ sequence as methodological narrative, not an accumulating proof.
 The LC3946 result demonstrates that a directional failure-family classifier can strictly improve over
 a failure-count baseline under specific frozen conditions. The advantage is real (decision_loss=0.0
 vs 1.0) and partially robust (10/11 perturbation survival). However, LC3946 is non-externalizable:
-it is a synthetic evaluator geometry, not a real-world domain. Its P(D) is VALID under DCG for
-internal measurement but INVALID for cross-domain comparison.
+it is a synthetic evaluator geometry, not a real-world domain. Its P(D) is GDC-FAILING (shared
+lineage with CSSE v2 probes) and cannot be compared to external measures.
 
 The LC322 result demonstrates that the advantage is conditional on the cost regime. At equal costs,
 the classifier ties the baseline. At asymmetric costs favoring wrong-reject avoidance, the classifier
-becomes superior. LC322 is the only problem class where both internal (CSSE v2) and external
-(corpus) measures satisfy DCG. The cross-domain comparison is valid but underpowered (external n=38).
+becomes superior. LC322 is the only problem class where External satisfies DCG. The cross-domain
+comparison is valid but underpowered (external n=38). CSSE v2 is GDC-FAILING, so it serves as an
+internal contrast, not a valid external comparator.
 
 The LC45 and LC743 results demonstrate boundary conditions where the mechanism fails. LC743
-additionally has insufficient external support (n=1, DCG.4 fails), so no cross-domain inference is
+additionally has insufficient external support (n=1, EVC-FAILING), so no cross-domain inference is
 permitted. These are not failures of the project; they are boundary conditions that define when and
 why the mechanism works.
 
@@ -1022,10 +1046,13 @@ does not
 include third-party benchmark validation, EvalPlus execution, LiveCodeBench execution, an independent
 metamorphic-testing baseline, independent oracle comparison, or non-repository replication.
 
-The Domain Completeness Gate (DCG) formalizes when cross-domain P(D) comparison is valid. Of all
-(source, problem) pairs tested, only LC322 satisfies DCG for both internal (CSSE v2) and external
-(corpus) measures. All other cross-domain comparisons are blocked by DCG: LC3946 is
-non-externalizable, LC79 and LC743 have insufficient external support (n=1). The single valid
+The Domain Completeness Gate (DCG) formalizes when cross-domain P(D) comparison is valid. DCG is
+defined on generation provenance and interface compatibility (GDC ∧ EVC), not on observed outcomes.
+Of all (source, problem) pairs tested, only LC322 External satisfies DCG. CSSE v2 is GDC-FAILING
+(shared mutation lineage), so it serves as an internal contrast. LC3946 is non-externalizable. LC79
+and LC743 are EVC-FAILING (insufficient sample, n=1). The single valid external anchor (LC322,
+external P(D)=0.053) is underpowered but confirms the phenomenon exists under independent solver
+lineage.
 external anchor (LC322, external P(D)=0.053) is underpowered but confirms the phenomenon exists
 under independent solver lineage.
 
@@ -1165,12 +1192,14 @@ conditional estimator behavior under the tested populations and λ values, nothi
 
 ### L4. DCG Is a Formalization, Not a Discovery
 
-The Domain Completeness Gate (DCG) formalizes an already-known sampling limitation: the external
-corpus is sparse (n=38 for LC322, n=1 for LC79/LC743) and structurally biased (interface-filtered,
-source-constrained). DCG does not fix this limitation; it prevents false equivalence between
-distributional spaces that are not comparable. The single valid external anchor (LC322) is
-underpowered. A larger external corpus would strengthen the external measure but is outside the
-scope of this paper.
+The Domain Completeness Gate (DCG = GDC ∧ EVC) formalizes an already-known sampling limitation:
+the external corpus is sparse (n=38 for LC322, n=1 for LC79/LC743) and structurally biased
+(interface-filtered, source-constrained). DCG does not fix this limitation; it prevents false
+equivalence between distributional spaces that are not comparable. DCG is evaluated on generation
+provenance and interface properties, not on observed outcomes, so it cannot be used post-hoc to
+classify results as valid or invalid. The single valid external anchor (LC322) is underpowered.
+A larger external corpus would strengthen the external measure but is outside the scope of this
+paper.
 
 # Conclusion
 
@@ -1178,25 +1207,26 @@ This paper asked when a directional failure-family classifier (C_genuine) improv
 decision utility over a failure-count baseline (B1). Four problem classes were tested under governed
 protocols with pre-declared solver populations and frozen evaluation procedures. Two measurement
 domains were present: an internal mutation measure (CSSE v2, n=500 per class) and an external
-corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG) determines which
-cross-domain comparisons are valid.
+corpus measure (human+GPT solutions). The Domain Completeness Gate (DCG = GDC ∧ EVC) determines
+which cross-domain comparisons are valid, evaluated on generation provenance and interface
+compatibility before computing P(D).
 
 The primary result is positive but non-externalizable. On LC3946 (poset-based lattice), C_genuine
 achieves decision_loss=0.0 versus B1's 1.0, strictly improving over all non-degenerate baselines.
 The advantage survives 10 of 11 perturbation conditions. However, LC3946 is a synthetic evaluator
-geometry — it cannot be embedded into an external solver space. Its P(D) is VALID internally but
-INVALID for cross-domain comparison.
+geometry — it cannot be embedded into an external solver space. Its P(D) is GDC-FAILING (shared
+lineage with CSSE v2 probes) and cannot be compared to external measures.
 
 The supporting result has one valid external anchor. On LC322 (Coin Change), C_genuine shows
 λ-dependent superiority internally (gap=3.13 at λ=50). Externally, P(D)=0.053 (n=38) compared to
-CSSE v2 P(D)=0.019 (n=317). This is the only DCG-valid cross-domain comparison in the system.
+CSSE v2 internal P(D)=0.019 (n=317, GDC-FAILING). This is the only DCG-valid external anchor.
 The external sample is underpowered but the point estimate confirms the phenomenon exists under
 independent solver lineage.
 
 Two negative boundary cases constrain interpretation. On LC45 (Jump Game II), the only separating
 features are informationally equivalent to B1 (encoder artifact). On LC743 (Network Delay Time),
 all estimators converge to identical predictions internally, and external support is insufficient
-(n=1, DCG.4 fails). No cross-domain inference is permitted for LC743.
+(n=1, EVC-FAILING). No cross-domain inference is permitted for LC743.
 
 The CSSE v2 experiment reveals that P(D) is problem-dependent: 0.019 (LC322), 0.000 (LC3946,
 LC79), 0.275 (LC743). Disagreements are threshold-localized at single k-values. This kills any
