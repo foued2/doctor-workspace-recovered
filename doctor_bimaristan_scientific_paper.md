@@ -298,8 +298,8 @@ training or prediction.
 
 DCG is a comparability relation over the space of experimental domains. It determines whether
 P(D) values from different (source, problem) pairs are admissible for joint inference. DCG is
-external to the quotient chain (R, B) that produces solver classes—it is a constraint on
-cross-comparison of results, not on their generation. It is evaluated after computing P(D).
+a non-generative relational constraint defined over quotient outputs (S/B × S/B)—it constrains
+cross-comparison of results, not their generation. It is evaluated after computing P(D).
 It does not affect which solvers enter computation or which P(D) values are produced.
 
 Formally, DCG is a binary relation on pairs of behavioral classes:
@@ -315,7 +315,7 @@ where GDC is observable (provable), EVC is observable (empirical), and R-coverag
 non-observable assumption about sampling completeness (unidentifiable from observed sample alone).
 
 DCG partitions behavioral classes into equivalence classes: results within the same class can
-be compared; results across classes cannot. This is an external constraint on the result space,
+be compared; results across classes cannot. This is a non-generative relational constraint on the result space,
 not part of the internal quotient structure (R, B) that produces solver classes.
 
 ### GDC — Generation Domain Constraint
@@ -474,7 +474,7 @@ not imply structural absence in B-space). R-coverage is partially evidenced for 
 (mixed R-classes, sufficient B-sample after filtering, but not provably invariant).
 
 **Consequence:** EVC is defined but not yet statistically transportable across solver ecosystems.
-DCG is an interpretation constraint, not a hard gate.
+DCG is a non-generative relational constraint over quotient outputs, not a hard gate.
 
 ### R as Sampling Operator
 
