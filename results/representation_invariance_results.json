@@ -1,0 +1,86 @@
+[
+  {
+    "problem": "lc322",
+    "train_test_split": {
+      "train_size": 24,
+      "test_size": 6
+    },
+    "results": {
+      "R1": {
+        "loss": 0.5068200364970028,
+        "delta_gain": 0.00244172891028982,
+        "mutual_information": 0.0010940142784171421,
+        "n_families": 4
+      },
+      "R2": {
+        "loss": 0.5079666785792761,
+        "delta_gain": 0.0012950868280164896,
+        "mutual_information": 0.0008033779941678714,
+        "n_families": 4
+      }
+    },
+    "delta_R1_R2": 0.0011466420822733303,
+    "bootstrap_ci": {
+      "point_estimate": 0.0011466420822733303,
+      "ci_lo": -0.008694605686394796,
+      "ci_hi": 0.013763675070493808
+    },
+    "classification": "representation-invariant null"
+  },
+  {
+    "problem": "lc3946",
+    "train_test_split": {
+      "train_size": 24,
+      "test_size": 6
+    },
+    "results": {
+      "R1": {
+        "loss": 0.7238580700122187,
+        "delta_gain": -0.014521812143744484,
+        "mutual_information": 0.012962299290398268,
+        "n_families": 4
+      },
+      "R2": {
+        "loss": 0.7462444062297856,
+        "delta_gain": -0.0369081483613114,
+        "mutual_information": 0.00886934271958681,
+        "n_families": 4
+      }
+    },
+    "delta_R1_R2": 0.022386336217566916,
+    "bootstrap_ci": {
+      "point_estimate": 0.022386336217566916,
+      "ci_lo": 0.0005496359088267289,
+      "ci_hi": 0.04452217386635504
+    },
+    "classification": "representation-sensitive signal exists"
+  },
+  {
+    "problem": "lc45",
+    "train_test_split": {
+      "train_size": 8,
+      "test_size": 2
+    },
+    "results": {
+      "R1": {
+        "loss": 0.6969324102168667,
+        "delta_gain": 0.039057699590306805,
+        "mutual_information": 0.008946684793701698,
+        "n_families": 4
+      },
+      "R2": {
+        "loss": 0.6889480888940781,
+        "delta_gain": 0.047042020913095395,
+        "mutual_information": 0.0033253452778263994,
+        "n_families": 4
+      }
+    },
+    "delta_R1_R2": -0.00798432132278859,
+    "bootstrap_ci": {
+      "point_estimate": -0.00798432132278859,
+      "ci_lo": -0.02207954968345649,
+      "ci_hi": 0.006110907037879421
+    },
+    "classification": "representation-invariant null"
+  }
+]

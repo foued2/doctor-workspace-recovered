@@ -1,0 +1,108 @@
+[
+  {
+    "problem": "lc3946",
+    "outcome_representation": "binary_failure_vector",
+    "frozen_phi": {
+      "distribution": {
+        "few": 8,
+        "medium": 21,
+        "many": 1
+      }
+    },
+    "structured_phi": {
+      "distribution": {
+        "cluster_3": 9,
+        "cluster_1": 12,
+        "cluster_0": 4,
+        "cluster_2": 5
+      }
+    },
+    "random_phi": {
+      "distribution": {
+        "random_3": 4,
+        "random_1": 10,
+        "random_2": 5,
+        "random_0": 11
+      }
+    },
+    "train_test_split": {
+      "train_size": 24,
+      "test_size": 6
+    },
+    "prediction_losses": {
+      "b0": 0.7093362578684742,
+      "bphi_frozen": 0.7741808013238298,
+      "bphi_structured": 0.7677336629526171,
+      "brand": 0.7696521633533598
+    },
+    "delta_gains": {
+      "frozen": -0.06484454345535562,
+      "structured": -0.05839740508414293,
+      "random": -0.060315905484885635
+    },
+    "mutual_information": {
+      "frozen": 0.0036097060064337674,
+      "structured": 0.0015580149200343054,
+      "random": 0.0011147657750934232
+    },
+    "bootstrap_ci": {
+      "point_estimate": -0.06484454345535562,
+      "ci_lo": -0.12284453728568834,
+      "ci_hi": -0.018199050050413224
+    },
+    "classification": "phi reduces predictive power"
+  },
+  {
+    "problem": "lc322",
+    "outcome_representation": "binary_failure_vector",
+    "frozen_phi": {
+      "distribution": {
+        "medium": 4,
+        "small": 25,
+        "large": 1
+      }
+    },
+    "structured_phi": {
+      "distribution": {
+        "cluster_3": 1,
+        "cluster_1": 5,
+        "cluster_0": 22,
+        "cluster_2": 2
+      }
+    },
+    "random_phi": {
+      "distribution": {
+        "random_3": 4,
+        "random_1": 10,
+        "random_2": 5,
+        "random_0": 11
+      }
+    },
+    "train_test_split": {
+      "train_size": 24,
+      "test_size": 6
+    },
+    "prediction_losses": {
+      "b0": 0.5092617654072926,
+      "bphi_frozen": 0.4894653761195898,
+      "bphi_structured": 0.49508979553539256,
+      "brand": 0.5049464823744841
+    },
+    "delta_gains": {
+      "frozen": 0.01979638928770283,
+      "structured": 0.014171969871900059,
+      "random": 0.004315283032808481
+    },
+    "mutual_information": {
+      "frozen": 0.0015561650456084016,
+      "structured": 0.0017875061216978006,
+      "random": 0.0003584642118349933
+    },
+    "bootstrap_ci": {
+      "point_estimate": 0.01979638928770283,
+      "ci_lo": 0.004181950138117507,
+      "ci_hi": 0.036562535933658324
+    },
+    "classification": "phi adds predictive signal"
+  }
+]

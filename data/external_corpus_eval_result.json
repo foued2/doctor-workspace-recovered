@@ -1,0 +1,737 @@
+[
+  {
+    "problem_class": "LC322",
+    "n_total": 38,
+    "n_valid": 13,
+    "n_ce": 25,
+    "n_disagree": 0,
+    "p_hat": 0.0,
+    "results": [
+      {
+        "sid": "ChatGPT-CodeGenAnalysis",
+        "source": "ChatGPT-CodeGenAnalysis",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "pass"
+      },
+      {
+        "sid": "human_solvers/lc_2d_dp.py",
+        "source": "human_solvers/lc_2d_dp.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_2d_dp_v2.py",
+        "source": "human_solvers/lc_2d_dp_v2.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_bfs_v1.py",
+        "source": "human_solvers/lc_bfs_v1.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_bfs_v2.py",
+        "source": "human_solvers/lc_bfs_v2.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_bfs_v3.py",
+        "source": "human_solvers/lc_bfs_v3.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_bfs_v4.py",
+        "source": "human_solvers/lc_bfs_v4.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_bottomup_dp_v2.py",
+        "source": "human_solvers/lc_bottomup_dp_v2.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_bottomup_dp_v3.py",
+        "source": "human_solvers/lc_bottomup_dp_v3.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_bottomup_dp_v4.py",
+        "source": "human_solvers/lc_bottomup_dp_v4.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_bottomup_dp_v5.py",
+        "source": "human_solvers/lc_bottomup_dp_v5.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_greedy_gcd.py",
+        "source": "human_solvers/lc_greedy_gcd.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_leetcode_bottomup_dp.py",
+        "source": "human_solvers/lc_leetcode_bottomup_dp.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_python-4-solutions-top-",
+        "source": "human_solvers/lc_python-4-solutions-top-down-dp-bottom-up-56n2.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_python-4-solutions-top-",
+        "source": "human_solvers/lc_python-4-solutions-top-down-dp-bottom-up.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_python-beat-100-optimal",
+        "source": "human_solvers/lc_python-beat-100-optimal-solution-100-eff-509j.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_python-beat-100-optimal",
+        "source": "human_solvers/lc_python-beat-100-optimal-solution-100-eff.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_recursive_no_memo.py",
+        "source": "human_solvers/lc_recursive_no_memo.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_recursive_with_memo.py",
+        "source": "human_solvers/lc_recursive_with_memo.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_video-keep-minimum-numb",
+        "source": "human_solvers/lc_video-keep-minimum-number-of-coins-to-ma-b5ft.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_video-keep-minimum-numb",
+        "source": "human_solvers/lc_video-keep-minimum-number-of-coins-to-ma.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_video-visualization-of-",
+        "source": "human_solvers/lc_video-visualization-of-bottom-up-dynamic-i47n.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/lc_video-visualization-of-",
+        "source": "human_solvers/lc_video-visualization-of-bottom-up-dynamic.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/so_41479112_1.py",
+        "source": "human_solvers/so_41479112_1.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/so_41479112_1_wrapped.py",
+        "source": "human_solvers/so_41479112_1_wrapped.py",
+        "obs_fails": 4,
+        "family_fails": {
+          "non_canonical_coin_order": 1,
+          "greedy_dp_threshold": 3
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/so_58925669_1.py",
+        "source": "human_solvers/so_58925669_1.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "large_amount_stress": 30,
+          "reachability_counterfactual": 30,
+          "greedy_dp_threshold": 30,
+          "memo_cache_aliasing": 30,
+          "forward_dp_overwrite": 30,
+          "non_canonical_coin_order": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/so_58925669_1_wrapped.py",
+        "source": "human_solvers/so_58925669_1_wrapped.py",
+        "obs_fails": 3,
+        "family_fails": {
+          "large_amount_stress": 1,
+          "memo_cache_aliasing": 2
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/so_sources\\correct.py",
+        "source": "human_solvers/so_sources\\correct.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "unknown"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_10_equals",
+        "source": "human_solvers/so_sources\\wrong_10_equals_only.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_1_off_by_",
+        "source": "human_solvers/so_sources\\wrong_1_off_by_one.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_2_wrong_i",
+        "source": "human_solvers/so_sources\\wrong_2_wrong_init.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_3_missing",
+        "source": "human_solvers/so_sources\\wrong_3_missing_return_check.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_4_wrong_l",
+        "source": "human_solvers/so_sources\\wrong_4_wrong_loop_start.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_5_wrong_i",
+        "source": "human_solvers/so_sources\\wrong_5_wrong_initial_value.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_6_max_ins",
+        "source": "human_solvers/so_sources\\wrong_6_max_instead_of_min.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_7_only_fi",
+        "source": "human_solvers/so_sources\\wrong_7_only_first_coin.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_8_wrong_i",
+        "source": "human_solvers/so_sources\\wrong_8_wrong_index.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      },
+      {
+        "sid": "human_solvers/so_sources\\wrong_9_edge_ca",
+        "source": "human_solvers/so_sources\\wrong_9_edge_case.py",
+        "obs_fails": 30,
+        "family_fails": {
+          "reachability_counterfactual": 5,
+          "non_canonical_coin_order": 5,
+          "large_amount_stress": 5,
+          "greedy_dp_threshold": 5,
+          "forward_dp_overwrite": 5,
+          "memo_cache_aliasing": 5
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": false,
+        "known_outcome": "fail"
+      }
+    ]
+  },
+  {
+    "problem_class": "LC79",
+    "n_total": 1,
+    "n_valid": 0,
+    "n_ce": 1,
+    "n_disagree": 0,
+    "p_hat": 0,
+    "results": [
+      {
+        "sid": "ChatGPT-CodeGenAnalysis",
+        "source": "ChatGPT-CodeGenAnalysis",
+        "obs_fails": 30,
+        "family_fails": {
+          "unknown": 30
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "pass"
+      }
+    ]
+  },
+  {
+    "problem_class": "LC743",
+    "n_total": 1,
+    "n_valid": 0,
+    "n_ce": 1,
+    "n_disagree": 0,
+    "p_hat": 0,
+    "results": [
+      {
+        "sid": "ChatGPT-CodeGenAnalysis",
+        "source": "ChatGPT-CodeGenAnalysis",
+        "obs_fails": 24,
+        "family_fails": {
+          "F4": 24,
+          "F2": 24,
+          "F3": 24,
+          "F1": 24
+        },
+        "b1": "REJECT",
+        "c_gen": "REJECT",
+        "disagree": 0,
+        "compile_error": true,
+        "known_outcome": "pass"
+      }
+    ]
+  }
+]

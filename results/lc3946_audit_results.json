@@ -1,0 +1,247 @@
+{
+  "contributions": [
+    {
+      "probe_id": "p_lc3946_0003",
+      "contribution": 0.18111576692786058,
+      "loss_R1": 0.9600694358471807,
+      "loss_R2": 1.1411852027750413,
+      "loss_b0": 0.9830877585747855,
+      "family_R1": "cluster_2",
+      "family_R2": "cluster_1",
+      "features": {
+        "n_items": 4,
+        "budget": 10,
+        "total_weight": 15,
+        "avg_value": 6.5,
+        "budget_ratio": 0.6666666666666666
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0021",
+      "contribution": 0.12382051041072328,
+      "loss_R1": 0.8522982416930053,
+      "loss_R2": 0.9761187521037286,
+      "loss_b0": 0.8105540450897294,
+      "family_R1": "cluster_2",
+      "family_R2": "cluster_1",
+      "features": {
+        "n_items": 6,
+        "budget": 6,
+        "total_weight": 77,
+        "avg_value": 1.0,
+        "budget_ratio": 0.07792207792207792
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0017",
+      "contribution": 0.12382051041072306,
+      "loss_R1": 0.8522982416930053,
+      "loss_R2": 0.9761187521037283,
+      "loss_b0": 0.8675632284814613,
+      "family_R1": "cluster_2",
+      "family_R2": "cluster_1",
+      "features": {
+        "n_items": 5,
+        "budget": 8,
+        "total_weight": 62,
+        "avg_value": 3.0,
+        "budget_ratio": 0.12903225806451613
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0007",
+      "contribution": 0.10345653757285844,
+      "loss_R1": 0.8522982416930053,
+      "loss_R2": 0.9557547792658637,
+      "loss_b0": 0.8675632284814613,
+      "family_R1": "cluster_2",
+      "family_R2": "cluster_0",
+      "features": {
+        "n_items": 4,
+        "budget": 12,
+        "total_weight": 30,
+        "avg_value": 7.5,
+        "budget_ratio": 0.4
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0027",
+      "contribution": 0.035654430912296364,
+      "loss_R1": 0.45096552905710224,
+      "loss_R2": 0.4866199599693986,
+      "loss_b0": 0.4561150289702285,
+      "family_R1": "cluster_1",
+      "family_R2": "cluster_0",
+      "features": {
+        "n_items": 4,
+        "budget": 9,
+        "total_weight": 26,
+        "avg_value": 3.5,
+        "budget_ratio": 0.34615384615384615
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0011",
+      "contribution": 0.029953871032687762,
+      "loss_R1": 0.45096552905710224,
+      "loss_R2": 0.48091940008979,
+      "loss_b0": 0.45056120886630463,
+      "family_R1": "cluster_1",
+      "family_R2": "cluster_1",
+      "features": {
+        "n_items": 4,
+        "budget": 8,
+        "total_weight": 17,
+        "avg_value": 4.25,
+        "budget_ratio": 0.47058823529411764
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0013",
+      "contribution": 0.0003231576814651804,
+      "loss_R1": 0.45096552905710224,
+      "loss_R2": 0.4512886867385674,
+      "loss_b0": 0.4561150289702285,
+      "family_R1": "cluster_1",
+      "family_R2": "cluster_3",
+      "features": {
+        "n_items": 4,
+        "budget": 8,
+        "total_weight": 52,
+        "avg_value": 4.25,
+        "budget_ratio": 0.15384615384615385
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0019",
+      "contribution": 0.0003231576814651804,
+      "loss_R1": 0.45096552905710224,
+      "loss_R2": 0.4512886867385674,
+      "loss_b0": 0.565141983740321,
+      "family_R1": "cluster_1",
+      "family_R2": "cluster_3",
+      "features": {
+        "n_items": 5,
+        "budget": 8,
+        "total_weight": 31,
+        "avg_value": 3.0,
+        "budget_ratio": 0.25806451612903225
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0025",
+      "contribution": 0.0,
+      "loss_R1": 0.8110523014324155,
+      "loss_R2": 0.8110523014324155,
+      "loss_b0": 0.8369882167858357,
+      "family_R1": "cluster_0",
+      "family_R2": "cluster_1",
+      "features": {
+        "n_items": 4,
+        "budget": 5,
+        "total_weight": 18,
+        "avg_value": 2.5,
+        "budget_ratio": 0.2777777777777778
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0029",
+      "contribution": 0.0,
+      "loss_R1": 0.48091940008979,
+      "loss_R2": 0.48091940008979,
+      "loss_b0": 0.45056120886630463,
+      "family_R1": "cluster_0",
+      "family_R2": "cluster_1",
+      "features": {
+        "n_items": 4,
+        "budget": 6,
+        "total_weight": 72,
+        "avg_value": 2.5,
+        "budget_ratio": 0.08333333333333333
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0005",
+      "contribution": -0.019924166489732165,
+      "loss_R1": 0.8193006726567743,
+      "loss_R2": 0.7993765061670421,
+      "loss_b0": 0.8369882167858357,
+      "family_R1": "cluster_3",
+      "family_R2": "cluster_0",
+      "features": {
+        "n_items": 4,
+        "budget": 15,
+        "total_weight": 12,
+        "avg_value": 9.25,
+        "budget_ratio": 1.25
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0015",
+      "contribution": -0.026061007789646207,
+      "loss_R1": 0.47734969452821363,
+      "loss_R2": 0.4512886867385674,
+      "loss_b0": 0.4561150289702285,
+      "family_R1": "cluster_3",
+      "family_R2": "cluster_3",
+      "features": {
+        "n_items": 5,
+        "budget": 14,
+        "total_weight": 87,
+        "avg_value": 5.6,
+        "budget_ratio": 0.16091954022988506
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0023",
+      "contribution": -0.04911859842064947,
+      "loss_R1": 1.1612516507853348,
+      "loss_R2": 1.1121330523646853,
+      "loss_b0": 0.9830877585747855,
+      "family_R1": "cluster_3",
+      "family_R2": "cluster_0",
+      "features": {
+        "n_items": 4,
+        "budget": 14,
+        "total_weight": 23,
+        "avg_value": 7.25,
+        "budget_ratio": 0.6086956521739131
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0001",
+      "contribution": -0.059013603044278495,
+      "loss_R1": 0.8110523014324155,
+      "loss_R2": 0.752038698388137,
+      "loss_b0": 0.752038698388137,
+      "family_R1": "cluster_0",
+      "family_R2": "cluster_2",
+      "features": {
+        "n_items": 3,
+        "budget": 6,
+        "total_weight": 6,
+        "avg_value": 3.3333333333333335,
+        "budget_ratio": 1.0
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0009",
+      "contribution": -0.10855552362226728,
+      "loss_R1": 0.9761187521037286,
+      "loss_R2": 0.8675632284814613,
+      "loss_b0": 0.8675632284814613,
+      "family_R1": "cluster_0",
+      "family_R2": "cluster_2",
+      "features": {
+        "n_items": 4,
+        "budget": 5,
+        "total_weight": 30,
+        "avg_value": 1.0,
+        "budget_ratio": 0.16666666666666666
+      }
+    }
+  ],
+  "top_20_pct": 3,
+  "top_10_pct": 1,
+  "delta_filtered": 0.01946663208089583
+}

@@ -1,0 +1,408 @@
+{
+  "lc322": {
+    "constraint_tightness": {
+      "mean": 0.05330669330669331,
+      "std": 0.13590595427019653,
+      "per_probe": [
+        {
+          "probe_id": "p_fp_0001",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1,
+          "symmetry": 1.0
+        },
+        {
+          "probe_id": "p_fp_0003",
+          "constraint_tightness": 0.0,
+          "branching_factor": 2,
+          "symmetry": 0.5
+        },
+        {
+          "probe_id": "p_fp_0005",
+          "constraint_tightness": 0.0,
+          "branching_factor": 2,
+          "symmetry": 0.5
+        },
+        {
+          "probe_id": "p_fp_0007",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_fp_0009",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_fp_0011",
+          "constraint_tightness": 0.0,
+          "branching_factor": 2,
+          "symmetry": 0.5
+        },
+        {
+          "probe_id": "p_fp_0013",
+          "constraint_tightness": 0.0,
+          "branching_factor": 4,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_fp_0015",
+          "constraint_tightness": 0.3996003996003996,
+          "branching_factor": 4,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_fp_0017",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_fp_0019",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_fp_0021",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_fp_0023",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_fp_0025",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_fp_0027",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_fp_0029",
+          "constraint_tightness": 0.4,
+          "branching_factor": 3,
+          "symmetry": 0.3333333333333333
+        }
+      ]
+    },
+    "branching_factor": {
+      "mean": 2.8,
+      "std": 0.7483314773547886
+    },
+    "symmetry": {
+      "mean": 0.39999999999999986,
+      "std": 0.17795130420052183
+    }
+  },
+  "lc3946": {
+    "constraint_tightness": {
+      "mean": 0.36084656084656086,
+      "std": 0.3130689216703782,
+      "per_probe": [
+        {
+          "probe_id": "p_lc3946_0001",
+          "constraint_tightness": 0.5,
+          "branching_factor": 1.3333333333333333,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "p_lc3946_0003",
+          "constraint_tightness": 0.7,
+          "branching_factor": 1.6666666666666667,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_lc3946_0005",
+          "constraint_tightness": 0.8,
+          "branching_factor": 1.3333333333333333,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_lc3946_0007",
+          "constraint_tightness": 0.5,
+          "branching_factor": 2.0,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_lc3946_0009",
+          "constraint_tightness": 0.0,
+          "branching_factor": 4.0,
+          "symmetry": 1.0
+        },
+        {
+          "probe_id": "p_lc3946_0011",
+          "constraint_tightness": 0.5,
+          "branching_factor": 2.0,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_lc3946_0013",
+          "constraint_tightness": 0.5,
+          "branching_factor": 2.0,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_lc3946_0015",
+          "constraint_tightness": 0.5,
+          "branching_factor": 3.3333333333333335,
+          "symmetry": 0.2
+        },
+        {
+          "probe_id": "p_lc3946_0017",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3.6666666666666665,
+          "symmetry": 0.2
+        },
+        {
+          "probe_id": "p_lc3946_0019",
+          "constraint_tightness": 0.0,
+          "branching_factor": 3.6666666666666665,
+          "symmetry": 0.2
+        },
+        {
+          "probe_id": "p_lc3946_0021",
+          "constraint_tightness": 0.0,
+          "branching_factor": 6.0,
+          "symmetry": 1.0
+        },
+        {
+          "probe_id": "p_lc3946_0023",
+          "constraint_tightness": 0.8571428571428572,
+          "branching_factor": 1.6666666666666667,
+          "symmetry": 0.5
+        },
+        {
+          "probe_id": "p_lc3946_0025",
+          "constraint_tightness": 0.0,
+          "branching_factor": 2.0,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_lc3946_0027",
+          "constraint_tightness": 0.5555555555555556,
+          "branching_factor": 2.6666666666666665,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "p_lc3946_0029",
+          "constraint_tightness": 0.0,
+          "branching_factor": 2.6666666666666665,
+          "symmetry": 0.25
+        }
+      ]
+    },
+    "branching_factor": {
+      "mean": 2.6666666666666665,
+      "std": 1.2292725943057181
+    },
+    "symmetry": {
+      "mean": 0.3622222222222222,
+      "std": 0.25987651388522165
+    }
+  },
+  "lc45": {
+    "constraint_tightness": {
+      "mean": 0.05,
+      "std": 0.10000000000000002,
+      "per_probe": [
+        {
+          "probe_id": "p_lc45_0001",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.75,
+          "symmetry": 0.4
+        },
+        {
+          "probe_id": "p_lc45_0003",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.5,
+          "symmetry": 0.8
+        },
+        {
+          "probe_id": "p_lc45_0005",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 1.0
+        },
+        {
+          "probe_id": "p_lc45_0007",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.9,
+          "symmetry": 0.9090909090909091
+        },
+        {
+          "probe_id": "p_lc45_0009",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.6666666666666667,
+          "symmetry": 0.75
+        },
+        {
+          "probe_id": "p_lc45_0011",
+          "constraint_tightness": 0.25,
+          "branching_factor": 1.0,
+          "symmetry": 0.6
+        },
+        {
+          "probe_id": "p_lc45_0013",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.25,
+          "symmetry": 0.8
+        },
+        {
+          "probe_id": "p_lc45_0015",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.8
+        },
+        {
+          "probe_id": "p_lc45_0017",
+          "constraint_tightness": 0.25,
+          "branching_factor": 1.25,
+          "symmetry": 0.6
+        },
+        {
+          "probe_id": "p_lc45_0019",
+          "constraint_tightness": 0.25,
+          "branching_factor": 1.0,
+          "symmetry": 0.6
+        },
+        {
+          "probe_id": "p_lc45_0021",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.75,
+          "symmetry": 1.0
+        },
+        {
+          "probe_id": "p_lc45_0023",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 1.0
+        },
+        {
+          "probe_id": "p_lc45_0025",
+          "constraint_tightness": 0.0,
+          "branching_factor": 2.5,
+          "symmetry": 1.0
+        },
+        {
+          "probe_id": "p_lc45_0027",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.25,
+          "symmetry": 0.8
+        },
+        {
+          "probe_id": "p_lc45_0029",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.5,
+          "symmetry": 0.6
+        }
+      ]
+    },
+    "branching_factor": {
+      "mean": 1.421111111111111,
+      "std": 0.4208662436709891
+    },
+    "symmetry": {
+      "mean": 0.7772727272727272,
+      "std": 0.18012086545094907
+    }
+  },
+  "lc743": {
+    "constraint_tightness": {
+      "mean": 0.13888888888888887,
+      "std": 0.28733556757746115,
+      "per_probe": [
+        {
+          "probe_id": "f1_chain_3",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.6666666666666666
+        },
+        {
+          "probe_id": "f1_chain_4_weighted",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.75
+        },
+        {
+          "probe_id": "f4_high_weight",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.5
+        },
+        {
+          "probe_id": "f2_init_zero",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.6666666666666666
+        },
+        {
+          "probe_id": "f2_add_one",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.6666666666666666
+        },
+        {
+          "probe_id": "f2_source_offset",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.5
+        },
+        {
+          "probe_id": "f3_max_heap",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.5,
+          "symmetry": 0.25
+        },
+        {
+          "probe_id": "f3_reverse_id",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.75
+        },
+        {
+          "probe_id": "f3_bf_few_iters",
+          "constraint_tightness": 0.0,
+          "branching_factor": 1.0,
+          "symmetry": 0.8
+        },
+        {
+          "probe_id": "f4_max_reachable",
+          "constraint_tightness": 0.3333333333333333,
+          "branching_factor": 1.0,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "f4_init_zero_unreachable",
+          "constraint_tightness": 0.3333333333333333,
+          "branching_factor": 1.0,
+          "symmetry": 0.3333333333333333
+        },
+        {
+          "probe_id": "f4_no_edges",
+          "constraint_tightness": 1.0,
+          "branching_factor": 0.0,
+          "symmetry": 1.0
+        }
+      ]
+    },
+    "branching_factor": {
+      "mean": 0.9583333333333334,
+      "std": 0.32004773949452536
+    },
+    "symmetry": {
+      "mean": 0.6013888888888889,
+      "std": 0.2127268215747228
+    }
+  }
+}

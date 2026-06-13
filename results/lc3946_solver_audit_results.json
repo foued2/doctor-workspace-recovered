@@ -1,0 +1,62 @@
+{
+  "contributions": [
+    {
+      "solver_id": "solver_028",
+      "contribution": 0.06103528499339228,
+      "loss_R1": 0.6099829813110856,
+      "loss_R2": 0.6710182663044779,
+      "loss_b0": 0.5708511487276815,
+      "n_failures": 6,
+      "correct": 0
+    },
+    {
+      "solver_id": "solver_009",
+      "contribution": 0.03715160622966107,
+      "loss_R1": 0.9228529343785298,
+      "loss_R2": 0.9600045406081908,
+      "loss_b0": 0.9725755469827023,
+      "n_failures": 10,
+      "correct": 1
+    },
+    {
+      "solver_id": "solver_015",
+      "contribution": 0.03537963037601355,
+      "loss_R1": 0.810426337473848,
+      "loss_R2": 0.8458059678498615,
+      "loss_b0": 0.7635425992540924,
+      "n_failures": 9,
+      "correct": 1
+    },
+    {
+      "solver_id": "solver_018",
+      "contribution": 0.018674350808678963,
+      "loss_R1": 0.5237660259877451,
+      "loss_R2": 0.5424403767964241,
+      "loss_b0": 0.478431524653022,
+      "n_failures": 4,
+      "correct": 0
+    },
+    {
+      "solver_id": "solver_022",
+      "contribution": -0.0015061997876521516,
+      "loss_R1": 0.30313229477016745,
+      "loss_R2": 0.3016260949825153,
+      "loss_b0": 0.3057470469566336,
+      "n_failures": 0,
+      "correct": 1
+    },
+    {
+      "solver_id": "solver_023",
+      "contribution": -0.016416655314691164,
+      "loss_R1": 1.1729878461519354,
+      "loss_R2": 1.1565711908372442,
+      "loss_b0": 1.1648696806367116,
+      "n_failures": 12,
+      "correct": 1
+    }
+  ],
+  "top_20_pct": 1,
+  "top_10_pct": 1,
+  "delta_filtered": 0.012127129171300655,
+  "original_delta": 0.022386
+}

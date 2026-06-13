@@ -1,0 +1,20 @@
+{
+  "phase": "cross_metric_comparison",
+  "Q1_discrete_zero_abs_error_nonzero": {
+    "count": 0,
+    "solvers": [],
+    "interpretation": "zero discrete implies zero continuous"
+  },
+  "Q2_discrete_nonzero_abs_error_zero": {
+    "count": 1,
+    "solvers": [
+      "s027"
+    ],
+    "interpretation": "discrete oracle penalizes continuously identical behavior"
+  },
+  "Q3_pearson_correlation": 0.1162,
+  "Q3_interpretation": "weak",
+  "Q4_reach_agree_separates": false,
+  "Q4_count": 0,
+  "Q4_solvers": []
+}

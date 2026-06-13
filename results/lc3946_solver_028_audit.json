@@ -1,0 +1,168 @@
+{
+  "target_solvers": [
+    "solver_028",
+    "solver_009",
+    "solver_015",
+    "solver_018"
+  ],
+  "failure_vectors": {
+    "solver_028": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "solver_009": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "solver_015": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "solver_018": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "distinguishing_probes": [
+    {
+      "probe_id": "p_lc3946_0001",
+      "solver_028": 0,
+      "solver_009": 1,
+      "solver_015": 1,
+      "solver_018": 0,
+      "features": {
+        "n_items": 3,
+        "budget": 6,
+        "total_weight": 6,
+        "avg_value": 3.3333333333333335,
+        "budget_ratio": 1.0
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0005",
+      "solver_028": 0,
+      "solver_009": 1,
+      "solver_015": 1,
+      "solver_018": 0,
+      "features": {
+        "n_items": 4,
+        "budget": 15,
+        "total_weight": 12,
+        "avg_value": 9.25,
+        "budget_ratio": 1.25
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0007",
+      "solver_028": 1,
+      "solver_009": 1,
+      "solver_015": 1,
+      "solver_018": 0,
+      "features": {
+        "n_items": 4,
+        "budget": 12,
+        "total_weight": 30,
+        "avg_value": 7.5,
+        "budget_ratio": 0.4
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0017",
+      "solver_028": 1,
+      "solver_009": 1,
+      "solver_015": 1,
+      "solver_018": 0,
+      "features": {
+        "n_items": 5,
+        "budget": 8,
+        "total_weight": 62,
+        "avg_value": 3.0,
+        "budget_ratio": 0.12903225806451613
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0019",
+      "solver_028": 0,
+      "solver_009": 1,
+      "solver_015": 0,
+      "solver_018": 0,
+      "features": {
+        "n_items": 5,
+        "budget": 8,
+        "total_weight": 31,
+        "avg_value": 3.0,
+        "budget_ratio": 0.25806451612903225
+      }
+    },
+    {
+      "probe_id": "p_lc3946_0025",
+      "solver_028": 0,
+      "solver_009": 1,
+      "solver_015": 1,
+      "solver_018": 0,
+      "features": {
+        "n_items": 4,
+        "budget": 5,
+        "total_weight": 18,
+        "avg_value": 2.5,
+        "budget_ratio": 0.2777777777777778
+      }
+    }
+  ],
+  "tight_budget_analysis": {
+    "tight_count": 8,
+    "loose_count": 7
+  }
+}

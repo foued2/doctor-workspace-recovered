@@ -1,0 +1,1414 @@
+{
+  "trajectories": {
+    "coin": [
+      {
+        "alpha": 0.0,
+        "avg_S": 2.8258046513499893,
+        "std_S": 4.440892098500626e-16,
+        "avg_dim": 2.0,
+        "avg_entropy": 0.8048288987835844,
+        "avg_failures": 289.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 289,
+            "spectrum": [
+              2.8258046513499897,
+              1.6139479769833829,
+              1.95848359786783e-15
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.8048288987835843,
+            "S": 2.8258046513499897
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 289,
+            "spectrum": [
+              2.8258046513499897,
+              1.6139479769833829,
+              1.95848359786783e-15
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.8048288987835843,
+            "S": 2.8258046513499897
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 289,
+            "spectrum": [
+              2.8258046513499897,
+              1.6139479769833829,
+              1.95848359786783e-15
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.8048288987835843,
+            "S": 2.8258046513499897
+          }
+        ]
+      },
+      {
+        "alpha": 0.1,
+        "avg_S": 8.298470469318772,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.402190820696026,
+        "avg_failures": 129.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 129,
+            "spectrum": [
+              8.298470469318772,
+              1.6327363444147327,
+              1.4069683363429162
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.402190820696026,
+            "S": 8.298470469318772
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 129,
+            "spectrum": [
+              8.298470469318772,
+              1.6327363444147327,
+              1.4069683363429162
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.402190820696026,
+            "S": 8.298470469318772
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 129,
+            "spectrum": [
+              8.298470469318772,
+              1.6327363444147327,
+              1.4069683363429162
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.402190820696026,
+            "S": 8.298470469318772
+          }
+        ]
+      },
+      {
+        "alpha": 0.25,
+        "avg_S": 7.964956193906981,
+        "std_S": 0.0,
+        "avg_dim": 2.0,
+        "avg_entropy": 0.7437492685882336,
+        "avg_failures": 141.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 141,
+            "spectrum": [
+              7.964956193906981,
+              2.820763712499609,
+              1.820100246521676
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7437492685882336,
+            "S": 7.964956193906981
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 141,
+            "spectrum": [
+              7.964956193906981,
+              2.820763712499609,
+              1.820100246521676
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7437492685882336,
+            "S": 7.964956193906981
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 141,
+            "spectrum": [
+              7.964956193906981,
+              2.820763712499609,
+              1.820100246521676
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7437492685882336,
+            "S": 7.964956193906981
+          }
+        ]
+      },
+      {
+        "alpha": 0.5,
+        "avg_S": 8.102347316400506,
+        "std_S": 0.0,
+        "avg_dim": 2.0,
+        "avg_entropy": 0.6591919099240081,
+        "avg_failures": 147.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 147,
+            "spectrum": [
+              8.102347316400506,
+              2.417805256856191,
+              1.85908195202259
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.6591919099240081,
+            "S": 8.102347316400506
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 147,
+            "spectrum": [
+              8.102347316400506,
+              2.417805256856191,
+              1.85908195202259
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.6591919099240081,
+            "S": 8.102347316400506
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 147,
+            "spectrum": [
+              8.102347316400506,
+              2.417805256856191,
+              1.85908195202259
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.6591919099240081,
+            "S": 8.102347316400506
+          }
+        ]
+      },
+      {
+        "alpha": 0.75,
+        "avg_S": 8.30675109848426,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.39432875993304844,
+        "avg_failures": 170.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 170,
+            "spectrum": [
+              8.30675109848426,
+              1.7826730637072667,
+              1.1999845564685465
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.3943287599330484,
+            "S": 8.30675109848426
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 170,
+            "spectrum": [
+              8.30675109848426,
+              1.7826730637072667,
+              1.1999845564685465
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.3943287599330484,
+            "S": 8.30675109848426
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 170,
+            "spectrum": [
+              8.30675109848426,
+              1.7826730637072667,
+              1.1999845564685465
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.3943287599330484,
+            "S": 8.30675109848426
+          }
+        ]
+      },
+      {
+        "alpha": 1.0,
+        "avg_S": 8.48528137423856,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 6.093474646870538e-29,
+        "avg_failures": 180.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 180,
+            "spectrum": [
+              8.48528137423856,
+              6.6111893430684474e-15,
+              1.3805065841367703e-30
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 6.093474646870538e-29,
+            "S": 8.48528137423856
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 180,
+            "spectrum": [
+              8.48528137423856,
+              6.6111893430684474e-15,
+              1.3805065841367703e-30
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 6.093474646870538e-29,
+            "S": 8.48528137423856
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 180,
+            "spectrum": [
+              8.48528137423856,
+              6.6111893430684474e-15,
+              1.3805065841367703e-30
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 6.093474646870538e-29,
+            "S": 8.48528137423856
+          }
+        ]
+      }
+    ],
+    "grid": [
+      {
+        "alpha": 0.0,
+        "avg_S": 0.0,
+        "std_S": 0.0,
+        "avg_dim": 3.0,
+        "avg_entropy": 0.0,
+        "avg_failures": 0.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 0,
+            "spectrum": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "intrinsic_dim": 3,
+            "spectral_entropy": 0.0,
+            "S": 0.0
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 0,
+            "spectrum": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "intrinsic_dim": 3,
+            "spectral_entropy": 0.0,
+            "S": 0.0
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 0,
+            "spectrum": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "intrinsic_dim": 3,
+            "spectral_entropy": 0.0,
+            "S": 0.0
+          }
+        ]
+      },
+      {
+        "alpha": 0.1,
+        "avg_S": 6.403669323690036,
+        "std_S": 8.881784197001252e-16,
+        "avg_dim": 2.0,
+        "avg_entropy": 1.0296078504696202,
+        "avg_failures": 201.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 201,
+            "spectrum": [
+              6.403669323690037,
+              4.0241829696966365,
+              1.3375240630488558
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 1.0296078504696202,
+            "S": 6.403669323690037
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 201,
+            "spectrum": [
+              6.403669323690037,
+              4.0241829696966365,
+              1.3375240630488558
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 1.0296078504696202,
+            "S": 6.403669323690037
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 201,
+            "spectrum": [
+              6.403669323690037,
+              4.0241829696966365,
+              1.3375240630488558
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 1.0296078504696202,
+            "S": 6.403669323690037
+          }
+        ]
+      },
+      {
+        "alpha": 0.25,
+        "avg_S": 7.01802754974399,
+        "std_S": 0.0,
+        "avg_dim": 2.0,
+        "avg_entropy": 0.8079237663773142,
+        "avg_failures": 216.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 216,
+            "spectrum": [
+              7.01802754974399,
+              2.7047259143830793,
+              1.6946229784524183
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.8079237663773142,
+            "S": 7.01802754974399
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 216,
+            "spectrum": [
+              7.01802754974399,
+              2.7047259143830793,
+              1.6946229784524183
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.8079237663773142,
+            "S": 7.01802754974399
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 216,
+            "spectrum": [
+              7.01802754974399,
+              2.7047259143830793,
+              1.6946229784524183
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.8079237663773142,
+            "S": 7.01802754974399
+          }
+        ]
+      },
+      {
+        "alpha": 0.5,
+        "avg_S": 7.016067205753164,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.425951398021327,
+        "avg_failures": 231.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 231,
+            "spectrum": [
+              7.016067205753164,
+              1.6539869153364013,
+              0.99454926889062
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.425951398021327,
+            "S": 7.016067205753164
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 231,
+            "spectrum": [
+              7.016067205753164,
+              1.6539869153364013,
+              0.99454926889062
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.425951398021327,
+            "S": 7.016067205753164
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 231,
+            "spectrum": [
+              7.016067205753164,
+              1.6539869153364013,
+              0.99454926889062
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.425951398021327,
+            "S": 7.016067205753164
+          }
+        ]
+      },
+      {
+        "alpha": 0.75,
+        "avg_S": 7.018522530051356,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.3702489164791491,
+        "avg_failures": 232.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 232,
+            "spectrum": [
+              7.018522530051356,
+              1.6696335219065932,
+              0.6728041302543358
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.3702489164791491,
+            "S": 7.018522530051356
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 232,
+            "spectrum": [
+              7.018522530051356,
+              1.6696335219065932,
+              0.6728041302543358
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.3702489164791491,
+            "S": 7.018522530051356
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 232,
+            "spectrum": [
+              7.018522530051356,
+              1.6696335219065932,
+              0.6728041302543358
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.3702489164791491,
+            "S": 7.018522530051356
+          }
+        ]
+      },
+      {
+        "alpha": 1.0,
+        "avg_S": 7.054785609782912,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 1.4848480755185695e-29,
+        "avg_failures": 237.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 237,
+            "spectrum": [
+              7.054785609782912,
+              2.6858449694084783e-15,
+              1.0627515278519496e-30
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 1.4848480755185695e-29,
+            "S": 7.054785609782912
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 237,
+            "spectrum": [
+              7.054785609782912,
+              2.6858449694084783e-15,
+              1.0627515278519496e-30
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 1.4848480755185695e-29,
+            "S": 7.054785609782912
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              3,
+              100
+            ],
+            "total_failures": 237,
+            "spectrum": [
+              7.054785609782912,
+              2.6858449694084783e-15,
+              1.0627515278519496e-30
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 1.4848480755185695e-29,
+            "S": 7.054785609782912
+          }
+        ]
+      }
+    ],
+    "interval": [
+      {
+        "alpha": 0.0,
+        "avg_S": 4.737087712930804,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.0,
+        "avg_failures": 34.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 34,
+            "spectrum": [
+              4.737087712930804,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 4.737087712930804
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 34,
+            "spectrum": [
+              4.737087712930804,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 4.737087712930804
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 34,
+            "spectrum": [
+              4.737087712930804,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 4.737087712930804
+          }
+        ]
+      },
+      {
+        "alpha": 0.1,
+        "avg_S": 4.980884763668413,
+        "std_S": 0.0,
+        "avg_dim": 2.0,
+        "avg_entropy": 0.7182143218004094,
+        "avg_failures": 44.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 44,
+            "spectrum": [
+              4.980884763668413,
+              2.476042602835393
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7182143218004094,
+            "S": 4.980884763668413
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 44,
+            "spectrum": [
+              4.980884763668413,
+              2.476042602835393
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7182143218004094,
+            "S": 4.980884763668413
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 44,
+            "spectrum": [
+              4.980884763668413,
+              2.476042602835393
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7182143218004094,
+            "S": 4.980884763668413
+          }
+        ]
+      },
+      {
+        "alpha": 0.25,
+        "avg_S": 5.218617145917011,
+        "std_S": 0.0,
+        "avg_dim": 2.0,
+        "avg_entropy": 0.7227514685796348,
+        "avg_failures": 48.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 48,
+            "spectrum": [
+              5.218617145917011,
+              2.6126681925458857
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7227514685796348,
+            "S": 5.218617145917011
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 48,
+            "spectrum": [
+              5.218617145917011,
+              2.6126681925458857
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7227514685796348,
+            "S": 5.218617145917011
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 48,
+            "spectrum": [
+              5.218617145917011,
+              2.6126681925458857
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.7227514685796348,
+            "S": 5.218617145917011
+          }
+        ]
+      },
+      {
+        "alpha": 0.5,
+        "avg_S": 6.155332832821576,
+        "std_S": 0.0,
+        "avg_dim": 2.0,
+        "avg_entropy": 0.48116319940373636,
+        "avg_failures": 62.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 62,
+            "spectrum": [
+              6.155332832821576,
+              2.095680728829827
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.4811631994037363,
+            "S": 6.155332832821576
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 62,
+            "spectrum": [
+              6.155332832821576,
+              2.095680728829827
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.4811631994037363,
+            "S": 6.155332832821576
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 62,
+            "spectrum": [
+              6.155332832821576,
+              2.095680728829827
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.4811631994037363,
+            "S": 6.155332832821576
+          }
+        ]
+      },
+      {
+        "alpha": 0.75,
+        "avg_S": 6.472287888492637,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.34676570240361837,
+        "avg_failures": 68.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 68,
+            "spectrum": [
+              6.472287888492637,
+              1.7057225707809498
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.34676570240361837,
+            "S": 6.472287888492637
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 68,
+            "spectrum": [
+              6.472287888492637,
+              1.7057225707809498
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.34676570240361837,
+            "S": 6.472287888492637
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 68,
+            "spectrum": [
+              6.472287888492637,
+              1.7057225707809498
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 0.34676570240361837,
+            "S": 6.472287888492637
+          }
+        ]
+      },
+      {
+        "alpha": 1.0,
+        "avg_S": 6.827884006044623,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 1.3155760307930756e-29,
+        "avg_failures": 74.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 74,
+            "spectrum": [
+              6.827884006044623,
+              2.444697487097836e-15
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 1.3155760307930756e-29,
+            "S": 6.827884006044623
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 74,
+            "spectrum": [
+              6.827884006044623,
+              2.444697487097836e-15
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 1.3155760307930756e-29,
+            "S": 6.827884006044623
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 74,
+            "spectrum": [
+              6.827884006044623,
+              2.444697487097836e-15
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 1.3155760307930756e-29,
+            "S": 6.827884006044623
+          }
+        ]
+      }
+    ],
+    "constraint": [
+      {
+        "alpha": 0.0,
+        "avg_S": 1.3999999999999997,
+        "std_S": 2.220446049250313e-16,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.0,
+        "avg_failures": 2.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          }
+        ]
+      },
+      {
+        "alpha": 0.1,
+        "avg_S": 1.3999999999999997,
+        "std_S": 2.220446049250313e-16,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.0,
+        "avg_failures": 2.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          }
+        ]
+      },
+      {
+        "alpha": 0.25,
+        "avg_S": 1.3999999999999997,
+        "std_S": 2.220446049250313e-16,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.0,
+        "avg_failures": 2.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.4,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.4
+          }
+        ]
+      },
+      {
+        "alpha": 0.5,
+        "avg_S": 0.9949874371066199,
+        "std_S": 0.0,
+        "avg_dim": 1.0,
+        "avg_entropy": 0.0,
+        "avg_failures": 1.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 1,
+            "spectrum": [
+              0.9949874371066199,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 0.9949874371066199
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 1,
+            "spectrum": [
+              0.9949874371066199,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 0.9949874371066199
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 1,
+            "spectrum": [
+              0.9949874371066199,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 0.9949874371066199
+          }
+        ]
+      },
+      {
+        "alpha": 0.75,
+        "avg_S": 0.46666666666666656,
+        "std_S": 0.6599663291074441,
+        "avg_dim": 1.6666666666666667,
+        "avg_entropy": 0.0,
+        "avg_failures": 0.6666666666666666,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 0,
+            "spectrum": [
+              0.0,
+              0.0
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.0,
+            "S": 0.0
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.3999999999999997,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 1.3999999999999997
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 0,
+            "spectrum": [
+              0.0,
+              0.0
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.0,
+            "S": 0.0
+          }
+        ]
+      },
+      {
+        "alpha": 1.0,
+        "avg_S": 0.8007040550178829,
+        "std_S": 0.5906547352539545,
+        "avg_dim": 1.3333333333333333,
+        "avg_entropy": 1.1203906200046596e-31,
+        "avg_failures": 1.0,
+        "seeds": [
+          {
+            "seed": 20260613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 0,
+            "spectrum": [
+              0.0,
+              0.0
+            ],
+            "intrinsic_dim": 2,
+            "spectral_entropy": 0.0,
+            "S": 0.0
+          },
+          {
+            "seed": 20270613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 2,
+            "spectrum": [
+              1.407124727947029,
+              7.850462293418876e-17
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": 3.3611718600139787e-31,
+            "S": 1.407124727947029
+          },
+          {
+            "seed": 20280613,
+            "matrix_shape": [
+              2,
+              100
+            ],
+            "total_failures": 1,
+            "spectrum": [
+              0.9949874371066199,
+              0.0
+            ],
+            "intrinsic_dim": 1,
+            "spectral_entropy": -0.0,
+            "S": 0.9949874371066199
+          }
+        ]
+      }
+    ]
+  },
+  "alignments": {
+    "coin": {
+      "0.0": 1.0,
+      "0.1": 1.0,
+      "0.25": 1.0000000000000002,
+      "0.5": 1.0,
+      "0.75": 1.0000000000000002,
+      "1.0": 1.0
+    },
+    "grid": {
+      "0.0": 1.0,
+      "0.1": 1.0,
+      "0.25": 1.0000000000000002,
+      "0.5": 1.0,
+      "0.75": 1.0000000000000002,
+      "1.0": 1.0
+    },
+    "interval": {
+      "0.0": 1.0,
+      "0.1": 1.0,
+      "0.25": 1.0,
+      "0.5": 0.9999999999999998,
+      "0.75": 1.0,
+      "1.0": 1.0
+    },
+    "constraint": {
+      "0.0": 1.0,
+      "0.1": 1.0,
+      "0.25": 1.0,
+      "0.5": 1.0,
+      "0.75": 1.0,
+      "1.0": 1.0000000000000002
+    }
+  },
+  "metadata": {
+    "alpha_grid": [
+      0.0,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "n_seeds": 3,
+    "seed_base": 20260613
+  }
+}

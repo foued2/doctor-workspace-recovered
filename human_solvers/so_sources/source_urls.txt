@@ -1,0 +1,11 @@
+Stack Overflow Sources for Human Wrong LC322 Code
+=================================================
+
+1. https://stackoverflow.com/questions/41479112/why-my-code-cant-pass-the-test-case-from-leetcode-322-coin-change
+   Bug: dp[j] = min(dp[j], int(j/i) + dp[j%i]) — wrong index formula
+
+2. https://stackoverflow.com/questions/tagged/coin-change?tab=Active
+   Bug: naive recursive solution without memoization
+
+3. https://stackoverflow.com/questions/70292399/leetcode-322-coin-change-with-2-programming-languages-produces-2-different-resu
+   Bug: recursive approach producing different results across languages

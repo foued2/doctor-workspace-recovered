@@ -1,0 +1,126 @@
+[
+  {
+    "problem": "lc3946",
+    "structured_phi": {
+      "distribution": {
+        "cluster_2": 5,
+        "cluster_3": 9,
+        "cluster_0": 4,
+        "cluster_1": 12
+      }
+    },
+    "random_phi": {
+      "distribution": {
+        "random_2": 5,
+        "random_3": 4,
+        "random_1": 10,
+        "random_0": 11
+      }
+    },
+    "train_test_split": {
+      "train_size": 24,
+      "test_size": 6
+    },
+    "results": {
+      "lambda_10": {
+        "loss_b0": 0.0,
+        "loss_bphi": 0.0,
+        "loss_brand": 0.0,
+        "delta_phi_b0": 0.0,
+        "delta_phi_brand": 0.0
+      },
+      "lambda_50": {
+        "loss_b0": 0.0,
+        "loss_bphi": 0.0,
+        "loss_brand": 0.0,
+        "delta_phi_b0": 0.0,
+        "delta_phi_brand": 0.0
+      },
+      "lambda_100": {
+        "loss_b0": 0.0,
+        "loss_bphi": 0.0,
+        "loss_brand": 0.0,
+        "delta_phi_b0": 0.0,
+        "delta_phi_brand": 0.0
+      }
+    },
+    "variance_separation": {
+      "between_variance": 0.0,
+      "within_variance": 0.0,
+      "f_statistic": 0,
+      "cluster_means": {
+        "unknown": 0.0
+      }
+    },
+    "bootstrap_ci": {
+      "lambda_50": {
+        "point_estimate": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0
+      }
+    },
+    "classification": "phi does not add predictive signal"
+  },
+  {
+    "problem": "lc322",
+    "structured_phi": {
+      "distribution": {
+        "cluster_2": 2,
+        "cluster_0": 22,
+        "cluster_3": 1,
+        "cluster_1": 5
+      }
+    },
+    "random_phi": {
+      "distribution": {
+        "random_2": 5,
+        "random_3": 4,
+        "random_1": 10,
+        "random_0": 11
+      }
+    },
+    "train_test_split": {
+      "train_size": 24,
+      "test_size": 6
+    },
+    "results": {
+      "lambda_10": {
+        "loss_b0": 0.16666666666666666,
+        "loss_bphi": 0.16666666666666666,
+        "loss_brand": 0.16666666666666666,
+        "delta_phi_b0": 0.0,
+        "delta_phi_brand": 0.0
+      },
+      "lambda_50": {
+        "loss_b0": 0.16666666666666666,
+        "loss_bphi": 0.16666666666666666,
+        "loss_brand": 0.16666666666666666,
+        "delta_phi_b0": 0.0,
+        "delta_phi_brand": 0.0
+      },
+      "lambda_100": {
+        "loss_b0": 0.16666666666666666,
+        "loss_bphi": 0.16666666666666666,
+        "loss_brand": 0.16666666666666666,
+        "delta_phi_b0": 0.0,
+        "delta_phi_brand": 0.0
+      }
+    },
+    "variance_separation": {
+      "between_variance": 0.0,
+      "within_variance": 80.47666666666666,
+      "f_statistic": 0.0,
+      "cluster_means": {
+        "unknown": 1.7
+      }
+    },
+    "bootstrap_ci": {
+      "lambda_50": {
+        "point_estimate": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0
+      }
+    },
+    "classification": "phi does not add predictive signal"
+  }
+]

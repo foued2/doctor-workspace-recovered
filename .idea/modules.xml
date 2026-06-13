@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/doctor-workspace.iml" filepath="$PROJECT_DIR$/.idea/doctor-workspace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/doctor-certify.iml" filepath="$PROJECT_DIR$/.idea/doctor-certify.iml" />
     </modules>
   </component>
 </project>

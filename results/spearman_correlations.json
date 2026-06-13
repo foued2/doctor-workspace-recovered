@@ -1,0 +1,14 @@
+{
+  "constraint_tightness": {
+    "rho": -0.6,
+    "pval": 0.4166666666666667
+  },
+  "branching_factor": {
+    "rho": 0.8,
+    "pval": 0.3333333333333333
+  },
+  "symmetry": {
+    "rho": 0.0,
+    "pval": 1.0
+  }
+}

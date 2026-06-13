@@ -196,8 +196,8 @@ def cross_population_reference() -> dict[str, Any]:
 def compute_gap(b1_loss: float, c_genuine_loss: float) -> float:
     """Compute the gap = B1_loss - C_genuine_loss.
 
-    gap > 0 means C_genuine beats B1; gap = 0 means tie; gap < 0 means
-    C_genuine is worse.
+    gap > 0 means B1 has higher loss; gap = 0 means tie; gap < 0 means
+    B1 has lower loss.
     """
     return b1_loss - c_genuine_loss
 

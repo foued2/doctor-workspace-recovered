@@ -133,8 +133,8 @@ The D > 0 requirement guards against the case where C_genuine silently degrades 
 Following the C-3a precedent, C-4 reports three cases for the LC322 population:
 
 - D = 0 → `FULL_EQUIVALENCE` (C_genuine is operationally B1; FAIL)
-- D > 0, A = 0 → `MASKED_DIVERGENCE` (C_genuine differs structurally but per-solver cost is uniformly equal; FAIL, since utility gap is 0)
-- D > 0, A > 0 → `DIRECTIONAL_SUPERIORITY` (C_genuine differs structurally AND per-solver costs differ; PASS or FAIL based on the utility gap criterion)
+- D > 0, A = 0 → `MASKED_DIVERGENCE` (C_genuine decisions differ from B1 but per-solver cost is uniformly equal; FAIL, since utility gap is 0)
+- D > 0, A > 0 → `DIRECTIONAL_SUPERIORITY` (C_genuine decisions differ from B1 AND per-solver costs differ; PASS or FAIL based on the utility gap criterion)
 
 The three-case report is orthogonal to the falsification criterion. The falsification criterion is the primary verdict. The three-case report is a secondary disambiguation, carried forward from C-3a for diagnostic clarity.
 

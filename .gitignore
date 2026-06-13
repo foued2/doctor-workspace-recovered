@@ -11,3 +11,4 @@ scratch/candidates/*_induction_candidate.json
 !scratch/candidates/.gitkeep
 
 doctor-workspace/
+opencode.json

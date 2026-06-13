@@ -341,6 +341,11 @@ def main(argv: list[str] | None = None) -> int:
     # Run all solvers on all probes
     pass_results = execute_solvers(seval_manifest, probe_index, config)
 
+    # Serialize per-probe pass/fail matrix (non-gated, for entropy analysis)
+    per_probe_path = paths["result"].parent / f"{paths['result'].stem}_per_probe.json"
+    with open(per_probe_path, "w") as _f:
+        json.dump(pass_results, _f, indent=2)
+
     # Ground truth: held-out fail rate
     ground = compute_ground_truth(pass_results, target_ids, failure_threshold)
     n_good = sum(1 for g in ground.values() if g["truth_label"] == "ACCEPT")

@@ -1,6 +1,6 @@
 {
   "population": "LC743",
-  "n_solvers": 30,
+  "n_solvers": 31,
   "n_cases": 24,
   "n_observed": 12,
   "n_target": 12,
@@ -35,7 +35,7 @@
   ],
   "random_seed": 42,
   "ground_truth_counts": {
-    "ACCEPT": 1,
+    "ACCEPT": 2,
     "REJECT": 29
   },
   "estimators": {
@@ -510,6 +510,19 @@
       "c_genuine_pred": "REJECT",
       "b1_pred": "REJECT",
       "b2_pred": "REJECT"
+    },
+    {
+      "solver_id": "s031",
+      "declared": "CORRECT",
+      "ground_truth": "ACCEPT",
+      "obs_fails": 0,
+      "obs_rate": 1.0,
+      "obs_dir_counts": {},
+      "tgt_fails": 0,
+      "tgt_rate": 0.0,
+      "c_genuine_pred": "ACCEPT",
+      "b1_pred": "ACCEPT",
+      "b2_pred": "ACCEPT"
     }
   ]
 }

@@ -1,0 +1,1809 @@
+{
+  "results": [
+    {
+      "problem": "coin",
+      "strategy": "random",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 979,
+      "S": 2.355935515011191,
+      "intrinsic_dimension": 6,
+      "singular_spectrum": [
+        2.355935515011191,
+        1.9516293072147477,
+        1.732050807568877,
+        1.6568689241907453,
+        1.414213562373094,
+        1.3828641487578535
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "constant",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "shuffled",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 257,
+      "S": 7.5620093745613115,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        7.5620093745613115,
+        4.8159969964080265,
+        4.352932205422651,
+        4.208550397513994,
+        3.9649022695251586,
+        3.852150881040127
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "adversarial",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 325,
+      "S": 8.893596810905205,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.893596810905205,
+        5.124814085179298,
+        4.65903542811593,
+        4.391758501048534,
+        4.227353709918483,
+        4.113726798987683
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "high_entropy",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 970,
+      "S": 2.71725597430158,
+      "intrinsic_dimension": 7,
+      "singular_spectrum": [
+        2.71725597430158,
+        2.3338327145764763,
+        2.0504168491523065,
+        1.8525547919457779,
+        1.7666383285258451,
+        1.527936661017618
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "random",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 984,
+      "S": 2.063693986356727,
+      "intrinsic_dimension": 6,
+      "singular_spectrum": [
+        2.063693986356727,
+        1.866950624525269,
+        1.694967779918464,
+        1.2588033826155327,
+        1.1754950406065527,
+        0.9999999999999999
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "constant",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "shuffled",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 252,
+      "S": 7.178919557283685,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        7.178919557283685,
+        5.113302181484553,
+        4.785193976117149,
+        4.38478278812562,
+        4.249483844375107,
+        3.7029898756037385
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "adversarial",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 310,
+      "S": 8.53460163958328,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.53460163958328,
+        5.0515078915868274,
+        4.6046881382571625,
+        4.442362877696389,
+        4.036914585929934,
+        3.8753636413903636
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "high_entropy",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 962,
+      "S": 3.5475649287803037,
+      "intrinsic_dimension": 6,
+      "singular_spectrum": [
+        3.5475649287803037,
+        2.3908090104184265,
+        2.332140206226302,
+        1.9052569257809813,
+        1.7687787354342737,
+        1.5109943296109412
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "random",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 983,
+      "S": 2.1714818462094874,
+      "intrinsic_dimension": 6,
+      "singular_spectrum": [
+        2.1714818462094874,
+        1.777940268272973,
+        1.7016701541678647,
+        1.5464666464782435,
+        1.050644788231694,
+        1.0
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "constant",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "shuffled",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 260,
+      "S": 7.16986925623239,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        7.16986925623239,
+        5.03108974029211,
+        4.78199804631871,
+        4.6116897504428636,
+        4.112844772824915,
+        3.698219083424896
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "adversarial",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 307,
+      "S": 8.61781531702402,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.61781531702402,
+        4.860087985128815,
+        4.603229125636155,
+        4.455563851341106,
+        3.994814627747267,
+        3.921147289267423
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "high_entropy",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 961,
+      "S": 3.102433215545995,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.102433215545995,
+        2.53680014017134,
+        2.199463132731007,
+        1.911327258847621,
+        1.814333849047961,
+        1.669558274871883
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "random",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 975,
+      "S": 2.438636648417538,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.438636648417538,
+        2.080044826211359,
+        1.638284743596332,
+        1.5427748155916758,
+        1.4142135623730951,
+        1.4142135623730951
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "constant",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "shuffled",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 248,
+      "S": 7.2421034835175515,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        7.2421034835175515,
+        5.078883232470375,
+        4.394380412881923,
+        4.315510051959458,
+        3.9183022543381307,
+        3.7171892058886318
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "adversarial",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 323,
+      "S": 8.638347024205704,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.638347024205704,
+        5.011384578770255,
+        4.71262476674305,
+        4.309469514825623,
+        4.136565579837099,
+        3.853554616757465
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "high_entropy",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 975,
+      "S": 2.639037864424835,
+      "intrinsic_dimension": 7,
+      "singular_spectrum": [
+        2.639037864424835,
+        2.091211268392202,
+        1.919493775870146,
+        1.700889730596683,
+        1.4795334781104026,
+        1.2263071437172532
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "random",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 981,
+      "S": 2.1012348043827007,
+      "intrinsic_dimension": 6,
+      "singular_spectrum": [
+        2.1012348043827007,
+        1.861711881444596,
+        1.7320508075688772,
+        1.673615666183325,
+        1.3950370397480774,
+        1.2336518730694928
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "constant",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "shuffled",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 255,
+      "S": 7.495219191843989,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        7.495219191843989,
+        5.042585258524148,
+        4.286268575489823,
+        4.137827335072086,
+        4.004737663623876,
+        3.6530904476591126
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "adversarial",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 319,
+      "S": 8.679916537533183,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.679916537533183,
+        5.033549573348117,
+        4.731773726884392,
+        4.287695650102979,
+        4.0319433778631515,
+        3.785938872822127
+      ]
+    },
+    {
+      "problem": "coin",
+      "strategy": "high_entropy",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 963,
+      "S": 3.3910755364884584,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.3910755364884584,
+        2.339230543182961,
+        2.216252593232487,
+        1.8330786407665076,
+        1.6178464487641904,
+        1.4472444283082655
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "random",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 945,
+      "S": 3.2482228869010634,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.2482228869010634,
+        2.7786909987861543,
+        2.643955852647572,
+        2.504200074681879,
+        2.3515493226806514,
+        2.1428960323502606
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "constant",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 930,
+      "S": 8.068457101577724,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        8.068457101577724,
+        4.619223486142936e-15,
+        1.5141866776252272e-17,
+        3.8409547638155705e-31,
+        2.922599178268611e-47,
+        3.0260504450166815e-48
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "shuffled",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 365,
+      "S": 6.181950820154947,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.181950820154947,
+        5.542613875005608,
+        5.024591812836103,
+        4.955280379736169,
+        4.865169852524875,
+        4.776541901067997
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "adversarial",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 478,
+      "S": 6.4391508006887195,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        6.4391508006887195,
+        6.0082947152565005,
+        5.702101885712565,
+        5.487151904421386,
+        4.95543338771482,
+        4.865408044420408
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "high_entropy",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 945,
+      "S": 3.2482228869010634,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.2482228869010634,
+        2.7786909987861543,
+        2.643955852647572,
+        2.504200074681879,
+        2.3515493226806514,
+        2.1428960323502606
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "random",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 947,
+      "S": 3.0729646495205065,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.0729646495205065,
+        2.7298747587286702,
+        2.5789952238094247,
+        2.5457170375581746,
+        2.4574290723746826,
+        2.123562810795205
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "constant",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 930,
+      "S": 8.068457101577724,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        8.068457101577724,
+        4.619223486142936e-15,
+        1.5141866776252272e-17,
+        3.8409547638155705e-31,
+        2.922599178268611e-47,
+        3.0260504450166815e-48
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "shuffled",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 384,
+      "S": 6.25104151415168,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.25104151415168,
+        5.807689472002287,
+        5.420104997441079,
+        5.155246951637356,
+        5.040463081806082,
+        4.696164405279392
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "adversarial",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 470,
+      "S": 6.626375569974124,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.626375569974124,
+        5.8841300151648035,
+        5.452083724462374,
+        5.156504897957442,
+        4.775652557223131,
+        4.753953382295935
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "high_entropy",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 947,
+      "S": 3.0729646495205065,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.0729646495205065,
+        2.7298747587286702,
+        2.5789952238094247,
+        2.5457170375581746,
+        2.4574290723746826,
+        2.123562810795205
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "random",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 947,
+      "S": 2.949903419423139,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.949903419423139,
+        2.849728874892735,
+        2.7069413786206615,
+        2.4648336388080367,
+        2.354029533945201,
+        2.058907538315269
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "constant",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 930,
+      "S": 8.068457101577724,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        8.068457101577724,
+        4.619223486142936e-15,
+        1.5141866776252272e-17,
+        3.8409547638155705e-31,
+        2.922599178268611e-47,
+        3.0260504450166815e-48
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "shuffled",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 391,
+      "S": 5.859793620261442,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        5.859793620261442,
+        5.759922243626305,
+        5.584793728757597,
+        5.544031195428361,
+        4.936271786188095,
+        4.354712210683665
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "adversarial",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 464,
+      "S": 6.5671826406229235,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.5671826406229235,
+        5.9436286565021925,
+        5.414739074085204,
+        5.281803486308079,
+        5.02518829483544,
+        4.769258195952756
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "high_entropy",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 947,
+      "S": 2.949903419423139,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.949903419423139,
+        2.849728874892735,
+        2.7069413786206615,
+        2.4648336388080367,
+        2.354029533945201,
+        2.058907538315269
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "random",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 957,
+      "S": 2.962700179047848,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.962700179047848,
+        2.794536086624899,
+        2.3727892848852674,
+        2.1484157874359298,
+        1.898377767085629,
+        1.8033344525203034
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "constant",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 930,
+      "S": 8.068457101577724,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        8.068457101577724,
+        4.619223486142936e-15,
+        1.5141866776252272e-17,
+        3.8409547638155705e-31,
+        2.922599178268611e-47,
+        3.0260504450166815e-48
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "shuffled",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 376,
+      "S": 6.211737579213595,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.211737579213595,
+        5.706215514720546,
+        5.52672505158932,
+        5.200096063494816,
+        4.559318149195432,
+        4.445418463038511
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "adversarial",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 465,
+      "S": 6.412935884123762,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.412935884123762,
+        5.748949861461453,
+        5.4252413835355995,
+        5.253392045167329,
+        4.863554997527512,
+        4.685625521874089
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "high_entropy",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 957,
+      "S": 2.962700179047848,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.962700179047848,
+        2.794536086624899,
+        2.3727892848852674,
+        2.1484157874359298,
+        1.898377767085629,
+        1.8033344525203034
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "random",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 958,
+      "S": 3.137971103078497,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.137971103078497,
+        2.3910250512939895,
+        2.221135179614521,
+        2.117611045251513,
+        1.8590683822818626,
+        1.7057967483400682
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "constant",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 930,
+      "S": 8.068457101577724,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        8.068457101577724,
+        4.619223486142936e-15,
+        1.5141866776252272e-17,
+        3.8409547638155705e-31,
+        2.922599178268611e-47,
+        3.0260504450166815e-48
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "shuffled",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 373,
+      "S": 6.026085474170204,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.026085474170204,
+        5.665472150916309,
+        5.139843079248158,
+        5.015823313498236,
+        4.804234077995354,
+        4.771146277238035
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "adversarial",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 477,
+      "S": 6.206769511015599,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.206769511015599,
+        5.664843736902125,
+        5.36894027317449,
+        5.272887744346332,
+        5.1303840555969895,
+        4.713395553930779
+      ]
+    },
+    {
+      "problem": "grid",
+      "strategy": "high_entropy",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 958,
+      "S": 3.137971103078497,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.137971103078497,
+        2.3910250512939895,
+        2.221135179614521,
+        2.117611045251513,
+        1.8590683822818626,
+        1.7057967483400682
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "random",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 944,
+      "S": 3.069171094487856,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.069171094487856,
+        2.960336410997012,
+        2.6459464284154017,
+        2.57946409563508,
+        2.3918104833814455,
+        2.192335479726767
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "constant",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "shuffled",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 236,
+      "S": 7.328577995456526,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        7.328577995456526,
+        4.680079596853629,
+        4.2637510783181325,
+        4.106017412623929,
+        3.891267968960104,
+        3.687868457755412
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "adversarial",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 308,
+      "S": 9.036227685916572,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        9.036227685916572,
+        5.037530182549375,
+        4.496261823003303,
+        4.244383782608003,
+        4.103584303971125,
+        3.8612613953863466
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "high_entropy",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 944,
+      "S": 3.069171094487856,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.069171094487856,
+        2.960336410997012,
+        2.6459464284154017,
+        2.57946409563508,
+        2.3918104833814455,
+        2.192335479726767
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "random",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 941,
+      "S": 3.3470651238116336,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.3470651238116336,
+        3.049525252530186,
+        2.7336686400331813,
+        2.6337917928615378,
+        2.2980693383715995,
+        2.14679281462887
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "constant",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "shuffled",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 236,
+      "S": 7.067654975166586,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        7.067654975166586,
+        5.086774443639464,
+        4.651553880437881,
+        4.237635064341841,
+        4.191225621838018,
+        3.49293399280759
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "adversarial",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 297,
+      "S": 8.707641397134122,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.707641397134122,
+        4.988491190753186,
+        4.539839680177959,
+        4.34326250372697,
+        4.022612163345763,
+        3.743712659930951
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "high_entropy",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 941,
+      "S": 3.3470651238116336,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.3470651238116336,
+        3.049525252530186,
+        2.7336686400331813,
+        2.6337917928615378,
+        2.2980693383715995,
+        2.14679281462887
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "random",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 947,
+      "S": 3.1005319817370034,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.1005319817370034,
+        2.8168771863988797,
+        2.7431062495804457,
+        2.505758245060868,
+        2.3873368901680823,
+        2.25340593830178
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "constant",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "shuffled",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 242,
+      "S": 7.189763998087638,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        7.189763998087638,
+        4.949640857518371,
+        4.573069000951159,
+        4.348238271859109,
+        3.925277262216939,
+        3.662933769181735
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "adversarial",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 282,
+      "S": 8.496711803379002,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.496711803379002,
+        4.70376448323382,
+        4.584402326354048,
+        4.241953433103552,
+        3.9395839649365425,
+        3.8674883600408783
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "high_entropy",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 947,
+      "S": 3.1005319817370034,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        3.1005319817370034,
+        2.8168771863988797,
+        2.7431062495804457,
+        2.505758245060868,
+        2.3873368901680823,
+        2.25340593830178
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "random",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 949,
+      "S": 2.9783055088687664,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.9783055088687664,
+        2.9093445927823054,
+        2.68400785834644,
+        2.4054488607767603,
+        2.266190037516445,
+        1.9861960001670813
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "constant",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "shuffled",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 234,
+      "S": 7.319802576707754,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        7.319802576707754,
+        4.864156443139767,
+        4.313059245004729,
+        4.233149977625465,
+        3.7692860620177835,
+        3.646586920377129
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "adversarial",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 304,
+      "S": 8.78902338763741,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.78902338763741,
+        4.79791666288417,
+        4.634876266952173,
+        4.229481430403872,
+        4.056309559516216,
+        3.642183554497169
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "high_entropy",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 949,
+      "S": 2.9783055088687664,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.9783055088687664,
+        2.9093445927823054,
+        2.68400785834644,
+        2.4054488607767603,
+        2.266190037516445,
+        1.9861960001670813
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "random",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 951,
+      "S": 2.961326662887158,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.961326662887158,
+        2.840199945447303,
+        2.547319356580834,
+        2.403705638957316,
+        2.1827200281211896,
+        1.8500529088403217
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "constant",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 1000,
+      "S": 0.0,
+      "intrinsic_dimension": 10,
+      "singular_spectrum": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "shuffled",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 240,
+      "S": 7.597691150709893,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        7.597691150709893,
+        4.940322946742235,
+        4.052905888875235,
+        3.997540154451996,
+        3.8522067246558325,
+        3.457301082433292
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "adversarial",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 304,
+      "S": 8.749838749400297,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        8.749838749400297,
+        4.824768068315833,
+        4.652086917506632,
+        4.236706796694496,
+        3.9455257180766057,
+        3.733292931721333
+      ]
+    },
+    {
+      "problem": "interval",
+      "strategy": "high_entropy",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 951,
+      "S": 2.961326662887158,
+      "intrinsic_dimension": 8,
+      "singular_spectrum": [
+        2.961326662887158,
+        2.840199945447303,
+        2.547319356580834,
+        2.403705638957316,
+        2.1827200281211896,
+        1.8500529088403217
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "random",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 493,
+      "S": 6.069472422349398,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.069472422349398,
+        5.888307396781474,
+        5.650584325593933,
+        5.458818634357052,
+        5.195898010733619,
+        4.802578533647072
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "constant",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 10,
+      "S": 3.1464265445104544,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        3.1464265445104544,
+        1.0657754782378581e-16,
+        1.3405020980942348e-33,
+        2.278222613129959e-50,
+        7.900429652718535e-69,
+        2.8958506810803932e-86
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "shuffled",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 282,
+      "S": 5.621900628128791,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        5.621900628128791,
+        5.169260588876657,
+        4.813400126142957,
+        4.6387884784877755,
+        4.458485579100516,
+        4.317862127453047
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "adversarial",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 488,
+      "S": 6.222122116622709,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.222122116622709,
+        5.817703178030518,
+        5.59448772034865,
+        5.256961485596192,
+        5.051285739322204,
+        4.802299203059883
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "high_entropy",
+      "seed": 20260613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 493,
+      "S": 6.069472422349398,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.069472422349398,
+        5.888307396781474,
+        5.650584325593933,
+        5.458818634357052,
+        5.195898010733619,
+        4.802578533647072
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "random",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 532,
+      "S": 6.593155898863113,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.593155898863113,
+        5.813816126924875,
+        5.388189624299345,
+        5.256373635589245,
+        5.084812393288912,
+        4.6631222997786175
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "constant",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 10,
+      "S": 3.1464265445104544,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        3.1464265445104544,
+        1.0657754782378581e-16,
+        1.3405020980942348e-33,
+        2.278222613129959e-50,
+        7.900429652718535e-69,
+        2.8958506810803932e-86
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "shuffled",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 309,
+      "S": 5.931206507355946,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        5.931206507355946,
+        5.1939304828784705,
+        4.980524859057893,
+        4.852931484180493,
+        4.787697193129067,
+        4.617367150999944
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "adversarial",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 507,
+      "S": 6.166647165445449,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.166647165445449,
+        5.901786026028311,
+        5.481739562298478,
+        5.293470300493273,
+        4.927979189473043,
+        4.798853017538014
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "high_entropy",
+      "seed": 20261613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 532,
+      "S": 6.593155898863113,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.593155898863113,
+        5.813816126924875,
+        5.388189624299345,
+        5.256373635589245,
+        5.084812393288912,
+        4.6631222997786175
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "random",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 507,
+      "S": 6.1540339774160655,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.1540339774160655,
+        5.653874641130792,
+        5.466257851310447,
+        5.230541271333712,
+        4.9031539816262555,
+        4.752597390317166
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "constant",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 10,
+      "S": 3.1464265445104544,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        3.1464265445104544,
+        1.0657754782378581e-16,
+        1.3405020980942348e-33,
+        2.278222613129959e-50,
+        7.900429652718535e-69,
+        2.8958506810803932e-86
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "shuffled",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 283,
+      "S": 5.681265906514265,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        5.681265906514265,
+        5.218271751484137,
+        5.1344544604846245,
+        4.724129211961436,
+        4.372069134712577,
+        4.257372506586219
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "adversarial",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 484,
+      "S": 6.029138252647212,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.029138252647212,
+        5.7384070936203,
+        5.576153390662187,
+        5.3896578447558525,
+        5.143250972512935,
+        4.7768607806796135
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "high_entropy",
+      "seed": 20262613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 507,
+      "S": 6.1540339774160655,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.1540339774160655,
+        5.653874641130792,
+        5.466257851310447,
+        5.230541271333712,
+        4.9031539816262555,
+        4.752597390317166
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "random",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 509,
+      "S": 5.838860497027364,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        5.838860497027364,
+        5.778504075245944,
+        5.518718231823958,
+        5.397385518949739,
+        5.049162618710588,
+        4.709993652881987
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "constant",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 10,
+      "S": 3.1464265445104544,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        3.1464265445104544,
+        1.0657754782378581e-16,
+        1.3405020980942348e-33,
+        2.278222613129959e-50,
+        7.900429652718535e-69,
+        2.8958506810803932e-86
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "shuffled",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 277,
+      "S": 5.661677249586273,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        5.661677249586273,
+        5.28832399638848,
+        5.1773487782940215,
+        4.734557640441805,
+        4.479767476405829,
+        4.3946139512069
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "adversarial",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 477,
+      "S": 6.56325614719352,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.56325614719352,
+        5.939787016053453,
+        5.368214452512091,
+        5.173900858187298,
+        4.819240936448026,
+        4.731567103956043
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "high_entropy",
+      "seed": 20263613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 509,
+      "S": 5.838860497027364,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        5.838860497027364,
+        5.778504075245944,
+        5.518718231823958,
+        5.397385518949739,
+        5.049162618710588,
+        4.709993652881987
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "random",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 483,
+      "S": 6.2440702079652315,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.2440702079652315,
+        5.72262179983531,
+        5.578211166049577,
+        5.3464791304240125,
+        5.142965788022521,
+        4.895926940307033
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "constant",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 10,
+      "S": 3.1464265445104544,
+      "intrinsic_dimension": 1,
+      "singular_spectrum": [
+        3.1464265445104544,
+        1.0657754782378581e-16,
+        1.3405020980942348e-33,
+        2.278222613129959e-50,
+        7.900429652718535e-69,
+        2.8958506810803932e-86
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "shuffled",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 320,
+      "S": 5.822193634486005,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        5.822193634486005,
+        5.63953362099182,
+        5.1507416567575905,
+        5.015229549580742,
+        4.432350798057528,
+        4.32655018359269
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "adversarial",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 500,
+      "S": 6.41174039294829,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.41174039294829,
+        5.828041545185123,
+        5.30235461024568,
+        5.187634651789801,
+        4.869971926036427,
+        4.685849518662557
+      ]
+    },
+    {
+      "problem": "constraint",
+      "strategy": "high_entropy",
+      "seed": 20264613,
+      "n_solvers": 10,
+      "n_tests": 100,
+      "total_failures": 483,
+      "S": 6.2440702079652315,
+      "intrinsic_dimension": 9,
+      "singular_spectrum": [
+        6.2440702079652315,
+        5.72262179983531,
+        5.578211166049577,
+        5.3464791304240125,
+        5.142965788022521,
+        4.895926940307033
+      ]
+    }
+  ],
+  "metadata": {
+    "n_problems": 4,
+    "n_strategies": 5,
+    "n_seeds": 5
+  }
+}

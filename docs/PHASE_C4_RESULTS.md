@@ -102,9 +102,9 @@ ACCEPT if 0 failures OR all failures share one probe_family
 REJECT otherwise
 ```
 
-On LC322, the 5 solvers misclassified by B1 (solver_019, solver_020, solver_021, solver_025, solver_027) all have ground_truth = ACCEPT and a small number of observed failures, all concentrated in one probe_family. C_genuine's rule classifies them as ACCEPT (structured failure pattern → less concerning than B1's blanket rejection).
+On LC322, the 5 solvers misclassified by B1 (solver_019, solver_020, solver_021, solver_025, solver_027) all have ground_truth = ACCEPT and a small number of observed failures, all in one probe_family. C_genuine's rule classifies them as ACCEPT because all failures share one family.
 
-The 1 additional false accept (solver_018) is a REJECT solver whose observed failures are also concentrated in one probe_family. C_genuine accepts it on the same structural basis, but the ground truth is REJECT.
+The 1 additional false accept (solver_018) is a REJECT solver whose observed failures are also in one probe_family. C_genuine accepts it under the same rule, but the ground truth is REJECT.
 
 The cost model is linear with global weights. At lambda = 50:
 - B1's cost: 5 false rejects × 50 = 250

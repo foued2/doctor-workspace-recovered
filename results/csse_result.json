@@ -1,0 +1,438 @@
+{
+  "experiment": "CSSE_v1",
+  "threshold_T": 0,
+  "epsilon": 0.1,
+  "pas": 0.6666666666666666,
+  "outcome": "A",
+  "per_solver": {
+    "A1_01": {
+      "family": "A1",
+      "fail_count": 12,
+      "total": 32,
+      "fail_rate": 0.375,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    "A1_02": {
+      "family": "A1",
+      "fail_count": 1,
+      "total": 32,
+      "fail_rate": 0.03125,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "A1_03": {
+      "family": "A1",
+      "fail_count": 24,
+      "total": 32,
+      "fail_rate": 0.75,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    "A1_04": {
+      "family": "A1",
+      "fail_count": 14,
+      "total": 32,
+      "fail_rate": 0.4375,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    "A1_05": {
+      "family": "A1",
+      "fail_count": 24,
+      "total": 32,
+      "fail_rate": 0.75,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    "A2_01": {
+      "family": "A2",
+      "fail_count": 0,
+      "total": 32,
+      "fail_rate": 0.0,
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "A2_02": {
+      "family": "A2",
+      "fail_count": 0,
+      "total": 32,
+      "fail_rate": 0.0,
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "A2_03": {
+      "family": "A2",
+      "fail_count": 0,
+      "total": 32,
+      "fail_rate": 0.0,
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "A2_04": {
+      "family": "A2",
+      "fail_count": 0,
+      "total": 32,
+      "fail_rate": 0.0,
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "A2_05": {
+      "family": "A2",
+      "fail_count": 0,
+      "total": 32,
+      "fail_rate": 0.0,
+      "b1_decision": "ACCEPT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "B1_01": {
+      "family": "B1",
+      "fail_count": 5,
+      "total": 32,
+      "fail_rate": 0.15625,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "B1_02": {
+      "family": "B1",
+      "fail_count": 5,
+      "total": 32,
+      "fail_rate": 0.15625,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "B1_03": {
+      "family": "B1",
+      "fail_count": 5,
+      "total": 32,
+      "fail_rate": 0.15625,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "B1_04": {
+      "family": "B1",
+      "fail_count": 5,
+      "total": 32,
+      "fail_rate": 0.15625,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "B1_05": {
+      "family": "B1",
+      "fail_count": 5,
+      "total": 32,
+      "fail_rate": 0.15625,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "ACCEPT"
+    },
+    "B2_01": {
+      "family": "B2",
+      "fail_count": 29,
+      "total": 32,
+      "fail_rate": 0.90625,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    "B2_02": {
+      "family": "B2",
+      "fail_count": 6,
+      "total": 32,
+      "fail_rate": 0.1875,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    "B2_03": {
+      "family": "B2",
+      "fail_count": 6,
+      "total": 32,
+      "fail_rate": 0.1875,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    "B2_04": {
+      "family": "B2",
+      "fail_count": 31,
+      "total": 32,
+      "fail_rate": 0.96875,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    },
+    "B2_05": {
+      "family": "B2",
+      "fail_count": 29,
+      "total": 32,
+      "fail_rate": 0.90625,
+      "b1_decision": "REJECT",
+      "c_genuine_decision": "REJECT"
+    }
+  },
+  "summary": {
+    "same_b1_pairs": 115,
+    "cross_family_same_b1": 75,
+    "cross_family_disagree": 50
+  },
+  "probes": [
+    {
+      "probe_id": "p01",
+      "probe_family": "single_match",
+      "axis": "element_access"
+    },
+    {
+      "probe_id": "p02",
+      "probe_family": "single_match",
+      "axis": "element_access"
+    },
+    {
+      "probe_id": "p03",
+      "probe_family": "single_match",
+      "axis": "element_access"
+    },
+    {
+      "probe_id": "p04",
+      "probe_family": "single_match",
+      "axis": "element_access"
+    },
+    {
+      "probe_id": "p05",
+      "probe_family": "pair_match",
+      "axis": "combination_logic"
+    },
+    {
+      "probe_id": "p06",
+      "probe_family": "pair_match",
+      "axis": "combination_logic"
+    },
+    {
+      "probe_id": "p07",
+      "probe_family": "pair_match",
+      "axis": "combination_logic"
+    },
+    {
+      "probe_id": "p08",
+      "probe_family": "pair_match",
+      "axis": "combination_logic"
+    },
+    {
+      "probe_id": "p09",
+      "probe_family": "multi_match",
+      "axis": "combination_logic"
+    },
+    {
+      "probe_id": "p10",
+      "probe_family": "multi_match",
+      "axis": "combination_logic"
+    },
+    {
+      "probe_id": "p11",
+      "probe_family": "multi_match",
+      "axis": "combination_logic"
+    },
+    {
+      "probe_id": "p12",
+      "probe_family": "multi_match",
+      "axis": "combination_logic"
+    },
+    {
+      "probe_id": "p13",
+      "probe_family": "impossible",
+      "axis": "termination"
+    },
+    {
+      "probe_id": "p14",
+      "probe_family": "impossible",
+      "axis": "termination"
+    },
+    {
+      "probe_id": "p15",
+      "probe_family": "impossible",
+      "axis": "termination"
+    },
+    {
+      "probe_id": "p16",
+      "probe_family": "impossible",
+      "axis": "termination"
+    },
+    {
+      "probe_id": "p17",
+      "probe_family": "edge_case",
+      "axis": "boundary_handling"
+    },
+    {
+      "probe_id": "p18",
+      "probe_family": "edge_case",
+      "axis": "boundary_handling"
+    },
+    {
+      "probe_id": "p19",
+      "probe_family": "edge_case",
+      "axis": "boundary_handling"
+    },
+    {
+      "probe_id": "p20",
+      "probe_family": "edge_case",
+      "axis": "boundary_handling"
+    },
+    {
+      "probe_id": "p21",
+      "probe_family": "exact_total",
+      "axis": "summation_logic"
+    },
+    {
+      "probe_id": "p22",
+      "probe_family": "exact_total",
+      "axis": "summation_logic"
+    },
+    {
+      "probe_id": "p23",
+      "probe_family": "exact_total",
+      "axis": "summation_logic"
+    },
+    {
+      "probe_id": "p24",
+      "probe_family": "exact_total",
+      "axis": "summation_logic"
+    },
+    {
+      "probe_id": "p25",
+      "probe_family": "large_gap",
+      "axis": "accumulation"
+    },
+    {
+      "probe_id": "p26",
+      "probe_family": "large_gap",
+      "axis": "accumulation"
+    },
+    {
+      "probe_id": "p27",
+      "probe_family": "large_gap",
+      "axis": "accumulation"
+    },
+    {
+      "probe_id": "p28",
+      "probe_family": "redundant",
+      "axis": "deduplication"
+    },
+    {
+      "probe_id": "p29",
+      "probe_family": "redundant",
+      "axis": "deduplication"
+    },
+    {
+      "probe_id": "p30",
+      "probe_family": "redundant",
+      "axis": "deduplication"
+    },
+    {
+      "probe_id": "p31",
+      "probe_family": "single_match",
+      "axis": "element_access"
+    },
+    {
+      "probe_id": "p32",
+      "probe_family": "impossible",
+      "axis": "termination"
+    }
+  ],
+  "solver_meta": {
+    "A1_01": {
+      "family": "A1",
+      "s_axis": "S0",
+      "p_axis": "P1"
+    },
+    "A1_02": {
+      "family": "A1",
+      "s_axis": "S0",
+      "p_axis": "P1"
+    },
+    "A1_03": {
+      "family": "A1",
+      "s_axis": "S0",
+      "p_axis": "P1"
+    },
+    "A1_04": {
+      "family": "A1",
+      "s_axis": "S0",
+      "p_axis": "P1"
+    },
+    "A1_05": {
+      "family": "A1",
+      "s_axis": "S0",
+      "p_axis": "P1"
+    },
+    "A2_01": {
+      "family": "A2",
+      "s_axis": "S0",
+      "p_axis": "P0"
+    },
+    "A2_02": {
+      "family": "A2",
+      "s_axis": "S0",
+      "p_axis": "P0"
+    },
+    "A2_03": {
+      "family": "A2",
+      "s_axis": "S0",
+      "p_axis": "P0"
+    },
+    "A2_04": {
+      "family": "A2",
+      "s_axis": "S0",
+      "p_axis": "P0"
+    },
+    "A2_05": {
+      "family": "A2",
+      "s_axis": "S0",
+      "p_axis": "P0"
+    },
+    "B1_01": {
+      "family": "B1",
+      "s_axis": "S1",
+      "p_axis": "P0"
+    },
+    "B1_02": {
+      "family": "B1",
+      "s_axis": "S1",
+      "p_axis": "P0"
+    },
+    "B1_03": {
+      "family": "B1",
+      "s_axis": "S1",
+      "p_axis": "P0"
+    },
+    "B1_04": {
+      "family": "B1",
+      "s_axis": "S1",
+      "p_axis": "P0"
+    },
+    "B1_05": {
+      "family": "B1",
+      "s_axis": "S1",
+      "p_axis": "P0"
+    },
+    "B2_01": {
+      "family": "B2",
+      "s_axis": "S1",
+      "p_axis": "P1"
+    },
+    "B2_02": {
+      "family": "B2",
+      "s_axis": "S1",
+      "p_axis": "P1"
+    },
+    "B2_03": {
+      "family": "B2",
+      "s_axis": "S1",
+      "p_axis": "P1"
+    },
+    "B2_04": {
+      "family": "B2",
+      "s_axis": "S1",
+      "p_axis": "P1"
+    },
+    "B2_05": {
+      "family": "B2",
+      "s_axis": "S1",
+      "p_axis": "P1"
+    }
+  }
+}

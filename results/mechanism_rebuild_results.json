@@ -1,0 +1,126 @@
+[
+  {
+    "problem": "lc3946",
+    "families": {
+      "definition": "mechanism-aligned",
+      "distribution": {
+        "factor_budget_tight": 14,
+        "easy_instance": 3,
+        "subset_enumeration": 8,
+        "factor_budget_loose": 5
+      }
+    },
+    "separability": {
+      "family_means": {
+        "easy_instance": 1.8181818181818181,
+        "factor_budget_loose": 2.0,
+        "factor_budget_tight": 3.6666666666666665,
+        "subset_enumeration": 2.0625
+      },
+      "variance": 0.5540425114066804,
+      "failure_indicator_variance": 0.009893616275119293
+    },
+    "best_threshold_T": 1,
+    "agreement_rate": 1.0,
+    "three_way": {
+      "lambda_10": {
+        "deltaU_b1_cgen": 0.3333333333333333,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "deltaU_b1_ccons": 0.3333333333333333,
+        "deltaU_ccons_cgen": 0.0
+      },
+      "lambda_50": {
+        "deltaU_b1_cgen": 1.6666666666666667,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "deltaU_b1_ccons": 1.6666666666666667,
+        "deltaU_ccons_cgen": 0.0
+      },
+      "lambda_100": {
+        "deltaU_b1_cgen": 3.3333333333333335,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "deltaU_b1_ccons": 3.3333333333333335,
+        "deltaU_ccons_cgen": 0.0
+      }
+    },
+    "permutation_test": {
+      "canonical_du": 1.6666666666666667,
+      "mean_shift": 1.6643666666666668,
+      "std_shift": 0.01165423146805963,
+      "canonical_percentile": 5.2
+    },
+    "classification": "NULL"
+  },
+  {
+    "problem": "lc322",
+    "families": {
+      "definition": "mechanism-aligned",
+      "distribution": {
+        "greedy_small": 12,
+        "boundary": 2,
+        "greedy_tiny": 11,
+        "greedy_medium": 2,
+        "greedy_large": 1,
+        "canonical_easy": 2
+      }
+    },
+    "separability": {
+      "family_means": {
+        "greedy_large": 1.0,
+        "greedy_tiny": 3.625,
+        "greedy_small": 3.0,
+        "greedy_medium": 1.0,
+        "canonical_easy": 1.0,
+        "boundary": 1.0
+      },
+      "variance": 1.220920138888889,
+      "failure_indicator_variance": 0.023479233440170943
+    },
+    "best_threshold_T": 1,
+    "agreement_rate": 1.0,
+    "three_way": {
+      "lambda_10": {
+        "deltaU_b1_cgen": 0.6333333333333333,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "deltaU_b1_ccons": 0.6333333333333333,
+        "deltaU_ccons_cgen": 0.0
+      },
+      "lambda_50": {
+        "deltaU_b1_cgen": 3.3,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "deltaU_b1_ccons": 3.3,
+        "deltaU_ccons_cgen": 0.0
+      },
+      "lambda_100": {
+        "deltaU_b1_cgen": 6.633333333333334,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "deltaU_b1_ccons": 6.633333333333334,
+        "deltaU_ccons_cgen": 0.0
+      }
+    },
+    "permutation_test": {
+      "canonical_du": 3.3,
+      "mean_shift": 3.734866666666667,
+      "std_shift": 0.7483462389384565,
+      "canonical_percentile": 29.5
+    },
+    "classification": "NULL"
+  }
+]

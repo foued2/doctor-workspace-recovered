@@ -1,0 +1,75 @@
+{
+  "lc322": {
+    "T_star": 3,
+    "agreement": 0.9333333333333333,
+    "n_disagreements": 2,
+    "disagreements": [
+      {
+        "sid": "solver_022",
+        "obs_fails": 2,
+        "family_fails": {
+          "large_amount_stress": 1,
+          "memo_cache_aliasing": 1
+        },
+        "n_families_with_failures": 2,
+        "b1": "REJECT",
+        "cgen": "REJECT",
+        "ccons": "ACCEPT",
+        "gt_correct": false,
+        "losses": {
+          "10": {
+            "b1": 0.0,
+            "cgen": 0.0,
+            "ccons": 1.0
+          },
+          "50": {
+            "b1": 0.0,
+            "cgen": 0.0,
+            "ccons": 1.0
+          },
+          "100": {
+            "b1": 0.0,
+            "cgen": 0.0,
+            "ccons": 1.0
+          }
+        }
+      },
+      {
+        "sid": "solver_025",
+        "obs_fails": 2,
+        "family_fails": {
+          "reachability_counterfactual": 1,
+          "forward_dp_overwrite": 1
+        },
+        "n_families_with_failures": 2,
+        "b1": "REJECT",
+        "cgen": "REJECT",
+        "ccons": "ACCEPT",
+        "gt_correct": true,
+        "losses": {
+          "10": {
+            "b1": 10.0,
+            "cgen": 10.0,
+            "ccons": 0.0
+          },
+          "50": {
+            "b1": 50.0,
+            "cgen": 50.0,
+            "ccons": 0.0
+          },
+          "100": {
+            "b1": 100.0,
+            "cgen": 100.0,
+            "ccons": 0.0
+          }
+        }
+      }
+    ]
+  },
+  "lc3946": {
+    "T_star": 1,
+    "agreement": 1.0,
+    "n_disagreements": 0,
+    "disagreements": []
+  }
+}

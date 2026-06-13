@@ -1,0 +1,14 @@
+{
+  "test_1_isospectral": [
+    {
+      "trial": 0,
+      "shape": [
+        3,
+        13
+      ],
+      "spectral_distinguish": false,
+      "combinatorial_distinguish": false,
+      "spec_A_S": 1.8044284764074898,
+      "spec_B_S": 1.8044284764074898,
+      "comb_A_rows": [
+        

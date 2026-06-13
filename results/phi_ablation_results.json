@@ -1,0 +1,116 @@
+[
+  {
+    "problem": "lc322",
+    "train_test_split": {
+      "train_size": 24,
+      "test_size": 6
+    },
+    "results": {
+      "A": {
+        "loss": 0.4894653761195898,
+        "delta_gain": 0.01979638928770283,
+        "mutual_information": 0.0015561650456084016,
+        "n_families": 3
+      },
+      "B": {
+        "loss": 0.49465195533333955,
+        "delta_gain": 0.014609810073953067,
+        "mutual_information": 0.0017914459002278844,
+        "n_families": 6
+      },
+      "C": {
+        "loss": 0.5066823413601088,
+        "delta_gain": 0.0025794240471838092,
+        "mutual_information": 0.0005008261966597425,
+        "n_families": 4
+      },
+      "AB": {
+        "loss": 0.49494597725695966,
+        "delta_gain": 0.014315788150332964,
+        "mutual_information": 0.002011666281516977,
+        "n_families": 8
+      },
+      "ABC": {
+        "loss": 0.5069150688758145,
+        "delta_gain": 0.0023466965314781207,
+        "mutual_information": 0.003597380031250033,
+        "n_families": 9
+      },
+      "rand": {
+        "loss": 0.5049464823744841,
+        "delta_gain": 0.004315283032808481,
+        "mutual_information": 0.0003584642118349933,
+        "n_families": 4
+      },
+      "noise": {
+        "loss": 0.49942734696184576,
+        "delta_gain": 0.009834418445446858,
+        "mutual_information": 0.0019188550315847683,
+        "n_families": 3
+      }
+    },
+    "bootstrap_ci": {
+      "point_estimate": 0.0023466965314781207,
+      "ci_lo": 0.0008057773257169609,
+      "ci_hi": 0.004583022328833564
+    },
+    "classification": "phi adds predictive signal"
+  },
+  {
+    "problem": "lc3946",
+    "train_test_split": {
+      "train_size": 24,
+      "test_size": 6
+    },
+    "results": {
+      "A": {
+        "loss": 0.7741808013238298,
+        "delta_gain": -0.06484454345535562,
+        "mutual_information": 0.0036097060064337674,
+        "n_families": 3
+      },
+      "B": {
+        "loss": 0.758251880645162,
+        "delta_gain": -0.04891562277668782,
+        "mutual_information": 0.0029888598942692714,
+        "n_families": 4
+      },
+      "C": {
+        "loss": 0.7788442702407017,
+        "delta_gain": -0.06950801237222748,
+        "mutual_information": 0.00047213426525450405,
+        "n_families": 3
+      },
+      "AB": {
+        "loss": 0.7499960159831567,
+        "delta_gain": -0.040659758114682476,
+        "mutual_information": 0.0070682788808121184,
+        "n_families": 8
+      },
+      "ABC": {
+        "loss": 0.7444939322569163,
+        "delta_gain": -0.035157674388442084,
+        "mutual_information": 0.016835252420160672,
+        "n_families": 13
+      },
+      "rand": {
+        "loss": 0.7696521633533598,
+        "delta_gain": -0.060315905484885635,
+        "mutual_information": 0.0011147657750934232,
+        "n_families": 4
+      },
+      "noise": {
+        "loss": 0.7517262956714733,
+        "delta_gain": -0.0423900378029991,
+        "mutual_information": 0.007350883938932711,
+        "n_families": 3
+      }
+    },
+    "bootstrap_ci": {
+      "point_estimate": -0.035157674388442084,
+      "ci_lo": -0.07879344608077032,
+      "ci_hi": 0.007062190317525752
+    },
+    "classification": "phi does not add predictive signal"
+  }
+]

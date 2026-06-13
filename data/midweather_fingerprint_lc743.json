@@ -1,0 +1,130 @@
+{
+  "result_id": "frozen_lc743_c4_ground_truth",
+  "problem_class": "lc743",
+  "per_solver_ground_truth": {
+    "s001": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s002": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s003": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.5833
+    },
+    "s004": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s005": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s006": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 1.0
+    },
+    "s007": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s008": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s009": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.5833
+    },
+    "s010": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s011": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s012": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.5833
+    },
+    "s013": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    },
+    "s014": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s015": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s016": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.5833
+    },
+    "s017": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.4167
+    },
+    "s018": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s019": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s020": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s021": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s022": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 1.0
+    },
+    "s023": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s024": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s025": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.25
+    },
+    "s026": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.75
+    },
+    "s027": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.25
+    },
+    "s028": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 1.0
+    },
+    "s029": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.25
+    },
+    "s030": {
+      "truth_label": "REJECT",
+      "heldout_fail_rate": 0.25
+    },
+    "s031": {
+      "truth_label": "ACCEPT",
+      "heldout_fail_rate": 0.0
+    }
+  }
+}

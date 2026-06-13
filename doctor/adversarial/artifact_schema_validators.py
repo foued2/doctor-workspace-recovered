@@ -170,11 +170,10 @@ def validate_probe_index(data: dict, path: str = "probe_index") -> None:
         if not isinstance(probe, dict):
             raise ArtifactValidationError(path, f"probes[{i}] is not a dict")
         _require_str(probe, "probe_id", f"{path}/probes[{i}]")
-        _require_str(probe, "family", f"{path}/probes[{i}]")
+        # Accept either "family" or "probe_family" for backward compatibility
+        if "family" not in probe and "probe_family" not in probe:
+            raise ArtifactValidationError(path, f"probes[{i}] missing required field: 'family' or 'probe_family'")
         _require_str(probe, "axis", f"{path}/probes[{i}]")
-        if "coins" not in probe:
-            raise ArtifactValidationError(path, f"probes[{i}] missing 'coins'")
-        _require_int(probe, "amount", f"{path}/probes[{i}]", min_val=1)
 
     _require_list(data, "axis_set", path)
     _require_str(data, "probe_index_set_id", path)

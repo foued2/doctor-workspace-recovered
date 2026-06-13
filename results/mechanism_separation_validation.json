@@ -1,0 +1,61 @@
+{
+  "problem": "LC3946",
+  "lambda_values": [
+    50
+  ],
+  "c_genuine_decisions": {
+    "solver_001": "ACCEPT",
+    "solver_002": "ACCEPT",
+    "solver_003": "ACCEPT",
+    "solver_004": "ACCEPT",
+    "solver_005": "ACCEPT",
+    "solver_006": "REJECT",
+    "solver_007": "REJECT",
+    "solver_008": "REJECT",
+    "solver_009": "REJECT",
+    "solver_010": "REJECT",
+    "solver_011": "REJECT",
+    "solver_012": "REJECT",
+    "solver_013": "REJECT",
+    "solver_014": "REJECT",
+    "solver_015": "REJECT",
+    "solver_016": "ACCEPT",
+    "solver_017": "ACCEPT",
+    "solver_018": "REJECT",
+    "solver_019": "ACCEPT",
+    "solver_020": "ACCEPT",
+    "solver_021": "ACCEPT",
+    "solver_022": "ACCEPT",
+    "solver_023": "REJECT",
+    "solver_024": "REJECT",
+    "solver_025": "ACCEPT",
+    "solver_026": "ACCEPT",
+    "solver_027": "ACCEPT",
+    "solver_028": "REJECT",
+    "solver_029": "REJECT",
+    "solver_030": "ACCEPT"
+  },
+  "c_genuine_accept_rate": 0.5,
+  "best_threshold_T": 1,
+  "agreement_rate": 1.0,
+  "confusion_matrix": {
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "tn": 15
+  },
+  "three_way": {
+    "lambda_50": {
+      "deltaU_b1_cgen": 1.6666666666666667,
+      "ci": [
+        0.0,
+        0.0
+      ],
+      "deltaU_b1_ccons": 1.6666666666666667,
+      "deltaU_ccons_cgen": 0.0,
+      "b1_vs_ccons_excludes_zero": false,
+      "ccons_vs_cgen_excludes_zero": false,
+      "pattern": "ambiguous"
+    }
+  }
+}

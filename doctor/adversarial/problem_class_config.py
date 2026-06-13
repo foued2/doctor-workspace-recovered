@@ -200,7 +200,7 @@ def _b6_reg_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = 
 
 
 def _c_genuine_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None = None) -> str:
-    """Genuine structured policy for Phase C-4.
+    """Phase C-4 decision policy.
 
     Decision rule (declared in PHASE_C4_SPEC.md before implementation):
         ACCEPT if obs_fails == 0
@@ -209,8 +209,7 @@ def _c_genuine_policy(obs_fails: int, n_obs: int, obs_records: list[dict] | None
 
     Falls back to B1 behavior (ACCEPT iff 0 failures) if obs_records is None.
 
-    Feature used: probe_family (from obs_records[i].fingerprint_context.probe_family).
-    Differs from _fail_count_policy: adds the 'all failures in one probe_family' ACCEPT branch.
+    Reads probe_family from obs_records[i].fingerprint_context.probe_family.
     """
     if obs_records is None:
         return "ACCEPT" if obs_fails == 0 else "REJECT"
@@ -280,7 +279,7 @@ def _c_majority_policy(
         Ties yield REJECT.)
 
     Falls back to B1 behavior if obs_records is None.
-    Feature used: probe_family (same as C_genuine).
+    Feature used: probe_family from obs_records.
     Differs from _c_genuine_policy: requires only plurality, not unanimity.
     Differs from _fail_count_policy: accepts solvers with a unique-mode failure family.
     """

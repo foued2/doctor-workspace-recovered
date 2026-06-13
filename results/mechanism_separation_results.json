@@ -1,0 +1,87 @@
+{
+  "problem": "LC322",
+  "lambda_values": [
+    10,
+    50,
+    100
+  ],
+  "c_genuine_decisions": {
+    "solver_001": "ACCEPT",
+    "solver_002": "ACCEPT",
+    "solver_003": "ACCEPT",
+    "solver_004": "ACCEPT",
+    "solver_005": "ACCEPT",
+    "solver_006": "REJECT",
+    "solver_007": "REJECT",
+    "solver_008": "ACCEPT",
+    "solver_009": "ACCEPT",
+    "solver_010": "ACCEPT",
+    "solver_011": "ACCEPT",
+    "solver_012": "REJECT",
+    "solver_013": "REJECT",
+    "solver_014": "ACCEPT",
+    "solver_015": "ACCEPT",
+    "solver_016": "ACCEPT",
+    "solver_017": "ACCEPT",
+    "solver_018": "ACCEPT",
+    "solver_019": "ACCEPT",
+    "solver_020": "ACCEPT",
+    "solver_021": "ACCEPT",
+    "solver_022": "REJECT",
+    "solver_023": "REJECT",
+    "solver_024": "ACCEPT",
+    "solver_025": "REJECT",
+    "solver_026": "ACCEPT",
+    "solver_027": "REJECT",
+    "solver_028": "REJECT",
+    "solver_029": "REJECT",
+    "solver_030": "ACCEPT"
+  },
+  "c_genuine_accept_rate": 0.6666666666666666,
+  "best_threshold_T": 3,
+  "agreement_rate": 0.9333333333333333,
+  "confusion_matrix": {
+    "tp": 20,
+    "fp": 2,
+    "fn": 0,
+    "tn": 8
+  },
+  "three_way": {
+    "lambda_10": {
+      "deltaU_b1_cgen": 0.4666666666666667,
+      "ci": [
+        -0.5882352941176471,
+        0.058823529411764705
+      ],
+      "deltaU_b1_ccons": 0.7666666666666667,
+      "deltaU_ccons_cgen": -0.3,
+      "b1_vs_ccons_excludes_zero": false,
+      "ccons_vs_cgen_excludes_zero": false,
+      "pattern": "ambiguous"
+    },
+    "lambda_50": {
+      "deltaU_b1_cgen": 3.1333333333333333,
+      "ci": [
+        -3.0625,
+        0.058823529411764705
+      ],
+      "deltaU_b1_ccons": 4.766666666666667,
+      "deltaU_ccons_cgen": -1.6333333333333333,
+      "b1_vs_ccons_excludes_zero": false,
+      "ccons_vs_cgen_excludes_zero": false,
+      "pattern": "ambiguous"
+    },
+    "lambda_100": {
+      "deltaU_b1_cgen": 6.466666666666667,
+      "ci": [
+        -6.1875,
+        0.058823529411764705
+      ],
+      "deltaU_b1_ccons": 9.766666666666667,
+      "deltaU_ccons_cgen": -3.3,
+      "b1_vs_ccons_excludes_zero": false,
+      "ccons_vs_cgen_excludes_zero": false,
+      "pattern": "ambiguous"
+    }
+  }
+}

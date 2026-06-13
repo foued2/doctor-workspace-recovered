@@ -1,0 +1,73 @@
+{
+  "n_ensembles": 50,
+  "ensemble_size": 5,
+  "pair_stability": {
+    "coin_change vs grid_shortest_path": {
+      "dominant_order": "coin_change > grid_shortest_path",
+      "stability": 0.9,
+      "count_p1_gt_p2": 45,
+      "count_p2_gt_p1": 5
+    },
+    "coin_change vs interval_cover": {
+      "dominant_order": "interval_cover > coin_change",
+      "stability": 0.68,
+      "count_p1_gt_p2": 16,
+      "count_p2_gt_p1": 34
+    },
+    "coin_change vs constraint_lattice": {
+      "dominant_order": "coin_change > constraint_lattice",
+      "stability": 0.6,
+      "count_p1_gt_p2": 30,
+      "count_p2_gt_p1": 20
+    },
+    "grid_shortest_path vs interval_cover": {
+      "dominant_order": "interval_cover > grid_shortest_path",
+      "stability": 0.96,
+      "count_p1_gt_p2": 2,
+      "count_p2_gt_p1": 48
+    },
+    "grid_shortest_path vs constraint_lattice": {
+      "dominant_order": "constraint_lattice > grid_shortest_path",
+      "stability": 0.88,
+      "count_p1_gt_p2": 6,
+      "count_p2_gt_p1": 44
+    },
+    "interval_cover vs constraint_lattice": {
+      "dominant_order": "interval_cover > constraint_lattice",
+      "stability": 0.82,
+      "count_p1_gt_p2": 41,
+      "count_p2_gt_p1": 9
+    }
+  },
+  "most_common_ranking": [
+    "interval_cover",
+    "coin_change",
+    "constraint_lattice",
+    "grid_shortest_path"
+  ],
+  "most_common_frequency": 0.28,
+  "strong_invariants": [
+    [
+      "grid_shortest_path vs interval_cover",
+      "interval_cover > grid_shortest_path",
+      0.96
+    ]
+  ],
+  "weak_invariants": [
+    [
+      "coin_change vs grid_shortest_path",
+      "coin_change > grid_shortest_path",
+      0.9
+    ],
+    [
+      "grid_shortest_path vs constraint_lattice",
+      "constraint_lattice > grid_shortest_path",
+      0.88
+    ],
+    [
+      "interval_cover vs constraint_lattice",
+      "interval_cover > constraint_lattice",
+      0.82
+    ]
+  ]
+}
